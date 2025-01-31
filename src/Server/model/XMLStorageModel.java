@@ -36,6 +36,8 @@ public class XMLStorageModel {
             throw new RuntimeException(e);
         } catch (SAXException e) {
             throw new RuntimeException(e);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }

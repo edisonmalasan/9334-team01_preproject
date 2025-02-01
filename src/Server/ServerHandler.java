@@ -10,9 +10,10 @@ import java.net.Socket;
 public class ServerHandler {
     private QuestionBankModel questionBank;
     private ServerSocket serverSocket;
-    private final int PORT_NUMBER = 5000;
+    private final int PORT_NUMBER;
 
-    public ServerHandler(QuestionBankModel questionBank) {
+    public ServerHandler(int PORT_NUMBER, QuestionBankModel questionBank) {
+        this.PORT_NUMBER = PORT_NUMBER;
         this.questionBank = questionBank;
     }
 

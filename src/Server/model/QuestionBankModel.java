@@ -1,22 +1,26 @@
 package Server.model;
 
-import java.util.*;
 import common.model.QuestionModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionBankModel {
     private List<QuestionModel> questions;
 
+
     public QuestionBankModel() {
         questions = new ArrayList<>();
-        loadQuestions();
     }
 
-    private void loadQuestions() {
-        // TODO: load questions from XMLStorageModel.java
-        questions.add(new QuestionModel("easy", "2 + 2 = ?", "4"));
-        questions.add(new QuestionModel("medium", "What is 5 * 6?", "30"));
-        questions.add(new QuestionModel("hard", "Solve: (8+2)/2 = ?", "5"));
+    public void add(QuestionModel question) {
+        questions.add(question);
     }
+
+    public List<QuestionModel> getAllQuestions() {
+        return questions;
+    }
+
 
     public QuestionModel getRandomQuestion(String difficulty) {
         List<QuestionModel> filtered = new ArrayList<>();
@@ -25,6 +29,6 @@ public class QuestionBankModel {
                 filtered.add(q);
             }
         }
-        return filtered.isEmpty() ? null : filtered.get(new Random().nextInt(filtered.size()));
+        return filtered.isEmpty() ? null : filtered.get((int) (Math.random() * filtered.size()));
     }
 }

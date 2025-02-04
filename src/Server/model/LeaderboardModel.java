@@ -1,10 +1,11 @@
 package Server.model;
 
 import Server.model.XMLStorageModel;
+import Client.model.LeaderboardEntryModel;
 import java.util.*;
 
 public class LeaderboardModel {
-    private List<LeaderboardEntry> leaderboard;
+    private List<LeaderboardEntryModel> leaderboard;
 
     public LeaderboardModel() {
         leaderboard = XMLStorageModel.loadLeaderboardFromXML("data/leaderboard.xml");
@@ -12,14 +13,14 @@ public class LeaderboardModel {
 
     public List<String> getLeaderboardEntries() {
         List<String> entries = new ArrayList<>();
-        for (LeaderboardEntry entry : leaderboard) {
+        for (LeaderboardEntryModel entry : leaderboard) {
             entries.add(entry.getPlayerName() + " - " + entry.getScore());
         }
         return entries;
     }
 
     public void addEntry(String playerName, int score) {
-        leaderboard.add(new LeaderboardEntry(playerName, score));
+        leaderboard.add(new LeaderboardEntryModel(playerName, score));
         leaderboard.sort((a, b) -> Integer.compare(b.getScore(), a.getScore())); // Sort descending
         XMLStorageModel.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
     }

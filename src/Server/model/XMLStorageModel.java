@@ -8,9 +8,11 @@ import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
 import java.io.*;
 
+import Client.model.LeaderboardEntryModel;
+
 public class XMLStorageModel {
-    public static List<LeaderboardEntry> loadLeaderboardFromXML(String filename) {
-        List<LeaderboardEntry> leaderboard = new ArrayList<>();
+    public static List<LeaderboardEntryModel> loadLeaderboardFromXML(String filename) {
+        List<LeaderboardEntryModel> leaderboard = new ArrayList<>();
         try {
             File file = new File(filename);
             if (!file.exists()) return leaderboard; // Return empty if no file
@@ -24,7 +26,7 @@ public class XMLStorageModel {
                 Element element = (Element) nodes.item(i);
                 String playerName = element.getElementsByTagName("player").item(0).getTextContent();
                 int score = Integer.parseInt(element.getElementsByTagName("score").item(0).getTextContent());
-                leaderboard.add(new LeaderboardEntry(playerName, score));
+                leaderboard.add(new LeaderboardEntryModel(playerName, score));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -32,14 +34,14 @@ public class XMLStorageModel {
         return leaderboard;
     }
 
-    public static void saveLeaderboardToXML(String filename, List<LeaderboardEntry> leaderboard) {
+    public static void saveLeaderboardToXML(String filename, List<LeaderboardEntryModel> leaderboard) {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.newDocument();
             Element rootElement = doc.createElement("leaderboard");
             doc.appendChild(rootElement);
 
-            for (LeaderboardEntry entry : leaderboard) {
+            for (LeaderboardEntryModel entry : leaderboard) {
                 Element entryElement = doc.createElement("entry");
 
                 Element player = doc.createElement("player");

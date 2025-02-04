@@ -1,6 +1,8 @@
 package Client.model;
 
-public class LeaderboardEntryModel {
+import java.io.Serializable;
+
+public class LeaderboardEntryModel implements Serializable {
     private String playerName;
     private int score;
 
@@ -13,15 +15,7 @@ public class LeaderboardEntryModel {
         return playerName;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
     public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 }

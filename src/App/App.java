@@ -1,4 +1,4 @@
-package app;
+package App;
 
 import Client.connection.ClientConnection;
 import Client.controller.MainMenuController;

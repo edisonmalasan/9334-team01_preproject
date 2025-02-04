@@ -17,19 +17,16 @@ public class ServerHandler {
         this.questionBank = questionBank;
     }
 
-    public void start() {
-        try {
-            serverSocket = new ServerSocket(PORT_NUMBER);
-            System.out.println("Server started on port: " + PORT_NUMBER);
+    public void start() throws IOException {
+        ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
+        System.out.println("Server started on port " + PORT_NUMBER);
 
-            while (true) {
-                Socket clientSocket = serverSocket.accept();
-                System.out.println("Client connected: " + clientSocket.getInetAddress());
+        while (true) {
+            Socket clientSocket = serverSocket.accept();
+            System.out.println("New client connected: " + clientSocket.getInetAddress());
 
-                new ClientHandler(clientSocket, questionBank).start();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            ClientHandler clientHandler = new ClientHandler(clientSocket, questionBank);
+            new Thread(clientHandler).start();
         }
     }
 }

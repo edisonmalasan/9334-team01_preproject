@@ -15,7 +15,11 @@ public class ServerMain {
 
         System.out.println("QuestionBank loaded: " + questionBank.getAllQuestions().size());
 
-        ServerHandler server = new ServerHandler(PORT_NUMBER, questionBank);
-        server.start();
+        try {
+            ServerHandler server = new ServerHandler(PORT_NUMBER, questionBank);
+            server.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

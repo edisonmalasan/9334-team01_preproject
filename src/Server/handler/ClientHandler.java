@@ -1,4 +1,4 @@
-package Server;
+package Server.handler;
 
 import Server.model.QuestionBankModel;
 import common.model.QuestionModel;

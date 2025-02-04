@@ -1,7 +1,7 @@
 package Server;
 
 import Server.model.QuestionBankModel;
-import Server.ClientHandler;
+import Server.handler.ClientHandler;
 
 import java.io.IOException;
 import java.net.ServerSocket;

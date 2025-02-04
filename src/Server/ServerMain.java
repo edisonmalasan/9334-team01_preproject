@@ -11,9 +11,11 @@ public class ServerMain {
 
     public static void main(String[] args) throws IOException {
         QuestionBankModel questionBank = new QuestionBankModel();
-        XMLStorageModel.loadQuestionFromXML("data/question.xml", questionBank);
-
+        // XMLStorageModel.loadQuestionFromXML("data/question.xml", questionBank); // will add if question components are done
         System.out.println("QuestionBank loaded: " + questionBank.getAllQuestions().size());
+        XMLStorageModel.loadLeaderboardFromXML("data/leaderboard.xml");
+        System.out.println("Leaderboard loaded: " + questionBank.getAllQuestions().size());
+
 
         try {
             ServerHandler server = new ServerHandler(PORT_NUMBER, questionBank);

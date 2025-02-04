@@ -1,4 +1,4 @@
-package Client;
+package Client.connection;
 
 import java.io.*;
 import java.net.Socket;

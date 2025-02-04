@@ -2,11 +2,10 @@ package Client;
 
 import Client.connection.ClientConnection;
 import Client.view.MainMenuView;
+import app.App;
 
 public class ClientMain {
     public static void main(String[] args) {
-        ClientConnection clientConnection = new ClientConnection();
-
-        new MainMenuView(clientConnection);
+        App.start();
     }
 }

@@ -1,29 +1,26 @@
 package Server.model;
 
+import Server.model.XMLStorageModel;
 import java.util.*;
-import Client.model.LeaderboardEntryModel;
 
 public class LeaderboardModel {
-    private List<LeaderboardEntryModel> leaderboard;
+    private List<LeaderboardEntry> leaderboard;
 
     public LeaderboardModel() {
-        leaderboard = new ArrayList<>();
-        loadLeaderboard();
+        leaderboard = XMLStorageModel.loadLeaderboardFromXML("data/leaderboard.xml");
     }
 
-    private void loadLeaderboard() {
-        // Example data (this could be loaded from XML)
-        leaderboard.add(new LeaderboardEntryModel("Player1", 80));
-        leaderboard.add(new LeaderboardEntryModel("Player2", 70));
-        leaderboard.add(new LeaderboardEntryModel("Player3", 50));
+    public List<String> getLeaderboardEntries() {
+        List<String> entries = new ArrayList<>();
+        for (LeaderboardEntry entry : leaderboard) {
+            entries.add(entry.getPlayerName() + " - " + entry.getScore());
+        }
+        return entries;
     }
 
-    public List<LeaderboardEntryModel> getLeaderboard() {
-        return leaderboard;
-    }
-
-    public void addEntry(LeaderboardEntryModel entry) {
-        leaderboard.add(entry);
-        leaderboard.sort(Comparator.comparingInt(LeaderboardEntryModel::getScore).reversed());
+    public void addEntry(String playerName, int score) {
+        leaderboard.add(new LeaderboardEntry(playerName, score));
+        leaderboard.sort((a, b) -> Integer.compare(b.getScore(), a.getScore())); // Sort descending
+        XMLStorageModel.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
     }
 }

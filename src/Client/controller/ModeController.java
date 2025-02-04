@@ -1,4 +1,4 @@
 package Client.controller;
 
-public class ModeController `{
+public class ModeController {
 }

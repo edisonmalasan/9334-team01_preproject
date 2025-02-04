@@ -2,10 +2,10 @@ package Client.view;
 
 import Client.connection.ClientConnection;
 
-public class LeaderboardView {
+public class GameModeView {
     private ClientConnection clientConnection;
-
-    public LeaderboardView(ClientConnection clientConnection) {
+    public GameModeView(ClientConnection clientConnection) {
         this.clientConnection = clientConnection;
     }
+
 }

@@ -1,18 +1,18 @@
 package common.model;
 
 public class QuestionModel {
-    private String difficulty;
+    private String category;
     private String questionText;
     private String correctAnswer;
 
-    public QuestionModel(String difficulty, String questionText, String correctAnswer) {
-        this.difficulty = difficulty;
+    public QuestionModel(String category, String questionText, String correctAnswer) {
+        this.category = category;
         this.questionText = questionText;
         this.correctAnswer = correctAnswer;
     }
 
-    public String getDifficulty() {
-        return difficulty;
+    public String getCategory() {
+        return category;
     }
 
     public String getQuestionText() {
@@ -25,6 +25,6 @@ public class QuestionModel {
 
     @Override
     public String toString() {
-        return "[" + difficulty.toUpperCase() + "] " + questionText + " (Answer: " + correctAnswer + ")";
+        return "[" + category.toUpperCase() + "] " + questionText + " (Answer: " + correctAnswer + ")";
     }
 }

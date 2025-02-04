@@ -1,41 +1,65 @@
 package Server.model;
 
-import common.model.QuestionModel;
+import java.util.*;
+import javax.xml.parsers.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.*;
+import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class XMLStorageModel {
-    public static void loadQuestionFromXML(String filePath, QuestionBankModel questionBank) {
+    public static List<LeaderboardEntry> loadLeaderboardFromXML(String filename) {
+        List<LeaderboardEntry> leaderboard = new ArrayList<>();
         try {
-            File file = new File(filePath);
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(file);
-            document.getDocumentElement().normalize();
+            File file = new File(filename);
+            if (!file.exists()) return leaderboard; // Return empty if no file
 
-            NodeList questionList = document.getElementsByTagName("question");
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document doc = builder.parse(file);
+            doc.getDocumentElement().normalize();
 
-            for (int i = 0; i < questionList.getLength(); i++) {
-                Node questionNode = questionList.item(i);
+            NodeList nodes = doc.getElementsByTagName("entry");
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Element element = (Element) nodes.item(i);
+                String playerName = element.getElementsByTagName("player").item(0).getTextContent();
+                int score = Integer.parseInt(element.getElementsByTagName("score").item(0).getTextContent());
+                leaderboard.add(new LeaderboardEntry(playerName, score));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return leaderboard;
+    }
 
-                if (questionNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element element = (Element) questionNode;
-                    String category = element.getElementsByTagName("category").item(0).getTextContent();
-                    String text = element.getElementsByTagName("text").item(0).getTextContent();
-                    String answer = element.getElementsByTagName("answer").item(0).getTextContent();
+    public static void saveLeaderboardToXML(String filename, List<LeaderboardEntry> leaderboard) {
+        try {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document doc = builder.newDocument();
+            Element rootElement = doc.createElement("leaderboard");
+            doc.appendChild(rootElement);
 
-                    questionBank.add(new QuestionModel(category, text, answer));
-                }
+            for (LeaderboardEntry entry : leaderboard) {
+                Element entryElement = doc.createElement("entry");
+
+                Element player = doc.createElement("player");
+                player.appendChild(doc.createTextNode(entry.getPlayerName()));
+                entryElement.appendChild(player);
+
+                Element score = doc.createElement("score");
+                score.appendChild(doc.createTextNode(String.valueOf(entry.getScore())));
+                entryElement.appendChild(score);
+
+                rootElement.appendChild(entryElement);
             }
 
-        } catch (ParserConfigurationException | IOException | SAXException e) {
-            throw new RuntimeException(e);
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(filename));
+            transformer.transform(source, result);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

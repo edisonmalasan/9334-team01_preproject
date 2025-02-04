@@ -21,7 +21,7 @@ public class LeaderboardModel {
 
     public void addEntry(String playerName, int score) {
         leaderboard.add(new LeaderboardEntryModel(playerName, score));
-        leaderboard.sort((a, b) -> Integer.compare(b.getScore(), a.getScore())); // Sort descending
+        leaderboard.sort((a, b) -> Integer.compare(b.getScore(), a.getScore())); // sort descending (highest to lowest)
         XMLStorageModel.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
     }
 }

@@ -28,10 +28,7 @@ public class XMLStorageModel {
             NodeList nodes = doc.getElementsByTagName("question");
             for (int i = 0; i < nodes.getLength(); i++) {
                 Element element = (Element) nodes.item(i);
-
-
                 String category = element.getAttribute("category");
-
                 String questionText = element.getElementsByTagName("text").item(0).getTextContent();
                 String correctAnswer = element.getElementsByTagName("answer").item(0).getTextContent();
                 List<String> choices = new ArrayList<>();
@@ -41,10 +38,9 @@ public class XMLStorageModel {
                     choices.add(choiceNodes.item(j).getTextContent());
                 }
 
-
                 questions.add(new QuestionModel(category, questionText, choices, correctAnswer));
             }
-        } catch (ParserConfigurationException | SAXException | IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return questions;

@@ -1,25 +1,19 @@
 package Server.controller;
 
-import Server.model.QuestionBankModel;
+import Server.model.XMLStorageModel;
 import common.model.QuestionModel;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class QuestionController {
-    private QuestionBankModel questionBank;
+    private static final String QUESTIONS_FILE = "data/questions.xml";
 
-    public QuestionController() {
-        this.questionBank = new QuestionBankModel();
-    }
+    // method to fetch question by category
+    public List<QuestionModel> getQuestionsByCategory(String category) {
+        List<QuestionModel> allQuestions = XMLStorageModel.loadQuestionsFromXML(QUESTIONS_FILE);
 
-    // get all questions from xml
-    public List<QuestionModel> getAllQuestions() {
-        return questionBank.getQuestions();
-    }
-
-    public List<QuestionModel> getQuestionByCategory(String category) {
-        return questionBank.getQuestions().stream()
+        return allQuestions.stream()
                 .filter(q -> q.getCategory().equalsIgnoreCase(category))
                 .collect(Collectors.toList());
     }

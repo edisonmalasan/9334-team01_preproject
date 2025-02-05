@@ -1,12 +1,10 @@
 <questions>
-    <question category="ALGEBRA">
+    <question category="Algebra">
         <text>What is 2 + 2?</text>
         <answer>4</answer>
-        <choices>
-            <choice>1</choice>
-            <choice>2</choice>
-            <choice>3</choice>
-            <choice>4</choice>
-        </choices>
+        <choice>1</choice>
+        <choice>2</choice>
+        <choice>3</choice>
+        <choice>4</choice>
     </question>
 </questions>

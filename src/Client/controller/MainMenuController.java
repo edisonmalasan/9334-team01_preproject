@@ -17,14 +17,4 @@ public class MainMenuController {
         // TODO: Setup Buttons here in view like
         //  view.getPlayButton().addActionListener(e ->  openGameModeView()); etc..
     }
-
-    private void openGameModeView() {
-        new GameView(clientConnection);
-        view.dispose();
-    }
-
-    private void showLeaderboard() {
-        new LeaderboardView(clientConnection);
-        view.dispose();
-    }
 }

@@ -18,4 +18,20 @@ public class LeaderboardEntryModel implements Serializable {
     public int getScore() {
         return score;
     }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "LeaderboardEntryModel{" +
+                "playerName='" + playerName + '\'' +
+                ", score=" + score +
+                '}';
+    }
 }

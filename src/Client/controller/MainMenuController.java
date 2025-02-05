@@ -3,7 +3,7 @@ package Client.controller;
 import Client.connection.ClientConnection;
 import Client.view.LeaderboardView;
 import Client.view.MainMenuView;
-import Client.view.GameModeView;
+import Client.view.GameView;
 
 public class MainMenuController {
     private MainMenuView view;
@@ -13,13 +13,13 @@ public class MainMenuController {
         this.clientConnection = clientConnection;
         this.view = new MainMenuView();
 
-        view.getPlayButton().addActionListener(e -> openGameModeView());
-        view.getLeaderboardButton().addActionListener(e -> showLeaderboard());
-        view.getExitButton().addActionListener(e -> System.exit(0));
+
+        // TODO: Setup Buttons here in view like
+        //  view.getPlayButton().addActionListener(e ->  openGameModeView()); etc..
     }
 
     private void openGameModeView() {
-        new GameModeView(clientConnection);
+        new GameView(clientConnection);
         view.dispose();
     }
 

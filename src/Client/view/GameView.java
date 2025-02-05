@@ -2,9 +2,9 @@ package Client.view;
 
 import Client.connection.ClientConnection;
 
-public class GameModeView {
+public class GameView {
     private ClientConnection clientConnection;
-    public GameModeView(ClientConnection clientConnection) {
+    public GameView(ClientConnection clientConnection) {
         this.clientConnection = clientConnection;
     }
 

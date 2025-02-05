@@ -26,8 +26,8 @@ public class ClientConnection {
 
     public String sendRequest(String request) {
         try {
-            output.println(request);  // Send request to server
-            return input.readLine();  // Read server response
+            output.println(request);
+            return input.readLine();
         } catch (IOException e) {
             e.printStackTrace();
             return null;

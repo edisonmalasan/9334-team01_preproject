@@ -1,48 +1,43 @@
 package Client.model;
 
-import java.time.format.DateTimeFormatter;
-
 public class ComboModel {
-    private DateTimeFormatter time;
-    private int numberOfCombo;
-    private int score;
+    private int comboCount;
+    private int highestCombo;
 
-    public ComboModel(DateTimeFormatter time, int numberOfCombo, int score) {
-        this.time = time;
-        this.numberOfCombo = numberOfCombo;
-        this.score = score;
+    public ComboModel() {
+        this.comboCount = 0;
+        this.highestCombo = 0;
     }
 
-    public DateTimeFormatter getTime() {
-        return time;
+    public void incrementCombo() {
+        comboCount++;
+        if (comboCount > highestCombo) {
+            highestCombo = comboCount;
+        }
     }
 
-    public void setTime(DateTimeFormatter time) {
-        this.time = time;
+    public void resetCombo() {
+        comboCount = 0;
     }
 
-    public int getNumberOfCombo() {
-        return numberOfCombo;
+    public int getComboCount() {
+        return comboCount;
     }
 
-    public void setNumberOfCombo(int numberOfCombo) {
-        this.numberOfCombo = numberOfCombo;
+    public void setComboCount(int comboCount) {
+        this.comboCount = comboCount;
     }
 
-    public int getScore() {
-        return score;
+    public int getHighestCombo() {
+        return highestCombo;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setHighestCombo(int highestCombo) {
+        this.highestCombo = highestCombo;
     }
 
     @Override
     public String toString() {
-        return "ComboModel{" +
-                "time=" + time +
-                ", numberOfCombo=" + numberOfCombo +
-                ", score=" + score +
-                '}';
+        return "ComboModel [comboCount=" + comboCount + ", highestCombo=" + highestCombo + "]";
     }
 }

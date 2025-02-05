@@ -1,45 +1,27 @@
 package Server.handler;
 
-import Server.model.QuestionBankModel;
-import common.model.QuestionModel;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ClientHandler extends Thread {
-    private Socket clientSocket;
-    private QuestionBankModel questionBank;
-    private BufferedReader in;
-    private PrintWriter out;
+public class ClientHandler implements Runnable {
 
-    public ClientHandler(Socket socket, QuestionBankModel questionBank) {
-        this.clientSocket = socket;
-        this.questionBank = questionBank;
+    private Socket clientSocket;
+    private ObjectInputStream input;
+    private ObjectOutputStream output;
+
+    public ClientHandler(Socket clientSocket) {
+        this.clientSocket = clientSocket;
     }
 
     @Override
     public void run() {
         try {
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            out = new PrintWriter(clientSocket.getOutputStream(),true);
+            input = new ObjectInputStream(clientSocket.getInputStream());
+            output = new ObjectOutputStream(clientSocket.getOutputStream());
 
-            out.println("Welcome to the Bomb Defuse Game Server!");
-
-            String difficulty;
-            while ((difficulty = in.readLine()) != null) {
-                QuestionModel question = questionBank.getRandomQuestion(difficulty);
-                if (question != null) {
-                    out.println("Question: " + question.getQuestionText());
-                    out.println("Difficulty: " + question.getDifficulty());
-                } else {
-                    out.println("No question available for difficulty: " + difficulty);
-                }
-
-            }
-            clientSocket.close();
+            // Communication logic here
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -5,17 +5,55 @@ import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
+
+import common.model.QuestionModel;
 import org.w3c.dom.*;
 import java.io.*;
 
 import Client.model.LeaderboardEntryModel;
 
 public class XMLStorageModel {
+
+    public static List<QuestionModel> loadQuestionsFromXML(String filename) {
+        List<QuestionModel> questions = new ArrayList<>();
+        try {
+            File file = new File(filename);
+            if (!file.exists()) return questions;
+
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document doc = builder.parse(file);
+            doc.getDocumentElement().normalize();
+
+            NodeList nodes = doc.getElementsByTagName("question");
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Element element = (Element) nodes.item(i);
+
+                // Extract category from XML
+                String category = element.getAttribute("category"); // Assuming category is an attribute
+
+                String questionText = element.getElementsByTagName("text").item(0).getTextContent();
+                String correctAnswer = element.getElementsByTagName("answer").item(0).getTextContent();
+                List<String> choices = new ArrayList<>();
+
+                NodeList choiceNodes = element.getElementsByTagName("choice");
+                for (int j = 0; j < choiceNodes.getLength(); j++) {
+                    choices.add(choiceNodes.item(j).getTextContent());
+                }
+
+                // Add to the list with category
+                questions.add(new QuestionModel(category, questionText, choices, correctAnswer));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return questions;
+    }
+
     public static List<LeaderboardEntryModel> loadLeaderboardFromXML(String filename) {
         List<LeaderboardEntryModel> leaderboard = new ArrayList<>();
         try {
             File file = new File(filename);
-            if (!file.exists()) return leaderboard; // Return empty if no file
+            if (!file.exists()) return leaderboard;
 
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.parse(file);
@@ -33,6 +71,7 @@ public class XMLStorageModel {
         }
         return leaderboard;
     }
+
 
     public static void saveLeaderboardToXML(String filename, List<LeaderboardEntryModel> leaderboard) {
         try {

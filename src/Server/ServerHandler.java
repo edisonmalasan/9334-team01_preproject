@@ -25,7 +25,7 @@ public class ServerHandler {
             Socket clientSocket = serverSocket.accept();
             System.out.println("New client connected: " + clientSocket.getInetAddress());
 
-            ClientHandler clientHandler = new ClientHandler(clientSocket, questionBank);
+            ClientHandler clientHandler = new ClientHandler(clientSocket);
             new Thread(clientHandler).start();
         }
     }

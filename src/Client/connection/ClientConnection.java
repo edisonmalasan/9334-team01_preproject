@@ -26,6 +26,7 @@ public class ClientConnection {
 
     public String sendRequest(String request) {
         try {
+            System.out.println("requesting server: " + request);
             output.println(request);
             return input.readLine();
         } catch (IOException e) {

@@ -3,6 +3,7 @@ package Client.view;
 import javax.swing.*;
 import java.awt.*;
 
+// SAMPLE ONLI
 public class MainMenuView extends JFrame {
     public JButton playButton;
     public JButton leaderboardButton;

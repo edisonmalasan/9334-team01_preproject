@@ -21,7 +21,7 @@ public class CategoryController {
         List<QuestionModel> filteredQuestions = filterQuestionsByCategory(category);
 
         if (!filteredQuestions.isEmpty()) {
-            QuestionModel question = filteredQuestions.getFirst();
+            QuestionModel question = filteredQuestions.get(0);
 
             new GameView(clientConnection, question);
         } else {

@@ -11,6 +11,7 @@ import org.w3c.dom.*;
 import java.io.*;
 
 import Client.model.LeaderboardEntryModel;
+import org.xml.sax.SAXException;
 
 public class XMLStorageModel {
 
@@ -43,7 +44,7 @@ public class XMLStorageModel {
 
                 questions.add(new QuestionModel(category, questionText, choices, correctAnswer));
             }
-        } catch (Exception e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
         return questions;

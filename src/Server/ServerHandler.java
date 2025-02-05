@@ -18,7 +18,7 @@ public class ServerHandler {
     }
 
     public void start() throws IOException {
-        ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
+        serverSocket = new ServerSocket(PORT_NUMBER);
         System.out.println("Server started on port " + PORT_NUMBER);
 
         while (true) {

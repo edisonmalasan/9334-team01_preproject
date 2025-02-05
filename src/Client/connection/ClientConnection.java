@@ -25,8 +25,13 @@ public class ClientConnection {
     }
 
     public String sendRequest(String request) {
+        if (socket == null || !socket.isConnected()) {
+            System.out.println("Not connected to the server.");
+            return null;
+        }
+
         try {
-            System.out.println("requesting server: " + request);
+            System.out.println("Requesting server: " + request);
             output.println(request);
             return input.readLine();
         } catch (IOException e) {
@@ -37,9 +42,9 @@ public class ClientConnection {
 
     public void close() {
         try {
-            input.close();
-            output.close();
-            socket.close();
+            if (input != null) input.close();
+            if (output != null) output.close();
+            if (socket != null) socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

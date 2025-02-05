@@ -21,7 +21,7 @@ public class ClientHandler implements Runnable {
             input = new ObjectInputStream(clientSocket.getInputStream());
             output = new ObjectOutputStream(clientSocket.getOutputStream());
 
-
+            // TODO: add the client request here like question req, leaderboard req etc.
         } catch (IOException e) {
             e.printStackTrace();
         }

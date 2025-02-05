@@ -28,8 +28,8 @@ public class XMLStorageModel {
             for (int i = 0; i < nodes.getLength(); i++) {
                 Element element = (Element) nodes.item(i);
 
-                // Extract category from XML
-                String category = element.getAttribute("category"); // Assuming category is an attribute
+
+                String category = element.getAttribute("category");
 
                 String questionText = element.getElementsByTagName("text").item(0).getTextContent();
                 String correctAnswer = element.getElementsByTagName("answer").item(0).getTextContent();
@@ -40,7 +40,7 @@ public class XMLStorageModel {
                     choices.add(choiceNodes.item(j).getTextContent());
                 }
 
-                // Add to the list with category
+
                 questions.add(new QuestionModel(category, questionText, choices, correctAnswer));
             }
         } catch (Exception e) {

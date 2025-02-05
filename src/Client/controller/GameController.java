@@ -16,6 +16,6 @@ public class GameController {
     }
 
     public void handleCategorySelection() {
-        List<QuestionModel> questions = questionBank.getQuestionsByCategory(category);
+        List<QuestionModel> questions = questionBank.getQuestions();
     }
 }

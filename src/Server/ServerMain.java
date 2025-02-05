@@ -1,7 +1,7 @@
 package Server;
 
 import Server.model.QuestionBankModel;
-import Server.model.XMLStorageModel;
+import Server.model.LeaderboardModel;
 
 import java.io.IOException;
 
@@ -11,11 +11,9 @@ public class ServerMain {
 
     public static void main(String[] args) throws IOException {
         QuestionBankModel questionBank = new QuestionBankModel();
-        // XMLStorageModel.loadQuestionFromXML("data/question.xml", questionBank); // will add if question components are done
-        System.out.println("QuestionBank loaded: " + questionBank.getAllQuestions().size());
-        XMLStorageModel.loadLeaderboardFromXML("data/leaderboard.xml");
-        System.out.println("Leaderboard loaded: " + questionBank.getAllQuestions().size());
-
+        LeaderboardModel leaderboard = new LeaderboardModel();
+        System.out.println("QuestionBank loaded: " + questionBank.getQuestions().size());
+        System.out.println("LeaderBoard loaded: " + leaderboard.getLeaderboardEntries().size());
 
         try {
             ServerHandler server = new ServerHandler(PORT_NUMBER, questionBank);

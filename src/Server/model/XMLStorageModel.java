@@ -31,6 +31,7 @@ public class XMLStorageModel {
                 String category = element.getAttribute("category");
                 String questionText = element.getElementsByTagName("text").item(0).getTextContent();
                 String correctAnswer = element.getElementsByTagName("answer").item(0).getTextContent();
+                int score = Integer.parseInt(element.getElementsByTagName("score").item(0).getTextContent());
                 List<String> choices = new ArrayList<>();
 
                 NodeList choiceNodes = element.getElementsByTagName("choice");
@@ -38,7 +39,7 @@ public class XMLStorageModel {
                     choices.add(choiceNodes.item(j).getTextContent());
                 }
 
-                questions.add(new QuestionModel(category, questionText, choices, correctAnswer)); // 5 pass
+                questions.add(new QuestionModel(category, questionText, choices, correctAnswer, score)); // 5 pass
             }
         } catch (Exception e) {
             e.printStackTrace();

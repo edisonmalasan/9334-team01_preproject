@@ -7,12 +7,14 @@ public class QuestionModel {
     private String questionText;
     private List<String> choices;
     private String correctAnswer;
+    private int score;
 
-    public QuestionModel(String category, String questionText, List<String> choices, String correctAnswer) {
+    public QuestionModel(String category, String questionText, List<String> choices, String correctAnswer, int score) {
         this.category = category;
         this.questionText = questionText;
         this.choices = choices;
         this.correctAnswer = correctAnswer;
+        this.score = score;
     }
 
     public String getCategory() {
@@ -31,6 +33,10 @@ public class QuestionModel {
         return correctAnswer;
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public void setCategory(String category) {
         this.category = category;
     }
@@ -47,8 +53,12 @@ public class QuestionModel {
         this.correctAnswer = correctAnswer;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     @Override
     public String toString() {
-        return "Category: " + category + "\nQuestion: " + questionText + "\nChoices: " + choices + "\nAnswer: " + correctAnswer;
+        return "Category: " + category + "\nQuestion: " + questionText + "\nChoices: " + choices + "\nAnswer: " + correctAnswer + "\nScore: " + score;
     }
 }

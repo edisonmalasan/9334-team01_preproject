@@ -38,7 +38,7 @@ public class XMLStorageModel {
                     choices.add(choiceNodes.item(j).getTextContent());
                 }
 
-                questions.add(new QuestionModel(category, questionText, choices, correctAnswer));
+                questions.add(new QuestionModel(category, questionText, choices, correctAnswer)); // 5 pass
             }
         } catch (Exception e) {
             e.printStackTrace();

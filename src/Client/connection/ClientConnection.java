@@ -24,6 +24,11 @@ public class ClientConnection {
         }
     }
 
+    // for ClientServerTest
+    public  boolean isConnected() {
+        return socket != null && socket.isConnected();
+    }
+
     public String sendRequest(String request) {
         if (socket == null || !socket.isConnected()) {
             System.out.println("Not connected to the server.");

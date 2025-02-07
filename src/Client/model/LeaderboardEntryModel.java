@@ -2,7 +2,7 @@ package Client.model;
 
 import java.io.Serializable;
 
-public class LeaderboardEntryModel implements Serializable {
+public class LeaderboardEntryModel {
     private String playerName;
     private int score;
 

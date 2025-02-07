@@ -1,5 +1,4 @@
 package Client.view;
 
-public class InputUsernameView() {
-    
+public class InputUsernameView {
 }

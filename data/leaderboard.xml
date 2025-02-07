@@ -1,0 +1,10 @@
+<leaderboard>
+    <entry>
+        <player>Player1</player>
+        <score>100</score>
+    </entry>
+    <entry>
+        <player>Player2</player>
+        <score>80</score>
+    </entry>
+</leaderboard>

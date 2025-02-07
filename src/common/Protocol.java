@@ -6,5 +6,4 @@ public class Protocol {
     public static final String ADD_SCORE = "ADD_SCORE";
 
 
-    // BADING SI JIM
 }

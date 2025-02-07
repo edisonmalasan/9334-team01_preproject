@@ -1,7 +1,11 @@
 package Client.controller;
 
-public InputUsernameController() {
+public class InputUsernameController() {
+    private String username;
 
+    public void setUsername() {
+    
+    }
     public String getUsername() {
         return "";
     }

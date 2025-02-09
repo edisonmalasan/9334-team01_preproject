@@ -14,6 +14,7 @@ public class MainMenuView extends JFrame {
         setSize(1024, 768);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+        setVisible(true);
         setLayout(new GridLayout(3,1)); // grid layout is like VStack a React component
 
         playButton = new JButton("PLAY");

@@ -18,13 +18,14 @@ public class MainMenuController {
 
         view.getPlayButton().addActionListener((ActionEvent e) -> {
             if (e.getSource() == view.playButton){
-                InputUsernameView inputUsernameView = new InputUsernameView();
-
+                view.dispose();
+                InputUsernameController inputUsernameController = new InputUsernameController();
             }
         });
 
         view.getLeaderboardButton().addActionListener((ActionEvent e) -> {
             if (e.getSource() == view.leaderboardButton){
+                view.dispose();
                 LeaderboardView leaderboardView = new LeaderboardView();
 
             }

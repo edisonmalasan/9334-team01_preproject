@@ -13,4 +13,8 @@ public class GameView {
         this.question = question;
     }
 
+    public GameView() {
+
+    }
+
 }

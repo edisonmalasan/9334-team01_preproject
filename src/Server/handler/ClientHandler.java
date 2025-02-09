@@ -60,17 +60,33 @@ public class ClientHandler implements Runnable {
 
             if (question != null) {
                 output.println("Question: " + question.getQuestionText());
-                output.println("Choices: " + String.join(", ", question.getChoices()));
                 System.out.println("Sending question to client: " + question.getQuestionText());
             } else {
                 output.println("No questions found for the given category.");
                 System.out.println("No question found for category: " + category);
             }
+        } else if (request.startsWith(Protocol.GET_CHOICES)) {
+            String category = request.split(":")[1].trim();
+            System.out.println("Client requested choices for category: " + category);
+
+            QuestionModel question = questionBank.getQuestions().stream()
+                    .filter(q -> q.getCategory().equalsIgnoreCase(category))
+                    .findFirst()
+                    .orElse(null);
+
+            if (question != null) {
+                output.println("Choices: " + String.join(",", question.getChoices()));
+                System.out.println("Sending choices to client: " + question.getQuestionText());
+            } else {
+                output.println("No choices found for the given category.");
+                System.out.println("No choices found for category: " + category);
+            }
         } else if (request.equals(Protocol.GET_LEADERBOARD)) {
             System.out.println("Client requested the leaderboard.");
-            String leaderboard = leaderboardController.getLeaderboard();
+            String leaderboard = LeaderboardController.getLeaderboard();
             output.println(leaderboard);
             System.out.println("Sending leaderboard to client.");
+
         } else if (request.startsWith(Protocol.ADD_SCORE)) {
             String[] parts = request.split(":");
             String playerName = parts[1].trim();

@@ -8,4 +8,7 @@ public class LeaderboardView {
     public LeaderboardView(ClientConnection clientConnection) {
         this.clientConnection = clientConnection;
     }
+
+    public LeaderboardView (){
+    }
 }

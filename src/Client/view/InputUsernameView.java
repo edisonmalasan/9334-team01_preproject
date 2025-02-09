@@ -26,4 +26,11 @@ public class InputUsernameView extends JFrame {
         add(usernameField);
         add(enterButton);
     }
+
+    public JTextField getUsernameField (){
+        return usernameField;
+    }
+    public JButton getEnterButton() {
+        return enterButton;
+    }
 }

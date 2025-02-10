@@ -76,7 +76,7 @@ public class ClientHandler implements Runnable {
 
             if (question != null) {
                 output.println("Choices: " + String.join(",", question.getChoices()));
-                System.out.println("Sending choices to client: " + question.getQuestionText());
+                System.out.println("Sending choices to client: " + question.getChoices());
             } else {
                 output.println("No choices found for the given category.");
                 System.out.println("No choices found for category: " + category);

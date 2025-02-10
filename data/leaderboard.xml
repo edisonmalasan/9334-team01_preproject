@@ -1,6 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <leaderboard>
     <entry>
         <player>Player1</player>
+        <score>100</score>
+    </entry>
+    <entry>
+        <player>TestPlayer</player>
         <score>100</score>
     </entry>
     <entry>

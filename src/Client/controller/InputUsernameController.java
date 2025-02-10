@@ -1,5 +1,7 @@
 package Client.controller;
 
+import Client.connection.ClientConnection;
+import Client.view.CategoryView;
 import Client.view.GameView;
 import Client.view.InputUsernameView;
 import Client.model.PlayerModel;
@@ -23,7 +25,7 @@ public class InputUsernameController {
     private InputUsernameView view;
     public PlayerModel player;
 
-    public InputUsernameController() {
+    public InputUsernameController(ClientConnection clientConnection) {
         this.view = new InputUsernameView();
 
         view.getEnterButton().addActionListener((ActionEvent e) -> {
@@ -76,7 +78,8 @@ public class InputUsernameController {
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
-                GameView gameView = new GameView();
+                view.dispose();
+                CategoryController categoryController = new CategoryController(clientConnection);
             }
         });
     }

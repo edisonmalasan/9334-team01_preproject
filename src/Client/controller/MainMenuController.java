@@ -19,7 +19,7 @@ public class MainMenuController {
         view.getPlayButton().addActionListener((ActionEvent e) -> {
             if (e.getSource() == view.playButton){
                 view.dispose();
-                InputUsernameController inputUsernameController = new InputUsernameController();
+                InputUsernameController inputUsernameController = new InputUsernameController(clientConnection);
             }
         });
 

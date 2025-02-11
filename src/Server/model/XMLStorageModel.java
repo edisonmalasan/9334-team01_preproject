@@ -6,6 +6,7 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 
+import Client.model.PlayerModel;
 import common.model.QuestionModel;
 import org.w3c.dom.*;
 import java.io.*;
@@ -46,7 +47,6 @@ public class XMLStorageModel {
         }
         return questions;
     }
-
     public static List<LeaderboardEntryModel> loadLeaderboardFromXML(String filename) {
         List<LeaderboardEntryModel> leaderboard = new ArrayList<>();
         try {
@@ -72,7 +72,8 @@ public class XMLStorageModel {
                 Element element = (Element) nodes.item(i);
                 String playerName = element.getElementsByTagName("player").item(0).getTextContent();
                 int score = Integer.parseInt(element.getElementsByTagName("score").item(0).getTextContent());
-                leaderboard.add(new LeaderboardEntryModel(playerName, score));
+                PlayerModel newPlayer = new PlayerModel(playerName,score);
+                leaderboard.add(new LeaderboardEntryModel(newPlayer));
             }
         } catch (Exception e) {
             System.err.println("Error loading leaderboard from XML: " + e.getMessage());

@@ -8,15 +8,14 @@ import Server.handler.ClientHandler;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import static common.Protocol.PORT_NUMBER;
 
 public class ServerHandler {
     private QuestionBankModel questionBank;
     private LeaderboardController leaderboard;
     private ServerSocket serverSocket;
-    private final int PORT_NUMBER;
 
-    public ServerHandler(int PORT_NUMBER, QuestionBankModel questionBank, LeaderboardController leaderboard) {
-        this.PORT_NUMBER = PORT_NUMBER;
+    public ServerHandler(QuestionBankModel questionBank, LeaderboardController leaderboard) {
         this.questionBank = questionBank;
         this.leaderboard = leaderboard;
     }

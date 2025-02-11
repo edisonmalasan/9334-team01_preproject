@@ -13,7 +13,7 @@ public class GameView {
         this.question = question;
     }
 
-    public GameView() {
+    public GameView(ClientConnection clientConnection) {
 
     }
 

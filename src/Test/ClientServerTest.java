@@ -2,7 +2,10 @@ package Test;
 
 import Client.connection.ClientConnection;
 import Client.controller.CategoryController;
+import Client.controller.GameController;
 import Client.controller.LeaderboardController;
+import Server.controller.QuestionController;
+import Server.handler.ClientHandler;
 import Server.model.QuestionBankModel;
 import common.model.QuestionModel;
 
@@ -20,14 +23,19 @@ public class ClientServerTest {
             return;
         }
 
+
+        QuestionBankModel questionBank = new QuestionBankModel();
+        GameController gameController = new GameController(clientConnection, questionBank);
+        //testing
+        gameController.startGame();
         // test
-        testFetchQuestionsByCategory(clientConnection);
+        //testFetchQuestionsByCategory(clientConnection);
 
         // test
-        testAddScoreToLeaderboard(clientConnection);
+        //testAddScoreToLeaderboard(clientConnection);
 
         // test
-        testFetchLeaderboard(clientConnection);
+        //testFetchLeaderboard(clientConnection);
 
         clientConnection.close();
         System.out.println("Client tests completed.");

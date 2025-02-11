@@ -1,5 +1,7 @@
 package Client.connection;
 
+import Server.handler.ClientHandler;
+
 import java.io.*;
 import java.net.Socket;
 

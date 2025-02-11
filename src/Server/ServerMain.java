@@ -2,8 +2,6 @@ package Server;
 
 import Server.model.QuestionBankModel;
 import Server.controller.LeaderboardController;
-import static common.Protocol.IP_ADDRESS;
-import static common.Protocol.PORT_NUMBER;
 
 import java.io.IOException;
 

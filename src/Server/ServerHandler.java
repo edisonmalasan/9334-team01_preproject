@@ -4,11 +4,11 @@ import Server.controller.LeaderboardController;
 import Server.model.LeaderboardModel;
 import Server.model.QuestionBankModel;
 import Server.handler.ClientHandler;
+import static common.Protocol.PORT_NUMBER;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import static common.Protocol.PORT_NUMBER;
 
 public class ServerHandler {
     private QuestionBankModel questionBank;

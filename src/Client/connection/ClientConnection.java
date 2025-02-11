@@ -16,6 +16,7 @@ public class ClientConnection {
 //    private static final String SERVER_IP = System.getenv("SERVER_IP") != null ? System.getenv("SERVER_IP") : "127.0.0.1";
 //    private static final int SERVER_PORT = System.getenv("SERVER_PORT") != null ? Integer.parseInt(System.getenv("SERVER_PORT")) : 5000;
 
+
     public ClientConnection() {
         try {
             socket = new Socket(IP_ADDRESS, PORT_NUMBER);

@@ -1,19 +1,25 @@
 package Client.connection;
 
+import Server.handler.ClientHandler;
+
 import java.io.*;
 import java.net.Socket;
+
+import static common.Protocol.IP_ADDRESS;
+import static common.Protocol.PORT_NUMBER;
 
 public class ClientConnection {
     private Socket socket;
     private BufferedReader input;
     private PrintWriter output;
 
-    private static final String SERVER_IP = System.getenv("SERVER_IP") != null ? System.getenv("SERVER_IP") : "127.0.0.1";
-    private static final int SERVER_PORT = System.getenv("SERVER_PORT") != null ? Integer.parseInt(System.getenv("SERVER_PORT")) : 5000;
+//    private static final String SERVER_IP = System.getenv("SERVER_IP") != null ? System.getenv("SERVER_IP") : "127.0.0.1";
+//    private static final int SERVER_PORT = System.getenv("SERVER_PORT") != null ? Integer.parseInt(System.getenv("SERVER_PORT")) : 5000;
+
 
     public ClientConnection() {
         try {
-            socket = new Socket(SERVER_IP, SERVER_PORT);
+            socket = new Socket(IP_ADDRESS, PORT_NUMBER);
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             output = new PrintWriter(socket.getOutputStream(), true);
 

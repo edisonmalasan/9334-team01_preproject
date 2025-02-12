@@ -1,5 +1,7 @@
 package Client.controller;
 
+import Client.view.GameView;
+import Client.view.InputUsernameView;
 import Client.model.PlayerModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,13 +19,17 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 public class InputUsernameController {
+    private InputUsernameView view;
+    public PlayerModel player;
 
     @FXML
     public TextField usernameField;
@@ -98,6 +104,13 @@ public class InputUsernameController {
                 writeDOMToFile(document, "data/leaderboard.xml");
             }
 
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                view.dispose();
+                CategoryController categoryController = new CategoryController(clientConnection);
+            }
+        });
         } catch (Exception exception) {
             exception.printStackTrace();
         }

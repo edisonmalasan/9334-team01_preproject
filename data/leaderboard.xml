@@ -1,31 +1,52 @@
 <leaderboard>
-        
+            
+    
     <entry>
-                
+                        
+        
         <player>Player1</player>
-                
-        <score>100</score>
-            
-    </entry>
+                        
         
+        <score>100</score>
+                    
+    
+    </entry>
+            
+    
     <entry>
-                
+                        
+        
         <player>TestPlayer</player>
-                
+                        
+        
         <score>100</score>
+                    
+    
+    </entry>
             
+    
+    <entry>
+                        
+        
+        <player>Player2</player>
+                        
+        
+        <score>80</score>
+                    
+    
     </entry>
         
+    
     <entry>
                 
-        <player>Player2</player>
+        <player>Yuen</player>
                 
-        <score>80</score>
+        <score>0</score>
             
     </entry>
     
     <entry>
-        <player>Yuen</player>
+        <player>PJ</player>
         <score>0</score>
     </entry>
 </leaderboard>

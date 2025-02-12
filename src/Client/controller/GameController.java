@@ -1,7 +1,7 @@
 package Client.controller;
 
 import Client.connection.ClientConnection;
-import Client.model.GameModel;
+//import Client.model.GameModel;
 import Client.view.GameView;
 import Server.handler.ClientHandler;
 import Server.model.QuestionBankModel;
@@ -19,7 +19,7 @@ public class GameController {
     /**
      *
      */
-    private GameModel gameModel;
+//    private GameModel gameModel;
     private QuestionBankModel questionBank;
     //switched from ClientHandler to ClientConnection for testing
     private ClientConnection clientConnection;

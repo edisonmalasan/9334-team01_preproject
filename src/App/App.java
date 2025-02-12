@@ -1,4 +1,4 @@
-package App;
+package App;    
 
 import Client.connection.ClientConnection;
 import Client.controller.MainMenuController;
@@ -12,11 +12,6 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
-//    public static void start() {
-//        ClientConnection clientConnection = new ClientConnection();
-//        new MainMenuController(clientConnection);
-//    }
 
     @Override
     public void start(Stage stage) throws Exception {

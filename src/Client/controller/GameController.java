@@ -24,9 +24,9 @@ public class GameController {
     //switched from ClientHandler to ClientConnection for testing
     private ClientConnection clientConnection;
 
-    public GameController(ClientConnection clientConnection, QuestionBankModel questionBank) {
+    public GameController(QuestionBankModel questionBank) {
         this.questionBank = questionBank;
-        this.clientConnection = clientConnection;
+        this.clientConnection = ClientConnection.getInstance();
     }
 
     public void startGame() {

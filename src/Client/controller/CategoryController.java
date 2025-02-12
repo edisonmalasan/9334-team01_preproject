@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CategoryController {
-    private final ClientConnection clientConnection;
-    private final QuestionBankModel questionBank;
+    private ClientConnection clientConnection;
+    private QuestionBankModel questionBank;
     private static String category;
 
     @FXML
@@ -26,13 +26,12 @@ public class CategoryController {
     @FXML
     private ImageView categoryLabel;
 
-    public CategoryController(ClientConnection clientConnection, QuestionBankModel questionBank) {
-        this.clientConnection = clientConnection;
-        this.questionBank = questionBank;
-    }
 
     @FXML
     public void initialize() {
+        this.clientConnection = ClientConnection.getInstance();
+        this.questionBank = new QuestionBankModel();
+
         algebraButton.setOnAction(this::handleButtonClick);
         anglesButton.setOnAction(this::handleButtonClick);
         geometryButton.setOnAction(this::handleButtonClick);

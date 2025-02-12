@@ -9,6 +9,7 @@ import static common.Protocol.IP_ADDRESS;
 import static common.Protocol.PORT_NUMBER;
 
 public class ClientConnection {
+    private static ClientConnection instance;
     private Socket socket;
     private BufferedReader input;
     private PrintWriter output;
@@ -17,7 +18,7 @@ public class ClientConnection {
 //    private static final int SERVER_PORT = System.getenv("SERVER_PORT") != null ? Integer.parseInt(System.getenv("SERVER_PORT")) : 5000;
 
 
-    public ClientConnection() {
+    private ClientConnection() {
         try {
             socket = new Socket(IP_ADDRESS, PORT_NUMBER);
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -28,6 +29,14 @@ public class ClientConnection {
             System.out.println("Error connecting to the server.");
             e.printStackTrace();
         }
+    }
+
+    // singleton instance
+    public static ClientConnection getInstance() {
+        if (instance == null) {
+            instance = new ClientConnection();
+        }
+        return instance;
     }
 
     // for ClientServerTest

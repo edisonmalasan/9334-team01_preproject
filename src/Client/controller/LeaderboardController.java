@@ -13,7 +13,7 @@ public class LeaderboardController {
     private ClientConnection clientConnection;
 
     public LeaderboardController() {
-        this.clientConnection = new ClientConnection();
+        this.clientConnection = ClientConnection.getInstance();
     }
 
     public String getLeaderboard() {

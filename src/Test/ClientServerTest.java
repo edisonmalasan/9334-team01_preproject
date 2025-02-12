@@ -22,12 +22,12 @@ public class ClientServerTest {
 
         // test
         testFetchQuestionsByCategory(clientConnection);
-
-        // test
-        testAddScoreToLeaderboard(clientConnection);
-
-        // test
-        testFetchLeaderboard(clientConnection);
+        testFetchQuestionChoicesByCategory(clientConnection);
+//        // test
+//        testAddScoreToLeaderboard(clientConnection);
+//
+//        // test
+//        testFetchLeaderboard(clientConnection);
 
         clientConnection.close();
         System.out.println("Client tests completed.");
@@ -39,6 +39,21 @@ public class ClientServerTest {
         // fetching questions for a category
         String category = "Algebra";
         String request = "GET_QUESTION:" + category;
+        String response = clientConnection.sendRequest(request);
+
+        if (response != null) {
+            System.out.println("Server response: " + response);
+        } else {
+            System.out.println("Failed to fetch questions for category: " + category);
+        }
+    }
+
+    private static void testFetchQuestionChoicesByCategory(ClientConnection clientConnection) {
+        System.out.println("\nTesting fetch questions by category...");
+
+        // fetching questions for a category
+        String category = "Algebra";
+        String request = "GET_CHOICES:" + category;
         String response = clientConnection.sendRequest(request);
 
         if (response != null) {

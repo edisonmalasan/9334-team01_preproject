@@ -1,6 +1,7 @@
 package Client.controller;
 
 
+import Client.connection.ClientConnection;
 import Client.model.PlayerModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ import java.util.Collection;
 
 public class InputUsernameController {
     public PlayerModel player;
+    private ClientConnection clientConnection;
 
     @FXML
     public TextField usernameField;
@@ -43,6 +45,10 @@ public class InputUsernameController {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    public InputUsernameController() {
+        this.clientConnection = ClientConnection.getInstance();
     }
 
     private void handleEnterButtonClick() throws IOException {

@@ -25,7 +25,7 @@ public class ClientServerTest {
 
 
         QuestionBankModel questionBank = new QuestionBankModel();
-        GameController gameController = new GameController(clientConnection, questionBank);
+        GameController gameController = new GameController(questionBank);
         //testing
         gameController.startGame();
         // test

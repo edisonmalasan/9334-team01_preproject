@@ -3,35 +3,33 @@ package Client.model;
 import java.io.Serializable;
 
 public class LeaderboardEntryModel {
-    private String playerName;
-    private int score;
+    private PlayerModel newPlayer;
 
-    public LeaderboardEntryModel(String playerName, int score) {
-        this.playerName = playerName;
-        this.score = score;
+    public LeaderboardEntryModel(PlayerModel newPlayer) {
+        this.newPlayer = newPlayer;
     }
 
     public String getPlayerName() {
-        return playerName;
+        return newPlayer.getName();
     }
 
     public int getScore() {
-        return score;
+        return newPlayer.getScore();
     }
 
     public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+        this.newPlayer.setName(playerName);
     }
 
     public void setScore(int score) {
-        this.score = score;
+        this.newPlayer.setScore(score);
     }
 
     @Override
     public String toString() {
         return "LeaderboardEntryModel{" +
-                "playerName='" + playerName + '\'' +
-                ", score=" + score +
+                "playerName='" + newPlayer.getName() + '\'' +
+                ", score=" + newPlayer.getScore() +
                 '}';
     }
 }

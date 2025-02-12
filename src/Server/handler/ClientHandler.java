@@ -1,5 +1,6 @@
 package Server.handler;
 
+import Client.model.PlayerModel;
 import Server.model.QuestionBankModel;
 import Server.controller.LeaderboardController;
 import common.Protocol;
@@ -91,9 +92,10 @@ public class ClientHandler implements Runnable {
             String[] parts = request.split(":");
             String playerName = parts[1].trim();
             int score = Integer.parseInt(parts[2].trim());
+            PlayerModel player = new PlayerModel(playerName,score);
 
             System.out.println("Client requested to add score: " + playerName + " with score " + score);
-            leaderboardController.addScore(playerName, score);
+            leaderboardController.addScore(player);
             output.println("Score added successfully!");
             System.out.println("Added score for player: " + playerName + " with score: " + score);
         } else {

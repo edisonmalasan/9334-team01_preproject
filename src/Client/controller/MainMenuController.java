@@ -1,43 +1,38 @@
 package Client.controller;
 
-import Client.connection.ClientConnection;
-import Client.view.InputUsernameView;
-import Client.view.LeaderboardView;
-import Client.view.MainMenuView;
-import Client.view.GameView;
-
-import java.awt.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import java.io.IOException;
 
 public class MainMenuController {
-    private MainMenuView view;
-    private ClientConnection clientConnection;
+    @FXML
+    private Button playButton;
+    @FXML
+    private Button leaderboardButton;
+    @FXML
+    private Button quitButton;
 
-    public MainMenuController(ClientConnection clientConnection) {
-        this.clientConnection = clientConnection;
-        this.view = new MainMenuView();
+    @FXML
+    public void initialize() {
+        playButton.setOnAction(event -> switchToLoginScreen());
+        quitButton.setOnAction(event -> System.exit(0)); // Closes the application
+    }
 
-        view.getPlayButton().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.playButton){
-                view.dispose();
-                InputUsernameController inputUsernameController = new InputUsernameController(clientConnection);
-            }
-        });
+    private void switchToLoginScreen() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/user_login.fxml"));
+            Scene loginScene = new Scene(loader.load());
 
-        view.getLeaderboardButton().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.leaderboardButton){
-                view.dispose();
-                LeaderboardView leaderboardView = new LeaderboardView();
-
-            }
-        });
-
-        view.getExitButton().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.exitButton){
-                System.exit(0);
-            }
-        });
-
-        // TODO: Setup Buttons here in view like
-        //  view.getPlayButton().addActionListener(e ->  openGameModeView()); etc..
+            Stage stage = (Stage) playButton.getScene().getWindow();
+            stage.setScene(loginScene);
+            stage.setTitle("Login");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,8 +1,15 @@
 package Client.controller;
 
 import Client.connection.ClientConnection;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class LeaderboardController {
+    @FXML
+    public Button backToMenuButton;
+    @FXML
+    public Label scoreLabel;
     private ClientConnection clientConnection;
 
     public LeaderboardController() {

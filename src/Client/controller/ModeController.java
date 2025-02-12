@@ -1,7 +1,17 @@
 package Client.controller;
 
-import Client.view.GameView;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 public class ModeController {
-    private GameView gameView;
+    @FXML
+    public ImageView gamemodeLabel;
+    @FXML
+    public Button classicButton;
+    @FXML
+    public Button endlessButton;
+    @FXML
+    public AnchorPane categoryMenu;
 }

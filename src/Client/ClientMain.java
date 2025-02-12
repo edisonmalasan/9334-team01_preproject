@@ -4,6 +4,6 @@ import App.App;
 
 public class ClientMain {
     public static void main(String[] args) {
-        App.start();
+        App.launch();
     }
 }

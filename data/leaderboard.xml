@@ -1,10 +1,61 @@
 <leaderboard>
+                
+    
+    
     <entry>
+                                
+        
+        
         <player>Player1</player>
+                                
+        
+        
         <score>100</score>
+                            
+    
+    
     </entry>
+                
+    
+    
     <entry>
+                                
+        
+        
         <player>Player2</player>
+                                
+        
+        
         <score>80</score>
+                            
+    
+    
+    </entry>
+            
+    
+    
+    <entry>
+                        
+        
+        <player/>
+                        
+        
+        <score>0</score>
+                    
+    
+    </entry>
+        
+    
+    <entry>
+                
+        <player>pj</player>
+                
+        <score>0</score>
+            
+    </entry>
+    
+    <entry>
+        <player>Username cannot be empty!</player>
+        <score>0</score>
     </entry>
 </leaderboard>

@@ -58,8 +58,6 @@ public class CategoryController {
         if (!filteredQuestions.isEmpty()) {
             QuestionModel question = filteredQuestions.get(0);
 
-            // Assuming GameView is a JavaFX View, ensure correct scene handling
-//            new GameView(clientConnection, question);
         } else {
             System.out.println("No questions found for the selected category: " + category);
         }

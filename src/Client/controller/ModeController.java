@@ -9,30 +9,5 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ModeController {
-    @FXML
-    public ImageView gamemodeLabel;
-    @FXML
-    public Button classicButton;
-    @FXML
-    public Button endlessButton;
-    @FXML
-    public AnchorPane categoryMenu;
-
-    @FXML
-    public void initialize() {
-        classicButton.setOnAction(event -> switchToCategoryScreen());
-    }
-
-    private void switchToCategoryScreen() {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/category_menu.fxml"));
-//            Scene categoryScene = new Scene(loader.load());
-//            Stage stage = (Stage) classicButton.getScene().getWindow();
-//            stage.setScene(categoryScene);
-//            stage.setTitle("Categories");
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-    }
+    //classic and endless mode
 }

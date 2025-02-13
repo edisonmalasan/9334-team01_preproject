@@ -1,17 +1,17 @@
 @font-face
 {
     -fx-font-family: "Space Nova";
-    src: url("fonts/SpaceNova-6Rpd1.otf");
+    src: url("../fonts/SpaceNova-6Rpd1.otf");
 }
 
 @font-face
 {
     -fx-font-family: "Roboto Mono";
-    src: url("fonts/RobotoMono-Bold.ttf");
+    src: url("../fonts/RobotoMono-Bold.ttf");
 }
 
 .button {
-    -fx-background-image: url("images/blue.png");
+    -fx-background-image: url("../images/blue.png");
     -fx-background-size: 146px 50px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -21,7 +21,7 @@
 }
 
 .button:hover {
-    -fx-background-image: url("images/hover.png");
+    -fx-background-image: url("../images/hover.png");
     -fx-background-size: 146px 50px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -32,7 +32,7 @@
 }
 
 .button:pressed {
-    -fx-background-image: url("images/hover.png");
+    -fx-background-image: url("../images/hover.png");
     -fx-background-size: 146px 50px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -43,7 +43,7 @@
 }
 
 #categoryMenu .button {
-    -fx-background-image: url("images/mode.png");
+    -fx-background-image: url("../images/mode.png");
     -fx-background-size: 146px 50px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -53,7 +53,7 @@
 }
 
 #categoryMenu .button:hover {
-    -fx-background-image: url("images/modehover.png");
+    -fx-background-image: url("../images/modehover.png");
     -fx-background-size: 146px 50px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -64,7 +64,7 @@
 }
 
 #categoryMenu .button:pressed {
-    -fx-background-image: url("images/modehover.png");
+    -fx-background-image: url("../images/modehover.png");
     -fx-background-size: 146px 50px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;

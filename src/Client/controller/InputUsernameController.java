@@ -3,6 +3,7 @@ package Client.controller;
 
 import Client.connection.ClientConnection;
 import Client.model.PlayerModel;
+import exception.ConnectionException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -47,7 +48,7 @@ public class InputUsernameController {
         });
     }
 
-    public InputUsernameController() {
+    public InputUsernameController() throws ConnectionException {
         this.clientConnection = ClientConnection.getInstance();
     }
 
@@ -108,7 +109,7 @@ public class InputUsernameController {
             exception.printStackTrace();
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gamemode_menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/gamemode_menu.fxml"));
         Scene modeScene = new Scene(loader.load());
 
         Stage stage = (Stage) enterButton.getScene().getWindow();

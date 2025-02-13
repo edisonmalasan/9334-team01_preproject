@@ -11,7 +11,7 @@
         <children>
             <ImageView fx:id="gamemodeLabel" fitHeight="140.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="@images/gamemode.png" />
+                    <Image url="@../images/gamemode.png" />
                 </image>
             </ImageView>
             <Button fx:id="classicButton" prefHeight="50.0" prefWidth="146.0" text="CLASSIC" />

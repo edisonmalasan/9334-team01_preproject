@@ -12,7 +12,7 @@
          <children>
             <ImageView fx:id="defuseLabel" fitHeight="140.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/defuseLabel.png" />
+                  <Image url="@../images/defuseLabel.png" />
                </image>
             </ImageView>
             <Button fx:id="playButton" prefHeight="50.0" prefWidth="146.0" text="PLAY" />

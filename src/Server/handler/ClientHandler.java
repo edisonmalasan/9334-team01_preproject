@@ -51,7 +51,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    private void handleRequest(String request) {
+    private Response handleRequest(String request) {
         try {
             if (request.startsWith(Protocol.GET_QUESTION)) {
                 String category = request.split(":")[1].trim();

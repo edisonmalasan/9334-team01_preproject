@@ -4,6 +4,7 @@ import Client.model.PlayerModel;
 import Server.model.QuestionBankModel;
 import Server.controller.LeaderboardController;
 import common.Protocol;
+import common.Response;
 import common.model.QuestionModel;
 
 import java.io.BufferedReader;
@@ -34,73 +35,50 @@ public class ClientHandler implements Runnable {
             String request;
             while ((request = input.readLine()) != null) {
                 System.out.println("Received request from client: " + request);
-                handleRequest(request);
+                Response response = handleRequest(request);
+                output.println(response.toString());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error handling client request: " + e.getMessage());
         } finally {
             try {
                 if (input != null) input.close();
                 if (output != null) output.close();
                 if (clientSocket != null) clientSocket.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println("Error closing client connection: " + e.getMessage());
             }
         }
     }
 
     private void handleRequest(String request) {
-        if (request.startsWith(Protocol.GET_QUESTION)) {
-            String category = request.split(":")[1].trim();
-            System.out.println("Client requested questions for category: " + category);
+        try {
+            if (request.startsWith(Protocol.GET_QUESTION)) {
+                String category = request.split(":")[1].trim();
+                QuestionModel question = questionBank.getQuestions().stream()
+                        .filter(q -> q.getCategory().equalsIgnoreCase(category))
+                        .findFirst()
+                        .orElse(null);
 
-            QuestionModel question = questionBank.getQuestions().stream()
-                    .filter(q -> q.getCategory().equalsIgnoreCase(category))
-                    .findFirst()
-                    .orElse(null);
-
-            if (question != null) {
-                output.println("Question: " + question.getQuestionText());
-                System.out.println("Sending question to client: " + question.getQuestionText());
+                if (question != null) {
+                    return new Response(true, "Question retrieved successfully.", question);
+                } else {
+                    return new Response(false, "No questions found for the given category.", null);
+                }
+            } else if (request.equals(Protocol.GET_LEADERBOARD)) {
+                String leaderboard = leaderboardController.getLeaderboard();
+                return new Response(true, "Leaderboard retrieved successfully.", leaderboard);
+            } else if (request.equals(Protocol.ADD_SCORE)) {
+                String[] parts = request.split(":");
+                String playerName = parts[1].trim();
+                int score = Integer.parseInt(parts[2].trim());
+                leaderboardController.addScore(new PlayerModel(playerName, score));
+                return new Response(true, "Score added successfully.", null);
             } else {
-                output.println("No questions found for the given category.");
-                System.out.println("No question found for category: " + category);
+                return new Response(false, "Invalid request.", null);
             }
-        } else if (request.startsWith(Protocol.GET_CHOICES)) {
-            String category = request.split(":")[1].trim();
-            System.out.println("Client requested choices for category: " + category);
-
-            QuestionModel question = questionBank.getQuestions().stream()
-                    .filter(q -> q.getCategory().equalsIgnoreCase(category))
-                    .findFirst()
-                    .orElse(null);
-
-            if (question != null) {
-                output.println("Choices: " + String.join(",", question.getChoices()));
-                System.out.println("Sending choices to client: " + question.getChoices());
-            } else {
-                output.println("No choices found for the given category.");
-                System.out.println("No choices found for category: " + category);
-            }
-        } else if (request.equals(Protocol.GET_LEADERBOARD)) {
-            System.out.println("Client requested the leaderboard.");
-            String leaderboard = LeaderboardController.getLeaderboard();
-            output.println(leaderboard);
-            System.out.println("Sending leaderboard to client.");
-
-        } else if (request.startsWith(Protocol.ADD_SCORE)) {
-            String[] parts = request.split(":");
-            String playerName = parts[1].trim();
-            int score = Integer.parseInt(parts[2].trim());
-            PlayerModel player = new PlayerModel(playerName,score);
-
-            System.out.println("Client requested to add score: " + playerName + " with score " + score);
-            leaderboardController.addScore(player);
-            output.println("Score added successfully!");
-            System.out.println("Added score for player: " + playerName + " with score: " + score);
-        } else {
-            output.println("Invalid request.");
-            System.out.println("Received an invalid request: " + request);
+        } catch (Exception e) {
+            return new Response(false, "Error processing request: " + e.getMessage(), null);
         }
     }
 }

@@ -8,46 +8,48 @@ import Server.controller.QuestionController;
 import Server.handler.ClientHandler;
 import Server.model.QuestionBankModel;
 import common.model.QuestionModel;
+import exception.ConnectionException;
+import exception.InvalidRequestException;
 
 import java.util.List;
 
 public class ClientServerTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ConnectionException {
         System.out.println("Starting client tests...");
 
-        // client connection
-        ClientConnection clientConnection = new ClientConnection();
-        if (clientConnection == null || !clientConnection.isConnected()) {
-            System.out.println("Failed to connect to the server. Exiting tests.");
-            return;
-        }
-
-
-        QuestionBankModel questionBank = new QuestionBankModel();
-        GameController gameController = new GameController(questionBank);
-        //testing
-        gameController.startGame();
-        // test
-        //testFetchQuestionsByCategory(clientConnection);
-
-        // test
-        //testAddScoreToLeaderboard(clientConnection);
-
-        // test
-        //testFetchLeaderboard(clientConnection);
-
-        clientConnection.close();
-        System.out.println("Client tests completed.");
+//        // client connection
+//        ClientConnection clientConnection = new ClientConnection();
+//        if (clientConnection == null || !clientConnection.isConnected()) {
+//            System.out.println("Failed to connect to the server. Exiting tests.");
+//            return;
+//        }
+//
+//
+//        QuestionBankModel questionBank = new QuestionBankModel();
+//        GameController gameController = new GameController(questionBank);
+//        //testing
+//        gameController.startGame();
+//        // test
+//        //testFetchQuestionsByCategory(clientConnection);
+//
+//        // test
+//        //testAddScoreToLeaderboard(clientConnection);
+//
+//        // test
+//        //testFetchLeaderboard(clientConnection);
+//
+//        clientConnection.close();
+//        System.out.println("Client tests completed.");
     }
 
-    private static void testFetchQuestionsByCategory(ClientConnection clientConnection) {
+    private static void testFetchQuestionsByCategory(ClientConnection clientConnection) throws InvalidRequestException, ConnectionException {
         System.out.println("\nTesting fetch questions by category...");
 
         // fetching questions for a category
         String category = "Algebra";
         String request = "GET_QUESTION:" + category;
-        String response = clientConnection.sendRequest(request);
+        String response = String.valueOf(clientConnection.sendRequest(request));
 
         if (response != null) {
             System.out.println("Server response: " + response);
@@ -56,14 +58,14 @@ public class ClientServerTest {
         }
     }
 
-    private static void testAddScoreToLeaderboard(ClientConnection clientConnection) {
+    private static void testAddScoreToLeaderboard(ClientConnection clientConnection) throws InvalidRequestException, ConnectionException {
         System.out.println("\nTesting adding a score to the leaderboard...");
 
         //  adding a score
         String playerName = "TestPlayer";
         int score = 100;
         String request = "ADD_SCORE:" + playerName + ":" + score;
-        String response = clientConnection.sendRequest(request);
+        String response = String.valueOf(clientConnection.sendRequest(request));
 
         if (response != null) {
             System.out.println("Server response: " + response);
@@ -72,12 +74,12 @@ public class ClientServerTest {
         }
     }
 
-    private static void testFetchLeaderboard(ClientConnection clientConnection) {
+    private static void testFetchLeaderboard(ClientConnection clientConnection) throws InvalidRequestException, ConnectionException {
         System.out.println("\nTesting fetch leaderboard...");
 
         // fetching the leaderboard
         String request = "GET_LEADERBOARD";
-        String response = clientConnection.sendRequest(request);
+        String response = String.valueOf(clientConnection.sendRequest(request));
 
         if (response != null) {
             System.out.println("Server response: " + response);

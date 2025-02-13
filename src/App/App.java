@@ -13,12 +13,13 @@ public class App extends Application {
         launch();
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main_menu.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Main Menu");
-        stage.show();
-    }
+    // loading fxml files should be done in view classes
+//    @Override
+//    public void start(Stage stage) throws Exception {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main_menu.fxml"));
+//        Parent root = loader.load();
+//        stage.setScene(new Scene(root));
+//        stage.setTitle("Main Menu");
+//        stage.show();
+//    }
 }

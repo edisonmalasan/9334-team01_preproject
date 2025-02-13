@@ -1,5 +1,6 @@
 package Client.connection;
 
+import Client.model.PlayerModel;
 import common.Response;
 import exception.ConnectionException;
 import exception.InvalidRequestException;
@@ -12,6 +13,7 @@ import static common.Protocol.IP_ADDRESS;
 import static common.Protocol.PORT_NUMBER;
 
 public class ClientConnection {
+    private ObjectOutputStream outputStream;
     private static ClientConnection instance;
     private Socket socket;
     private BufferedReader input;
@@ -24,6 +26,7 @@ public class ClientConnection {
             socket = new Socket(IP_ADDRESS, PORT_NUMBER);
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             output = new PrintWriter(socket.getOutputStream(), true);
+            outputStream = new ObjectOutputStream(socket.getOutputStream());
 
             logger.info("Connected to the server.");
         } catch (IOException e) {
@@ -68,6 +71,16 @@ public class ClientConnection {
             if (socket != null) socket.close();
         } catch (IOException e) {
             System.err.println("Error closing connection: " + e.getMessage());
+        }
+    }
+
+    public void sendLeaderboardUpdate(PlayerModel player) {
+        try {
+            outputStream.writeObject("UPDATE_LEADERBOARD");
+            outputStream.writeObject(player);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

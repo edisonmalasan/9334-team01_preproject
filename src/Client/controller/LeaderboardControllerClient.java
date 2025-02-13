@@ -5,10 +5,11 @@ import common.Response;
 import exception.ConnectionException;
 import exception.InvalidRequestException;
 
-public class LeaderboardController {
+
+public class LeaderboardControllerClient {
     private ClientConnection clientConnection;
 
-    public LeaderboardController() throws ConnectionException {
+    public LeaderboardControllerClient() throws ConnectionException {
         this.clientConnection = ClientConnection.getInstance();
     }
 

@@ -3,6 +3,7 @@ package Client.controller;
 
 import Client.connection.ClientConnection;
 import Client.model.PlayerModel;
+import Client.view.InputUsernameView;
 import exception.ConnectionException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,8 @@ import java.util.Collection;
 public class InputUsernameController {
     public PlayerModel player;
     private ClientConnection clientConnection;
+    private InputUsernameView inputUsernameView;
+    private Stage stage;
 
     @FXML
     public TextField usernameField;
@@ -52,12 +55,17 @@ public class InputUsernameController {
         this.clientConnection = ClientConnection.getInstance();
     }
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+        this.inputUsernameView = new InputUsernameView(stage);
+    }
+
     private void handleEnterButtonClick() throws IOException {
         String username = usernameField.getText().trim();
 
         if (username.isEmpty()) {
-            usernameField.setPromptText("Username cannot be empty!"); // Show error message
-            return; // Stop further execution
+            usernameField.setPromptText("Username cannot be empty!");
+            return;
         }
 
         player = new PlayerModel(username, 0);

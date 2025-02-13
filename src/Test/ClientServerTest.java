@@ -1,17 +1,8 @@
 package Test;
 
 import Client.connection.ClientConnection;
-import Client.controller.CategoryController;
-import Client.controller.GameController;
-import Client.controller.LeaderboardController;
-import Server.controller.QuestionController;
-import Server.handler.ClientHandler;
-import Server.model.QuestionBankModel;
-import common.model.QuestionModel;
 import exception.ConnectionException;
 import exception.InvalidRequestException;
-
-import java.util.List;
 
 public class ClientServerTest {
 

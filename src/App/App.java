@@ -19,7 +19,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws FXMLLoadingException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/views/main_menu.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
             Parent root = fxmlLoader.load();
 
             MainMenuController controller = fxmlLoader.getController();

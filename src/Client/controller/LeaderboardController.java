@@ -4,9 +4,6 @@ import Client.connection.ClientConnection;
 import common.Response;
 import exception.ConnectionException;
 import exception.InvalidRequestException;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
 public class LeaderboardController {
     private ClientConnection clientConnection;
@@ -23,8 +20,10 @@ public class LeaderboardController {
             } else {
                 return "Error fetching leaderboard: " + response.getMessage();
             }
-        } catch (ConnectionException | InvalidRequestException e) {
-            return "Error: " + e.getMessage();
+        } catch (ConnectionException e) {
+            return "Unable to connect to the server. Please try again later.";
+        } catch (InvalidRequestException e) {
+            return "Invalid request. Please contact support.";
         }
     }
 

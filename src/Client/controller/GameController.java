@@ -6,6 +6,7 @@ import Client.view.GameView;
 import Server.handler.ClientHandler;
 import Server.model.QuestionBankModel;
 import common.model.QuestionModel;
+import exception.ConnectionException;
 
 import java.util.List;
 import java.util.Scanner;
@@ -24,7 +25,7 @@ public class GameController {
     //switched from ClientHandler to ClientConnection for testing
     private ClientConnection clientConnection;
 
-    public GameController(QuestionBankModel questionBank) {
+    public GameController(QuestionBankModel questionBank) throws ConnectionException {
         this.questionBank = questionBank;
         this.clientConnection = ClientConnection.getInstance();
     }

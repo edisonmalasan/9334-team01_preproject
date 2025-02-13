@@ -3,6 +3,7 @@ package Client.controller;
 import Client.connection.ClientConnection;
 import Server.model.QuestionBankModel;
 import common.model.QuestionModel;
+import exception.ConnectionException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -28,7 +29,7 @@ public class CategoryController {
 
 
     @FXML
-    public void initialize() {
+    public void initialize() throws ConnectionException {
         this.clientConnection = ClientConnection.getInstance();
         this.questionBank = new QuestionBankModel();
 

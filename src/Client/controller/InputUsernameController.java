@@ -37,7 +37,7 @@ public class InputUsernameController {
         enterButton.setOnAction(event -> handleEnterButtonClick());
 
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
-            errorLabel.setText(""); // Clear error message
+            errorLabel.setText("");
         });
     }
 

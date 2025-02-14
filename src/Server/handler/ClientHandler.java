@@ -37,7 +37,7 @@ public class ClientHandler implements Runnable {
         try {
             System.out.println("New client connected: " + clientSocket.getInetAddress());
 
-            while (!clientSocket.isClosed()) {  // ✅ Keep listening unless the client disconnects
+            while (!clientSocket.isClosed()) {
                 Object request = objectInputStream.readObject();
 
                 if (request instanceof String) {
@@ -49,7 +49,7 @@ public class ClientHandler implements Runnable {
                         sendResponse(response);
                     }
 
-                } else if (request instanceof PlayerModel) { // ✅ Handles player registration safely
+                } else if (request instanceof PlayerModel) {
                     System.out.println("DEBUG: Player registration request received.");
                     Response response = handlePlayerRegistration((PlayerModel) request);
                     sendResponse(response);

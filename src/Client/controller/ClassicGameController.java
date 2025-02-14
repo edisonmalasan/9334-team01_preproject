@@ -2,8 +2,7 @@ package Client.controller;
 
 import Client.connection.ClientConnection;
 //import Client.model.GameModel;
-import Client.view.GameView;
-import Server.handler.ClientHandler;
+import Client.view.ClassicGameView;
 import Server.model.QuestionBankModel;
 import common.model.QuestionModel;
 import exception.ConnectionException;
@@ -12,11 +11,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class GameController {
+public class ClassicGameController {
     /**
      *
      */
-    private GameView gameView;
+    private ClassicGameView classicGameView;
     /**
      *
      */
@@ -25,7 +24,7 @@ public class GameController {
     //switched from ClientHandler to ClientConnection for testing
     private ClientConnection clientConnection;
 
-    public GameController(QuestionBankModel questionBank) throws ConnectionException {
+    public ClassicGameController(QuestionBankModel questionBank) throws ConnectionException {
         this.questionBank = questionBank;
         this.clientConnection = ClientConnection.getInstance();
     }

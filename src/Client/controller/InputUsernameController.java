@@ -2,11 +2,13 @@ package Client.controller;
 
 import Client.connection.ClientConnection;
 import Client.model.PlayerModel;
+import Client.view.ModeView;
 import common.Response;
 import exception.ConnectionException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -65,7 +67,7 @@ public class InputUsernameController {
                         usernameField.requestFocus();
                         errorLabel.setText(response.getMessage());
                     } else {
-                        switchToGameMode();
+                        updateUI(this::switchToModeSelection);
                     }
                 });
 
@@ -76,18 +78,26 @@ public class InputUsernameController {
         }).start();
     }
 
-    private void switchToGameMode() {
+    private void updateUI(Runnable action) {
+        javafx.application.Platform.runLater(action);
+    }
+
+    private void switchToModeSelection() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/mode_menu.fxml"));
-            Scene modeScene = new Scene(loader.load());
+            Parent root = loader.load();
 
+            ModeController modeController = loader.getController();
             Stage stage = (Stage) enterButton.getScene().getWindow();
-            stage.setScene(modeScene);
-            stage.setTitle("Game Modes");
+            modeController.setModeView(new ModeView(stage));
+
+            stage.setScene(new Scene(root));
+            stage.setTitle("Select Game Mode");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
             errorLabel.setText("Failed to load game mode.");
         }
     }
+
 }

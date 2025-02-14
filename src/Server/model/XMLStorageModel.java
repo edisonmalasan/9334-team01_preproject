@@ -44,20 +44,20 @@ public class XMLStorageModel {
         }
         return questions;
     }
+
     public static List<LeaderboardEntryModelServer> loadLeaderboardFromXML(String filename) {
         List<LeaderboardEntryModelServer> leaderboard = new ArrayList<>();
         try {
             File file = new File(filename);
             if (!file.exists()) {
                 System.out.println("Leaderboard file not found. Creating a new one.");
-                file.createNewFile(); // create file if it doesnt exist
-                return leaderboard; // return empty list
+                file.createNewFile();
+                return leaderboard;
             }
 
-            // if file is empty
             if (file.length() == 0) {
                 System.out.println("Leaderboard file is empty. Initializing with an empty leaderboard.");
-                return leaderboard; // return empty list
+                return leaderboard;
             }
 
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -69,7 +69,7 @@ public class XMLStorageModel {
                 Element element = (Element) nodes.item(i);
                 String playerName = element.getElementsByTagName("player").item(0).getTextContent();
                 int score = Integer.parseInt(element.getElementsByTagName("score").item(0).getTextContent());
-                PlayerModel newPlayer = new PlayerModel(playerName,score);
+
                 leaderboard.add(new LeaderboardEntryModelServer(playerName, score));
             }
         } catch (Exception e) {
@@ -105,8 +105,11 @@ public class XMLStorageModel {
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(new File(filename));
             transformer.transform(source, result);
+
+            System.out.println("Leaderboard successfully saved to XML.");
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("Error saving leaderboard to XML: " + e.getMessage());
         }
     }
 }

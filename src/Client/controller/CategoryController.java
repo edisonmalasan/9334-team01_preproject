@@ -1,37 +1,23 @@
 package Client.controller;
 
 import Client.connection.ClientConnection;
-import Server.model.QuestionBankModel;
 import common.model.QuestionModel;
 import exception.ConnectionException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import java.io.IOException;
 
 public class CategoryController {
     private ClientConnection clientConnection;
-    private QuestionBankModel questionBank;
-    private static String category;
-
-    @FXML
-    public AnchorPane categoryMenu;
+    private static String selectedCategory;
 
     @FXML
     private Button algebraButton, anglesButton, geometryButton, logicButton, probabilityButton, trigoButton;
 
     @FXML
-    private ImageView categoryLabel;
-
-
-    @FXML
     public void initialize() throws ConnectionException {
         this.clientConnection = ClientConnection.getInstance();
-        this.questionBank = new QuestionBankModel();
 
         algebraButton.setOnAction(this::handleButtonClick);
         anglesButton.setOnAction(this::handleButtonClick);
@@ -43,30 +29,27 @@ public class CategoryController {
 
     private void handleButtonClick(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
-        category = clickedButton.getText(); // Get category from button text
+        selectedCategory = clickedButton.getText();
 
-        handleCategorySelection(category);
+        requestQuestionFromServer(selectedCategory);
     }
 
-    public static String getCategory() {
-        return category;
+    public static String getSelectedCategory() {
+        return selectedCategory;
     }
 
-    private void handleCategorySelection(String category) {
-        List<QuestionModel> filteredQuestions = filterQuestionsByCategory(category);
+    private void requestQuestionFromServer(String category) {
+        try {
+            QuestionModel question = clientConnection.getQuestion(category);
 
-        if (!filteredQuestions.isEmpty()) {
-            QuestionModel question = filteredQuestions.get(0);
-
-//       new GameView(clientConnection, question);
-        } else {
-            System.out.println("No questions found for the selected category: " + category);
+            if (question != null) {
+                System.out.println("Received Question: " + question.getQuestionText());
+                //
+            } else {
+                System.out.println("No questions found for category: " + category);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error fetching question: " + e.getMessage());
         }
-    }
-
-    private List<QuestionModel> filterQuestionsByCategory(String category) {
-        return questionBank.getQuestions().stream()
-                .filter(q -> q.getCategory().equalsIgnoreCase(category))
-                .collect(Collectors.toList());
     }
 }

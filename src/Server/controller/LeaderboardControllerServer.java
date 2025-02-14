@@ -1,6 +1,5 @@
 package Server.controller;
 
-import Client.model.LeaderboardEntryModelClient;
 import Server.model.LeaderboardEntryModelServer;
 import Server.model.XMLStorageModel;
 
@@ -21,7 +20,7 @@ public class LeaderboardControllerServer {
     }
 
     public static void addScore(String playerName, int score) {
-        List<LeaderboardEntryModelServer> leaderboard = XMLStorageModel.loadLeaderboardFromXML(LEADERBOARD_FILE);
+        List<LeaderboardEntryModelServer> leaderboard = XMLStorageModel.loadLeaderboardFromXML("data/leaderboard.xml");
 
         boolean found = false;
         for (LeaderboardEntryModelServer entry : leaderboard) {
@@ -36,12 +35,8 @@ public class LeaderboardControllerServer {
             leaderboard.add(new LeaderboardEntryModelServer(playerName, score));
         }
 
-        leaderboard.sort((a, b) -> Integer.compare(b.getScore(), a.getScore())); // Sort leaderboard
-
-        XMLStorageModel.saveLeaderboardToXML(LEADERBOARD_FILE, leaderboard);
+        leaderboard.sort((a, b) -> Integer.compare(b.getScore(), a.getScore()));
+        XMLStorageModel.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
     }
 
-    public static void addScore(LeaderboardEntryModelClient entry) {
-        addScore(entry.getPlayerName(), entry.getScore());
-    }
 }

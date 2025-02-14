@@ -2,8 +2,8 @@ package Client.connection;
 
 import Client.model.PlayerModel;
 import common.Response;
+import common.model.QuestionModel;
 import exception.ConnectionException;
-import exception.InvalidRequestException;
 
 import java.io.*;
 import java.net.Socket;
@@ -13,20 +13,18 @@ import static common.Protocol.IP_ADDRESS;
 import static common.Protocol.PORT_NUMBER;
 
 public class ClientConnection {
-    private ObjectOutputStream outputStream;
     private static ClientConnection instance;
     private Socket socket;
-    private BufferedReader input;
-    private PrintWriter output;
+    private ObjectOutputStream objectOutputStream;
+    private ObjectInputStream objectInputStream;
 
-    private static final Logger logger = Logger.getLogger(ClientConnection.class.getName()); // for debugging purposes
+    private static final Logger logger = Logger.getLogger(ClientConnection.class.getName());
 
     private ClientConnection() throws ConnectionException {
         try {
             socket = new Socket(IP_ADDRESS, PORT_NUMBER);
-            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            output = new PrintWriter(socket.getOutputStream(), true);
-            outputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
 
             logger.info("Connected to the server.");
         } catch (IOException e) {
@@ -35,7 +33,19 @@ public class ClientConnection {
         }
     }
 
-    // singleton instance
+    public QuestionModel getQuestion(String category) throws IOException, ClassNotFoundException {
+        sendObject("GET_QUESTION:" + category);
+
+        Response response = (Response) receiveObject();
+
+        if (response.isSuccess()) {
+            return (QuestionModel) response.getData();
+        } else {
+            System.err.println("Error fetching question: " + response.getMessage());
+            return null;
+        }
+    }
+
     public static ClientConnection getInstance() throws ConnectionException {
         if (instance == null) {
             instance = new ClientConnection();
@@ -43,50 +53,22 @@ public class ClientConnection {
         return instance;
     }
 
-    public Response sendRequest(String request) throws ConnectionException, InvalidRequestException {
+    public void sendObject(Object obj) throws IOException {
+        objectOutputStream.writeObject(obj);
+        objectOutputStream.flush();
+    }
 
-        if (socket == null || !socket.isConnected()) {
-            throw new InvalidRequestException("Not Connected to the server.");
-        }
-
-        try {
-            System.out.println("Requesting server: " + request);
-            output.println(request);
-
-            String response = input.readLine();
-            if (response == null) {
-                throw new InvalidRequestException("No response received.");
-            }
-
-            return new Response(true, "Request successful", response);
-        } catch (IOException e) {
-            throw new ConnectionException("Error connecting to the server.", e);
-        }
+    public Object receiveObject() throws IOException, ClassNotFoundException {
+        return objectInputStream.readObject();
     }
 
     public void close() {
         try {
-            if (input != null) input.close();
-            if (output != null) output.close();
             if (socket != null) socket.close();
+            if (objectInputStream != null) objectInputStream.close();
+            if (objectOutputStream != null) objectOutputStream.close();
         } catch (IOException e) {
             System.err.println("Error closing connection: " + e.getMessage());
         }
     }
-
-    public void sendLeaderboardUpdate(PlayerModel player) {
-        try {
-            outputStream.writeObject("UPDATE_LEADERBOARD");
-            outputStream.writeObject(player);
-            outputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // for ClientServerTest
-    public  boolean isConnected() {
-        return socket != null && socket.isConnected();
-    }
-
 }

@@ -90,7 +90,7 @@ public class ClientHandler implements Runnable {
 
             if (exists) {
                 System.out.println("DEBUG: Username already exists.");
-                return new Response(false, "Username already taken! Please choose another.", null);
+                return new Response(false, "Username already taken!", null);
             }
 
             leaderboard.add(new LeaderboardEntryModelServer(usernameLower, 0));

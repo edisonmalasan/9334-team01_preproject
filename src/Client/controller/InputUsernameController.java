@@ -35,6 +35,10 @@ public class InputUsernameController {
     @FXML
     public void initialize() {
         enterButton.setOnAction(event -> handleEnterButtonClick());
+
+        usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
+            errorLabel.setText(""); // Clear error message
+        });
     }
 
     private void handleEnterButtonClick() {
@@ -55,14 +59,15 @@ public class InputUsernameController {
 
                 System.out.println("DEBUG: Received response: " + response);
 
-                if (!response.isSuccess()) {
-                    Platform.runLater(() -> {
+                Platform.runLater(() -> {
+                    if (!response.isSuccess()) {
+                        usernameField.clear();
+                        usernameField.requestFocus();
                         errorLabel.setText(response.getMessage());
-                    });
-                    return;
-                }
-
-                Platform.runLater(this::switchToGameMode);
+                    } else {
+                        switchToGameMode();
+                    }
+                });
 
             } catch (Exception e) {
                 e.printStackTrace();

@@ -4,7 +4,7 @@ import Client.connection.ClientConnection;
 import Client.model.PlayerModel;
 import common.Response;
 import exception.ConnectionException;
-import exception.InvalidRequestException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class InputUsernameController {
-    public PlayerModel player;
+    private PlayerModel player;
     private ClientConnection clientConnection;
 
     @FXML
@@ -28,23 +28,17 @@ public class InputUsernameController {
     @FXML
     private Button enterButton;
 
-    @FXML
-    public void initialize() {
-        enterButton.setOnAction(event -> {
-            try {
-                handleEnterButtonClick();
-            } catch (IOException e) {
-                errorLabel.setText("Error: " + e.getMessage());
-            }
-        });
-    }
-
     public InputUsernameController() throws ConnectionException {
         this.clientConnection = ClientConnection.getInstance();
     }
 
-    private void handleEnterButtonClick() throws IOException {
-        String username = usernameField.getText().trim();
+    @FXML
+    public void initialize() {
+        enterButton.setOnAction(event -> handleEnterButtonClick());
+    }
+
+    private void handleEnterButtonClick() {
+        String username = usernameField.getText().trim().toLowerCase();
 
         if (username.isEmpty()) {
             errorLabel.setText("Username cannot be empty!");
@@ -52,30 +46,43 @@ public class InputUsernameController {
         }
 
         player = new PlayerModel(username, 0);
+        System.out.println("DEBUG: Sending player data to server: " + player.getName());
 
-        try {
-            // Send the PlayerModel to the server
-            clientConnection.sendObject(player);
+        new Thread(() -> {
+            try {
+                clientConnection.sendObject(player);
+                Response response = (Response) clientConnection.receiveObject();
 
-            Response response = (Response) clientConnection.receiveObject();
+                System.out.println("DEBUG: Received response: " + response);
 
-            if (!response.isSuccess()) {
-                errorLabel.setText("Error: " + response.getMessage());
-                return;
+                if (!response.isSuccess()) {
+                    Platform.runLater(() -> {
+                        errorLabel.setText(response.getMessage());
+                    });
+                    return;
+                }
+
+                Platform.runLater(this::switchToGameMode);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> errorLabel.setText("Connection error."));
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            errorLabel.setText("Connection error.");
-        }
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/gamemode_menu.fxml"));
-        Scene modeScene = new Scene(loader.load());
-
-        Stage stage = (Stage) enterButton.getScene().getWindow();
-        stage.setScene(modeScene);
-        stage.setTitle("Game Modes");
-        stage.show();
+        }).start();
     }
 
+    private void switchToGameMode() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/mode_menu.fxml"));
+            Scene modeScene = new Scene(loader.load());
+
+            Stage stage = (Stage) enterButton.getScene().getWindow();
+            stage.setScene(modeScene);
+            stage.setTitle("Game Modes");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            errorLabel.setText("Failed to load game mode.");
+        }
+    }
 }

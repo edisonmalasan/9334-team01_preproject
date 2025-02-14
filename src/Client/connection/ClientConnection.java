@@ -64,7 +64,10 @@ public class ClientConnection {
     }
 
     public Object receiveObject() throws IOException, ClassNotFoundException {
-        return objectInputStream.readObject();
+        System.out.println("DEBUG: Waiting to receive object from server...");
+        Object obj = objectInputStream.readObject();
+        System.out.println("DEBUG: Received object: " + obj);
+        return obj;
     }
 
     public void close() {

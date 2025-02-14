@@ -49,14 +49,16 @@ public class XMLStorageModel {
         List<LeaderboardEntryModelServer> leaderboard = new ArrayList<>();
         try {
             File file = new File(filename);
+
+
+            File parentDir = file.getParentFile();
+            if (parentDir != null && !parentDir.exists()) {
+                parentDir.mkdirs();
+            }
+
             if (!file.exists()) {
                 System.out.println("Leaderboard file not found. Creating a new one.");
                 file.createNewFile();
-                return leaderboard;
-            }
-
-            if (file.length() == 0) {
-                System.out.println("Leaderboard file is empty. Initializing with an empty leaderboard.");
                 return leaderboard;
             }
 
@@ -69,7 +71,6 @@ public class XMLStorageModel {
                 Element element = (Element) nodes.item(i);
                 String playerName = element.getElementsByTagName("player").item(0).getTextContent();
                 int score = Integer.parseInt(element.getElementsByTagName("score").item(0).getTextContent());
-
                 leaderboard.add(new LeaderboardEntryModelServer(playerName, score));
             }
         } catch (Exception e) {
@@ -78,6 +79,7 @@ public class XMLStorageModel {
         }
         return leaderboard;
     }
+
 
     public static void saveLeaderboardToXML(String filename, List<LeaderboardEntryModelServer> leaderboard) {
         try {

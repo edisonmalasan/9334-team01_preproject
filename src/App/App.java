@@ -1,7 +1,9 @@
 package App;    
 
+import Client.connection.ClientConnection;
 import Client.controller.MainMenuController;
 import Client.view.MainMenuView;
+import exception.ConnectionException;
 import exception.FXMLLoadingException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +27,13 @@ public class App extends Application {
             MainMenuController controller = fxmlLoader.getController();
             MainMenuView mainMenuView = new MainMenuView(primaryStage);
             controller.setMainMenuView(mainMenuView);
+
+            try {
+                ClientConnection.getInstance().connect();
+                System.out.println("Client connected to the server.");
+            } catch (ConnectionException e) {
+                System.err.println("⚠ Server is not running. The client will continue in offline mode.");
+            }
 
             primaryStage.setScene(new Scene(root));
             primaryStage.setTitle("Bomb Defusing Game");

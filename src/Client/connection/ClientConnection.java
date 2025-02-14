@@ -21,15 +21,27 @@ public class ClientConnection {
     private static final Logger logger = Logger.getLogger(ClientConnection.class.getName());
 
     private ClientConnection() throws ConnectionException {
-        try {
-            socket = new Socket(IP_ADDRESS, PORT_NUMBER);
-            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            objectInputStream = new ObjectInputStream(socket.getInputStream());
+        // to not connect immediately
+    }
 
-            logger.info("Connected to the server.");
-        } catch (IOException e) {
-            logger.severe("Error connecting to the server: " + e.getMessage());
-            throw new ConnectionException("Error connecting to the server.", e);
+    public static ClientConnection getInstance() throws ConnectionException {
+        if (instance == null) {
+            instance = new ClientConnection();
+        }
+        return instance;
+    }
+
+    public void connect() throws ConnectionException {
+        if (socket == null || socket.isClosed()) {
+            try {
+                socket = new Socket(IP_ADDRESS, PORT_NUMBER);
+                objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                objectInputStream = new ObjectInputStream(socket.getInputStream());
+                logger.info("Connected to the server.");
+            } catch (IOException e) {
+                logger.severe("Error connecting to the server: " + e.getMessage());
+                throw new ConnectionException("Error connecting to the server.", e);
+            }
         }
     }
 
@@ -44,13 +56,6 @@ public class ClientConnection {
             System.err.println("Error fetching question: " + response.getMessage());
             return null;
         }
-    }
-
-    public static ClientConnection getInstance() throws ConnectionException {
-        if (instance == null) {
-            instance = new ClientConnection();
-        }
-        return instance;
     }
 
     public void sendObject(Object obj) throws IOException {

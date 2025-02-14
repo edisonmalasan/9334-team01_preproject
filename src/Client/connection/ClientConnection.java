@@ -21,7 +21,7 @@ public class ClientConnection {
 
     private static final Logger logger = Logger.getLogger(ClientConnection.class.getName()); // for debugging purposes
 
-    private ClientConnection() throws ConnectionException {
+    public ClientConnection() throws ConnectionException {
         try {
             socket = new Socket(IP_ADDRESS, PORT_NUMBER);
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));

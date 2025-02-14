@@ -9,6 +9,57 @@
         <score>1</score>
     </question>
 
+    <question category="Algebra">
+        <text>Solve the following equation: 10 - 2(3)</text>
+        <answer>4</answer>
+        <choice>-13</choice>
+        <choice>-4</choice>
+        <choice>16</choice>
+        <choice>4</choice>
+        <score>1</score>
+    </question>
+
+    <question category="Algebra">
+        <text>Solve the following equation: 2(z + 3) = 18</text>
+        <answer>z = 6</answer>
+        <choice>z = 7.5</choice>
+        <choice>z = 2</choice>
+        <choice>z = 6</choice>
+        <choice>z = 12</choice>
+        <score>1</score>
+    </question>
+
+    <question category="Algebra">
+        <text>What is the algebraic expression for this phrase: "9 taken away from the sum of x and y"</text>
+        <answer>x + y - 9</answer>
+        <choice>x + y - 9</choice>
+        <choice>9 - (x + y)</choice>
+        <choice>x + y / 9</choice>
+        <choice>9 / x + y</choice>
+        <score>1</score>
+    </question>
+
+    <question category="Algebra">
+        <text>Rearrange the equation into slope-intercept form: 2x - 3y = 9</text>
+        <answer>y = 2 / 3x - 3</answer>
+        <choice>y = 9 / 2x - 3</choice>
+        <choice>y = 2 / 3x - 3</choice>
+        <choice>y = 2x / 3y - 3</choice>
+        <choice>y = 3 / 2x - 9</choice>
+        <score>1</score>
+    </question>
+
+    <question category="Algebra">
+        <text>The sum of two numbers is 82 and their product is 1456, find the two numbers.</text>
+        <answer>26 , 56</answer>
+        <choice>41, 2</choice>
+        <choice>26 , 56</choice>
+        <choice>41, -2</choice>
+        <choice>-26 , -56</choice>
+        <score>1</score>
+    </question>
+
+
     <question category="Angles">
         <text>What is the sum of the interior angles of a triangle?</text>
         <answer>180</answer>

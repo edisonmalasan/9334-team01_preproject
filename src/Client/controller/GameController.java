@@ -1,29 +1,23 @@
 package Client.controller;
 
 import Client.connection.ClientConnection;
-//import Client.model.GameModel;
-import Client.view.GameView;
-import Server.handler.ClientHandler;
 import Server.model.QuestionBankModel;
 import common.model.QuestionModel;
 import exception.ConnectionException;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 public class GameController {
-    /**
-     *
-     */
-    private GameView gameView;
-    /**
-     *
-     */
-//    private GameModel gameModel;
-    private QuestionBankModel questionBank;
-    //switched from ClientHandler to ClientConnection for testing
-    private ClientConnection clientConnection;
+    public QuestionBankModel questionBank;
+    public ClientConnection clientConnection;
+    private static final int INITIAL_TIME = 180; // 3 minutes in seconds
+    private int remainingTime;
+    private final Random random = new Random();
 
     public GameController(QuestionBankModel questionBank) throws ConnectionException {
         this.questionBank = questionBank;
@@ -61,6 +55,16 @@ public class GameController {
 
     private List<String> getCategories() {
         List<QuestionModel> questions = questionBank.getQuestions();
+
+        // Debugging: Print if questions are available
+        if (questions.isEmpty()) {
+            System.out.println("No questions found in the question bank!");
+        } else {
+            System.out.println("Questions loaded from question bank:");
+            for (QuestionModel q : questions) {
+                System.out.println(" - " + q.getCategory() + ": " + q.getQuestionText());
+            }
+        }
         return questions.stream()
                 .map(QuestionModel::getCategory)
                 .distinct()
@@ -73,14 +77,17 @@ public class GameController {
                 .collect(Collectors.toList());
 
         System.out.println("\nStarting " + category + " Quiz!");
+        remainingTime = INITIAL_TIME;
+        Set<Integer> qteTriggers = generateQTETriggers(questions.size());
 
         int totalScore = 0;
-        for (QuestionModel question : questions) {
+        for (int i = 0; i < questions.size() && remainingTime > 0; i++) {
+            QuestionModel question = questions.get(i);
             System.out.println("\n" + question.getQuestionText());
             List<String> choices = question.getChoices();
 
-            for (int i = 0; i < choices.size(); i++) {
-                System.out.println((i + 1) + ". " + choices.get(i));
+            for (int j = 0; j < choices.size(); j++) {
+                System.out.println((j + 1) + ". " + choices.get(j));
             }
 
             System.out.print("Enter your answer (1-" + choices.size() + "): ");
@@ -94,12 +101,65 @@ public class GameController {
                     totalScore += question.getScore();
                 } else {
                     System.out.println("Wrong! The correct answer is: " + question.getCorrectAnswer());
+                    remainingTime -= 10; // Wrong answer penalty
                 }
             } else {
                 System.out.println("Invalid choice. Skipping question...");
             }
+
+            // **Trigger Quick Time Event at random moments**
+            if (qteTriggers.contains(i)) {
+                boolean success = triggerQuickTimeEvent(scanner);
+                if (!success) {
+                    int penalty = determineQTEPenalty();
+                    remainingTime -= penalty;
+                    System.out.println("QTE failed! Time penalty: -" + penalty + " seconds. Remaining Time: " + remainingTime + " seconds.");
+                }
+            }
+
+            if (remainingTime <= 0) {
+                System.out.println("Time's up! Game over.");
+                break;
+            }
         }
         System.out.println("Total Score: " + totalScore);
     }
-}
 
+    /**
+     * Generates random moments in the quiz where Quick Time Events will trigger.
+     * Ensures a reasonable number of events (1-3) depending on the number of questions.
+     */
+    private Set<Integer> generateQTETriggers(int totalQuestions) {
+        Set<Integer> qteTriggers = new HashSet<>();
+        int qteCount = Math.min(3, totalQuestions); // Max 3 QTEs per game
+
+        while (qteTriggers.size() < qteCount) {
+            qteTriggers.add(random.nextInt(totalQuestions));
+        }
+        return qteTriggers;
+    }
+
+    /**
+     * Simulates a quick time event where the player must react quickly.
+     */
+    private boolean triggerQuickTimeEvent(Scanner scanner) {
+        System.out.println("\n QUICK TIME EVENT! ");
+        System.out.println("Type 'DEFUSE' within 3 seconds to avoid penalty!");
+
+        long startTime = System.currentTimeMillis();
+        String response = scanner.nextLine();
+        long reactionTime = (System.currentTimeMillis() - startTime) / 1000; // Convert to seconds
+
+        return response.equalsIgnoreCase("DEFUSE") && reactionTime <= 3;
+    }
+
+    /**
+     * Determines how much time to deduct when a QTE is failed.
+     * The penalty increases as the game progresses.
+     */
+    private int determineQTEPenalty() {
+        if (remainingTime > 90) return 30;  // 30-second penalty if time > 90s
+        if (remainingTime > 45) return 20;  // 20-second penalty if time > 45s
+        return 15;                          // 15-second penalty otherwise
+    }
+}

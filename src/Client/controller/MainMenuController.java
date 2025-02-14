@@ -26,7 +26,7 @@ public class MainMenuController {
 
     @FXML
     public void initialize() {
-        playButton.setOnAction( actionEvent -> mainMenuView.switchScene("/views/input_username.fxml", "Bomb Defusing Game"));
+        playButton.setOnAction( actionEvent -> mainMenuView.switchScene("/views/user_login.fxml", "Bomb Defusing Game"));
         leaderboardButton.setOnAction(actionEvent -> mainMenuView.switchScene("/views/leaderboard.fxml", "Leaderboard"));
         quitButton.setOnAction(actionEvent -> System.exit(0));
     }

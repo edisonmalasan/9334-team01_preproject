@@ -11,9 +11,6 @@ import common.model.QuestionModel;
 import org.w3c.dom.*;
 import java.io.*;
 
-import Client.model.LeaderboardEntryModel;
-import org.xml.sax.SAXException;
-
 public class XMLStorageModel {
 
     public static List<QuestionModel> loadQuestionsFromXML(String filename) {
@@ -47,8 +44,8 @@ public class XMLStorageModel {
         }
         return questions;
     }
-    public static List<LeaderboardEntryModel> loadLeaderboardFromXML(String filename) {
-        List<LeaderboardEntryModel> leaderboard = new ArrayList<>();
+    public static List<LeaderboardEntryModelServer> loadLeaderboardFromXML(String filename) {
+        List<LeaderboardEntryModelServer> leaderboard = new ArrayList<>();
         try {
             File file = new File(filename);
             if (!file.exists()) {
@@ -73,7 +70,7 @@ public class XMLStorageModel {
                 String playerName = element.getElementsByTagName("player").item(0).getTextContent();
                 int score = Integer.parseInt(element.getElementsByTagName("score").item(0).getTextContent());
                 PlayerModel newPlayer = new PlayerModel(playerName,score);
-                leaderboard.add(new LeaderboardEntryModel(newPlayer));
+                leaderboard.add(new LeaderboardEntryModelServer(playerName, score));
             }
         } catch (Exception e) {
             System.err.println("Error loading leaderboard from XML: " + e.getMessage());
@@ -82,14 +79,14 @@ public class XMLStorageModel {
         return leaderboard;
     }
 
-    public static void saveLeaderboardToXML(String filename, List<LeaderboardEntryModel> leaderboard) {
+    public static void saveLeaderboardToXML(String filename, List<LeaderboardEntryModelServer> leaderboard) {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.newDocument();
             Element rootElement = doc.createElement("leaderboard");
             doc.appendChild(rootElement);
 
-            for (LeaderboardEntryModel entry : leaderboard) {
+            for (LeaderboardEntryModelServer entry : leaderboard) {
                 Element entryElement = doc.createElement("entry");
 
                 Element player = doc.createElement("player");

@@ -1,43 +1,33 @@
 package Client.controller;
 
-import Client.connection.ClientConnection;
-import Client.view.InputUsernameView;
-import Client.view.LeaderboardView;
 import Client.view.MainMenuView;
-import Client.view.GameView;
-
-import java.awt.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class MainMenuController {
-    private MainMenuView view;
-    private ClientConnection clientConnection;
+    @FXML
+    private Button playButton;
 
-    public MainMenuController(ClientConnection clientConnection) {
-        this.clientConnection = clientConnection;
-        this.view = new MainMenuView();
+    @FXML
+    private Button leaderboardButton;
 
-        view.getPlayButton().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.playButton){
-                view.dispose();
-                InputUsernameController inputUsernameController = new InputUsernameController(clientConnection);
-            }
-        });
+    @FXML
+    private Button quitButton;
 
-        view.getLeaderboardButton().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.leaderboardButton){
-                view.dispose();
-                LeaderboardView leaderboardView = new LeaderboardView();
+    private MainMenuView mainMenuView;
 
-            }
-        });
+    public void setMainMenuView(MainMenuView mainMenuView) {
+        this.mainMenuView = mainMenuView;
+    }
 
-        view.getExitButton().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.exitButton){
-                System.exit(0);
-            }
-        });
-
-        // TODO: Setup Buttons here in view like
-        //  view.getPlayButton().addActionListener(e ->  openGameModeView()); etc..
+    @FXML
+    public void initialize() {
+        playButton.setOnAction( actionEvent -> mainMenuView.switchScene("/views/input_username.fxml", "Bomb Defusing Game"));
+        leaderboardButton.setOnAction(actionEvent -> mainMenuView.switchScene("/views/leaderboard.fxml", "Leaderboard"));
+        quitButton.setOnAction(actionEvent -> System.exit(0));
     }
 }

@@ -1,36 +1,28 @@
 package Client.view;
 
-//TODO: For testing only, to be improved
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.awt.*;
+public class InputUsernameView {
+    private Stage stage;
 
-public class InputUsernameView extends JFrame {
-
-    public JLabel enterUsernameLabel;
-    public JTextField usernameField;
-    public JButton enterButton;
-    public InputUsernameView() {
-        setTitle("Username Input");
-        setSize(1024, 768);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-        setVisible(true);
-        setLayout(new GridLayout(3,1));
-
-        enterUsernameLabel = new JLabel("Enter your username:");
-        usernameField = new JTextField();
-        enterButton = new JButton("Enter");
-
-        add(enterUsernameLabel);
-        add(usernameField);
-        add(enterButton);
+    public InputUsernameView(Stage stage) {
+        this.stage = stage;
     }
 
-    public JTextField getUsernameField (){
-        return usernameField;
-    }
-    public JButton getEnterButton() {
-        return enterButton;
+    public void switchScene(String fxmlFile, String title) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = fxmlLoader.load();
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

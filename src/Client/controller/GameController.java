@@ -1,11 +1,12 @@
 package Client.controller;
 
 import Client.connection.ClientConnection;
-import Client.model.GameModel;
+//import Client.model.GameModel;
 import Client.view.GameView;
 import Server.handler.ClientHandler;
 import Server.model.QuestionBankModel;
 import common.model.QuestionModel;
+import exception.ConnectionException;
 
 import java.util.List;
 import java.util.Scanner;
@@ -19,14 +20,14 @@ public class GameController {
     /**
      *
      */
-    private GameModel gameModel;
+//    private GameModel gameModel;
     private QuestionBankModel questionBank;
     //switched from ClientHandler to ClientConnection for testing
     private ClientConnection clientConnection;
 
-    public GameController(ClientConnection clientConnection, QuestionBankModel questionBank) {
+    public GameController(QuestionBankModel questionBank) throws ConnectionException {
         this.questionBank = questionBank;
-        this.clientConnection = clientConnection;
+        this.clientConnection = ClientConnection.getInstance();
     }
 
     public void startGame() {

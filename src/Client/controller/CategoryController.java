@@ -1,84 +1,64 @@
 package Client.controller;
 
 import Client.connection.ClientConnection;
-import Client.view.CategoryView;
-import Client.view.GameView;
 import Server.model.QuestionBankModel;
 import common.model.QuestionModel;
+import exception.ConnectionException;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.event.ActionEvent;
 
-import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CategoryController {
     private ClientConnection clientConnection;
     private QuestionBankModel questionBank;
-    private CategoryView view;
-    private GameView gameView;
-    public static String category;
-    public CategoryController(ClientConnection clientConnection) {
-        this.clientConnection = clientConnection;
-        this.questionBank = questionBank;
-        this.view = new CategoryView();
+    private static String category;
 
-        view.getCategory1().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.category1){
-                category = view.category1.getText();
-                view.dispose();
-                gameView = new GameView(clientConnection);
+    @FXML
+    public AnchorPane categoryMenu;
 
-            }
-        });
+    @FXML
+    private Button algebraButton, anglesButton, geometryButton, logicButton, probabilityButton, trigoButton;
 
-        view.getCategory2().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.category2){
-                category = view.category2.getText();
-                view.dispose();
-                gameView = new GameView(clientConnection);
-            }
-        });
+    @FXML
+    private ImageView categoryLabel;
 
-        view.getCategory3().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.category3){
-                category = view.category3.getText();
-                view.dispose();
-                gameView = new GameView(clientConnection);
-            }
-        });
 
-        view.getCategory4().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.category4){
-                category = view.category4.getText();
-                view.dispose();
-            }
-        });
+    @FXML
+    public void initialize() throws ConnectionException {
+        this.clientConnection = ClientConnection.getInstance();
+        this.questionBank = new QuestionBankModel();
 
-        view.getCategory5().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.category5){
-                category = view.category5.getText();
-                view.dispose();
-            }
-        });
+        algebraButton.setOnAction(this::handleButtonClick);
+        anglesButton.setOnAction(this::handleButtonClick);
+        geometryButton.setOnAction(this::handleButtonClick);
+        logicButton.setOnAction(this::handleButtonClick);
+        probabilityButton.setOnAction(this::handleButtonClick);
+        trigoButton.setOnAction(this::handleButtonClick);
+    }
 
-        view.getCategory6().addActionListener((ActionEvent e) -> {
-            if (e.getSource() == view.category6){
-                category = view.category6.getText();
-                view.dispose();
-            }
-        });
+    private void handleButtonClick(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        category = clickedButton.getText(); // Get category from button text
+
+        handleCategorySelection(category);
     }
 
     public static String getCategory() {
         return category;
     }
 
-    public void handleCategorySelection(String category) {
+    private void handleCategorySelection(String category) {
         List<QuestionModel> filteredQuestions = filterQuestionsByCategory(category);
 
         if (!filteredQuestions.isEmpty()) {
             QuestionModel question = filteredQuestions.get(0);
 
-            new GameView(clientConnection, question);
+//       new GameView(clientConnection, question);
         } else {
             System.out.println("No questions found for the selected category: " + category);
         }
@@ -89,6 +69,4 @@ public class CategoryController {
                 .filter(q -> q.getCategory().equalsIgnoreCase(category))
                 .collect(Collectors.toList());
     }
-
-
 }

@@ -1,9 +1,9 @@
 package Server;
 
-import Server.controller.LeaderboardController;
-import Server.model.LeaderboardModel;
+import Server.controller.LeaderboardControllerServer;
 import Server.model.QuestionBankModel;
 import Server.handler.ClientHandler;
+import static common.Protocol.PORT_NUMBER;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,12 +11,10 @@ import java.net.Socket;
 
 public class ServerHandler {
     private QuestionBankModel questionBank;
-    private LeaderboardController leaderboard;
+    private LeaderboardControllerServer leaderboard;
     private ServerSocket serverSocket;
-    private final int PORT_NUMBER;
 
-    public ServerHandler(int PORT_NUMBER, QuestionBankModel questionBank, LeaderboardController leaderboard) {
-        this.PORT_NUMBER = PORT_NUMBER;
+    public ServerHandler(QuestionBankModel questionBank, LeaderboardControllerServer leaderboard) {
         this.questionBank = questionBank;
         this.leaderboard = leaderboard;
     }

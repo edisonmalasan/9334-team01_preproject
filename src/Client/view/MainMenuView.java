@@ -1,38 +1,30 @@
 package Client.view;
 
-import javax.swing.*;
-import java.awt.*;
+import com.sun.tools.javac.Main;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
-// SAMPLE ONLI
-public class MainMenuView extends JFrame {
-    public JButton playButton;
-    public JButton leaderboardButton;
-    public JButton exitButton;
+public class MainMenuView {
+    private Stage stage;
 
-    public MainMenuView() {
-        setTitle("Bomb Defuse Game - Main Menu");
-        setSize(1024, 768);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-        setVisible(true);
-        setLayout(new GridLayout(3,1)); // grid layout is like VStack a React component
-
-        playButton = new JButton("PLAY");
-        leaderboardButton = new JButton("LEADERBOARD");
-        exitButton = new JButton("EXIT");
-
-        add(playButton);
-        add(leaderboardButton);
-        add(exitButton);
+    public MainMenuView(Stage stage) {
+        this.stage = stage;
     }
 
-    public JButton getPlayButton() {
-        return playButton;
-    }
-    public JButton getLeaderboardButton() {
-        return leaderboardButton;
-    }
-    public JButton getExitButton() {
-        return exitButton;
+    public void switchScene(String fxmlFile, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

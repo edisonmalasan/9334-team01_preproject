@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -37,6 +38,8 @@ public class App extends Application {
                 System.err.println("⚠ Server is not running. The client will continue in offline mode.");
             }
 
+            // Set the application logo (Replace with your actual image path)
+            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/bomb_mad.png")));
             primaryStage.setScene(new Scene(root));
             primaryStage.setTitle("Bomb Defusing Game");
             primaryStage.setResizable(false);

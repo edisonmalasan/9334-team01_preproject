@@ -10,6 +10,18 @@
     src: url("../fonts/RobotoMono-Bold.ttf");
 }
 
+
+#leaderboardButton {
+    -fx-font-size: 13px;
+}
+
+#inputUsername,
+#mainMenu,
+#gameMode,
+#categoryMenu {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 100%, black, darkgray);
+}
+
 .button {
     -fx-background-image: url("../images/blue.png");
     -fx-background-size: 146px 50px;

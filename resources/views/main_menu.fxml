@@ -11,6 +11,12 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="Client.controller.MainMenuController">
    <children>
+      <ImageView fx:id="defuseLabel" fitHeight="140.0" fitWidth="374.0"
+                 pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="325.0">
+         <image>
+            <Image url="@../images/defuseLabel.png" />
+         </image>
+      </ImageView>
       <VBox alignment="CENTER" spacing="30.0"
             prefWidth="400.0" prefHeight="350.0"
             AnchorPane.topAnchor="50.0"
@@ -18,12 +24,6 @@
             AnchorPane.leftAnchor="312.0"
             AnchorPane.rightAnchor="312.0">
          <children>
-            <ImageView fx:id="defuseLabel" fitHeight="140.0" fitWidth="374.0"
-                       pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/defuseLabel.png" />
-               </image>
-            </ImageView>
             <Button fx:id="playButton" prefHeight="50.0" prefWidth="200.0" text="PLAY" />
             <Button fx:id="leaderboardButton" prefHeight="50.0" prefWidth="200.0" text="LEADERBOARD" />
             <Button fx:id="quitButton" prefHeight="50.0" prefWidth="200.0" text="EXIT" />

@@ -1,8 +1,11 @@
 package common.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class QuestionModel {
+public class QuestionModel implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String category;
     private String questionText;
     private List<String> choices;
@@ -37,28 +40,14 @@ public class QuestionModel {
         return score;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public void setQuestionText(String questionText) {
-        this.questionText = questionText;
-    }
-
-    public void setChoices(List<String> choices) {
-        this.choices = choices;
-    }
-
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     @Override
     public String toString() {
-        return "Category: " + category + "\nQuestion: " + questionText + "\nChoices: " + choices + "\nAnswer: " + correctAnswer + "\nScore: " + score;
+        return "QuestionModel{" +
+                "category='" + category + '\'' +
+                ", questionText='" + questionText + '\'' +
+                ", choices=" + choices +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                ", score=" + score +
+                '}';
     }
 }

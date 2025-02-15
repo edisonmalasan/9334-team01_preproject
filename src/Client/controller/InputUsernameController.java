@@ -2,9 +2,7 @@ package Client.controller;
 
 import Client.connection.ClientConnection;
 import Client.model.PlayerModel;
-import Client.view.InputUsernameView;
 import Client.view.MainMenuView;
-import Client.view.ModeView;
 import common.Response;
 import exception.ConnectionException;
 import javafx.application.Platform;
@@ -17,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.EOFException;
 import java.io.IOException;
 
 public class InputUsernameController {
@@ -32,14 +31,8 @@ public class InputUsernameController {
     @FXML
     private Button enterButton;
 
-    private InputUsernameView inputUsernameView;
-
     public InputUsernameController() throws ConnectionException {
         this.clientConnection = ClientConnection.getInstance();
-    }
-
-    public void setInputUsernameView(InputUsernameView inputUsernameView) {
-        this.inputUsernameView = inputUsernameView;
     }
 
     @FXML
@@ -75,9 +68,13 @@ public class InputUsernameController {
                         usernameField.requestFocus();
                         errorLabel.setText(response.getMessage());
                     } else {
-                        updateUI(this::switchToMainMenu);
+                        switchToMainMenu();  // ✅ Directly load Main Menu
                     }
                 });
+
+            } catch (EOFException e) {
+                System.err.println("ERROR: Server closed the connection unexpectedly.");
+                Platform.runLater(() -> errorLabel.setText("Server disconnected. Please try again."));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -85,26 +82,14 @@ public class InputUsernameController {
                     errorLabel.setText("Connection error.");
                     usernameField.clear();
                 });
-
-                usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
-                    errorLabel.setText("");
-                });
             }
         }).start();
-    }
-
-    private void updateUI(Runnable action) {
-        javafx.application.Platform.runLater(action);
     }
 
     private void switchToMainMenu() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
             Parent root = loader.load();
-
-            MainMenuController mainMenuController = loader.getController();
-            MainMenuView mainMenuView = new MainMenuView((Stage) enterButton.getScene().getWindow());
-            mainMenuController.setMainMenuView(mainMenuView);
 
             Stage stage = (Stage) enterButton.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -116,5 +101,4 @@ public class InputUsernameController {
             errorLabel.setText("Failed to load Main Menu");
         }
     }
-
 }

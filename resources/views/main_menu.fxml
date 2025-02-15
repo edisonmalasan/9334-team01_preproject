@@ -13,9 +13,9 @@
    <children>
       <ImageView fx:id="defuseLabel" fitHeight="140.0" fitWidth="374.0"
                  pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="325.0">
-         <image>
-            <Image url="@../images/defuseLabel.png" />
-         </image>
+            <image>
+               <Image url="@../images/defuseLabel.png" />
+            </image>
       </ImageView>
       <VBox alignment="CENTER" spacing="30.0"
             prefWidth="400.0" prefHeight="350.0"

@@ -42,13 +42,11 @@ public class ClientHandler implements Runnable {
 
                 if (request instanceof String) {
                     String reqString = (String) request;
-
                     if (reqString.startsWith("GET_QUESTION:")) {
                         String category = reqString.split(":")[1].trim();
                         Response response = handleQuestionRequest(category);
                         sendResponse(response);
                     }
-
                 } else if (request instanceof PlayerModel) {
                     System.out.println("DEBUG: Player registration request received.");
                     Response response = handlePlayerRegistration((PlayerModel) request);
@@ -59,29 +57,37 @@ public class ClientHandler implements Runnable {
             System.out.println("Client disconnected.");
         } catch (SocketException e) {
             System.out.println("Client forcibly closed the connection.");
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (Exception e) {
+            System.err.println("SERVER ERROR: " + e.getMessage());
             e.printStackTrace();
         } finally {
             closeConnection();
         }
     }
 
-    private void sendResponse(Response response) throws IOException {
-        objectOutputStream.writeObject(response);
-        objectOutputStream.flush();
-    }
 
+    private void sendResponse(Response response) throws IOException {
+        System.out.println("DEBUG: Sending response to client: " + response);
+
+        try {
+            objectOutputStream.writeObject(response);
+            objectOutputStream.flush();
+        } catch (IOException e) {
+            System.err.println("ERROR: Failed to send response: " + e.getMessage());
+            throw e;
+        }
+    }
 
 
     private Response handlePlayerRegistration(PlayerModel player) {
         try {
-            System.out.println("DEBUG: Registering player: " + player.getName());
-
             if (player == null) {
+                System.err.println("ERROR: Received null player data.");
                 return new Response(false, "Received null player data.", null);
             }
 
             String usernameLower = player.getName().toLowerCase();
+            System.out.println("DEBUG: Registering player: " + usernameLower);
 
             List<LeaderboardEntryModelServer> leaderboard = XMLStorageModel.loadLeaderboardFromXML("data/leaderboard.xml");
 
@@ -98,13 +104,11 @@ public class ClientHandler implements Runnable {
 
             System.out.println("DEBUG: Player registered successfully.");
             return new Response(true, "Player registered successfully.", null);
-
         } catch (Exception e) {
             e.printStackTrace();
             return new Response(false, "Error registering player: " + e.getMessage(), null);
         }
     }
-
 
 
     private Response handleQuestionRequest(String category) {

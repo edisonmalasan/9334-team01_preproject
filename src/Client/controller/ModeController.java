@@ -1,8 +1,5 @@
 package Client.controller;
 
-import Client.view.CategoryView;
-import Client.view.ModeView;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,12 +15,6 @@ public class ModeController {
     @FXML
     private Button endlessButton;
 
-    private ModeView modeView;
-
-    public void setModeView(ModeView modeView) {
-        this.modeView = modeView;
-    }
-
     @FXML
     public void initialize() {
         classicButton.setOnAction(actionEvent -> switchToCategorySelection());
@@ -35,13 +26,9 @@ public class ModeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/category_menu.fxml"));
             Parent root = loader.load();
 
-            CategoryController controller = loader.getController();
-            CategoryView categoryView = new CategoryView((Stage) classicButton.getScene().getWindow());
-            controller.setCategoryView(categoryView);
-
             Stage stage = (Stage) classicButton.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("Bomb Defusing Game");
+            stage.setTitle("Select a Category");
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
@@ -50,7 +37,6 @@ public class ModeController {
     }
 
     private void switchToEndlessMode() {
-        // TODO: IF CLASSIC MODE IS DONE BY SUNDAY
+        // TODO: Implement Endless Mode if Classic Mode is completed
     }
-
 }

@@ -38,11 +38,12 @@
 
             <children>
                 <Button fx:id="algebraButton" prefHeight="50.0" prefWidth="180.0" text="ALGEBRA" />
-                <Button fx:id="logicButton" prefHeight="50.0" prefWidth="180.0" text="GEOMETRY" GridPane.columnIndex="1" />
-                <Button fx:id="trigoButton" style="-fx-font-size: 14px;" prefHeight="50.0" prefWidth="180.0" text="PROBABILITY" GridPane.rowIndex="1" />
-                <Button fx:id="anglesButton" style="-fx-font-size: 13px;" prefHeight="50.0" prefWidth="180.0" text="TRIGONOMETRY" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Button fx:id="probabilityButton" prefHeight="50.0" prefWidth="180.0" text="ANGLES" GridPane.rowIndex="2" />
-                <Button fx:id="geometryButton" prefHeight="50.0" prefWidth="180.0" text="LOGIC" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Button fx:id="geometryButton" prefHeight="50.0" prefWidth="180.0" text="GEOMETRY" GridPane.columnIndex="1" />
+                <Button fx:id="probabilityButton" style="-fx-font-size: 14px;" prefHeight="50.0" prefWidth="180.0" text="PROBABILITY" GridPane.rowIndex="1" />
+                <Button fx:id="trigoButton" style="-fx-font-size: 13px;" prefHeight="50.0" prefWidth="180.0" text="TRIGONOMETRY" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Button fx:id="anglesButton" prefHeight="50.0" prefWidth="180.0" text="ANGLES" GridPane.rowIndex="2" />
+                <Button fx:id="logicButton" prefHeight="50.0" prefWidth="180.0" text="LOGIC" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
             </children>
 
         </GridPane>

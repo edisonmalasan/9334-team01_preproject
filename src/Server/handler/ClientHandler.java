@@ -5,7 +5,7 @@ import Server.controller.LeaderboardControllerServer;
 import Server.controller.QuestionController;
 import Server.model.LeaderboardEntryModelServer;
 import Server.model.QuestionBankModel;
-import Server.model.XMLStorageModel;
+import Server.controller.XMLStorageController;
 import common.Response;
 import common.model.QuestionModel;
 
@@ -89,7 +89,7 @@ public class ClientHandler implements Runnable {
             String usernameLower = player.getName().toLowerCase();
             System.out.println("DEBUG: Registering player: " + usernameLower);
 
-            List<LeaderboardEntryModelServer> leaderboard = XMLStorageModel.loadLeaderboardFromXML("data/leaderboard.xml");
+            List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML("data/leaderboard.xml");
 
             boolean exists = leaderboard.stream()
                     .anyMatch(entry -> entry.getPlayerName().equalsIgnoreCase(usernameLower));
@@ -100,7 +100,7 @@ public class ClientHandler implements Runnable {
             }
 
             leaderboard.add(new LeaderboardEntryModelServer(usernameLower, 0));
-            XMLStorageModel.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
+            XMLStorageController.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
 
             System.out.println("DEBUG: Player registered successfully.");
             return new Response(true, "Player registered successfully.", null);

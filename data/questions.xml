@@ -444,7 +444,7 @@
         <score>3</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>A chocolate bar costs c pence and a drink costs d pence. What is the expression for the cost of 2 chocolate bars and 2 drinks?</text>
         <choice>c + d</choice>
         <choice>2c + d</choice>
@@ -454,7 +454,7 @@
         <score>1</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>If a book costs $5 and you buy 3 books, how much do you pay in total?</text>
         <choice>$10</choice>
         <choice>$15</choice>
@@ -464,7 +464,7 @@
         <score>1</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>A rectangle has a length of 8 cm and a width of 5 cm. What is its area?</text>
         <choice>13 cm^2</choice>
         <choice>25 cm^2</choice>
@@ -474,7 +474,7 @@
         <score>1</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>What is 25% of 80?</text>
         <choice>20</choice>
         <choice>10</choice>
@@ -484,7 +484,7 @@
         <score>1</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>A shop sells apples for $1.50 each. If you buy 4 apples, how much do you spend?</text>
         <choice>$4.50</choice>
         <choice>$6.00</choice>
@@ -494,7 +494,7 @@
         <score>1</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>If 5 pencils cost $10, how much does 1 pencil cost?</text>
         <choice>$5</choice>
         <choice>$4</choice>
@@ -504,7 +504,7 @@
         <score>1</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>If today is Monday, what day will it be in 10 days?</text>
         <choice>Thursday</choice>
         <choice>Friday</choice>
@@ -514,7 +514,7 @@
         <score>1</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>John has 12 marbles. He gives 4 marbles to his friend. How many marbles does he have left?</text>
         <choice>4</choice>
         <choice>8</choice>
@@ -524,7 +524,7 @@
         <score>1</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. What is the monthly break-even point?</text>
         <choice>100 bags</choice>
         <choice>150 bags</choice>
@@ -534,7 +534,7 @@
         <score>2</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. To make a profit of $150, how many bags of cotton candy must be sold?</text>
         <choice>100 bags</choice>
         <choice>150 bags</choice>
@@ -544,7 +544,7 @@
         <score>2</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>A train travels 60 km per hour. How far does it travel in 2.5 hours?</text>
         <choice>100 km</choice>
         <choice>120 km</choice>
@@ -554,7 +554,7 @@
         <score>2</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>A store sells a shirt for $25 with a 20% discount. What is the final price?</text>
         <choice>$15</choice>
         <choice>$20</choice>
@@ -564,7 +564,7 @@
         <score>2</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>A pizza is cut into 8 equal slices. If you eat 3 slices, what fraction of the pizza is left?</text>
         <choice>3/8</choice>
         <choice>5/8</choice>
@@ -574,7 +574,7 @@
         <score>2</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>A shop sells a book for $30. If sales tax is 10%, what is the total price?</text>
         <choice>$33</choice>
         <choice>$35</choice>
@@ -584,7 +584,7 @@
         <score>2</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>A car travels 300 km in 5 hours. What is its average speed?</text>
         <choice>59 km/h</choice>
         <choice>60 km/h</choice>
@@ -594,7 +594,7 @@
         <score>2</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>Kevin saves 2 dollars during the month of January. Each month, he plans to save twice the amount saved during the previous month. With this plan, how much will he have saved after 18 months?</text>
         <choice>$218,174</choice>
         <choice>$262,144</choice>
@@ -604,7 +604,7 @@
         <score>3</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>A cardboard packing box contains footballs and baseballs. The ratio by weight of baseballs to footballs is 7 to 9. How many kilograms of footballs will there be in the box if the total weight of the box is 48 kilograms?</text>
         <choice>30</choice>
         <choice>27</choice>
@@ -614,7 +614,7 @@
         <score>3</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>A farmer has a field in the shape of a right triangle. The two shorter sides are 9 meters and 12 meters. What is the length of the longest side?</text>
         <choice>13 meters</choice>
         <choice>14 meters</choice>
@@ -624,7 +624,7 @@
         <score>3</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>The price of a phone increased by 10% in the first year and 20% in the second year. If the original price was $500, what is the final price after two years?</text>
         <choice>$600</choice>
         <choice>$680</choice>
@@ -634,7 +634,7 @@
         <score>3</score>
     </question>
 
-    <question category="PROBLEM-SOLVING">
+    <question category="PROBABILITY">
         <text>The sum of the ages of Alex and Ben is 44. Five years ago, Alex was twice as old as Ben. How old is Ben now?</text>
         <choice>14</choice>
         <choice>15</choice>

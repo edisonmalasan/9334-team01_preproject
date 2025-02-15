@@ -1,7 +1,6 @@
 package Server.controller;
 
 import Server.model.LeaderboardEntryModelServer;
-import Server.model.XMLStorageModel;
 
 import java.util.List;
 
@@ -9,7 +8,7 @@ public class LeaderboardControllerServer {
     private static final String LEADERBOARD_FILE = "data/leaderboard.xml";
 
     public static String getLeaderboard() {
-        List<LeaderboardEntryModelServer> leaderboard = XMLStorageModel.loadLeaderboardFromXML(LEADERBOARD_FILE);
+        List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML(LEADERBOARD_FILE);
         StringBuilder leaderboardString = new StringBuilder();
 
         for (LeaderboardEntryModelServer entry : leaderboard) {
@@ -20,7 +19,7 @@ public class LeaderboardControllerServer {
     }
 
     public static void addScore(String playerName, int score) {
-        List<LeaderboardEntryModelServer> leaderboard = XMLStorageModel.loadLeaderboardFromXML("data/leaderboard.xml");
+        List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML("data/leaderboard.xml");
 
         boolean found = false;
         for (LeaderboardEntryModelServer entry : leaderboard) {
@@ -36,7 +35,7 @@ public class LeaderboardControllerServer {
         }
 
         leaderboard.sort((a, b) -> Integer.compare(b.getScore(), a.getScore()));
-        XMLStorageModel.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
+        XMLStorageController.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
     }
 
 }

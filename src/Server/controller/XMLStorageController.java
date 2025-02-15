@@ -1,4 +1,4 @@
-package Server.model;
+package Server.controller;
 
 import java.util.*;
 import javax.xml.parsers.*;
@@ -6,12 +6,12 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 
-import Client.model.PlayerModel;
+import Server.model.LeaderboardEntryModelServer;
 import common.model.QuestionModel;
 import org.w3c.dom.*;
 import java.io.*;
 
-public class XMLStorageModel {
+public class XMLStorageController {
 
     public static List<QuestionModel> loadQuestionsFromXML(String filename) {
         List<QuestionModel> questions = new ArrayList<>();

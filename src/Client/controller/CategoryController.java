@@ -4,6 +4,7 @@ import Client.connection.ClientConnection;
 import Client.view.CategoryView;
 import common.model.QuestionModel;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class CategoryController {
@@ -31,7 +33,7 @@ public class CategoryController {
     private static String selectedCategory;
 
     private CategoryView categoryView;
-    
+
     public void setCategoryView(CategoryView categoryView) {
         this.categoryView = categoryView;
     }
@@ -47,15 +49,15 @@ public class CategoryController {
 
     @FXML
     public void initialize() {
-        algebraButton.setOnAction(event -> requestQuestionFromServer("Algebra"));
-        anglesButton.setOnAction(event -> requestQuestionFromServer("Angles"));
-        geometryButton.setOnAction(event -> requestQuestionFromServer("Geometry"));
-        logicButton.setOnAction(event -> requestQuestionFromServer("Logic"));
-        probabilityButton.setOnAction(event -> requestQuestionFromServer("Probability"));
-        trigoButton.setOnAction(event -> requestQuestionFromServer("Trigonometry"));
+        algebraButton.setOnAction(event -> requestQuestionFromServer("ALGEBRA", event));
+        anglesButton.setOnAction(event -> requestQuestionFromServer("ARITHMETIC", event)); // ANGLES
+        geometryButton.setOnAction(event -> requestQuestionFromServer("GEOMETRY", event));
+        logicButton.setOnAction(event -> requestQuestionFromServer("LOGIC", event));
+        probabilityButton.setOnAction(event -> requestQuestionFromServer("PROBABILITY", event));
+        trigoButton.setOnAction(event -> requestQuestionFromServer("TRIGONOMETRY", event));
     }
 
-    private void requestQuestionFromServer(String category) {
+    private void requestQuestionFromServer(String category, ActionEvent event) {
         selectedCategory = category;
         System.out.println("DEBUG: Requesting question for category: " + category);
 
@@ -65,7 +67,7 @@ public class CategoryController {
 
                 if (question != null) {
                     System.out.println("DEBUG: Received Question: " + question.getQuestionText());
-                    updateUI(() -> switchToGameplay(category));
+                    updateUI(() -> switchToGameplay(category, event));
                 } else {
                     System.out.println("ERROR: No questions found for category: " + category);
                 }
@@ -76,12 +78,12 @@ public class CategoryController {
         }).start();
     }
 
-    private void switchToGameplay(String category) {
+    private void switchToGameplay(String category, ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/gameplay.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/classic_game.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage) algebraButton.getScene().getWindow();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Game - " + category);
             stage.setResizable(false);

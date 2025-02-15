@@ -1,106 +1,135 @@
 package Server.handler;
 
 import Client.model.PlayerModel;
+import Server.controller.LeaderboardControllerServer;
+import Server.controller.QuestionController;
+import Server.model.LeaderboardEntryModelServer;
 import Server.model.QuestionBankModel;
-import Server.controller.LeaderboardController;
-import common.Protocol;
+import Server.model.XMLStorageModel;
+import common.Response;
 import common.model.QuestionModel;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
+import java.util.List;
 
 public class ClientHandler implements Runnable {
     private Socket clientSocket;
-    private BufferedReader input;
-    private PrintWriter output;
-    private QuestionBankModel questionBank;
-    private LeaderboardController leaderboardController;
+    private ObjectInputStream objectInputStream;
+    private ObjectOutputStream objectOutputStream;
+    private LeaderboardControllerServer leaderboardControllerServer;
 
-    public ClientHandler(Socket clientSocket, QuestionBankModel questionBank, LeaderboardController leaderboardController) {
+    public ClientHandler(Socket clientSocket, QuestionBankModel questionBank, LeaderboardControllerServer leaderboardControllerServer) {
         this.clientSocket = clientSocket;
-        this.questionBank = questionBank;
-        this.leaderboardController = leaderboardController;
+        this.leaderboardControllerServer = leaderboardControllerServer;
+
+        try {
+            objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void run() {
         try {
-            input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            output = new PrintWriter(clientSocket.getOutputStream(), true);
+            System.out.println("New client connected: " + clientSocket.getInetAddress());
 
-            String request;
-            while ((request = input.readLine()) != null) {
-                System.out.println("Received request from client: " + request);
-                handleRequest(request);
+            while (!clientSocket.isClosed()) {
+                Object request = objectInputStream.readObject();
+
+                if (request instanceof String) {
+                    String reqString = (String) request;
+
+                    if (reqString.startsWith("GET_QUESTION:")) {
+                        String category = reqString.split(":")[1].trim();
+                        Response response = handleQuestionRequest(category);
+                        sendResponse(response);
+                    }
+
+                } else if (request instanceof PlayerModel) {
+                    System.out.println("DEBUG: Player registration request received.");
+                    Response response = handlePlayerRegistration((PlayerModel) request);
+                    sendResponse(response);
+                }
             }
-        } catch (IOException e) {
+        } catch (EOFException e) {
+            System.out.println("Client disconnected.");
+        } catch (SocketException e) {
+            System.out.println("Client forcibly closed the connection.");
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (input != null) input.close();
-                if (output != null) output.close();
-                if (clientSocket != null) clientSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            closeConnection();
         }
     }
 
-    private void handleRequest(String request) {
-        if (request.startsWith(Protocol.GET_QUESTION)) {
-            String category = request.split(":")[1].trim();
-            System.out.println("Client requested questions for category: " + category);
+    private void sendResponse(Response response) throws IOException {
+        objectOutputStream.writeObject(response);
+        objectOutputStream.flush();
+    }
 
-            QuestionModel question = questionBank.getQuestions().stream()
-                    .filter(q -> q.getCategory().equalsIgnoreCase(category))
-                    .findFirst()
-                    .orElse(null);
 
-            if (question != null) {
-                output.println("Question: " + question.getQuestionText());
-                System.out.println("Sending question to client: " + question.getQuestionText());
-            } else {
-                output.println("No questions found for the given category.");
-                System.out.println("No question found for category: " + category);
+
+    private Response handlePlayerRegistration(PlayerModel player) {
+        try {
+            System.out.println("DEBUG: Registering player: " + player.getName());
+
+            if (player == null) {
+                return new Response(false, "Received null player data.", null);
             }
-        } else if (request.startsWith(Protocol.GET_CHOICES)) {
-            String category = request.split(":")[1].trim();
-            System.out.println("Client requested choices for category: " + category);
 
-            QuestionModel question = questionBank.getQuestions().stream()
-                    .filter(q -> q.getCategory().equalsIgnoreCase(category))
-                    .findFirst()
-                    .orElse(null);
+            String usernameLower = player.getName().toLowerCase();
 
-            if (question != null) {
-                output.println("Choices: " + String.join(",", question.getChoices()));
-                System.out.println("Sending choices to client: " + question.getChoices());
-            } else {
-                output.println("No choices found for the given category.");
-                System.out.println("No choices found for category: " + category);
+            List<LeaderboardEntryModelServer> leaderboard = XMLStorageModel.loadLeaderboardFromXML("data/leaderboard.xml");
+
+            boolean exists = leaderboard.stream()
+                    .anyMatch(entry -> entry.getPlayerName().equalsIgnoreCase(usernameLower));
+
+            if (exists) {
+                System.out.println("DEBUG: Username already exists.");
+                return new Response(false, "Username already taken!", null);
             }
-        } else if (request.equals(Protocol.GET_LEADERBOARD)) {
-            System.out.println("Client requested the leaderboard.");
-            String leaderboard = LeaderboardController.getLeaderboard();
-            output.println(leaderboard);
-            System.out.println("Sending leaderboard to client.");
 
-        } else if (request.startsWith(Protocol.ADD_SCORE)) {
-            String[] parts = request.split(":");
-            String playerName = parts[1].trim();
-            int score = Integer.parseInt(parts[2].trim());
-            PlayerModel player = new PlayerModel(playerName,score);
+            leaderboard.add(new LeaderboardEntryModelServer(usernameLower, 0));
+            XMLStorageModel.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
 
-            System.out.println("Client requested to add score: " + playerName + " with score " + score);
-            leaderboardController.addScore(player);
-            output.println("Score added successfully!");
-            System.out.println("Added score for player: " + playerName + " with score: " + score);
-        } else {
-            output.println("Invalid request.");
-            System.out.println("Received an invalid request: " + request);
+            System.out.println("DEBUG: Player registered successfully.");
+            return new Response(true, "Player registered successfully.", null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(false, "Error registering player: " + e.getMessage(), null);
         }
     }
+
+
+
+    private Response handleQuestionRequest(String category) {
+        QuestionController questionController = new QuestionController();
+        List<QuestionModel> questions = questionController.getQuestionsByCategory(category);
+
+        if (questions.isEmpty()) {
+            return new Response(false, "No questions found for category: " + category, null);
+        }
+
+        QuestionModel question = questions.get(0);
+
+        return new Response(true, "Question retrieved successfully.", question);
+    }
+
+    private void closeConnection() {
+        try {
+            if (objectInputStream != null) objectInputStream.close();
+            if (objectOutputStream != null) objectOutputStream.close();
+            if (clientSocket != null && !clientSocket.isClosed()) clientSocket.close();
+            System.out.println("Connection closed.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

@@ -1,104 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <leaderboard>
-                    
-    
-    
-    
-    <entry>
-                                        
-        
-        
-        
-        <player>Player1</player>
-                                        
-        
-        
-        
-        <score>100</score>
-                                    
-    
-    
-    
-    </entry>
-                    
-    
-    
-    
-    <entry>
-                                        
-        
-        
-        
-        <player>TestPlayer</player>
-                                        
-        
-        
-        
-        <score>100</score>
-                                    
-    
-    
-    
-    </entry>
-                    
-    
-    
-    
-    <entry>
-                                        
-        
-        
-        
-        <player>Player2</player>
-                                        
-        
-        
-        
-        <score>80</score>
-                                    
-    
-    
-    
-    </entry>
-                
-    
-    
-    
-    <entry>
-                                
-        
-        
-        <player>Yuen</player>
-                                
-        
-        
-        <score>0</score>
-                            
-    
-    
-    </entry>
-            
-    
-    
-    <entry>
-        <player>PJ</player>
-                        
-        
-        <score>0</score>
-                    
-    
-    </entry>
-        
-    
-    <entry>
-                
-        <player>pol</player>
-                
-        <score>0</score>
-            
-    </entry>
-    
     <entry>
         <player>pj</player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>edison</player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>meow</player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>nyger</player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>asimov</player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>kata</player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>ediboi</player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>gareb</player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>garenn</player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>gundam</player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>ver</player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>fiction</player>
         <score>0</score>
     </entry>
 </leaderboard>

@@ -1,135 +1,103 @@
 package Client.controller;
 
-
 import Client.connection.ClientConnection;
 import Client.model.PlayerModel;
+import Client.view.ModeView;
+import common.Response;
+import exception.ConnectionException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.w3c.dom.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
 
+import java.io.IOException;
 
 public class InputUsernameController {
-    public PlayerModel player;
+    private PlayerModel player;
     private ClientConnection clientConnection;
 
     @FXML
     public TextField usernameField;
+
     @FXML
     public Label errorLabel;
+
     @FXML
     private Button enterButton;
 
-    @FXML
-    public void initialize() {
-        enterButton.setOnAction(event -> {
-            try {
-                handleEnterButtonClick();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-    }
-
-    public InputUsernameController() {
+    public InputUsernameController() throws ConnectionException {
         this.clientConnection = ClientConnection.getInstance();
     }
 
-    private void handleEnterButtonClick() throws IOException {
-        String username = usernameField.getText().trim();
+    @FXML
+    public void initialize() {
+        enterButton.setOnAction(event -> handleEnterButtonClick());
+
+        usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
+            errorLabel.setText("");
+        });
+    }
+
+    private void handleEnterButtonClick() {
+        String username = usernameField.getText().trim().toLowerCase();
 
         if (username.isEmpty()) {
-            usernameField.setPromptText("Username cannot be empty!"); // Show error message
-            return; // Stop further execution
+            errorLabel.setText("Username cannot be empty!");
+            return;
         }
 
         player = new PlayerModel(username, 0);
+        System.out.println("DEBUG: Sending player data to server: " + player.getName());
 
-        try {
-            File inputFile = new File("data/leaderboard.xml");
-            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = docBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(inputFile);
-            document.getDocumentElement().normalize();
-            NodeList nodes = document.getElementsByTagName("entry");
+        new Thread(() -> {
+            try {
+                clientConnection.sendObject(player);
+                Response response = (Response) clientConnection.receiveObject();
 
-            Element root = document.getDocumentElement();
-            Collection<PlayerModel> players = new ArrayList<>();
-            players.add(player);
+                System.out.println("DEBUG: Received response: " + response);
 
-            boolean check = false;
-            for (int i = 0; i < nodes.getLength(); i++) {
-                Node node = nodes.item(i);
-                Element element = (Element) node;
-                String name = element.getElementsByTagName("player").item(0).getTextContent();
-                int score = Integer.parseInt(element.getElementsByTagName("score").item(0).getTextContent());
+                Platform.runLater(() -> {
+                    if (!response.isSuccess()) {
+                        usernameField.clear();
+                        usernameField.requestFocus();
+                        errorLabel.setText(response.getMessage());
+                    } else {
+                        updateUI(this::switchToModeSelection);
+                    }
+                });
 
-                if (name.equals(player.getName())) {
-                    player.setScore(score);
-                    check = true;
-                    break;
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> errorLabel.setText("Connection error."));
             }
-
-            if (!check) {
-                for (PlayerModel playerModel : players) {
-                    Element newPlayer = document.createElement("entry");
-
-                    Element name = document.createElement("player");
-                    name.appendChild(document.createTextNode(playerModel.getName()));
-                    newPlayer.appendChild(name);
-
-                    Element score = document.createElement("score");
-                    score.appendChild(document.createTextNode(Integer.toString(playerModel.getScore())));
-                    newPlayer.appendChild(score);
-
-                    root.appendChild(newPlayer);
-                }
-                writeDOMToFile(document, "data/leaderboard.xml");
-            }
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gamemode_menu.fxml"));
-        Scene modeScene = new Scene(loader.load());
-
-        Stage stage = (Stage) enterButton.getScene().getWindow();
-        stage.setScene(modeScene);
-        stage.setTitle("Game modes");
-        stage.show();
+        }).start();
     }
 
-    private static void writeDOMToFile(Document document, String fileName) {
+    private void updateUI(Runnable action) {
+        javafx.application.Platform.runLater(action);
+    }
+
+    private void switchToModeSelection() {
         try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(document);
-            PrintWriter fileWriter = new PrintWriter(fileName);
-            StreamResult result = new StreamResult(fileWriter);
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-            transformer.transform(source, result);
-            fileWriter.close();
-        } catch (Exception e) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/mode_menu.fxml"));
+            Parent root = loader.load();
+
+            ModeController modeController = loader.getController();
+            Stage stage = (Stage) enterButton.getScene().getWindow();
+            modeController.setModeView(new ModeView(stage));
+
+            stage.setScene(new Scene(root));
+            stage.setTitle("Select Game Mode");
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
+            errorLabel.setText("Failed to load game mode.");
         }
     }
+
 }

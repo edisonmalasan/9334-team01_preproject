@@ -2,6 +2,8 @@ package Client.controller;
 
 import Client.connection.ClientConnection;
 import Client.model.PlayerModel;
+import Client.view.InputUsernameView;
+import Client.view.MainMenuView;
 import Client.view.ModeView;
 import common.Response;
 import exception.ConnectionException;
@@ -30,8 +32,14 @@ public class InputUsernameController {
     @FXML
     private Button enterButton;
 
+    private InputUsernameView inputUsernameView;
+
     public InputUsernameController() throws ConnectionException {
         this.clientConnection = ClientConnection.getInstance();
+    }
+
+    public void setInputUsernameView(InputUsernameView inputUsernameView) {
+        this.inputUsernameView = inputUsernameView;
     }
 
     @FXML
@@ -67,13 +75,20 @@ public class InputUsernameController {
                         usernameField.requestFocus();
                         errorLabel.setText(response.getMessage());
                     } else {
-                        updateUI(this::switchToModeSelection);
+                        updateUI(this::switchToMainMenu);
                     }
                 });
 
             } catch (Exception e) {
                 e.printStackTrace();
-                Platform.runLater(() -> errorLabel.setText("Connection error."));
+                Platform.runLater(() -> {
+                    errorLabel.setText("Connection error.");
+                    usernameField.clear();
+                });
+
+                usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
+                    errorLabel.setText("");
+                });
             }
         }).start();
     }
@@ -82,21 +97,23 @@ public class InputUsernameController {
         javafx.application.Platform.runLater(action);
     }
 
-    private void switchToModeSelection() {
+    private void switchToMainMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/mode_menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
             Parent root = loader.load();
 
-            ModeController modeController = loader.getController();
-            Stage stage = (Stage) enterButton.getScene().getWindow();
-            modeController.setModeView(new ModeView(stage));
+            MainMenuController mainMenuController = loader.getController();
+            MainMenuView mainMenuView = new MainMenuView((Stage) enterButton.getScene().getWindow());
+            mainMenuController.setMainMenuView(mainMenuView);
 
+            Stage stage = (Stage) enterButton.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("Select Game Mode");
+            stage.setTitle("Bomb Defusing Game");
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            errorLabel.setText("Failed to load game mode.");
+            errorLabel.setText("Failed to load Main Menu");
         }
     }
 

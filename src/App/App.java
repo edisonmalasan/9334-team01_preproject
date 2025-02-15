@@ -1,7 +1,9 @@
 package App;    
 
 import Client.connection.ClientConnection;
+import Client.controller.InputUsernameController;
 import Client.controller.MainMenuController;
+import Client.view.InputUsernameView;
 import Client.view.MainMenuView;
 import exception.ConnectionException;
 import exception.FXMLLoadingException;
@@ -21,12 +23,12 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws FXMLLoadingException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/input_username.fxml"));
             Parent root = fxmlLoader.load();
 
-            MainMenuController controller = fxmlLoader.getController();
-            MainMenuView mainMenuView = new MainMenuView(primaryStage);
-            controller.setMainMenuView(mainMenuView);
+            InputUsernameController controller = fxmlLoader.getController();
+            InputUsernameView inputUsernameView = new InputUsernameView(primaryStage);
+            controller.setInputUsernameView(inputUsernameView);
 
             try {
                 ClientConnection.getInstance().connect();
@@ -40,7 +42,7 @@ public class App extends Application {
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
-            throw new FXMLLoadingException("main_menu.fxml", e);
+            throw new FXMLLoadingException("input_username.fxml", e);
         }
     }
 }

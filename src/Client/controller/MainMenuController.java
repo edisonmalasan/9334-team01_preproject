@@ -22,8 +22,23 @@ public class MainMenuController {
 
     @FXML
     public void initialize() {
-        playButton.setOnAction( actionEvent -> mainMenuView.switchScene("/views/user_login.fxml", "Bomb Defusing Game"));
-        leaderboardButton.setOnAction(actionEvent -> mainMenuView.switchScene("/views/leaderboard.fxml", "Leaderboard"));
+        playButton.setOnAction(actionEvent -> {
+            if (mainMenuView != null) {
+                mainMenuView.switchScene("/views/mode_menu.fxml", "Bomb Defusing Game");
+            } else {
+                System.err.println("ERROR: MainMenuView is not set!");
+            }
+        });
+
+        leaderboardButton.setOnAction(actionEvent -> {
+            if (mainMenuView != null) {
+                mainMenuView.switchScene("/views/leaderboard.fxml", "Leaderboard");
+            } else {
+                System.err.println("ERROR: MainMenuView is not set!");
+            }
+        });
+
         quitButton.setOnAction(actionEvent -> System.exit(0));
     }
+
 }

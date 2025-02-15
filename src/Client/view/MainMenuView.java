@@ -1,11 +1,8 @@
 package Client.view;
 
-import com.sun.tools.javac.Main;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class MainMenuView {

@@ -1,8 +1,9 @@
 package Client.model;
 
-import java.util.Objects;
+import java.io.Serializable;
 
-public class PlayerModel {
+public class PlayerModel implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String name;
     private int score;
 
@@ -28,20 +29,7 @@ public class PlayerModel {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        PlayerModel that = (PlayerModel) obj;
-        return score == that.score && name.equals(that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, score);
-    }
-
-    @Override
     public String toString() {
-        return name + " - Score: " + score;
+        return "PlayerModel{name='" + name + "', score=" + score + "}";
     }
 }

@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 public class QuestionController {
     private static final String QUESTIONS_FILE = "data/questions.xml";
 
-    // method to fetch question by category
     public List<QuestionModel> getQuestionsByCategory(String category) {
         List<QuestionModel> allQuestions = XMLStorageModel.loadQuestionsFromXML(QUESTIONS_FILE);
 

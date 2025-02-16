@@ -103,7 +103,9 @@ public class ClassicGameController {
             Button choiceButton = new Button(choice);
             choiceButton.setPrefSize(146, 50);
             choiceButton.setStyle("-fx-font-family: 'Roboto Mono'; -fx-font-size: 15px;");
-            choiceButton.setOnAction(e -> checkAnswer(choiceButton, choice, question.getCorrectAnswer()));
+
+            choiceButton.setOnAction(e -> checkAnswer(choiceButton, choice, question));
+
             choicesBox.getChildren().add(choiceButton);
             choiceButtons.add(choiceButton);
         }
@@ -115,10 +117,13 @@ public class ClassicGameController {
         currentQuestionIndex++;
     }
 
-    private void checkAnswer(Button selectedButton, String selectedAnswer, String correctAnswer) {
-        if (selectedAnswer.equals(correctAnswer)) {
+
+    private void checkAnswer(Button selectedButton, String selectedAnswer, QuestionModel question) {
+        int questionScore = question.getScore();
+
+        if (selectedAnswer.equals(question.getCorrectAnswer())) {
             selectedButton.setStyle("-fx-background-image: url('/images/correct_answer.png');");
-            finalScore += 10;
+            finalScore += questionScore;
             comboModel.incrementCombo();
         } else {
             selectedButton.setStyle("-fx-background-image: url('/images/wrong_answer.png');");
@@ -129,7 +134,7 @@ public class ClassicGameController {
         updateComboUI();
 
         for (Button btn : choiceButtons) {
-            if (btn.getText().equals(correctAnswer)) {
+            if (btn.getText().equals(question.getCorrectAnswer())) {
                 btn.setStyle("-fx-background-image: url('/images/correct_answer.png');");
                 break;
             }

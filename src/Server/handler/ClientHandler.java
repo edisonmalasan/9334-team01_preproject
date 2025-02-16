@@ -55,8 +55,8 @@ public class ClientHandler implements Runnable {
                         sendResponse(response);
                     }
                 } else if (request instanceof PlayerModel) {
-                    logger.info("Player registration request received.");
-                    Response response = handlePlayerRegistration((PlayerModel) request);
+                    logger.info("Player score update request received.");
+                    Response response = handlePlayerScoreUpdate((PlayerModel) request);
                     sendResponse(response);
                 }
             }
@@ -83,7 +83,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    private Response handlePlayerRegistration(PlayerModel player) {
+    private Response handlePlayerScoreUpdate(PlayerModel player) {
         try {
             if (player == null) {
                 logger.severe("Received null player data.");
@@ -91,26 +91,31 @@ public class ClientHandler implements Runnable {
             }
 
             String usernameLower = player.getName().toLowerCase();
-            logger.info("Registering player: " + usernameLower);
+            int score = player.getScore();
+            logger.info("Updating player score: " + usernameLower + " with score: " + score);
 
             List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML("data/leaderboard.xml");
 
-            boolean exists = leaderboard.stream()
-                    .anyMatch(entry -> entry.getPlayerName().equalsIgnoreCase(usernameLower));
-
-            if (exists) {
-                logger.warning("Username already exists.");
-                return new Response(false, "Username already taken!", null);
+            boolean found = false;
+            for (LeaderboardEntryModelServer entry : leaderboard) {
+                if (entry.getPlayerName().equalsIgnoreCase(usernameLower)) {
+                    entry.setScore(entry.getScore() + score); // Update the score
+                    found = true;
+                    break;
+                }
             }
 
-            leaderboard.add(new LeaderboardEntryModelServer(usernameLower, 0));
+            if (!found) {
+                leaderboard.add(new LeaderboardEntryModelServer(usernameLower, score)); // Add new entry if not found
+            }
+
             XMLStorageController.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
 
-            logger.info("Player registered successfully.");
-            return new Response(true, "Player registered successfully.", null);
+            logger.info("Player score updated successfully.");
+            return new Response(true, "Player score updated successfully.", null);
         } catch (Exception e) {
-            logger.severe("Error registering player: " + e.getMessage());
-            return new Response(false, "Error registering player: " + e.getMessage(), null);
+            logger.severe("Error updating player score: " + e.getMessage());
+            return new Response(false, "Error updating player score: " + e.getMessage(), null);
         }
     }
 

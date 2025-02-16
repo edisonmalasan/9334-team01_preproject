@@ -23,6 +23,8 @@ public class LeaderboardEntryModelServer implements Serializable {
         this.playerName = playerName;
     }
 
+
+
     public void setScore(int score) {
         this.score = score;
     }

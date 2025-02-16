@@ -3,8 +3,10 @@ package Client.controller;
 import Client.connection.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.model.ComboModel;
+import Client.model.PlayerModel;
 import Client.utils.BombUtility;
 import Client.utils.QTEUtility;
+import common.Response;
 import common.model.QuestionModel;
 import exception.ConnectionException;
 import exception.ThreadInterruptedException;
@@ -176,6 +178,9 @@ public class ClassicGameController {
             ScoreController scoreController = loader.getController();
             scoreController.setScore(finalScore);
 
+            // Send the player's score to the server
+            sendScoreToServer(finalScore);
+
             Stage stage = (Stage) timerLabel.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Score");
@@ -187,5 +192,25 @@ public class ClassicGameController {
             logger.log(Level.SEVERE, "Failed to load Score view", e);
             throw new RuntimeException(e);
         }
+    }
+
+    private void sendScoreToServer(int score) {
+        new Thread(() -> {
+            try {
+                String playerName = InputUsernameController.getPlayerName();
+                PlayerModel player = new PlayerModel(playerName, score);
+
+                clientConnection.sendObject(player);
+                Response response = (Response) clientConnection.receiveObject();
+
+                if (response.isSuccess()) {
+                    logger.info("Score successfully sent to the server.");
+                } else {
+                    logger.warning("Failed to send score to the server: " + response.getMessage());
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                logger.log(Level.SEVERE, "Error sending score to the server", e);
+            }
+        }).start();
     }
 }

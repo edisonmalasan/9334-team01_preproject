@@ -2,6 +2,7 @@ package Client.controller;
 
 import Client.connection.AnsiFormatter;
 import Client.connection.ClientConnection;
+import Client.model.ComboModel;
 import Client.utils.BombUtility;
 import Client.utils.QTEUtility;
 import common.model.QuestionModel;
@@ -32,6 +33,8 @@ public class ClassicGameController {
     @FXML
     private Label questionLabel;
     @FXML
+    private Label comboLabel;
+    @FXML
     private HBox choicesBox;
     @FXML
     private ImageView bombImage;
@@ -48,8 +51,10 @@ public class ClassicGameController {
     private int currentQuestionIndex = 0;
     private QTEUtility qteUtility;
     private BombUtility bombUtility;
+    private ComboModel comboModel;
+    private int finalScore = 0;
 
-    private static final Logger logger = Logger.getLogger(InputUsernameController.class.getName());
+    private static final Logger logger = Logger.getLogger(ClassicGameController.class.getName());
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -65,6 +70,7 @@ public class ClassicGameController {
 
     public void setQuestions(String category, List<QuestionModel> questions) {
         this.questions = questions;
+        this.comboModel = new ComboModel();
         System.out.println("DEBUG: Loaded " + questions.size() + " questions for category: " + category);
         this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons);
         this.qteUtility = new QTEUtility(questions.size(), bombUtility::applyPenalty, QTEPane);
@@ -77,6 +83,7 @@ public class ClassicGameController {
             choicesBox.getChildren().clear();
             bombImage.setVisible(false);
             bombUtility.stopBombAnimation();
+            switchToScoreView();
             return;
         }
 
@@ -96,17 +103,23 @@ public class ClassicGameController {
 
         if (!bombUtility.isRunning()) {
             Platform.runLater(() -> bombUtility.startBombAnimation());
-        }        qteUtility.triggerQuickTimeEvent(currentQuestionIndex);
+        }
+        qteUtility.triggerQuickTimeEvent(currentQuestionIndex);
         currentQuestionIndex++;
     }
 
     private void checkAnswer(Button selectedButton, String selectedAnswer, String correctAnswer) {
         if (selectedAnswer.equals(correctAnswer)) {
             selectedButton.setStyle("-fx-background-image: url('/images/correct_answer.png');");
+            finalScore += 10;
+            comboModel.incrementCombo();
         } else {
             selectedButton.setStyle("-fx-background-image: url('/images/wrong_answer.png');");
             bombUtility.applyPenalty(3);
+            comboModel.resetCombo();
         }
+
+        updateComboUI();
 
         for (Button btn : choiceButtons) {
             if (btn.getText().equals(correctAnswer)) {
@@ -130,10 +143,18 @@ public class ClassicGameController {
         }).start();
     }
 
+    private void updateComboUI() {
+        System.out.println("DEBUG: Updating combo display: " + comboModel.getComboCount());
+        Platform.runLater(() -> comboLabel.setText("Combo: " + comboModel.getComboCount()));
+    }
+
     private void switchToScoreView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/score_view.fxml"));
             Parent root = loader.load();
+
+            ScoreController scoreController = loader.getController();
+            scoreController.setScore(finalScore);
 
             Stage stage = (Stage) timerLabel.getScene().getWindow();
             stage.setScene(new Scene(root));

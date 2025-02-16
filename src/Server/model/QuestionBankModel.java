@@ -1,5 +1,6 @@
 package Server.model;
 
+import Server.controller.XMLStorageController;
 import common.model.QuestionModel;
 import java.util.*;
 
@@ -8,7 +9,7 @@ public class QuestionBankModel {
     private List<QuestionModel> questions;
 
     public QuestionBankModel() {
-        this.questions = Collections.synchronizedList(XMLStorageModel.loadQuestionsFromXML("data/questions.xml"));
+        this.questions = Collections.synchronizedList(XMLStorageController.loadQuestionsFromXML("data/questions.xml"));
     }
 
     public List<QuestionModel> getQuestions() {

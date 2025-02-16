@@ -1,21 +1,27 @@
-package App;    
+package App;
 
+import Client.connection.AnsiFormatter;
 import Client.connection.ClientConnection;
-import Client.controller.InputUsernameController;
-import Client.controller.MainMenuController;
-import Client.view.InputUsernameView;
-import Client.view.MainMenuView;
 import exception.ConnectionException;
 import exception.FXMLLoadingException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class App extends Application {
+    private static final Logger logger = Logger.getLogger(App.class.getName());
+
+    static {
+        AnsiFormatter.enableColorLogging(logger);
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -26,22 +32,22 @@ public class App extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/input_username.fxml"));
             Parent root = fxmlLoader.load();
 
-            InputUsernameController controller = fxmlLoader.getController();
-            InputUsernameView inputUsernameView = new InputUsernameView(primaryStage);
-            controller.setInputUsernameView(inputUsernameView);
-
             try {
                 ClientConnection.getInstance().connect();
-                System.out.println("Client connected to the server.");
+                logger.info("✅ Client successfully connected to the server.");
             } catch (ConnectionException e) {
-                System.err.println("⚠ Server is not running. The client will continue in offline mode.");
+                logger.warning("⚠ Server is not running. The client will continue in offline mode.");
             }
+
+            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/bomb_mad.png")));
 
             primaryStage.setScene(new Scene(root));
             primaryStage.setTitle("Bomb Defusing Game");
             primaryStage.setResizable(false);
             primaryStage.show();
+
         } catch (IOException e) {
+            logger.log(Level.SEVERE, "❌ Failed to load FXML: input_username.fxml", e);
             throw new FXMLLoadingException("input_username.fxml", e);
         }
     }

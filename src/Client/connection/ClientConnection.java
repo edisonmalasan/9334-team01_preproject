@@ -1,6 +1,5 @@
 package Client.connection;
 
-import Client.model.PlayerModel;
 import common.Response;
 import common.model.QuestionModel;
 import exception.ConnectionException;
@@ -20,8 +19,24 @@ public class ClientConnection {
 
     private static final Logger logger = Logger.getLogger(ClientConnection.class.getName());
 
+    static {
+        AnsiFormatter.enableColorLogging(logger);
+    }
+
     private ClientConnection() throws ConnectionException {
-        // to not connect immediately
+        try {
+            System.out.println("DEBUG: Attempting to connect to server...");
+
+            socket = new Socket(IP_ADDRESS, PORT_NUMBER);
+            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
+
+            System.out.println("✅ DEBUG: Connected to server successfully!");
+
+        } catch (IOException e) {
+            System.err.println("❌ DEBUG: Connection to server failed!");
+            throw new ConnectionException("Error connecting to the server.", e);
+        }
     }
 
     public static ClientConnection getInstance() throws ConnectionException {
@@ -59,17 +74,21 @@ public class ClientConnection {
     }
 
     public void sendObject(Object obj) throws IOException {
+        if (objectOutputStream == null) {
+            throw new IOException("❌ ERROR: Object is NULL! Cannot send data.");
+        }
         objectOutputStream.writeObject(obj);
         objectOutputStream.flush();
     }
 
     public Object receiveObject() throws IOException, ClassNotFoundException {
         System.out.println("DEBUG: Waiting to receive object from server...");
+
         Object obj = objectInputStream.readObject();
+
         System.out.println("DEBUG: Received object: " + obj);
         return obj;
     }
-
     public void close() {
         try {
             if (socket != null) socket.close();

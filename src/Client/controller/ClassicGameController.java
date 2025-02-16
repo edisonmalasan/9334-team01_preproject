@@ -1,6 +1,7 @@
 package Client.controller;
 
 import Client.connection.ClientConnection;
+import Client.utils.QTEUtil;
 import common.model.QuestionModel;
 import exception.ConnectionException;
 import exception.ThreadInterruptedException;
@@ -12,11 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ClassicGameController {
     @FXML
@@ -31,6 +32,8 @@ public class ClassicGameController {
     private ImageView flame;
     @FXML
     private Line wick;
+    @FXML
+    private Pane QTEPane;  // Pane for QTE button
 
     private List<Button> choiceButtons = new ArrayList<>();
     private ClientConnection clientConnection;
@@ -41,7 +44,7 @@ public class ClassicGameController {
     private Timeline bombTimer;
     private int totalTime = 30;
     private int remainingTime;
-
+    private QTEUtil qteUtil;
 
     public ClassicGameController() {
         try {
@@ -54,6 +57,7 @@ public class ClassicGameController {
     public void setQuestions(String category, List<QuestionModel> questions) {
         this.questions = questions;
         System.out.println("DEBUG: Loaded " + questions.size() + " questions for category: " + category);
+        this.qteUtil = new QTEUtil(questions.size(), this::applyPenalty, QTEPane);
         showNextQuestion();
     }
 
@@ -74,6 +78,7 @@ public class ClassicGameController {
             }
 
             Platform.runLater(this::startBombAnimation);
+            qteUtil.triggerQuickTimeEvent(currentQuestionIndex);
             currentQuestionIndex++;
         } else {
             questionLabel.setText("🎉 Game Over!");
@@ -83,12 +88,11 @@ public class ClassicGameController {
     }
 
     private void checkAnswer(Button selectedButton, String selectedAnswer, String correctAnswer) {
-
         if (selectedAnswer.equals(correctAnswer)) {
             selectedButton.setStyle("-fx-background-image: url('/images/correct_answer.png');");
         } else {
             selectedButton.setStyle("-fx-background-image: url('/images/wrong_answer.png');");
-            applyPenalty();
+            applyPenalty(3);
         }
 
         for (Button btn : choiceButtons) {
@@ -113,17 +117,16 @@ public class ClassicGameController {
         }).start();
     }
 
-    private void applyPenalty() {
+    private void applyPenalty(int penalty) {
         double wickLength = wick.getEndX() - wick.getStartX();
-        double shrinkAmount = wickLength / 3;
+        double shrinkAmount = wickLength / (totalTime / penalty);
 
         if (wickLength > 0) {
             wick.setStartX(wick.getStartX() + shrinkAmount);
             flame.setLayoutX(flame.getLayoutX() + shrinkAmount);
         }
 
-        int timePenalty = 3;  //reduce time by 3s per mistake
-        remainingTime = Math.max(0, remainingTime - timePenalty);
+        remainingTime = Math.max(0, remainingTime - penalty);
         Platform.runLater(() -> timerLabel.setText(remainingTime + "s"));
 
         if (remainingTime <= 0 || wick.getStartX() >= wick.getEndX()) {
@@ -137,7 +140,6 @@ public class ClassicGameController {
         bombImage.setVisible(true);
         flame.setVisible(true);
         wick.setVisible(true);
-        remainingTime = totalTime;
 
         flameFlicker = new TranslateTransition(Duration.millis(200), flame);
         flameFlicker.setFromX(-2);
@@ -171,7 +173,6 @@ public class ClassicGameController {
 
         flame.setVisible(false);
         wick.setVisible(false);
-
     }
 
     private void shortenWick() {

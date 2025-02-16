@@ -115,6 +115,8 @@ public class ClientHandler implements Runnable {
     }
 
     private Response handleQuestionRequest(String category) {
+        System.out.println("DEBUG: Server received question request for category: " + category);
+
         QuestionController questionController = new QuestionController();
         List<QuestionModel> questions = questionController.getQuestionsByCategory(category);
 
@@ -123,9 +125,8 @@ public class ClientHandler implements Runnable {
             return new Response(false, "No questions found for category: " + category, null);
         }
 
-        QuestionModel question = questions.get(0);
         logger.info("Question retrieved successfully for category: " + category);
-        return new Response(true, "Question retrieved successfully.", question);
+        return new Response(true, "Question retrieved successfully.", questions);
     }
 
     private void closeConnection() {

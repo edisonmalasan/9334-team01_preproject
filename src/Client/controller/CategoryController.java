@@ -3,6 +3,7 @@ package Client.controller;
 import Client.connection.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.view.CategoryView;
+import common.Response;
 import common.model.QuestionModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,28 +67,51 @@ public class CategoryController {
 
     private void requestQuestionFromServer(String category, ActionEvent event) {
         selectedCategory = category;
-        logger.info("📩 Requesting question for category: " + category);
+        logger.info("📩 Requesting questions for category: " + category);
 
         new Thread(() -> {
             try {
-                QuestionModel question = clientConnection.getQuestion(category);
+                clientConnection.sendObject("GET_QUESTION:" + category);
+                Response response = (Response) clientConnection.receiveObject();
 
-                if (question != null) {
-                    logger.info("✅ Received Question: " + question.getQuestionText());
-                    updateUI(() -> switchToGameplay(category, event));
+                logger.info("DEBUG: Received response from server: " + response);
+
+                if (response.isSuccess() && response.getData() instanceof List) {
+                    List<QuestionModel> questions = (List<QuestionModel>) response.getData();
+
+                    logger.info("✅ Received " + questions.size() + " questions for category: " + category);
+
+                    // log formatted questions for debug purpose
+                    for (int i = 0; i < questions.size(); i++) {
+                        QuestionModel q = questions.get(i);
+                        logger.info("\n📌 Question " + (i + 1) + ":\n"
+                                + "   🏷 Category: " + q.getCategory() + "\n"
+                                + "   ❓ Question: " + q.getQuestionText() + "\n"
+                                + "   🔢 Choices: " + q.getChoices() + "\n"
+                                + "   ✅ Correct Answer: " + q.getCorrectAnswer() + "\n"
+                                + "   ⭐ Score: " + q.getScore() + "\n"
+                                + "--------------------------------------");
+                    }
+
+                    updateUI(() -> switchToGameplay(category, questions, event));
                 } else {
                     logger.warning("⚠️ No questions found for category: " + category);
                 }
             } catch (IOException | ClassNotFoundException e) {
-                logger.log(Level.SEVERE, "❌ Failed to fetch question from server.", e);
+                logger.log(Level.SEVERE, "❌ Failed to fetch questions from server.", e);
             }
         }).start();
     }
 
-    private void switchToGameplay(String category, ActionEvent event) {
+
+
+    private void switchToGameplay(String category, List<QuestionModel> questions, ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/classic_game.fxml"));
             Parent root = loader.load();
+
+            ClassicGameController gameController = loader.getController();
+            gameController.setQuestions(category, questions); //  pass all questions
 
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -94,7 +119,7 @@ public class CategoryController {
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "❌ Failed to switch to gameplay screen.", e);
+            e.printStackTrace();
         }
     }
 

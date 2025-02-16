@@ -29,7 +29,7 @@ public class QTEUtility {
      */
     private Set<Integer> generateQTETriggers(int totalQuestions) {
         Set<Integer> qteTriggers = new HashSet<>();
-        int qteCount = Math.min(5, totalQuestions); // Max 3 QTEs per game
+        int qteCount = Math.min(3, totalQuestions); // Max 3 QTEs per game
 
         while (qteTriggers.size() < qteCount) {
             qteTriggers.add(random.nextInt(totalQuestions));

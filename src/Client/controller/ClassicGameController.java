@@ -52,7 +52,7 @@ public class ClassicGameController {
     public void setQuestions(String category, List<QuestionModel> questions) {
         this.questions = questions;
         System.out.println("DEBUG: Loaded " + questions.size() + " questions for category: " + category);
-        this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::showNextQuestion, choiceButtons);
+        this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons);
         this.qteUtility = new QTEUtility(questions.size(), bombUtility::applyPenalty, QTEPane);
         showNextQuestion();
     }
@@ -111,5 +111,8 @@ public class ClassicGameController {
                 throw new ThreadInterruptedException("Thread was interrupted while waiting to show the next question.", e);
             }
         }).start();
+    }
+
+    private void switchToScoreView() {
     }
 }

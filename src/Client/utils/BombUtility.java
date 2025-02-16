@@ -24,6 +24,8 @@ public class BombUtility {
     private int totalTime = 30;
     private int remainingTime;
 
+    private boolean explosionTriggered = false; // Flag to prevent multiple explosions
+
     public BombUtility(ImageView bombImage, ImageView flame, Line wick, Label timerLabel,
                        Runnable explosionCallback, List<Button> choiceButtons) {
         this.bombImage = bombImage;
@@ -41,6 +43,7 @@ public class BombUtility {
         flame.setVisible(true);
         wick.setVisible(true);
 
+        // Start flame flickering animation
         flameFlicker = new TranslateTransition(Duration.millis(200), flame);
         flameFlicker.setFromX(-2);
         flameFlicker.setToX(2);
@@ -48,10 +51,12 @@ public class BombUtility {
         flameFlicker.setCycleCount(Animation.INDEFINITE);
         flameFlicker.play();
 
+        // Start wick shrinking animation
         wickAnimation = new Timeline(new KeyFrame(Duration.seconds(1), e -> shortenWick()));
         wickAnimation.setCycleCount(totalTime);
         wickAnimation.play();
 
+        // Start bomb timer
         bombTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateTimer()));
         bombTimer.setCycleCount(totalTime);
         bombTimer.play();
@@ -123,6 +128,10 @@ public class BombUtility {
     }
 
     private void triggerExplosion() {
+        if (explosionTriggered) return; // Prevent multiple explosions
+
+        explosionTriggered = true; // Set the flag to true to indicate explosion has occurred
+
         stopBombAnimation();
         bombImage.setImage(new Image("/images/explosion.png"));
         System.out.println("BOOM! The bomb explodes!");
@@ -131,7 +140,5 @@ public class BombUtility {
             btn.setDisable(true);
             btn.setOpacity(0.8);
         }
-
-        Platform.runLater(explosionCallback);
     }
 }

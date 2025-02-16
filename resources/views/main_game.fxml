@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainGame" prefHeight="768.0" prefWidth="1024.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.ClassicGameController">
+
+    <children>
+      <VBox alignment="CENTER" layoutX="435.0" layoutY="161.0" prefHeight="50.0" prefWidth="183.0">
+         <children>
+            <Label prefHeight="21.0" prefWidth="175.0" text="Combo Count:">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="comboLabel" alignment="CENTER" prefHeight="21.0" prefWidth="175.0" text="0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Pane layoutX="53.0" layoutY="266.0" prefHeight="200.0" prefWidth="918.0">
+         <children>
+      
+              <ImageView fx:id="bombImage" fitHeight="129.0" fitWidth="123.0" layoutX="765.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                      <Image url="@../images/bomb.png" />
+                  </image>
+              </ImageView>
+            <Line endX="195.0" endY="6.0" layoutX="596.0" layoutY="42.0" startX="-520.0" startY="8.0" strokeWidth="3.0" />
+            <ImageView fitHeight="36.0" fitWidth="42.0" layoutX="56.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/wick.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <HBox layoutX="171.0" layoutY="623.0" prefHeight="50.0" prefWidth="683.0" spacing="30.0">
+         <children>
+                <Button fx:id="optionOneButton" prefHeight="50.0" prefWidth="146.0">
+               <graphic>
+                  <Label fx:id="l" text="Option 1" />
+               </graphic></Button>
+                <Button fx:id="optionTwoutton" prefHeight="50.0" prefWidth="146.0">
+               <graphic>
+                  <Label text="option 2" />
+               </graphic></Button>
+                <Button fx:id="optionThreeButton" prefHeight="50.0" prefWidth="146.0">
+               <graphic>
+                  <Label text="option 3" />
+               </graphic></Button>
+                <Button fx:id="optionFourButton" prefHeight="50.0" prefWidth="146.0">
+               <graphic>
+                  <Label text="option 4" />
+               </graphic></Button>
+         </children>
+      </HBox>
+      <Label layoutX="505.0" layoutY="28.0" text="0 s." />
+      <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="478.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Hour.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="forfeitButton" layoutX="840.0" layoutY="27.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="156.0" text="forfeit" AnchorPane.leftAnchor="840.0" />
+      <Label alignment="CENTER" layoutX="185.0" layoutY="551.0" prefHeight="72.0" prefWidth="655.0" text="Game Question">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+
+    </children>
+
+</AnchorPane>

@@ -1,7 +1,6 @@
 <questions>
     <question category="ALGEBRA">
         <text>What is the proper term for this definition?
-
             A term without a variable</text>
         <choice>Constant</choice>
         <choice>Exponent</choice>
@@ -13,7 +12,6 @@
 
     <question category="ALGEBRA">
         <text>How many terms are included in this expression?
-
             2x^2 + 12x - 8 + 10x</text>
         <choice>3</choice>
         <choice>4</choice>
@@ -25,7 +23,6 @@
 
     <question category="ALGEBRA">
         <text>"Simplify the fraction to the lowest terms:
-
             924/1092"</text>
         <choice>308/364</choice>
         <choice>11/13</choice>
@@ -37,7 +34,6 @@
 
     <question category="ALGEBRA">
         <text>"Identify the domain and range:
-
             (-2, 3), (4, 5), (-1, 6), (2, 3), (1, 3), (4, 7), (-3, 0)"</text>
         <choice>"D: {0, 1, 2, 3, 4, 5, 6, 7}
             R: {-1, -2, -3}"</choice>
@@ -54,7 +50,6 @@
 
     <question category="ALGEBRA">
         <text>"Solve the following equation:
-
             10 - 2(3)"</text>
         <choice>-13</choice>
         <choice>4</choice>
@@ -66,7 +61,6 @@
 
     <question category="ALGEBRA">
         <text>"Simplify the expression:
-
             (-1/5)^3"</text>
         <choice>-3/125</choice>
         <choice>-1/125</choice>
@@ -78,7 +72,6 @@
 
     <question category="ALGEBRA">
         <text>"Simplify the expression:
-
             (2x^3)^2"</text>
         <choice>2x^5</choice>
         <choice>4x^6</choice>
@@ -90,7 +83,6 @@
 
     <question category="ALGEBRA">
         <text>"Simplify the expression:
-
             4m + 5 + 2m - 1"</text>
         <choice>10m</choice>
         <choice>6m + 4</choice>
@@ -102,7 +94,6 @@
 
     <question category="ALGEBRA">
         <text>"Solve the pair of equations for x and y:
-
             x + y = 4
             x − y = 8"</text>
         <choice>x = 2 , y = −6</choice>
@@ -115,7 +106,6 @@
 
     <question category="ALGEBRA">
         <text>"Solve the following equation:
-
             5(x − 5) = 5"</text>
         <choice>x = −6</choice>
         <choice>x = 1</choice>
@@ -127,7 +117,6 @@
 
     <question category="ALGEBRA">
         <text>"What is the algebraic expression for this phrase:
-
             'A number t times 6'"</text>
         <choice>6t</choice>
         <choice>6(t) + 1</choice>
@@ -139,7 +128,6 @@
 
     <question category="ALGEBRA">
         <text>"What is the algebraic expression for this phrase:
-
             '13 more than the product of 9 and n'"</text>
         <choice>13 + 9 + n</choice>
         <choice>9n + 13</choice>
@@ -151,7 +139,6 @@
 
     <question category="ALGEBRA">
         <text>"Solve the following equation:
-
             2(z + 3) = 18"</text>
         <choice>z = 12</choice>
         <choice>z = 7.5</choice>
@@ -163,7 +150,6 @@
 
     <question category="ALGEBRA">
         <text>"Solve the following equation:
-
             6x − 2 = −14"</text>
         <choice>1</choice>
         <choice>-2</choice>
@@ -175,7 +161,6 @@
 
     <question category="ALGEBRA">
         <text>"Solve the following equation:
-
             4k - 5k = 10 + k"</text>
         <choice>k = 5</choice>
         <choice>k = 20</choice>
@@ -187,7 +172,6 @@
 
     <question category="ALGEBRA">
         <text>"Solve the pair of equations for x and y:
-
             2x + y = 16
             y − 2x = 0"</text>
         <choice>x = 4 , y = −8</choice>
@@ -200,7 +184,6 @@
 
     <question category="ALGEBRA">
         <text>"Translate and solve:
-
             '4 less than 3 times a number is -16'"</text>
         <choice>x = -4</choice>
         <choice>x = 3</choice>
@@ -212,7 +195,6 @@
 
     <question category="ALGEBRA">
         <text>"Rearrange the equation into slope-intercept form:
-
             2x - 3y = 9"</text>
         <choice>y = 9 / 2x - 3</choice>
         <choice>y = 2 / 3x - 3</choice>
@@ -224,7 +206,6 @@
 
     <question category="ALGEBRA">
         <text>"What is the algebraic expression for this phrase:
-
             ""9 taken away from the sum of x and y"""</text>
         <choice>x + y - 9</choice>
         <choice>9 - (x + y)</choice>

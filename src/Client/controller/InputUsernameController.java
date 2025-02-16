@@ -6,6 +6,9 @@ import Client.model.PlayerModel;
 import Client.view.MainMenuView;
 import common.Response;
 import exception.ConnectionException;
+import exception.InvalidUsernameException;
+import exception.ServerDisconnectedException;
+import exception.ServerNotRunningException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,9 +43,21 @@ public class InputUsernameController {
     @FXML
     private Button enterButton;
 
-    public InputUsernameController() throws ConnectionException {
-        this.clientConnection = ClientConnection.getInstance();
+    public InputUsernameController() {
+        try {
+            this.clientConnection = ClientConnection.getInstance();
+
+            if (this.clientConnection == null) {
+                logger.severe("❌ ERROR: ClientConnection is NULL! Server may not be running.");
+            } else {
+                logger.info("✅ Client is set up properly.");
+            }
+
+        } catch (ConnectionException e) {
+            handleException(new ServerNotRunningException("⚠ Server is not running."));
+        }
     }
+
 
     @FXML
     public void initialize() {
@@ -57,8 +72,7 @@ public class InputUsernameController {
         String username = usernameField.getText().trim().toLowerCase();
 
         if (username.isEmpty()) {
-            errorLabel.setText("Username cannot be empty!");
-            logger.warning("User attempted to enter an empty username.");
+            handleException(new InvalidUsernameException("Username cannot be empty!"));
             return;
         }
 
@@ -74,28 +88,22 @@ public class InputUsernameController {
 
                 Platform.runLater(() -> {
                     if (!response.isSuccess()) {
-                        usernameField.clear();
-                        usernameField.requestFocus();
-                        errorLabel.setText(response.getMessage());
-                        logger.warning("Username rejected: " + response.getMessage());
+                        handleException(new InvalidUsernameException(response.getMessage()));
                     } else {
                         switchToMainMenu();
                     }
                 });
 
             } catch (EOFException e) {
-                logger.severe("Server closed the connection unexpectedly.");
-                Platform.runLater(() -> errorLabel.setText("Server disconnected. Please try again."));
-
+                handleException(new ServerDisconnectedException("⚠ Server disconnected."));
+            } catch (java.net.ConnectException e) {
+                handleException(new ServerNotRunningException("⚠ Server is not running."));
             } catch (Exception e) {
-                logger.log(Level.SEVERE, "Connection error occurred", e);
-                Platform.runLater(() -> {
-                    errorLabel.setText("Connection error.");
-                    usernameField.clear();
-                });
+                handleException(new ServerNotRunningException("⚠ CONNECTION ERROR: Server is not running."));
             }
         }).start();
     }
+
 
     private void switchToMainMenu() {
         try {
@@ -115,4 +123,14 @@ public class InputUsernameController {
             errorLabel.setText("Failed to load Main Menu");
         }
     }
+
+    private void handleException(Exception e) {
+        logger.severe("❌ ERROR: " + e.getMessage());
+        Platform.runLater(() -> {
+            usernameField.clear();
+            usernameField.requestFocus();
+            errorLabel.setText(e.getMessage());
+        });
+    }
+
 }

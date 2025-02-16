@@ -44,6 +44,8 @@ public class ClassicGameController {
     private Line wick;
     @FXML
     private Pane QTEPane;
+    @FXML
+    private Button forfeitButton;
 
     private List<Button> choiceButtons = new ArrayList<>();
     private ClientConnection clientConnection;
@@ -75,6 +77,11 @@ public class ClassicGameController {
         this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons);
         this.qteUtility = new QTEUtility(questions.size(), bombUtility::applyPenalty, QTEPane);
         showNextQuestion();
+    }
+
+    @FXML
+    public void initialize() {
+        forfeitButton.setOnAction(e -> handleForfeit());
     }
 
     private void showNextQuestion() {
@@ -146,6 +153,14 @@ public class ClassicGameController {
     private void updateComboUI() {
         System.out.println("DEBUG: Updating combo display: " + comboModel.getComboCount());
         Platform.runLater(() -> comboLabel.setText("Combo: " + comboModel.getComboCount()));
+    }
+
+    @FXML
+    private void handleForfeit() {
+        System.out.println("Player forfeited. Stopping game...");
+        bombUtility.stopBombAnimation();
+        finalScore = 0;
+        switchToScoreView();
     }
 
     private void switchToScoreView() {

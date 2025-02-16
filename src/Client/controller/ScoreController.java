@@ -1,5 +1,6 @@
 package Client.controller;
 
+import Client.connection.AnsiFormatter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,14 +23,20 @@ public class ScoreController {
     private int finalScore;
     private static final Logger logger = Logger.getLogger(ScoreController.class.getName());
 
+    static {
+        AnsiFormatter.enableColorLogging(logger);
+    }
+
+
     public void setScore(int score) {
         this.finalScore = score;
         scoreLabel.setText(String.valueOf(finalScore));
     }
 
     @FXML
-    private void handleBackToMenu() {
-        switchToMainMenu();
+    public void initialize() {
+        backToMenuButton.setOnAction(event -> switchToMainMenu());
+
     }
 
     private void switchToMainMenu() {

@@ -5,6 +5,7 @@ import Client.connection.ClientConnection;
 import exception.ConnectionException;
 import exception.FXMLLoadingException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -45,6 +46,12 @@ public class App extends Application {
             primaryStage.setTitle("Bomb Defusing Game");
             primaryStage.setResizable(false);
             primaryStage.show();
+
+            primaryStage.setOnCloseRequest(event -> {
+                System.out.println("Closing application...");
+                Platform.exit();
+                System.exit(0);
+            });
 
         } catch (IOException e) {
             logger.log(Level.SEVERE, "❌ Failed to load FXML: input_username.fxml", e);

@@ -13,7 +13,7 @@
 #inputUsername,
 #mainMenu,
 #gameMode,
-
+#scoreView,
 #categoryMenu {
     -fx-background-color: radial-gradient(center 50% 50%, radius 100%, black, darkgray);
 }

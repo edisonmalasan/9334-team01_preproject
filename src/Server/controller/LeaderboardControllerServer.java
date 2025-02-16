@@ -7,15 +7,8 @@ import java.util.List;
 public class LeaderboardControllerServer {
     private static final String LEADERBOARD_FILE = "data/leaderboard.xml";
 
-    public static String getLeaderboard() {
-        List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML(LEADERBOARD_FILE);
-        StringBuilder leaderboardString = new StringBuilder();
-
-        for (LeaderboardEntryModelServer entry : leaderboard) {
-            leaderboardString.append(entry.getPlayerName()).append(": ").append(entry.getScore()).append("\n");
-        }
-
-        return leaderboardString.toString();
+    public static List<LeaderboardEntryModelServer> getLeaderboard() {
+        return XMLStorageController.loadLeaderboardFromXML(LEADERBOARD_FILE);
     }
 
     public static void addScore(String playerName, int score) {

@@ -19,6 +19,10 @@ public class ClientConnection {
 
     private static final Logger logger = Logger.getLogger(ClientConnection.class.getName());
 
+    static {
+        AnsiFormatter.enableColorLogging(logger);
+    }
+
     private ClientConnection() throws ConnectionException {
         // to not connect immediately
     }

@@ -1,5 +1,6 @@
 package Client.controller;
 
+import Client.connection.AnsiFormatter;
 import Client.view.CategoryView;
 import Client.view.MainMenuView;
 import Client.view.ModeView;
@@ -11,8 +12,16 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainMenuController {
+    private static final Logger logger = Logger.getLogger(MainMenuController.class.getName());
+
+    static {
+        AnsiFormatter.enableColorLogging(logger);
+    }
+
     @FXML
     private Button playButton;
 
@@ -31,10 +40,11 @@ public class MainMenuController {
     @FXML
     public void initialize() {
         playButton.setOnAction(actionEvent -> switchToModeMenu());
-
         leaderboardButton.setOnAction(actionEvent -> switchToLeaderboard());
-
-        quitButton.setOnAction(actionEvent -> System.exit(0));
+        quitButton.setOnAction(actionEvent -> {
+            logger.info("Exiting application.");
+            System.exit(0);
+        });
     }
 
     private void switchToModeMenu() {
@@ -47,13 +57,15 @@ public class MainMenuController {
             stage.setTitle("Bomb Defusing Game");
             stage.setResizable(false);
             stage.show();
+
+            logger.info("Switched to Mode Menu.");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Failed to load Mode Menu", e);
         }
     }
 
     private void switchToLeaderboard() {
-        // TODO: Sunday
+        logger.info("Leaderboard button clicked. (TODO: Implement Leaderboard)");
+        // TODO: Implement Leaderboard functionality
     }
-
 }

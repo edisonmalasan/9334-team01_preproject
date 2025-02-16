@@ -1,5 +1,6 @@
 package Server.handler;
 
+import Client.connection.AnsiFormatter;
 import Client.model.PlayerModel;
 import Server.controller.LeaderboardControllerServer;
 import Server.controller.QuestionController;
@@ -13,12 +14,18 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ClientHandler implements Runnable {
     private Socket clientSocket;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
     private LeaderboardControllerServer leaderboardControllerServer;
+    private static final Logger logger = Logger.getLogger(ClientHandler.class.getName());
+
+    static {
+        AnsiFormatter.enableColorLogging(logger);
+    }
 
     public ClientHandler(Socket clientSocket, QuestionBankModel questionBank, LeaderboardControllerServer leaderboardControllerServer) {
         this.clientSocket = clientSocket;
@@ -28,14 +35,14 @@ public class ClientHandler implements Runnable {
             objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.severe("Error initializing streams: " + e.getMessage());
         }
     }
 
     @Override
     public void run() {
         try {
-            System.out.println("New client connected: " + clientSocket.getInetAddress());
+            logger.info("New client connected: " + clientSocket.getInetAddress());
 
             while (!clientSocket.isClosed()) {
                 Object request = objectInputStream.readObject();
@@ -48,46 +55,43 @@ public class ClientHandler implements Runnable {
                         sendResponse(response);
                     }
                 } else if (request instanceof PlayerModel) {
-                    System.out.println("DEBUG: Player registration request received.");
+                    logger.info("Player registration request received.");
                     Response response = handlePlayerRegistration((PlayerModel) request);
                     sendResponse(response);
                 }
             }
         } catch (EOFException e) {
-            System.out.println("Client disconnected.");
+            logger.info("Client disconnected.");
         } catch (SocketException e) {
-            System.out.println("Client forcibly closed the connection.");
+            logger.warning("Client forcibly closed the connection.");
         } catch (Exception e) {
-            System.err.println("SERVER ERROR: " + e.getMessage());
-            e.printStackTrace();
+            logger.severe("SERVER ERROR: " + e.getMessage());
         } finally {
             closeConnection();
         }
     }
 
-
     private void sendResponse(Response response) throws IOException {
-        System.out.println("DEBUG: Sending response to client: " + response);
+        logger.info("Sending response to client: " + response);
 
         try {
             objectOutputStream.writeObject(response);
             objectOutputStream.flush();
         } catch (IOException e) {
-            System.err.println("ERROR: Failed to send response: " + e.getMessage());
+            logger.severe("Failed to send response: " + e.getMessage());
             throw e;
         }
     }
 
-
     private Response handlePlayerRegistration(PlayerModel player) {
         try {
             if (player == null) {
-                System.err.println("ERROR: Received null player data.");
+                logger.severe("Received null player data.");
                 return new Response(false, "Received null player data.", null);
             }
 
             String usernameLower = player.getName().toLowerCase();
-            System.out.println("DEBUG: Registering player: " + usernameLower);
+            logger.info("Registering player: " + usernameLower);
 
             List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML("data/leaderboard.xml");
 
@@ -95,32 +99,32 @@ public class ClientHandler implements Runnable {
                     .anyMatch(entry -> entry.getPlayerName().equalsIgnoreCase(usernameLower));
 
             if (exists) {
-                System.out.println("DEBUG: Username already exists.");
+                logger.warning("Username already exists.");
                 return new Response(false, "Username already taken!", null);
             }
 
             leaderboard.add(new LeaderboardEntryModelServer(usernameLower, 0));
             XMLStorageController.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
 
-            System.out.println("DEBUG: Player registered successfully.");
+            logger.info("Player registered successfully.");
             return new Response(true, "Player registered successfully.", null);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.severe("Error registering player: " + e.getMessage());
             return new Response(false, "Error registering player: " + e.getMessage(), null);
         }
     }
-
 
     private Response handleQuestionRequest(String category) {
         QuestionController questionController = new QuestionController();
         List<QuestionModel> questions = questionController.getQuestionsByCategory(category);
 
         if (questions.isEmpty()) {
+            logger.warning("No questions found for category: " + category);
             return new Response(false, "No questions found for category: " + category, null);
         }
 
         QuestionModel question = questions.get(0);
-
+        logger.info("Question retrieved successfully for category: " + category);
         return new Response(true, "Question retrieved successfully.", question);
     }
 
@@ -129,11 +133,9 @@ public class ClientHandler implements Runnable {
             if (objectInputStream != null) objectInputStream.close();
             if (objectOutputStream != null) objectOutputStream.close();
             if (clientSocket != null && !clientSocket.isClosed()) clientSocket.close();
-            System.out.println("Connection closed.");
+            logger.info("Connection closed.");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.severe("Error closing connection: " + e.getMessage());
         }
     }
-
-
 }

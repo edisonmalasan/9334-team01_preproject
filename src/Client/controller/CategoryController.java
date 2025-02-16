@@ -1,5 +1,6 @@
 package Client.controller;
 
+import Client.connection.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.view.CategoryView;
 import common.model.QuestionModel;
@@ -12,10 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CategoryController {
+    private static final Logger logger = Logger.getLogger(CategoryController.class.getName());
+
     @FXML
     private Button algebraButton;
     @FXML
@@ -31,19 +35,21 @@ public class CategoryController {
 
     private ClientConnection clientConnection;
     private static String selectedCategory;
-
     private CategoryView categoryView;
+
+    static {
+        AnsiFormatter.enableColorLogging(logger);
+    }
 
     public void setCategoryView(CategoryView categoryView) {
         this.categoryView = categoryView;
     }
 
-
     public CategoryController() {
         try {
             this.clientConnection = ClientConnection.getInstance();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "❌ Failed to initialize ClientConnection.", e);
         }
     }
 
@@ -59,21 +65,20 @@ public class CategoryController {
 
     private void requestQuestionFromServer(String category, ActionEvent event) {
         selectedCategory = category;
-        System.out.println("DEBUG: Requesting question for category: " + category);
+        logger.info("📩 Requesting question for category: " + category);
 
         new Thread(() -> {
             try {
                 QuestionModel question = clientConnection.getQuestion(category);
 
                 if (question != null) {
-                    System.out.println("DEBUG: Received Question: " + question.getQuestionText());
+                    logger.info("✅ Received Question: " + question.getQuestionText());
                     updateUI(() -> switchToGameplay(category, event));
                 } else {
-                    System.out.println("ERROR: No questions found for category: " + category);
+                    logger.warning("⚠️ No questions found for category: " + category);
                 }
             } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-                System.err.println("ERROR: Failed to fetch question from server.");
+                logger.log(Level.SEVERE, "❌ Failed to fetch question from server.", e);
             }
         }).start();
     }
@@ -89,7 +94,7 @@ public class CategoryController {
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "❌ Failed to switch to gameplay screen.", e);
         }
     }
 

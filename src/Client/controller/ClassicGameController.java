@@ -124,7 +124,7 @@ public class ClassicGameController {
 
         int timePenalty = 3;  //reduce time by 3s per mistake
         remainingTime = Math.max(0, remainingTime - timePenalty);
-        timerLabel.setText(String.valueOf(remainingTime));
+        Platform.runLater(() -> timerLabel.setText(remainingTime + "s"));
 
         if (remainingTime <= 0 || wick.getStartX() >= wick.getEndX()) {
             triggerExplosion();
@@ -132,11 +132,11 @@ public class ClassicGameController {
     }
 
     private void startBombAnimation() {
+        remainingTime = totalTime;
+        timerLabel.setText(String.valueOf(remainingTime) + "s");
         bombImage.setVisible(true);
         flame.setVisible(true);
         wick.setVisible(true);
-        timerLabel.setText(String.valueOf(remainingTime) + "s");
-
         remainingTime = totalTime;
 
         flameFlicker = new TranslateTransition(Duration.millis(200), flame);
@@ -152,16 +152,26 @@ public class ClassicGameController {
 
         bombTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateTimer()));
         bombTimer.setCycleCount(totalTime);
-        bombTimer.setOnFinished(e -> triggerExplosion());
         bombTimer.play();
     }
 
     private void stopBombAnimation() {
-        if (wickAnimation != null) wickAnimation.stop();
-        if (flameFlicker != null) flameFlicker.stop();
-        if (bombTimer != null) bombTimer.stop();
+        if (wickAnimation != null) {
+            wickAnimation.stop();
+            wickAnimation = null;
+        }
+        if (flameFlicker != null) {
+            flameFlicker.stop();
+            flameFlicker = null;
+        }
+        if (bombTimer != null) {
+            bombTimer.stop();
+            bombTimer = null;
+        }
+
         flame.setVisible(false);
         wick.setVisible(false);
+
     }
 
     private void shortenWick() {
@@ -180,11 +190,13 @@ public class ClassicGameController {
     }
 
     private void updateTimer() {
-        remainingTime--;
-        timerLabel.setText(String.valueOf(remainingTime) + "s");
+        if (remainingTime > 0) {
+            remainingTime--;
+            Platform.runLater(() -> timerLabel.setText(remainingTime + "s"));
+        }
 
         if (remainingTime <= 0) {
-            bombTimer.stop();
+            triggerExplosion();
         }
     }
 

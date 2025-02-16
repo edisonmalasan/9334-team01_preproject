@@ -47,6 +47,8 @@
             </children>
         </Pane>
 
+        <Pane fx:id="QTEPane" layoutX="0" layoutY="0" prefHeight="768.0" prefWidth="1024.0"/>
+
         <!-- Timer -->
         <Label fx:id="timerLabel" layoutX="505.0" layoutY="28.0" text="0 s." />
         <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="478.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">

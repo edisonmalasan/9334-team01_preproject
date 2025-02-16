@@ -1,60 +1,78 @@
 package Client.utils;
+
+import javafx.application.Platform;
+import javafx.scene.control.Label;
+
 import java.util.Timer;
 import java.util.TimerTask;
+
 public class TimerUtil {
-    private int seconds;
-    private int minutes;
-    static int interval;
-    static Timer timer;
+    private int secondsRemaining;
+    private Timer timer;
+    private boolean isRunning = false;
+    private Label timerLabel;
+
+    public TimerUtil(int durationInSeconds, Label timerLabel) {
+        this.secondsRemaining = durationInSeconds;
+        this.timerLabel = timerLabel;
+    }
+
+    public int getSecondsRemaining() {
+        this.secondsRemaining--;
+        return this.secondsRemaining;
+    }
+
+    public void start() {
+        if (isRunning) return;
+        isRunning = true;
+
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> updateTimerUI());
+                if (secondsRemaining <= 0) {
+                    stop();
+                    Platform.runLater(() -> timerLabel.setText("Time's up!"));
+                }
+                secondsRemaining--;
+            }
+        }, 1000, 1000);
+    }
+
+    public void stop() {
+        if (timer != null) {
+            timer.cancel();
+        }
+        isRunning = false;
+    }
+
+    public void addTime(int seconds) {
+        secondsRemaining += seconds;
+        updateTimerUI();
+    }
+
+    public void subtractTime(int seconds) {
+        secondsRemaining = Math.max(0, secondsRemaining - seconds);
+        updateTimerUI();
+    }
+
+    public void reset(int newDuration) {
+        stop();
+        secondsRemaining = newDuration;
+        updateTimerUI();
+    }
+
+    private void updateTimerUI() {
+        String timeFormatted = String.format("%02d:%02d", secondsRemaining / 60, secondsRemaining % 60);
+        timerLabel.setText(timeFormatted);
+    }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
 
     public int getSeconds() {
-        return seconds;
-    }
-
-    public void setSeconds(int seconds) {
-        this.seconds = seconds;
-    }
-
-    public int getMinutes() {
-        return minutes;
-    }
-
-    public void setMinutes(int minutes) {
-        this.minutes = minutes;
-    }
-
-    public void addTime() {
-        seconds += 10;
-    }
-
-    public void subtractTime() {
-        seconds -= 10;
-    }
-
-    public void countdown() { //displays a string of the time; line by line
-        int delay = 1000;
-        int period = 1000;
-        timer = new Timer();
-        interval = 1800;
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                int seconds = setInterval();
-                String time = String.format("%02d:%02d", seconds / 60, seconds % 60);
-                System.out.println(time);
-            }
-        }, delay, period);
-    }
-    private static int setInterval() {
-        if (interval == 1)
-            timer.cancel();
-        return interval--;
-    }
-
-    public String toString() {
-        return "BombTimer{" +
-                "seconds=" + seconds +
-                ", minutes=" + minutes +
-                '}';
+        return secondsRemaining;
     }
 }
-

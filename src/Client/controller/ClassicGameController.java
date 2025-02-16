@@ -1,110 +1,101 @@
 package Client.controller;
 
 import Client.connection.ClientConnection;
-//import Client.model.GameModel;
-import Client.view.ClassicGameView;
-import Server.model.QuestionBankModel;
 import common.model.QuestionModel;
 import exception.ConnectionException;
-import javafx.scene.layout.AnchorPane;
+import exception.ThreadInterruptedException;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class ClassicGameController {
-    public AnchorPane categoryMenu;
-    /**
-     *
-     */
-    private ClassicGameView classicGameView;
-    /**
-     *
-     */
-//    private GameModel gameModel;
-    private QuestionBankModel questionBank;
-    //switched from ClientHandler to ClientConnection for testing
+    @FXML
+    private Label questionLabel;
+    @FXML
+    private HBox choicesBox;
+
+    private List<Button> choiceButtons = new ArrayList<>();
+
     private ClientConnection clientConnection;
+    private List<QuestionModel> questions;
+    private int currentQuestionIndex = 0;
 
-    public ClassicGameController(QuestionBankModel questionBank) throws ConnectionException {
-        this.questionBank = questionBank;
-        this.clientConnection = ClientConnection.getInstance();
+    public ClassicGameController() {
+        try {
+            this.clientConnection = ClientConnection.getInstance();
+        } catch (ConnectionException e) {
+            e.printStackTrace();
+        }
     }
-
 
     public void setQuestions(String category, List<QuestionModel> questions) {
+        this.questions = questions;
+        System.out.println("DEBUG: Loaded " + questions.size() + " questions for category: " + category);
+        showNextQuestion();
     }
 
-    public void startGame() {
-        Scanner scanner = new Scanner(System.in);
+    private void showNextQuestion() {
+        if (currentQuestionIndex < questions.size()) {
+            QuestionModel question = questions.get(currentQuestionIndex);
+            questionLabel.setText(question.getQuestionText());
+            choicesBox.getChildren().clear();
+            choiceButtons.clear();
 
-        while (true) {
-            System.out.println("\nAvailable Categories:");
-            List<String> categories = getCategories();
-            for (int i = 0; i < categories.size(); i++) {
-                System.out.println((i + 1) + ". " + categories.get(i));
+            for (String choice : question.getChoices()) {
+                Button choiceButton = new Button(choice);
+                choiceButton.setPrefSize(146, 50);
+                choiceButton.setStyle("-fx-font-family: 'Roboto Mono'; -fx-font-size: 15px;");
+                choiceButton.setOnAction(e -> checkAnswer(choiceButton, choice, question.getCorrectAnswer()));
+                choicesBox.getChildren().add(choiceButton);
+                choiceButtons.add(choiceButton);
             }
 
-            System.out.print("\nSelect a category (enter number) or 0 to exit: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            currentQuestionIndex++;
+        } else {
+            questionLabel.setText("🎉 Game Over!");
+            choicesBox.getChildren().clear();
+        }
+    }
 
-            if (choice == 0) {
-                System.out.println("Exiting game...");
+    private void checkAnswer(Button selectedButton, String selectedAnswer, String correctAnswer) {
+        if (selectedAnswer.equals(correctAnswer)) {
+            selectedButton.setStyle("-fx-background-image: url('/images/correct_answer.png');");
+        } else {
+            selectedButton.setStyle("-fx-background-image: url('/images/wrong_answer.png');");
+        }
+
+        // show the correct answer if a wrong answer was chosen
+        for (Button btn : choiceButtons) {
+            if (btn.getText().equals(correctAnswer)) {
+                btn.setStyle("-fx-background-image: url('/images/correct_answer.png');");
                 break;
             }
-
-            if (choice > 0 && choice <= categories.size()) {
-                String selectedCategory = categories.get(choice - 1);
-                playCategory(selectedCategory, scanner);
-            } else {
-                System.out.println("Invalid choice. Try again.");
-            }
         }
-        scanner.close();
-    }
 
-    private List<String> getCategories() {
-        List<QuestionModel> questions = questionBank.getQuestions();
-        return questions.stream()
-                .map(QuestionModel::getCategory)
-                .distinct()
-                .collect(Collectors.toList());
-    }
-
-    private void playCategory(String category, Scanner scanner) {
-        List<QuestionModel> questions = questionBank.getQuestions().stream()
-                .filter(q -> q.getCategory().equalsIgnoreCase(category))
-                .collect(Collectors.toList());
-
-        System.out.println("\nStarting " + category + " Quiz!");
-
-        int totalScore = 0;
-        for (QuestionModel question : questions) {
-            System.out.println("\n" + question.getQuestionText());
-            List<String> choices = question.getChoices();
-
-            for (int i = 0; i < choices.size(); i++) {
-                System.out.println((i + 1) + ". " + choices.get(i));
-            }
-
-            System.out.print("Enter your answer (1-" + choices.size() + "): ");
-            int answerIndex = scanner.nextInt() - 1;
-            scanner.nextLine(); // Consume newline
-
-            if (answerIndex >= 0 && answerIndex < choices.size()) {
-                String selectedAnswer = choices.get(answerIndex);
-                if (selectedAnswer.equals(question.getCorrectAnswer())) {
-                    System.out.println("Correct!");
-                    totalScore += question.getScore();
-                } else {
-                    System.out.println("Wrong! The correct answer is: " + question.getCorrectAnswer());
-                }
-            } else {
-                System.out.println("Invalid choice. Skipping question...");
-            }
+        // disable all buttons after answering
+        for (Button btn : choiceButtons) {
+            btn.setDisable(true);
+            btn.setOpacity(0.8);
         }
-        System.out.println("Total Score: " + totalScore);
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+                javafx.application.Platform.runLater(this::showNextQuestion);
+            } catch (InterruptedException e) {
+                throw new ThreadInterruptedException("Thread was interrupted while waiting to show the next question.", e);
+            }
+        }).start();
     }
+
+
 }
-

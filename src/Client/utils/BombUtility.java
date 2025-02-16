@@ -23,6 +23,9 @@ public class BombUtility {
     private Timeline bombTimer;
     private int totalTime = 30;
     private int remainingTime;
+    private boolean hasExploded = false;
+    private boolean isRunning = false;
+
 
     public BombUtility(ImageView bombImage, ImageView flame, Line wick, Label timerLabel,
                        Runnable explosionCallback, List<Button> choiceButtons) {
@@ -35,6 +38,9 @@ public class BombUtility {
     }
 
     public void startBombAnimation() {
+        if (isRunning) return;
+        isRunning = true;
+
         remainingTime = totalTime;
         updateTimerLabel();
         bombImage.setVisible(true);
@@ -54,6 +60,7 @@ public class BombUtility {
 
         bombTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateTimer()));
         bombTimer.setCycleCount(totalTime);
+        bombTimer.setOnFinished(e -> triggerExplosion());
         bombTimer.play();
     }
 
@@ -76,16 +83,11 @@ public class BombUtility {
 
     private void shortenWick() {
         double wickLength = wick.getEndX() - wick.getStartX();
-        double shrinkAmount = wickLength / remainingTime;
+        double shrinkAmount = wickLength / totalTime;
 
         if (wick.getStartX() < wick.getEndX()) {
             wick.setStartX(wick.getStartX() + shrinkAmount);
             flame.setLayoutX(flame.getLayoutX() + shrinkAmount);
-        }
-
-        if (remainingTime <= 0) {
-            stopBombAnimation();
-            triggerExplosion();
         }
     }
 
@@ -123,6 +125,8 @@ public class BombUtility {
     }
 
     private void triggerExplosion() {
+        if (hasExploded) return;
+        hasExploded = true;
         stopBombAnimation();
         bombImage.setImage(new Image("/images/explosion.png"));
         System.out.println("BOOM! The bomb explodes!");
@@ -133,5 +137,9 @@ public class BombUtility {
         }
 
         Platform.runLater(explosionCallback);
+    }
+
+    public boolean isRunning() {
+        return isRunning;
     }
 }

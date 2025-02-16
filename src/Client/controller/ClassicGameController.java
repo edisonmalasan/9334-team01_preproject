@@ -58,29 +58,32 @@ public class ClassicGameController {
     }
 
     private void showNextQuestion() {
-        if (currentQuestionIndex < questions.size()) {
-            QuestionModel question = questions.get(currentQuestionIndex);
-            questionLabel.setText(question.getQuestionText());
-            choicesBox.getChildren().clear();
-            choiceButtons.clear();
-
-            for (String choice : question.getChoices()) {
-                Button choiceButton = new Button(choice);
-                choiceButton.setPrefSize(146, 50);
-                choiceButton.setStyle("-fx-font-family: 'Roboto Mono'; -fx-font-size: 15px;");
-                choiceButton.setOnAction(e -> checkAnswer(choiceButton, choice, question.getCorrectAnswer()));
-                choicesBox.getChildren().add(choiceButton);
-                choiceButtons.add(choiceButton);
-            }
-
-            Platform.runLater(() -> bombUtility.startBombAnimation());
-            qteUtility.triggerQuickTimeEvent(currentQuestionIndex);
-            currentQuestionIndex++;
-        } else {
+        if (currentQuestionIndex >= questions.size()) {
             questionLabel.setText("🎉 Game Over!");
             choicesBox.getChildren().clear();
             bombImage.setVisible(false);
+            bombUtility.stopBombAnimation();
+            return;
         }
+
+        QuestionModel question = questions.get(currentQuestionIndex);
+        questionLabel.setText(question.getQuestionText());
+        choicesBox.getChildren().clear();
+        choiceButtons.clear();
+
+        for (String choice : question.getChoices()) {
+            Button choiceButton = new Button(choice);
+            choiceButton.setPrefSize(146, 50);
+            choiceButton.setStyle("-fx-font-family: 'Roboto Mono'; -fx-font-size: 15px;");
+            choiceButton.setOnAction(e -> checkAnswer(choiceButton, choice, question.getCorrectAnswer()));
+            choicesBox.getChildren().add(choiceButton);
+            choiceButtons.add(choiceButton);
+        }
+
+        if (!bombUtility.isRunning()) {
+            Platform.runLater(() -> bombUtility.startBombAnimation());
+        }        qteUtility.triggerQuickTimeEvent(currentQuestionIndex);
+        currentQuestionIndex++;
     }
 
     private void checkAnswer(Button selectedButton, String selectedAnswer, String correctAnswer) {

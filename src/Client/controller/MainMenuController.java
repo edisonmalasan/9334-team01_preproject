@@ -66,6 +66,19 @@ public class MainMenuController {
 
     private void switchToLeaderboard() {
         logger.info("Leaderboard button clicked. (TODO: Implement Leaderboard)");
-        // TODO: Implement Leaderboard functionality
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/leaderboard.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) playButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Leaderboards");
+            stage.setResizable(false);
+            stage.show();
+
+            logger.info("Switched to Mode Menu.");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Failed to load Mode Menu", e);
+        }
     }
 }

@@ -20,6 +20,8 @@ import java.util.List;
 
 public class ClassicGameController {
     @FXML
+    private Label timerLabel;
+    @FXML
     private Label questionLabel;
     @FXML
     private HBox choicesBox;
@@ -37,6 +39,9 @@ public class ClassicGameController {
     private Timeline wickAnimation;
     private TranslateTransition flameFlicker;
     private Timeline bombTimer;
+    private int totalTime = 30;
+    private int remainingTime;
+
 
     public ClassicGameController() {
         try {
@@ -78,12 +83,12 @@ public class ClassicGameController {
     }
 
     private void checkAnswer(Button selectedButton, String selectedAnswer, String correctAnswer) {
-        stopBombAnimation();
 
         if (selectedAnswer.equals(correctAnswer)) {
             selectedButton.setStyle("-fx-background-image: url('/images/correct_answer.png');");
         } else {
             selectedButton.setStyle("-fx-background-image: url('/images/wrong_answer.png');");
+            applyPenalty();
         }
 
         for (Button btn : choiceButtons) {
@@ -108,10 +113,31 @@ public class ClassicGameController {
         }).start();
     }
 
+    private void applyPenalty() {
+        double wickLength = wick.getEndX() - wick.getStartX();
+        double shrinkAmount = wickLength / 3;
+
+        if (wickLength > 0) {
+            wick.setStartX(wick.getStartX() + shrinkAmount);
+            flame.setLayoutX(flame.getLayoutX() + shrinkAmount);
+        }
+
+        int timePenalty = 3;  //reduce time by 3s per mistake
+        remainingTime = Math.max(0, remainingTime - timePenalty);
+        timerLabel.setText(String.valueOf(remainingTime));
+
+        if (remainingTime <= 0 || wick.getStartX() >= wick.getEndX()) {
+            triggerExplosion();
+        }
+    }
+
     private void startBombAnimation() {
         bombImage.setVisible(true);
         flame.setVisible(true);
         wick.setVisible(true);
+        timerLabel.setText(String.valueOf(remainingTime) + "s");
+
+        remainingTime = totalTime;
 
         flameFlicker = new TranslateTransition(Duration.millis(200), flame);
         flameFlicker.setFromX(-2);
@@ -121,11 +147,12 @@ public class ClassicGameController {
         flameFlicker.play();
 
         wickAnimation = new Timeline(new KeyFrame(Duration.seconds(1), e -> shortenWick()));
-        wickAnimation.setCycleCount(10); //runs for 10s
+        wickAnimation.setCycleCount(totalTime);
         wickAnimation.play();
 
-        bombTimer = new Timeline(new KeyFrame(Duration.seconds(10), e -> triggerExplosion()));
-        bombTimer.setCycleCount(1);
+        bombTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateTimer()));
+        bombTimer.setCycleCount(totalTime);
+        bombTimer.setOnFinished(e -> triggerExplosion());
         bombTimer.play();
     }
 
@@ -134,15 +161,30 @@ public class ClassicGameController {
         if (flameFlicker != null) flameFlicker.stop();
         if (bombTimer != null) bombTimer.stop();
         flame.setVisible(false);
+        wick.setVisible(false);
     }
 
     private void shortenWick() {
-        if (wick.getEndX() < 100) {
-            wick.setEndX(wick.getEndX() + 5);
-            flame.setLayoutX(flame.getLayoutX() + 5);
-        } else {
+        double wickLength = wick.getEndX() - wick.getStartX();
+        double shrinkAmount = wickLength / remainingTime;
+
+        if (wick.getStartX() < wick.getEndX()) {
+            wick.setStartX(wick.getStartX() + shrinkAmount);
+            flame.setLayoutX(flame.getLayoutX() + shrinkAmount);
+        }
+
+        if (remainingTime <= 0) {
             stopBombAnimation();
             triggerExplosion();
+        }
+    }
+
+    private void updateTimer() {
+        remainingTime--;
+        timerLabel.setText(String.valueOf(remainingTime) + "s");
+
+        if (remainingTime <= 0) {
+            bombTimer.stop();
         }
     }
 

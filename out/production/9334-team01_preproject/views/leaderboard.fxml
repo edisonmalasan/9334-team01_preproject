@@ -14,11 +14,11 @@
       <HBox layoutX="89.0" layoutY="167.0" prefHeight="411.0" prefWidth="846.0">
          <children>
             <TableView fx:id="classicTable" prefHeight="530.0" prefWidth="430.0">
-              <columns>
-                <TableColumn fx:id="classicRank" prefWidth="75.0" text="Rank" />
-                <TableColumn fx:id="classicUsername" prefWidth="176.0" text="username" />
+               <columns>
+                  <TableColumn fx:id="classicRank" prefWidth="75.0" text="Rank" />
+                  <TableColumn fx:id="classicUsername" prefWidth="176.0" text="username" />
                   <TableColumn fx:id="classicScore" minWidth="0.0" prefWidth="124.5" text="score" />
-              </columns>
+               </columns>
             </TableView>
             <TableView fx:id="endlessTable" prefHeight="530.0" prefWidth="430.0">
                <columns>

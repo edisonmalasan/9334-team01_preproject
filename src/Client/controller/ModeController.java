@@ -18,6 +18,8 @@ public class ModeController {
     static {
         AnsiFormatter.enableColorLogging(logger);
     }
+    @FXML
+    public Button returnButton;
 
     @FXML
     private Button classicButton;
@@ -29,6 +31,7 @@ public class ModeController {
     public void initialize() {
         classicButton.setOnAction(actionEvent -> switchToCategorySelection());
         endlessButton.setOnAction(actionEvent -> switchToEndlessMode());
+        returnButton.setOnAction(actionEvent -> returnToMainMenu());
     }
 
     private void switchToCategorySelection() {
@@ -48,8 +51,24 @@ public class ModeController {
         }
     }
 
+
     private void switchToEndlessMode() {
         logger.info("Endless Mode button clicked. (TODO: Implement Endless Mode)");
         // TODO: Implement Endless Mode if Classic Mode is completed
+    }
+    public void returnToMainMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) returnButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Bomb Defusing Game");
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

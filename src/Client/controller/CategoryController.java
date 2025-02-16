@@ -21,6 +21,8 @@ import java.util.logging.Logger;
 
 public class CategoryController {
     private static final Logger logger = Logger.getLogger(CategoryController.class.getName());
+    @FXML
+    public Button returnButton;
 
     @FXML
     private Button algebraButton;
@@ -63,6 +65,7 @@ public class CategoryController {
         logicButton.setOnAction(event -> requestQuestionFromServer("LOGIC", event));
         probabilityButton.setOnAction(event -> requestQuestionFromServer("PROBABILITY", event));
         trigoButton.setOnAction(event -> requestQuestionFromServer("TRIGONOMETRY", event));
+        returnButton.setOnAction(event -> returnToMainMenu());
     }
 
     private void requestQuestionFromServer(String category, ActionEvent event) {
@@ -103,8 +106,6 @@ public class CategoryController {
         }).start();
     }
 
-
-
     private void switchToGameplay(String category, List<QuestionModel> questions, ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/classic_game.fxml"));
@@ -126,7 +127,21 @@ public class CategoryController {
     private void updateUI(Runnable action) {
         Platform.runLater(action);
     }
+    public void returnToMainMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
+            Parent root = loader.load();
 
+            Stage stage = (Stage) returnButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Bomb Defusing Game");
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static String getSelectedCategory() {
         return selectedCategory;
     }

@@ -1,8 +1,9 @@
 package Client.controller;
 
+import Client.connection.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.model.PlayerModel;
-import Client.view.ModeView;
+import Client.view.MainMenuView;
 import common.Response;
 import exception.ConnectionException;
 import javafx.application.Platform;
@@ -15,17 +16,26 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.EOFException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InputUsernameController {
+    private static final Logger logger = Logger.getLogger(InputUsernameController.class.getName());
+
+    static {
+        AnsiFormatter.enableColorLogging(logger);
+    }
+
     private PlayerModel player;
     private ClientConnection clientConnection;
 
     @FXML
-    public TextField usernameField;
+    private TextField usernameField;
 
     @FXML
-    public Label errorLabel;
+    private Label errorLabel;
 
     @FXML
     private Button enterButton;
@@ -48,56 +58,61 @@ public class InputUsernameController {
 
         if (username.isEmpty()) {
             errorLabel.setText("Username cannot be empty!");
+            logger.warning("User attempted to enter an empty username.");
             return;
         }
 
         player = new PlayerModel(username, 0);
-        System.out.println("DEBUG: Sending player data to server: " + player.getName());
+        logger.info("Sending player data to server: " + player.getName());
 
         new Thread(() -> {
             try {
                 clientConnection.sendObject(player);
                 Response response = (Response) clientConnection.receiveObject();
 
-                System.out.println("DEBUG: Received response: " + response);
+                logger.info("Received response: " + response);
 
                 Platform.runLater(() -> {
                     if (!response.isSuccess()) {
                         usernameField.clear();
                         usernameField.requestFocus();
                         errorLabel.setText(response.getMessage());
+                        logger.warning("Username rejected: " + response.getMessage());
                     } else {
-                        updateUI(this::switchToModeSelection);
+                        switchToMainMenu();
                     }
                 });
 
+            } catch (EOFException e) {
+                logger.severe("Server closed the connection unexpectedly.");
+                Platform.runLater(() -> errorLabel.setText("Server disconnected. Please try again."));
+
             } catch (Exception e) {
-                e.printStackTrace();
-                Platform.runLater(() -> errorLabel.setText("Connection error."));
+                logger.log(Level.SEVERE, "Connection error occurred", e);
+                Platform.runLater(() -> {
+                    errorLabel.setText("Connection error.");
+                    usernameField.clear();
+                });
             }
         }).start();
     }
 
-    private void updateUI(Runnable action) {
-        javafx.application.Platform.runLater(action);
-    }
-
-    private void switchToModeSelection() {
+    private void switchToMainMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/mode_menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
             Parent root = loader.load();
 
-            ModeController modeController = loader.getController();
             Stage stage = (Stage) enterButton.getScene().getWindow();
-            modeController.setModeView(new ModeView(stage));
-
             stage.setScene(new Scene(root));
-            stage.setTitle("Select Game Mode");
+            stage.setTitle("Bomb Defusing Game");
+            stage.setResizable(false);
             stage.show();
+
+            logger.info("Successfully switched to the Main Menu.");
+
         } catch (IOException e) {
-            e.printStackTrace();
-            errorLabel.setText("Failed to load game mode.");
+            logger.log(Level.SEVERE, "Failed to load Main Menu", e);
+            errorLabel.setText("Failed to load Main Menu");
         }
     }
-
 }

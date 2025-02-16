@@ -29,6 +29,10 @@ public class ClassicGameController {
         this.clientConnection = ClientConnection.getInstance();
     }
 
+
+    public void setQuestions(String category, List<QuestionModel> questions) {
+    }
+
     public void startGame() {
         Scanner scanner = new Scanner(System.in);
 

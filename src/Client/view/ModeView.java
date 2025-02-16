@@ -6,26 +6,5 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class ModeView {
-    private Stage stage;
-
-    public ModeView(Stage stage) {
-        this.stage = stage;
-    }
-
-    public Stage getStage() {
-        return stage;
-    }
-
-    public void switchScene(String fxmlFile, String title) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            stage.setScene(new Scene(root));
-            stage.setTitle(title);
-            stage.setResizable(false);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    // no need to use this just do the scene transition directly to controller to avoid confusion
 }

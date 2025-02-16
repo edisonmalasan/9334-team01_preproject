@@ -1,6 +1,5 @@
 package Client.connection;
 
-import Client.model.PlayerModel;
 import common.Response;
 import common.model.QuestionModel;
 import exception.ConnectionException;
@@ -19,6 +18,10 @@ public class ClientConnection {
     private ObjectInputStream objectInputStream;
 
     private static final Logger logger = Logger.getLogger(ClientConnection.class.getName());
+
+    static {
+        AnsiFormatter.enableColorLogging(logger);
+    }
 
     private ClientConnection() throws ConnectionException {
         // to not connect immediately
@@ -65,11 +68,12 @@ public class ClientConnection {
 
     public Object receiveObject() throws IOException, ClassNotFoundException {
         System.out.println("DEBUG: Waiting to receive object from server...");
+
         Object obj = objectInputStream.readObject();
+
         System.out.println("DEBUG: Received object: " + obj);
         return obj;
     }
-
     public void close() {
         try {
             if (socket != null) socket.close();

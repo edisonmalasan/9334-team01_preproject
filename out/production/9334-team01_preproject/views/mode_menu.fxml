@@ -6,16 +6,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="456.0" prefWidth="744.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.ModeController">
-    <VBox alignment="CENTER" layoutX="185.0" layoutY="94.0" spacing="30.0">
+<AnchorPane fx:id="gameMode" prefHeight="768.0" prefWidth="1024.0" stylesheets="@styles.css"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Client.controller.ModeController">
+    <ImageView fx:id="gamemodeLabel" fitHeight="140.0" fitWidth="374.0"
+               pickOnBounds="true" preserveRatio="true"
+               AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="325.0">
+        <image>
+            <Image url="@../images/gamemode.png" />
+        </image>
+    </ImageView>
+    <VBox alignment="CENTER" spacing="30.0"
+          AnchorPane.topAnchor="50.0"
+          AnchorPane.bottomAnchor="50.0"
+          AnchorPane.leftAnchor="312.0"
+          AnchorPane.rightAnchor="312.0">
         <children>
-            <ImageView fx:id="gamemodeLabel" fitHeight="140.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@../images/gamemode.png" />
-                </image>
-            </ImageView>
-            <Button fx:id="classicButton" prefHeight="50.0" prefWidth="146.0" text="CLASSIC" />
-            <Button fx:id="endlessButton" prefHeight="50.0" prefWidth="146.0" text="ENDLESS" />
+            <Button fx:id="classicButton" prefHeight="50.0" prefWidth="200.0" text="CLASSIC" />
+            <Button fx:id="endlessButton" prefHeight="50.0" prefWidth="200.0" text="ENDLESS" />
         </children>
     </VBox>
+
 </AnchorPane>

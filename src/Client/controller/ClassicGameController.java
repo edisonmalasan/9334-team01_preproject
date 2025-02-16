@@ -1,5 +1,6 @@
 package Client.controller;
 
+import Client.connection.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.utils.BombUtility;
 import Client.utils.QTEUtility;
@@ -8,15 +9,22 @@ import exception.ConnectionException;
 import exception.ThreadInterruptedException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClassicGameController {
     @FXML
@@ -40,6 +48,12 @@ public class ClassicGameController {
     private int currentQuestionIndex = 0;
     private QTEUtility qteUtility;
     private BombUtility bombUtility;
+
+    private static final Logger logger = Logger.getLogger(InputUsernameController.class.getName());
+
+    static {
+        AnsiFormatter.enableColorLogging(logger);
+    }
 
     public ClassicGameController() {
         try {
@@ -117,5 +131,20 @@ public class ClassicGameController {
     }
 
     private void switchToScoreView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/score_view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) timerLabel.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Score");
+            stage.setResizable(false);
+            stage.show();
+
+            logger.info("Successfully switched to the Score view");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Failed to load Score view", e);
+            throw new RuntimeException(e);
+        }
     }
 }

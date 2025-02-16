@@ -1,5 +1,6 @@
 package Client.utils;
 
+import exception.ThreadInterruptedException;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
@@ -130,18 +131,28 @@ public class BombUtility {
         stopBombAnimation();
         bombImage.setImage(new Image("/images/explosion.png"));
         System.out.println("BOOM! The bomb explodes!");
-
         for (Button btn : choiceButtons) {
             btn.setDisable(true);
             btn.setOpacity(0.8);
         }
 
-        Platform.runLater(explosionCallback);
+        // transition to score view
+        Platform.runLater(() -> {
+            new Thread(() -> {
+                try {
+                    // 2sec
+                    Thread.sleep(2000);
+
+                    Platform.runLater(explosionCallback);
+                } catch (InterruptedException e) {
+                    throw new ThreadInterruptedException("Thread was interrupted:", e);
+                }
+            }).start();
+        });
     }
 
     public boolean isRunning() {
         return isRunning;
     }
-
 
 }

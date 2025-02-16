@@ -24,7 +24,19 @@ public class ClientConnection {
     }
 
     private ClientConnection() throws ConnectionException {
-        // to not connect immediately
+        try {
+            System.out.println("DEBUG: Attempting to connect to server...");
+
+            socket = new Socket(IP_ADDRESS, PORT_NUMBER);
+            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
+
+            System.out.println("✅ DEBUG: Connected to server successfully!");
+
+        } catch (IOException e) {
+            System.err.println("❌ DEBUG: Connection to server failed!");
+            throw new ConnectionException("Error connecting to the server.", e);
+        }
     }
 
     public static ClientConnection getInstance() throws ConnectionException {
@@ -62,6 +74,9 @@ public class ClientConnection {
     }
 
     public void sendObject(Object obj) throws IOException {
+        if (objectOutputStream == null) {
+            throw new IOException("❌ ERROR: Object is NULL! Cannot send data.");
+        }
         objectOutputStream.writeObject(obj);
         objectOutputStream.flush();
     }

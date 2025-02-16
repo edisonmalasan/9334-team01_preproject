@@ -91,22 +91,29 @@ public class ClientHandler implements Runnable {
             }
 
             String usernameLower = player.getName().toLowerCase();
-            int score = player.getScore();
-            logger.info("Updating player score: " + usernameLower + " with score: " + score);
+            int newScore = player.getScore();
+            logger.info("Updating player score: " + usernameLower + " with score: " + newScore);
 
             List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML("data/leaderboard.xml");
 
             boolean found = false;
             for (LeaderboardEntryModelServer entry : leaderboard) {
                 if (entry.getPlayerName().equalsIgnoreCase(usernameLower)) {
-                    entry.setScore(entry.getScore() + score); // Update the score
+                    // compare the new score with the existing score
+                    if (newScore > entry.getScore()) {
+                        entry.setScore(newScore); // update the score only if the new score is higher
+                        logger.info("Updated score for player: " + usernameLower + " to: " + newScore);
+                    } else {
+                        logger.info("New score is not higher. Keeping the existing score: " + entry.getScore());
+                    }
                     found = true;
                     break;
                 }
             }
 
             if (!found) {
-                leaderboard.add(new LeaderboardEntryModelServer(usernameLower, score)); // Add new entry if not found
+                leaderboard.add(new LeaderboardEntryModelServer(usernameLower, newScore));
+                logger.info("Added new player to leaderboard: " + usernameLower + " with score: " + newScore);
             }
 
             XMLStorageController.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);

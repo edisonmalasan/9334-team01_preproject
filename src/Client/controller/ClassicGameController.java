@@ -6,12 +6,14 @@ import Client.view.ClassicGameView;
 import Server.model.QuestionBankModel;
 import common.model.QuestionModel;
 import exception.ConnectionException;
+import javafx.scene.layout.AnchorPane;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class ClassicGameController {
+    public AnchorPane categoryMenu;
     /**
      *
      */

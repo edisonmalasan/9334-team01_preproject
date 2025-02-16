@@ -6,13 +6,13 @@ import javafx.scene.control.Label;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TimerUtil {
+public class TimerUtility {
     private int secondsRemaining;
     private Timer timer;
     private boolean isRunning = false;
     private Label timerLabel;
 
-    public TimerUtil(int durationInSeconds, Label timerLabel) {
+    public TimerUtility(int durationInSeconds, Label timerLabel) {
         this.secondsRemaining = durationInSeconds;
         this.timerLabel = timerLabel;
     }

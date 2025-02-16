@@ -11,21 +11,30 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class LeaderboardControllerClient {
 
-    public TableColumn classicRank;
-    public TableColumn endlessRank;
+
 
     // FXML Elements
+     public TableColumn classicRank;
+     public TableColumn endlessRank;
+     public Button returnButton;
     @FXML
     private TableView<LeaderboardEntryModelServer> classicTable;
 
@@ -108,7 +117,26 @@ public class LeaderboardControllerClient {
         // Search box handlers for filtering Classic and Endless tables
         classicSearchBox.textProperty().addListener((observable, oldValue, newValue) -> filterLeaderboardData(newValue, "classic"));
         endlessSearchBox.textProperty().addListener((observable, oldValue, newValue) -> filterLeaderboardData(newValue, "endless"));
+
+        returnButton.setOnAction(event -> returnToMainMenu());
     }
+
+    public void returnToMainMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) returnButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Bomb Defusing Game");
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Sort leaderboard data based on score in descending order.

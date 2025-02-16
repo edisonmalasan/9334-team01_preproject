@@ -11,14 +11,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Consumer;
 
-public class QTEUtil {
+public class QTEUtility {
     private final Consumer<Integer> applyPenalty;
     private final Pane QTEPane;
     private final Random random = new Random();
     private final Set<Integer> qteTriggers;
     private final Timer timer = new Timer();
 
-    public QTEUtil(int totalQuestions, Consumer<Integer> applyPenalty, Pane QTEPane) {
+    public QTEUtility(int totalQuestions, Consumer<Integer> applyPenalty, Pane QTEPane) {
         this.applyPenalty = applyPenalty;
         this.QTEPane = QTEPane;
         this.qteTriggers = generateQTETriggers(totalQuestions);

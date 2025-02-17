@@ -26,6 +26,7 @@ public class BombUtility {
     private int remainingTime;
     private boolean hasExploded = false;
     private boolean isRunning = false;
+    private boolean isEndlessMode = false;
 
 
     public BombUtility(ImageView bombImage, ImageView flame, Line wick, Label timerLabel,
@@ -36,6 +37,7 @@ public class BombUtility {
         this.timerLabel = timerLabel;
         this.explosionCallback = explosionCallback;
         this.choiceButtons = choiceButtons;
+        this.isEndlessMode = isEndlessMode;
     }
 
     public void startBombAnimation(boolean isEndlessMode) {
@@ -67,21 +69,31 @@ public class BombUtility {
             bombTimer.setOnFinished(e -> triggerExplosion());
             bombTimer.play();
         } else {
-            timerLabel.setText("Endless Mode");
+            timerLabel.setText("∞");
         }
     }
 
     public void applyPenalty(int penalty) {
+        if (!isRunning || hasExploded) return;
+
         double wickLength = wick.getEndX() - wick.getStartX();
-        double shrinkAmount = wickLength / (totalTime / penalty);
 
-        if (wickLength > 0) {
-            wick.setStartX(wick.getStartX() + shrinkAmount);
-            flame.setLayoutX(flame.getLayoutX() + shrinkAmount);
+        if (isEndlessMode) {
+            double shrinkAmount = wickLength / 10; //adjust
+            if (wickLength > 0) {
+                wick.setStartX(wick.getStartX() + shrinkAmount);
+                flame.setLayoutX(flame.getLayoutX() + shrinkAmount);
+            }
+        } else {
+            double shrinkAmount = wickLength / (totalTime / penalty);
+            if (wickLength > 0) {
+                wick.setStartX(wick.getStartX() + shrinkAmount);
+                flame.setLayoutX(flame.getLayoutX() + shrinkAmount);
+            }
+
+            remainingTime = Math.max(0, remainingTime - penalty);
+            updateTimerLabel();
         }
-
-        remainingTime = Math.max(0, remainingTime - penalty);
-        updateTimerLabel();
 
         if (remainingTime <= 0 || wick.getStartX() >= wick.getEndX()) {
             triggerExplosion();

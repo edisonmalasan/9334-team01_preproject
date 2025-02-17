@@ -2,9 +2,12 @@ package Client.controller;
 
 import Client.connection.AnsiFormatter;
 import Client.connection.ClientConnection;
+import Client.model.PlayerModel;
+import Client.view.MainMenuView;
+import common.Response;
 import exception.ConnectionException;
 import exception.InvalidUsernameException;
-
+import exception.ServerDisconnectedException;
 import exception.ServerNotRunningException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -16,7 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
+import java.io.EOFException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,8 +31,7 @@ public class InputUsernameController {
         AnsiFormatter.enableColorLogging(logger);
     }
 
-    private static String playerName;
-
+    private PlayerModel player;
     private ClientConnection clientConnection;
 
     @FXML
@@ -74,12 +76,32 @@ public class InputUsernameController {
             return;
         }
 
-        playerName = username;
-        switchToMainMenu();
-    }
+        player = new PlayerModel(username, 0);
+        logger.info("Sending player data to server: " + player.getName());
 
-    public static String getPlayerName() {
-        return playerName;
+        new Thread(() -> {
+            try {
+                clientConnection.sendObject(player);
+                Response response = (Response) clientConnection.receiveObject();
+
+                logger.info("Received response: " + response);
+
+                Platform.runLater(() -> {
+                    if (!response.isSuccess()) {
+                        handleException(new InvalidUsernameException(response.getMessage()));
+                    } else {
+                        switchToMainMenu();
+                    }
+                });
+
+            } catch (EOFException e) {
+                handleException(new ServerDisconnectedException("⚠ Server disconnected."));
+            } catch (java.net.ConnectException e) {
+                handleException(new ServerNotRunningException("⚠ Server is not running."));
+            } catch (Exception e) {
+                handleException(new ServerNotRunningException("⚠ CONNECTION ERROR: Server is not running."));
+            }
+        }).start();
     }
 
 

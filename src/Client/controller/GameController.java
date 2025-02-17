@@ -29,37 +29,36 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class GameController {
+public abstract class GameController {
     @FXML
-    private Label timerLabel;
+    protected Label timerLabel;
     @FXML
-    private Label questionLabel;
+    protected Label questionLabel;
     @FXML
-    private Label comboLabel;
+    protected Label comboLabel;
     @FXML
-    private HBox choicesBox;
+    protected HBox choicesBox;
     @FXML
-    private ImageView bombImage;
+    protected ImageView bombImage;
     @FXML
-    private ImageView flame;
+    protected ImageView flame;
     @FXML
-    private Line wick;
+    protected Line wick;
     @FXML
-    private Pane QTEPane;
+    protected Pane QTEPane;
     @FXML
-    private Button forfeitButton;
+    protected Button forfeitButton;
 
-    private List<Button> choiceButtons = new ArrayList<>();
-    private ClientConnection clientConnection;
-    private List<QuestionModel> questions;
-    private int currentQuestionIndex = 0;
-    private QTEUtility qteUtility;
-    private BombUtility bombUtility;
-    private ComboModel comboModel;
-    private int finalScore = 0;
-    private boolean isEndlessMode = false;
+    protected List<Button> choiceButtons = new ArrayList<>();
+    protected ClientConnection clientConnection;
+    protected List<QuestionModel> questions;
+    protected int currentQuestionIndex = 0;
+    protected QTEUtility qteUtility;
+    protected BombUtility bombUtility;
+    protected ComboModel comboModel;
+    protected int finalScore = 0;
 
-    private static final Logger logger = Logger.getLogger(GameController.class.getName());
+    protected static final Logger logger = Logger.getLogger(GameController.class.getName());
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -73,9 +72,8 @@ public class GameController {
         }
     }
 
-    public void setQuestions(String category, List<QuestionModel> questions, boolean isEndlessMode) {
+    public void setQuestions(String category, List<QuestionModel> questions) {
         this.questions = questions;
-        this.isEndlessMode = isEndlessMode;
         this.comboModel = new ComboModel();
         System.out.println("DEBUG: Loaded " + questions.size() + " questions for category: " + category);
         this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons);
@@ -88,45 +86,9 @@ public class GameController {
         forfeitButton.setOnAction(e -> handleForfeit());
     }
 
-    private void showNextQuestion() {
-        if (currentQuestionIndex >= questions.size()) {
-            questionLabel.setText("🎉 Game Over!");
-            choicesBox.getChildren().clear();
-            bombImage.setVisible(false);
-            bombUtility.stopBombAnimation();
-            switchToScoreView();
-            return;
-        }
+    protected abstract void showNextQuestion();
 
-        QuestionModel question = questions.get(currentQuestionIndex);
-        questionLabel.setText(question.getQuestionText());
-        choicesBox.getChildren().clear();
-        choiceButtons.clear();
-
-        for (String choice : question.getChoices()) {
-            Button choiceButton = new Button(choice);
-            choiceButton.setPrefSize(146, 50);
-            choiceButton.setStyle("-fx-font-family: 'Roboto Mono'; -fx-font-size: 15px;");
-
-            choiceButton.setOnAction(e -> checkAnswer(choiceButton, choice, question));
-
-            choicesBox.getChildren().add(choiceButton);
-            choiceButtons.add(choiceButton);
-        }
-
-        if (!bombUtility.isRunning()) {
-            Platform.runLater(() -> bombUtility.startBombAnimation(isEndlessMode));
-        }
-
-        if (!isEndlessMode) {
-            qteUtility.triggerQuickTimeEvent(currentQuestionIndex);
-        }
-
-        currentQuestionIndex++;
-    }
-
-
-    private void checkAnswer(Button selectedButton, String selectedAnswer, QuestionModel question) {
+    protected void checkAnswer(Button selectedButton, String selectedAnswer, QuestionModel question) {
         int questionScore = question.getScore();
 
         if (selectedAnswer.equals(question.getCorrectAnswer())) {
@@ -168,21 +130,20 @@ public class GameController {
         }).start();
     }
 
-
-    private void updateComboUI() {
+    protected void updateComboUI() {
         System.out.println("DEBUG: Updating combo display: " + comboModel.getComboCount());
         Platform.runLater(() -> comboLabel.setText("Combo: " + comboModel.getComboCount()));
     }
 
     @FXML
-    private void handleForfeit() {
+    protected void handleForfeit() {
         System.out.println("Player forfeited. Stopping game...");
         bombUtility.stopBombAnimation();
         finalScore = 0;
         switchToScoreView();
     }
 
-    private void switchToScoreView() {
+    protected void switchToScoreView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/score_view.fxml"));
             Parent root = loader.load();

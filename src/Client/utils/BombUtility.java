@@ -22,7 +22,7 @@ public class BombUtility {
     private Timeline wickAnimation;
     private TranslateTransition flameFlicker;
     private Timeline bombTimer;
-    private int totalTime = 30;
+    private int totalTime = 60;
     private int remainingTime;
     private boolean hasExploded = false;
     private boolean isRunning = false;

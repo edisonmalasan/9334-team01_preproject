@@ -125,7 +125,12 @@ public class ClassicGameController {
 
         if (selectedAnswer.equals(question.getCorrectAnswer())) {
             selectedButton.setStyle("-fx-background-image: url('/images/correct_answer.png');");
-            finalScore += questionScore;
+
+            // Added combo multiplier to the score
+            int comboMultiplier = Math.max(1, comboModel.getComboCount()); // Ensure at least x1 multiplier
+            int totalScoreForQuestion = questionScore * comboMultiplier;
+            finalScore += totalScoreForQuestion;
+
             comboModel.incrementCombo();
         } else {
             selectedButton.setStyle("-fx-background-image: url('/images/wrong_answer.png');");
@@ -156,6 +161,7 @@ public class ClassicGameController {
             }
         }).start();
     }
+
 
     private void updateComboUI() {
         System.out.println("DEBUG: Updating combo display: " + comboModel.getComboCount());

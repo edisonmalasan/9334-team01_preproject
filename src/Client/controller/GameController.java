@@ -57,6 +57,7 @@ public abstract class GameController {
     protected BombUtility bombUtility;
     protected ComboModel comboModel;
     protected int finalScore = 0;
+    protected boolean checkMode = false;
 
     protected static final Logger logger = Logger.getLogger(GameController.class.getName());
 
@@ -172,6 +173,10 @@ public abstract class GameController {
             try {
                 String playerName = InputUsernameController.getPlayerName();
                 PlayerModel player = new PlayerModel(playerName, score);
+
+                if (checkMode){
+                    player.setName(playerName + "  ");
+                }
 
                 clientConnection.sendObject(player);
                 Response response = (Response) clientConnection.receiveObject();

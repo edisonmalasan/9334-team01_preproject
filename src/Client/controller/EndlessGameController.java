@@ -40,5 +40,6 @@ public class EndlessGameController extends GameController {
         }
 
         currentQuestionIndex++;
+        checkMode = true;
     }
 }

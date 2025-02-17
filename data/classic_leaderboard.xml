@@ -92,4 +92,8 @@
         <player>poi</player>
         <score>3</score>
     </entry>
+    <entry>
+        <player>123</player>
+        <score>21</score>
+    </entry>
 </leaderboard>

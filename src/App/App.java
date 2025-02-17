@@ -2,6 +2,7 @@ package App;
 
 import Client.connection.AnsiFormatter;
 import Client.connection.ClientConnection;
+import Client.utils.SoundUtility;
 import exception.ConnectionException;
 import exception.FXMLLoadingException;
 import javafx.application.Application;
@@ -32,6 +33,8 @@ public class App extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/input_username.fxml"));
             Parent root = fxmlLoader.load();
+            //test
+            SoundUtility.playBackgroundMusic("audio/bgm.wav");
 
             try {
                 ClientConnection.getInstance().connect();

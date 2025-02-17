@@ -38,15 +38,14 @@ public class BombUtility {
         this.choiceButtons = choiceButtons;
     }
 
-    public void startBombAnimation() {
+    public void startBombAnimation(boolean isEndlessMode) {
         if (isRunning) return;
         isRunning = true;
 
-        remainingTime = totalTime;
-        updateTimerLabel();
         bombImage.setVisible(true);
         flame.setVisible(true);
         wick.setVisible(true);
+        hasExploded = false;
 
         flameFlicker = new TranslateTransition(Duration.millis(200), flame);
         flameFlicker.setFromX(-2);
@@ -55,14 +54,21 @@ public class BombUtility {
         flameFlicker.setCycleCount(Animation.INDEFINITE);
         flameFlicker.play();
 
-        wickAnimation = new Timeline(new KeyFrame(Duration.seconds(1), e -> shortenWick()));
-        wickAnimation.setCycleCount(totalTime);
-        wickAnimation.play();
+        if (!isEndlessMode) {
+            remainingTime = totalTime;
+            updateTimerLabel();
 
-        bombTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateTimer()));
-        bombTimer.setCycleCount(totalTime);
-        bombTimer.setOnFinished(e -> triggerExplosion());
-        bombTimer.play();
+            wickAnimation = new Timeline(new KeyFrame(Duration.seconds(1), e -> shortenWick()));
+            wickAnimation.setCycleCount(totalTime);
+            wickAnimation.play();
+
+            bombTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateTimer()));
+            bombTimer.setCycleCount(totalTime);
+            bombTimer.setOnFinished(e -> triggerExplosion());
+            bombTimer.play();
+        } else {
+            timerLabel.setText("Endless Mode");
+        }
     }
 
     public void applyPenalty(int penalty) {

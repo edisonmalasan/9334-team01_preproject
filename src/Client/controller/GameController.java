@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClassicGameController {
+public class GameController {
     @FXML
     private Label timerLabel;
     @FXML
@@ -57,14 +57,15 @@ public class ClassicGameController {
     private BombUtility bombUtility;
     private ComboModel comboModel;
     private int finalScore = 0;
+    private boolean isEndlessMode = false;
 
-    private static final Logger logger = Logger.getLogger(ClassicGameController.class.getName());
+    private static final Logger logger = Logger.getLogger(GameController.class.getName());
 
     static {
         AnsiFormatter.enableColorLogging(logger);
     }
 
-    public ClassicGameController() {
+    public GameController() {
         try {
             this.clientConnection = ClientConnection.getInstance();
         } catch (ConnectionException e) {
@@ -72,8 +73,9 @@ public class ClassicGameController {
         }
     }
 
-    public void setQuestions(String category, List<QuestionModel> questions) {
+    public void setQuestions(String category, List<QuestionModel> questions, boolean isEndlessMode) {
         this.questions = questions;
+        this.isEndlessMode = isEndlessMode;
         this.comboModel = new ComboModel();
         System.out.println("DEBUG: Loaded " + questions.size() + " questions for category: " + category);
         this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons);
@@ -113,9 +115,13 @@ public class ClassicGameController {
         }
 
         if (!bombUtility.isRunning()) {
-            Platform.runLater(() -> bombUtility.startBombAnimation());
+            Platform.runLater(() -> bombUtility.startBombAnimation(isEndlessMode));
         }
-        qteUtility.triggerQuickTimeEvent(currentQuestionIndex);
+
+        if (!isEndlessMode) {
+            qteUtility.triggerQuickTimeEvent(currentQuestionIndex);
+        }
+
         currentQuestionIndex++;
     }
 

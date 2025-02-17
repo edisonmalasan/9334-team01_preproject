@@ -60,6 +60,7 @@ public class ClientHandler implements Runnable {
                     sendResponse(response);
                 }
             }
+
         } catch (EOFException e) {
             logger.info("Client disconnected.");
         } catch (SocketException e) {

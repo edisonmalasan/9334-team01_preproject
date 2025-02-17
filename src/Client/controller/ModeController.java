@@ -54,8 +54,25 @@ public class ModeController {
 
     private void switchToEndlessMode() {
         logger.info("Endless Mode button clicked. (TODO: Implement Endless Mode)");
-        // TODO: Implement Endless Mode if Classic Mode is completed
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/category_menu.fxml"));
+            Parent root = loader.load();
+
+            CategoryController categoryController = loader.getController();
+            categoryController.setEndlessMode(true); // Set Endless Mode flag
+
+            Stage stage = (Stage) endlessButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Select a Category");
+            stage.setResizable(false);
+            stage.show();
+
+            logger.info("Switched to Category Selection for Endless Mode.");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Failed to load Category Menu", e);
+        }
     }
+
     public void returnToMainMenu() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));

@@ -40,6 +40,7 @@ public class CategoryController {
     private ClientConnection clientConnection;
     private static String selectedCategory;
     private CategoryView categoryView;
+    private boolean isEndlessMode = false;
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -111,8 +112,8 @@ public class CategoryController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/classic_game.fxml"));
             Parent root = loader.load();
 
-            ClassicGameController gameController = loader.getController();
-            gameController.setQuestions(category, questions); //  pass all questions
+            GameController gameController = loader.getController();
+            gameController.setQuestions(category, questions, isEndlessMode); //  pass all questions
 
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -145,4 +146,9 @@ public class CategoryController {
     public static String getSelectedCategory() {
         return selectedCategory;
     }
+
+    public void setEndlessMode(boolean isEndlessMode) {
+        this.isEndlessMode = isEndlessMode;
+    }
+
 }

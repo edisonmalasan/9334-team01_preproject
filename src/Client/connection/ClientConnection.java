@@ -88,6 +88,7 @@ public class ClientConnection {
         System.out.println("DEBUG: Received object: " + obj);
         return obj;
     }
+
     public void close() {
         try {
             if (socket != null) socket.close();

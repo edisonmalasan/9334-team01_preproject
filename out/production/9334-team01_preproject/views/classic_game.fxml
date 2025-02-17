@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="classicGame" prefHeight="768.0" prefWidth="1024.0" stylesheets="@classic_game.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.ClassicGameController">
+<AnchorPane fx:id="classicGame" prefHeight="768.0" prefWidth="1024.0" stylesheets="@classic_game.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.ClassicGameController">
 
     <children>
         <!-- Combo Counter -->
         <VBox alignment="CENTER" layoutX="435.0" layoutY="161.0" prefHeight="50.0" prefWidth="183.0">
             <children>
-                <Label fx:id="comboText" prefHeight="21.0" prefWidth="175.0" text="Combo Count:">
+                <Label fx:id="comboText" alignment="CENTER" prefHeight="21.0" prefWidth="175.0" text="Combo Count:">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -47,7 +42,7 @@
             </children>
         </Pane>
 
-        <Pane fx:id="QTEPane" layoutX="0" layoutY="0" prefHeight="768.0" prefWidth="1024.0"/>
+        <Pane fx:id="QTEPane" layoutX="0" layoutY="0" prefHeight="768.0" prefWidth="1024.0" />
 
         <!-- Timer -->
         <Label fx:id="timerLabel" layoutX="505.0" layoutY="28.0" text="0 s." />

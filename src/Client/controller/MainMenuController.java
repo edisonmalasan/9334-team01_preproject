@@ -1,9 +1,6 @@
 package Client.controller;
 
 import Client.connection.AnsiFormatter;
-import Client.view.CategoryView;
-import Client.view.MainMenuView;
-import Client.view.ModeView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,11 +28,6 @@ public class MainMenuController {
     @FXML
     private Button quitButton;
 
-    private MainMenuView mainMenuView;
-
-    public void setMainMenuView(MainMenuView mainMenuView) {
-        this.mainMenuView = mainMenuView;
-    }
 
     @FXML
     public void initialize() {
@@ -64,7 +56,6 @@ public class MainMenuController {
         }
     }
 
-    
     private void switchToLeaderboard() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/leaderboard.fxml"));

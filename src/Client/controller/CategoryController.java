@@ -2,7 +2,6 @@ package Client.controller;
 
 import Client.connection.AnsiFormatter;
 import Client.connection.ClientConnection;
-import Client.view.CategoryView;
 import common.Response;
 import common.model.QuestionModel;
 import javafx.application.Platform;
@@ -39,15 +38,10 @@ public class CategoryController {
 
     private ClientConnection clientConnection;
     private static String selectedCategory;
-    private CategoryView categoryView;
     private boolean isEndlessMode = false;
 
     static {
         AnsiFormatter.enableColorLogging(logger);
-    }
-
-    public void setCategoryView(CategoryView categoryView) {
-        this.categoryView = categoryView;
     }
 
     public CategoryController() {

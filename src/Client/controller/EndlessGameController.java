@@ -5,6 +5,8 @@ import common.model.QuestionModel;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class EndlessGameController extends GameController {
@@ -24,6 +26,11 @@ public class EndlessGameController extends GameController {
         choicesBox.getChildren().clear();
         choiceButtons.clear();
 
+
+        // shuffled choices
+        List<String> shuffledChoices = new ArrayList<>(question.getChoices());
+        Collections.shuffle(shuffledChoices);
+
         for (String choice : question.getChoices()) {
             Button choiceButton = new Button(choice);
             choiceButton.setPrefSize(146, 50);
@@ -40,5 +47,6 @@ public class EndlessGameController extends GameController {
         }
 
         currentQuestionIndex++;
+        checkMode = true;
     }
 }

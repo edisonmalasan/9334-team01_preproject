@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,6 +58,7 @@ public abstract class GameController {
     protected BombUtility bombUtility;
     protected ComboModel comboModel;
     protected int finalScore = 0;
+    protected boolean checkMode = false;
 
     protected static final Logger logger = Logger.getLogger(GameController.class.getName());
 
@@ -73,9 +75,10 @@ public abstract class GameController {
     }
 
     public void setQuestions(String category, List<QuestionModel> questions) {
-        this.questions = questions;
+        this.questions = new ArrayList<>(questions);
+        Collections.shuffle(this.questions);  //shuffled questions
         this.comboModel = new ComboModel();
-        System.out.println("DEBUG: Loaded " + questions.size() + " questions for category: " + category);
+        System.out.println("DEBUG: Loaded " + questions.size() + " shuffled questions for category: " + category);
         this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons);
         this.qteUtility = new QTEUtility(questions.size(), bombUtility::applyPenalty, QTEPane);
         showNextQuestion();
@@ -172,6 +175,10 @@ public abstract class GameController {
             try {
                 String playerName = InputUsernameController.getPlayerName();
                 PlayerModel player = new PlayerModel(playerName, score);
+
+                if (checkMode){
+                    player.setName(playerName + "  ");
+                }
 
                 clientConnection.sendObject(player);
                 Response response = (Response) clientConnection.receiveObject();

@@ -85,10 +85,11 @@ public class LeaderboardControllerClient {
 
         // Initialize leaderboard data (this data would be fetched from a server in a real-world scenario)
         classicLeaderboard = FXCollections.observableArrayList(
-                LeaderboardControllerServer.getLeaderboard()
+                LeaderboardControllerServer.getClassicLeaderboard()
         );
 
         endlessLeaderboard = FXCollections.observableArrayList(
+                LeaderboardControllerServer.getEndlessLeaderboard()
         );
 
         // Sort the leaderboard based on score in descending order

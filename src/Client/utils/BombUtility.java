@@ -95,7 +95,7 @@ public class BombUtility {
             updateTimerLabel();
         }
 
-        if (remainingTime <= 0 || wick.getStartX() >= wick.getEndX()) {
+        if (wick.getStartX() >= wick.getEndX()) {
             triggerExplosion();
         }
     }

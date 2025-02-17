@@ -97,7 +97,7 @@ public class CategoryController {
                                 + "--------------------------------------");
                     }
 
-                    updateUI(() -> switchToGameplay(category, questions, event));
+                    updateUI(() -> switchToGameplay(category, questions, event, isEndlessMode));
                 } else {
                     logger.warning("⚠️ No questions found for category: " + category);
                 }
@@ -107,13 +107,18 @@ public class CategoryController {
         }).start();
     }
 
-    private void switchToGameplay(String category, List<QuestionModel> questions, ActionEvent event) {
+    private void switchToGameplay(String category, List<QuestionModel> questions, ActionEvent event, boolean isEndlessMode) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/classic_game.fxml"));
+            FXMLLoader loader;
+            if (isEndlessMode) {
+                loader = new FXMLLoader(getClass().getResource("/views/endless_game.fxml"));
+            } else {
+                loader = new FXMLLoader(getClass().getResource("/views/classic_game.fxml"));
+            }
             Parent root = loader.load();
 
             GameController gameController = loader.getController();
-            gameController.setQuestions(category, questions, isEndlessMode); //  pass all questions
+            gameController.setQuestions(category, questions);
 
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));

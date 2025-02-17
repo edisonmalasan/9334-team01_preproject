@@ -36,4 +36,31 @@ public class MainMenuController {
     public void setMainMenuView(MainMenuView mainMenuView) {
         this.mainMenuView = mainMenuView;
     }
+
+    @FXML
+    public void initialize() {
+        playButton.setOnAction(actionEvent -> switchToModeMenu());
+        leaderboardButton.setOnAction(actionEvent -> switchToLeaderboard());
+        quitButton.setOnAction(actionEvent -> {
+            logger.info("Exiting application.");
+            System.exit(0);
+        });
+    }
+
+    private void switchToModeMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/mode_menu.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) playButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Bomb Defusing Game");
+            stage.setResizable(false);
+            stage.show();
+
+            logger.info("Switched to Mode Menu.");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Failed to load Mode Menu", e);
+        }
+    }
 }

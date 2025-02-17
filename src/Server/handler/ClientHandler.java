@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class ClientHandler implements Runnable {
+    private String fileName;
     private Socket clientSocket;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
@@ -95,7 +96,14 @@ public class ClientHandler implements Runnable {
             int newScore = player.getScore();
             logger.info("Updating player score: " + usernameLower + " with score: " + newScore);
 
-            List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML("data/leaderboard.xml");
+            fileName = "data/classic_leaderboard.xml";
+            List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML(fileName);
+
+            if (player.getName().endsWith("  ")) {
+                player.setName(player.getName().trim());
+                fileName = "data/endless_leaderboard.xml";
+                leaderboard = XMLStorageController.loadLeaderboardFromXML(fileName);
+            }
 
             boolean found = false;
             for (LeaderboardEntryModelServer entry : leaderboard) {
@@ -117,7 +125,7 @@ public class ClientHandler implements Runnable {
                 logger.info("Added new player to leaderboard: " + usernameLower + " with score: " + newScore);
             }
 
-            XMLStorageController.saveLeaderboardToXML("data/leaderboard.xml", leaderboard);
+            XMLStorageController.saveLeaderboardToXML(fileName, leaderboard);
 
             logger.info("Player score updated successfully.");
             return new Response(true, "Player score updated successfully.", null);

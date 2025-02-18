@@ -16,13 +16,13 @@ public class SoundUtility {
     Clip clip;
     // current status of clip
     String status;
-    AudioInputStream in1, in2;
+    AudioInputStream in1;
     static String bgmPath, clickPath;
 
     public SoundUtility() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         // create AudioInputStream object
         in1 = AudioSystem.getAudioInputStream(new File(bgmPath).getAbsoluteFile());
-        in2 = AudioSystem.getAudioInputStream(new File(clickPath).getAbsoluteFile());
+        //in2 = AudioSystem.getAudioInputStream(new File(clickPath).getAbsoluteFile());
 
         // create clip reference
         clip = AudioSystem.getClip();
@@ -47,14 +47,6 @@ public class SoundUtility {
     }
 
     public static void playClickingSound() {
-        try {
-            clickPath = "resources/audio/Click.wav";
-            SoundUtility audioPlayer2 = new SoundUtility();
-            audioPlayer2.play();
-        } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace();
-        }
     }
         public void play() {
             //start the clip

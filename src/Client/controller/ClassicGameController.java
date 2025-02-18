@@ -14,7 +14,7 @@ public class ClassicGameController extends GameController {
     @Override
     protected void showNextQuestion() {
         if (currentQuestionIndex >= questions.size()) {
-            questionLabel.setText("🎉 Game Over!");
+            questionLabel.setText("🎉 Game Over! All Questions Have Been Exhausted");
             choicesBox.getChildren().clear();
             bombImage.setVisible(false);
             bombUtility.stopBombAnimation();

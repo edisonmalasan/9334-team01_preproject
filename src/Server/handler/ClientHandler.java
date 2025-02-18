@@ -59,6 +59,10 @@ public class ClientHandler implements Runnable {
                         List<LeaderboardEntryModelServer> classicLeaderboard = LeaderboardControllerServer.getClassicLeaderboard();
                         Response response = handleLeaderboardUpdate(classicLeaderboard);
                         sendResponse(response);
+                    } else if (reqString.startsWith("GET_LEADERBOARD_ENDLESS")) {
+                        List<LeaderboardEntryModelServer> endlessLeaderboard = LeaderboardControllerServer.getEndlessLeaderboard();
+                        Response response = handleLeaderboardUpdate(endlessLeaderboard);
+                        sendResponse(response);
                     }
                 } else if (request instanceof PlayerModel) {
                     logger.info("Player score update request received.");

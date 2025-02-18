@@ -80,7 +80,7 @@ public class InputUsernameController {
 
     private void switchToMainMenu(ActionEvent event) {
         logger.info("\nInputUsernameController: Switching to Main Menu.");
-        ViewManager.goTo(event, ViewManager.MAIN_MENU, "Main Menu");
+        ViewManager.goTo(event, ViewManager.MAIN_MENU, "Bomb Defusing Game");
     }
 
     private void handleException(Exception e) {

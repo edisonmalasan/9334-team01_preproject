@@ -4,4 +4,20 @@
         <player>nig</player>
         <score>8</score>
     </entry>
+    <entry>
+        <player>...</player>
+        <score>13</score>
+    </entry>
+    <entry>
+        <player>123</player>
+        <score>18</score>
+    </entry>
+    <entry>
+        <player>yuen</player>
+        <score>120</score>
+    </entry>
+    <entry>
+        <player>0.0</player>
+        <score>25</score>
+    </entry>
 </leaderboard>

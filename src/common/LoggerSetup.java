@@ -9,10 +9,15 @@ public class LoggerSetup {
         Logger logger = Logger.getLogger(loggerName);
         logger.setUseParentHandlers(false);
 
+//        // avoid duplicate
+//        if (logger.getHandlers().length > 0) {
+//            return logger;
+//        }
+
         try {
             File logFile = new File(filePath);
-
             File logDir = logFile.getParentFile();
+
             if (logDir != null && !logDir.exists()) {
                 logDir.mkdirs();
             }

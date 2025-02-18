@@ -1,6 +1,7 @@
 package Client.controller;
 
 import Client.view.ViewManager;
+import Server.handler.ClientHandler;
 import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import common.LoggerSetup;
@@ -37,7 +38,8 @@ public class CategoryController {
     private static String selectedCategory;
     private boolean isEndlessMode = false;
 
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
+//    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
+    private static final Logger logger = Logger.getLogger(CategoryController.class.getName());
 
     static {
         AnsiFormatter.enableColorLogging(logger);

@@ -1,5 +1,6 @@
 package Server.controller;
 
+import Server.handler.ClientHandler;
 import common.AnsiFormatter;
 import common.LoggerSetup;
 import common.model.QuestionModel;
@@ -14,7 +15,8 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class XMLStorageController {
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Server/Log/server.log");
+//    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Server/Log/server.log");
+private static final Logger logger = Logger.getLogger(XMLStorageController.class.getName());
 
     static {
         AnsiFormatter.enableColorLogging(logger);

@@ -13,6 +13,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Logger;
 
+/**
+ * Represents a server
+ */
 public class ServerHandler {
     private QuestionBankModel questionBank;
     private LeaderboardControllerServer leaderboard;
@@ -29,6 +32,9 @@ public class ServerHandler {
         this.leaderboard = leaderboard;
     }
 
+    /**
+     * Starts the server
+     */
     public void start() {
         try {
             serverSocket = new ServerSocket(PORT_NUMBER);

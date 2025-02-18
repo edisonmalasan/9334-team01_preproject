@@ -17,6 +17,9 @@ import java.net.SocketException;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Handles client requests
+ */
 public class ClientHandler implements Runnable {
     private String fileName;
     private Socket clientSocket;

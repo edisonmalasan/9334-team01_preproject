@@ -10,6 +10,9 @@ import java.io.*;
 
 import Server.view.AdminView;
 
+/**
+ * Manipulates the admin GUI
+ */
 public class AdminViewController {
     private AdminView view;
 
@@ -22,7 +25,9 @@ public class AdminViewController {
         view.getRefreshButton().addActionListener(e -> refreshLeaderboard());  // Add listener for refresh
     }
 
-    // Load XML and update the view with the current leaderboard
+    /**
+     * Loads XML and updates the view with the current leaderboard
+     */
     public void loadXML() {
         try {
             File xmlFile = view.getXmlFile();
@@ -55,7 +60,9 @@ public class AdminViewController {
         }
     }
 
-    // Save changes to the XML (edit existing player)
+    /**
+     * Save changes to the XML
+     */
     private void saveChanges() {
         String name = view.getNameField().getText();
         String score = view.getScoreField().getText();
@@ -102,7 +109,9 @@ public class AdminViewController {
         }
     }
 
-    // Delete the selected player from the XML
+    /**
+     * Deletes the selected player from the XML
+     */
     private void deleteSelectedPlayer() {
         String selectedPlayer = view.getSelectedPlayer();
         if (selectedPlayer != null) {
@@ -130,14 +139,12 @@ public class AdminViewController {
                     }
                 }
 
-                // Save the updated document back to the file
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
                 DOMSource source = new DOMSource(document);
                 StreamResult result = new StreamResult(xmlFile);
                 transformer.transform(source, result);
 
-                // Reload the view with updated XML data
                 loadXML();
 
             } catch (Exception e) {
@@ -148,7 +155,9 @@ public class AdminViewController {
         }
     }
 
-    // Refresh leaderboard from file
+    /**
+     * Refreshes the leaderboard file
+     */
     private void refreshLeaderboard() {
         loadXML();
     }

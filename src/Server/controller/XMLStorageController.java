@@ -14,6 +14,9 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
+/**
+ * Manipulates XML files
+ */
 public class XMLStorageController {
 //    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Server/Log/server.log");
 private static final Logger logger = Logger.getLogger(XMLStorageController.class.getName());
@@ -22,6 +25,9 @@ private static final Logger logger = Logger.getLogger(XMLStorageController.class
         AnsiFormatter.enableColorLogging(logger);
     }
 
+    /**
+     * Returns the list of questions
+     */
     public static List<QuestionModel> loadQuestionsFromXML(String filename) {
         List<QuestionModel> questions = new ArrayList<>();
         try {
@@ -56,6 +62,9 @@ private static final Logger logger = Logger.getLogger(XMLStorageController.class
         return questions;
     }
 
+    /**
+     * Returns a list containing leaderboard entries
+     */
     public static List<LeaderboardEntryModelServer> loadLeaderboardFromXML(String filename) {
         List<LeaderboardEntryModelServer> leaderboard = new ArrayList<>();
         try {
@@ -91,6 +100,9 @@ private static final Logger logger = Logger.getLogger(XMLStorageController.class
         return leaderboard;
     }
 
+    /**
+     * Saves the list of leaderboard entries to the xml file
+     */
     public static void saveLeaderboardToXML(String filename, List<LeaderboardEntryModelServer> leaderboard) {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();

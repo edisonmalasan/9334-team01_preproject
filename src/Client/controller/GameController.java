@@ -1,5 +1,6 @@
 package Client.controller;
 
+import Client.view.ViewManager;
 import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.model.ComboModel;
@@ -30,6 +31,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.function.Consumer;
 
 public abstract class GameController {
     @FXML
@@ -77,7 +79,7 @@ public abstract class GameController {
 
     public void setQuestions(String category, List<QuestionModel> questions) {
         this.questions = new ArrayList<>(questions);
-        Collections.shuffle(this.questions);  //shuffled questions
+        Collections.shuffle(this.questions);  // Shuffling questions
         this.comboModel = new ComboModel();
         logger.info("\nGameController: Loaded " + questions.size() + " shuffled questions for category: " + category);
         this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons);
@@ -151,27 +153,14 @@ public abstract class GameController {
     }
 
     protected void switchToScoreView() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/score_view.fxml"));
-            Parent root = loader.load();
+        sendScoreToServer(finalScore);
 
+        ViewManager.goTo(null, ViewManager.SCORE_VIEW, "Score View", loader -> {
             ScoreController scoreController = loader.getController();
-            scoreController.setScore(finalScore);
+            scoreController.setScore(finalScore);  // passing the score to the ScoreController
+        });
 
-            // Send the player's score to the server
-            sendScoreToServer(finalScore);
-
-            Stage stage = (Stage) timerLabel.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Score");
-            stage.setResizable(false);
-            stage.show();
-
-            logger.info("\nGameController: Successfully switched to the Score view");
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "\nGameController: Failed to load Score view", e);
-            throw new RuntimeException(e);
-        }
+        logger.info("\nGameController: Successfully switched to the Score view");
     }
 
     private void sendScoreToServer(int score) {

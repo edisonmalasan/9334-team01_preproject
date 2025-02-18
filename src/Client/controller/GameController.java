@@ -1,13 +1,12 @@
 package Client.controller;
 
 import Client.view.ViewManager;
-import Server.handler.ClientHandler;
 import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.model.ComboModel;
 import Client.model.PlayerModel;
-import Client.utils.BombUtility;
-import Client.utils.QTEUtility;
+import Client.utility.BombUtility;
+import Client.utility.QTEUtility;
 import common.LoggerSetup;
 import common.Response;
 import common.model.QuestionModel;

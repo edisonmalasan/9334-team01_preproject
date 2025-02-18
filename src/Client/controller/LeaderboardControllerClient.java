@@ -25,7 +25,9 @@ import java.util.List;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
+/**
+ * Manipulates leaderboard view
+ */
 public class LeaderboardControllerClient {
 
 
@@ -100,19 +102,9 @@ public class LeaderboardControllerClient {
         endlessTable.setItems(endlessLeaderboard);
 
         // Initialize Rank columns to compute the rank dynamically
-        classicRank.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer>, ObservableValue<Integer>>() {
-            @Override
-            public ObservableValue<Integer> call(TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer> param) {
-                return new SimpleIntegerProperty(getRankForIndex(classicLeaderboard, classicLeaderboard.indexOf(param.getValue()))).asObject();
-            }
-        });
+        classicRank.setCellValueFactory((Callback<TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer>, ObservableValue<Integer>>) param -> new SimpleIntegerProperty(getRankForIndex(classicLeaderboard, classicLeaderboard.indexOf(param.getValue()))).asObject());
 
-        endlessRank.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer>, ObservableValue<Integer>>() {
-            @Override
-            public ObservableValue<Integer> call(TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer> param) {
-                return new SimpleIntegerProperty(getRankForIndex(endlessLeaderboard, endlessLeaderboard.indexOf(param.getValue()))).asObject();
-            }
-        });
+        endlessRank.setCellValueFactory((Callback<TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer>, ObservableValue<Integer>>) param -> new SimpleIntegerProperty(getRankForIndex(endlessLeaderboard, endlessLeaderboard.indexOf(param.getValue()))).asObject());
 
         // Search box handlers for filtering Classic and Endless tables
         classicSearchBox.textProperty().addListener((observable, oldValue, newValue) -> filterLeaderboardData(newValue, "classic"));
@@ -141,8 +133,6 @@ public class LeaderboardControllerClient {
     /**
      * Sort leaderboard data based on score in descending order.
      * In case of a tie, it sorts alphabetically by the player name.
-     *
-     * @param leaderboard The leaderboard to be sorted.
      */
     private void sortLeaderboardByScore(ObservableList<LeaderboardEntryModelServer> leaderboard) {
         leaderboard.sort((entry1, entry2) -> {
@@ -159,10 +149,6 @@ public class LeaderboardControllerClient {
     /**
      * Get the rank for a given index based on the leaderboard sorting.
      * In case of a tie, it assigns the same rank to entries with equal scores.
-     *
-     * @param leaderboard The leaderboard.
-     * @param index The index of the current entry.
-     * @return The rank (1-based index) of the entry.
      */
     private int getRankForIndex(ObservableList<LeaderboardEntryModelServer> leaderboard, int index) {
         if (index == 0) {
@@ -182,9 +168,6 @@ public class LeaderboardControllerClient {
 
     /**
      * Filter leaderboard data based on the search query.
-     *
-     * @param query Search text.
-     * @param type  Type of leaderboard (classic or endless).
      */
     private void filterLeaderboardData(String query, String type) {
         ObservableList<LeaderboardEntryModelServer> filteredList = FXCollections.observableArrayList();

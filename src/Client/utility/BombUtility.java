@@ -11,6 +11,9 @@ import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import java.util.List;
 
+/**
+ * Represents the bomb and its animation
+ */
 public class BombUtility {
     private final ImageView bombImage;
     private final ImageView flame;

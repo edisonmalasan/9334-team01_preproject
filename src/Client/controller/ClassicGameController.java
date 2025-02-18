@@ -9,7 +9,9 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+/**
+ * Manipulates classic game logic
+ */
 public class ClassicGameController extends GameController {
     @Override
     protected void showNextQuestion() {

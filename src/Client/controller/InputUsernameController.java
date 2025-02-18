@@ -1,10 +1,9 @@
 package Client.controller;
 
-import Server.handler.ClientHandler;
+
 import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.view.ViewManager;
-import common.LoggerSetup;
 import exception.ConnectionException;
 import exception.InvalidUsernameException;
 import exception.ServerNotRunningException;
@@ -16,7 +15,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.util.logging.Logger;
-
+/**
+ * Manipulates input username view
+ */
 public class InputUsernameController {
 //    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
     private static final Logger logger = Logger.getLogger(InputUsernameController.class.getName());

@@ -8,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import java.util.logging.Logger;
-
+/**
+ * Manipulates main menu view
+ */
 public class MainMenuController {
 //    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
     private static final Logger logger = Logger.getLogger(MainMenuController.class.getName());

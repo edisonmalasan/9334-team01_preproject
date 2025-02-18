@@ -16,7 +16,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**
+ * Manipulates category view
+ */
 public class CategoryController {
     @FXML
     public Button returnButton;

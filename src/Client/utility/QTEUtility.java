@@ -11,6 +11,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Consumer;
 
+/**
+ * Represents a quick time event
+ */
 public class QTEUtility {
     private final Consumer<Integer> applyPenalty;
     private final Pane QTEPane;

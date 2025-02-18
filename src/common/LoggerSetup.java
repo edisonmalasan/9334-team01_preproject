@@ -3,7 +3,9 @@ package common;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.*;
-
+/**
+ * Sets the logger
+ */
 public class LoggerSetup {
     public static Logger setupLogger(String loggerName, String filePath) {
         Logger logger = Logger.getLogger(loggerName);

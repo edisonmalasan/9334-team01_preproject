@@ -2,6 +2,9 @@ package Client.model;
 
 import java.io.Serializable;
 
+/**
+ * Represents a player
+ */
 public class PlayerModel implements Serializable {
     private static final long serialVersionUID = 1L;
 

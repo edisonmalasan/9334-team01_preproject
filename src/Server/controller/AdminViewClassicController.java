@@ -7,13 +7,13 @@ import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.*;
 import java.io.*;
-import java.util.List;
-import Server.view.AdminView;
 
-public class AdminViewController {
-    private AdminView view;
+import Server.view.AdminViewClassic;
 
-    public AdminViewController(AdminView view) {
+public class AdminViewClassicController {
+    private AdminViewClassic view;
+
+    public AdminViewClassicController(AdminViewClassic view) {
         this.view = view;
 
         // Set up event listeners

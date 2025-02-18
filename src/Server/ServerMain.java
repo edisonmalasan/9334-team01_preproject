@@ -1,7 +1,7 @@
 package Server;
 
-import Server.controller.AdminViewController;
-import Server.view.AdminView;
+import Server.controller.AdminViewClassicController;
+import Server.view.AdminViewClassic;
 import common.AnsiFormatter;
 import Server.model.QuestionBankModel;
 import Server.controller.LeaderboardControllerServer;
@@ -24,8 +24,8 @@ public class ServerMain {
 
         try {
             ServerHandler server = new ServerHandler(questionBank, leaderboardControllerServer);
-            AdminView view = new AdminView("data/classic_leaderboard.xml");
-            AdminViewController controller = new AdminViewController(view);
+            AdminViewClassic view = new AdminViewClassic("data/classic_leaderboard.xml");
+            AdminViewClassicController controller = new AdminViewClassicController(view);
             controller.loadXML();
             server.start();
         } catch (Exception e) {

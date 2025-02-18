@@ -7,7 +7,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.io.*;
 
-public class AdminView extends JFrame {
+public class AdminViewClassic extends JFrame {
     private JTextArea textArea;
     private File xmlFile;
     private DefaultListModel<String> playerListModel;
@@ -15,7 +15,7 @@ public class AdminView extends JFrame {
     private JTextField nameField, scoreField;
     private JButton saveButton, deleteButton, refreshButton;  // Add refresh button
 
-    public AdminView(String xmlFilePath) {
+    public AdminViewClassic(String xmlFilePath) {
         super("Admin View");
         this.xmlFile = new File(xmlFilePath);
 

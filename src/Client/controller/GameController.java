@@ -13,6 +13,7 @@ import common.model.QuestionModel;
 import exception.ConnectionException;
 import exception.ThreadInterruptedException;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -86,7 +87,7 @@ public abstract class GameController {
 
     @FXML
     public void initialize() {
-        forfeitButton.setOnAction(e -> handleForfeit());
+        forfeitButton.setOnAction(this::handleForfeit);
     }
 
     protected abstract void showNextQuestion();
@@ -142,20 +143,32 @@ public abstract class GameController {
     }
 
     @FXML
-    protected void handleForfeit() {
+    protected void handleForfeit(ActionEvent event) {
         logger.info("\nGameController: Player forfeited. Stopping game...");
         bombUtility.stopBombAnimation();
         finalScore = 0;
-        switchToScoreView();
+        switchToScoreView(event);
     }
 
+    //default event
     protected void switchToScoreView() {
+        switchToScoreView(null);
+    }
+
+    protected void switchToScoreView(ActionEvent event) {
         sendScoreToServer(finalScore);
 
-        ViewManager.goTo(null, ViewManager.SCORE_VIEW, "Score View", loader -> {
-            ScoreController scoreController = loader.getController();
-            scoreController.setScore(finalScore);  // passing the score to the ScoreController
-        });
+        if (event == null) {
+            ViewManager.goTo(null, ViewManager.SCORE_VIEW, "Score View", loader -> {
+                ScoreController scoreController = loader.getController();
+                scoreController.setScore(finalScore);
+            });
+        } else {
+            ViewManager.goTo(event, ViewManager.SCORE_VIEW, "Score View", loader -> {
+                ScoreController scoreController = loader.getController();
+                scoreController.setScore(finalScore);
+            });
+        }
 
         logger.info("\nGameController: Successfully switched to the Score view");
     }

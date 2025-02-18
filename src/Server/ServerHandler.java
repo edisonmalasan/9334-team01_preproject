@@ -4,6 +4,8 @@ import common.AnsiFormatter;
 import Server.controller.LeaderboardControllerServer;
 import Server.model.QuestionBankModel;
 import Server.handler.ClientHandler;
+import common.LoggerSetup;
+
 import static common.Protocol.PORT_NUMBER;
 
 import java.io.IOException;
@@ -15,7 +17,8 @@ public class ServerHandler {
     private QuestionBankModel questionBank;
     private LeaderboardControllerServer leaderboard;
     private ServerSocket serverSocket;
-    private static final Logger logger = Logger.getLogger(ServerHandler.class.getName());
+//    private static final Logger logger = Logger.getLogger(ServerHandler.class.getName());
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Server/Log/server.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);

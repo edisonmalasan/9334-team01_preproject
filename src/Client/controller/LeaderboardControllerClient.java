@@ -22,7 +22,6 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.stage.Stage;

@@ -9,11 +9,7 @@ import common.model.QuestionModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,7 +37,7 @@ public class CategoryController {
     private static String selectedCategory;
     private boolean isEndlessMode = false;
 
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);

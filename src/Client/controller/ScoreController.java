@@ -22,7 +22,7 @@ public class ScoreController {
     private Button backToMenuButton;
 
     private int finalScore;
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);

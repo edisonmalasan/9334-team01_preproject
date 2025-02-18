@@ -14,16 +14,12 @@ import exception.ConnectionException;
 import exception.ThreadInterruptedException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +27,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.function.Consumer;
 
 public abstract class GameController {
     @FXML
@@ -63,7 +58,7 @@ public abstract class GameController {
     protected int finalScore = 0;
     protected boolean checkMode = false;
 
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);

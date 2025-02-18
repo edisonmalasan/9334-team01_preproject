@@ -93,3 +93,192 @@ ClientConnection: Received object: Response{success=true, message='Player score 
 Feb 18, 2025 10:04:47 PM Client.controller.GameController lambda$sendScoreToServer$4
 INFO: 
 GameController: Score successfully sent to the server.
+Feb 18, 2025 10:11:48 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Attempting to connect to server...
+Feb 18, 2025 10:11:48 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Connected to server successfully!
+Feb 18, 2025 10:11:56 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: GET_QUESTION:ARITHMETIC
+Feb 18, 2025 10:11:56 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 10:11:56 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Question retrieved successfully.', data=[QuestionModel{category='ARITHMETIC', questionText='Find the next term of the arithmetic sequence 177, 173, 169, 165,…', choices=[160, 162, 161, 159], correctAnswer='162', score=1}, QuestionModel{category='ARITHMETIC', questionText='65 is what percent of 500', choices=[6, 8, 11, 13], correctAnswer='13', score=1}, QuestionModel{category='ARITHMETIC', questionText='9/10 - 3/10', choices=[3/4, 4/5, 4/15, 3/15], correctAnswer='3/4', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is the sum of 130 + 125 + 191?', choices=[335, 457, 446, 546], correctAnswer='446', score=1}, QuestionModel{category='ARITHMETIC', questionText='Solve 24 ÷ 8 + 2.', choices=[5, 6, 8, 12], correctAnswer='12', score=1}, QuestionModel{category='ARITHMETIC', questionText='Cube root of 1331 is:', choices=[11, 13, 14, 12], correctAnswer='11', score=1}, QuestionModel{category='ARITHMETIC', questionText='A square has all its angles equal to:', choices=[180, 90, 75, 120], correctAnswer='90', score=1}, QuestionModel{category='ARITHMETIC', questionText='The square root of 5 is:', choices=[2.23, 2.25, 3, 2.5], correctAnswer='2.23', score=1}, QuestionModel{category='ARITHMETIC', questionText='Which of the following inequalities is true?', choices=[3/4 is less than 5/7, 2/3 is greater than 5/6, 5/8 is greater than 6/10, 4/5 is less than 2/9], correctAnswer='5/8 > 6/10', score=2}, QuestionModel{category='ARITHMETIC', questionText='What is the value of the expression 8x – 10 when x = 5?', choices=[30, 4, 3, 50], correctAnswer='30', score=2}, QuestionModel{category='ARITHMETIC', questionText='46.2 × 10-2 =', choices=[0.0462, 0.462, 4.62, 0.00462], correctAnswer='0.462', score=2}, QuestionModel{category='ARITHMETIC', questionText='3 1/3 – 2 2/5 =', choices=[1 1/2, 1/15, 14/15, 1 1/1], correctAnswer='14/15', score=2}, QuestionModel{category='ARITHMETIC', questionText='15 + 19 + 23 + 27 + 31 + 35 + 39', choices=[150, 189, 174, 168], correctAnswer='189', score=2}, QuestionModel{category='ARITHMETIC', questionText='7 / 20 =', choices=[0.035, 0.855, 3.35, 0.858], correctAnswer='0.858', score=2}, QuestionModel{category='ARITHMETIC', questionText='Common ration of  4, 12, 36, 108, ...', choices=[6, 3, -3, -6], correctAnswer='3', score=2}, QuestionModel{category='ARITHMETIC', questionText='75, ?, ?, ?, 135', choices=[90, 105, 120, 120, 105, 90, 85, 95, 105, 95, 115, 125], correctAnswer='90, 105, 120', score=3}, QuestionModel{category='ARITHMETIC', questionText='What is the common ratio of the sequence: 4,12,36,108,...?', choices=[2, 3, 4, 6], correctAnswer='3', score=3}, QuestionModel{category='ARITHMETIC', questionText='A store increases the price of a phone from $500 to $625. What is the percentage increase?', choices=[20%, 22.50%, 25%, 30%], correctAnswer='25%', score=3}, QuestionModel{category='ARITHMETIC', questionText='"What is the average (mean) of these numbers?
+            8, 14, 20, 26, 32, 38"', choices=[21, 23, 24, 26], correctAnswer='24', score=3}, QuestionModel{category='ARITHMETIC', questionText='Which two consecutive whole numbers does √77 ​lie between?', choices=[7 and 8, 8 and 9, 9 and 10, 10 and 11], correctAnswer='8 and 9', score=3}, QuestionModel{category='ARITHMETIC', questionText='What is 8 + 12?', choices=[18, 20, 21, 19], correctAnswer='20', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 50 - 18?', choices=[28, 32, 30, 31], correctAnswer='32', score=2}, QuestionModel{category='ARITHMETIC', questionText='What is 15 × 4?', choices=[60, 65, 70, 75], correctAnswer='60', score=2}, QuestionModel{category='ARITHMETIC', questionText='What is 96 ÷ 8?', choices=[10, 11, 12, 13], correctAnswer='12', score=2}, QuestionModel{category='ARITHMETIC', questionText='What is 75 + 39?', choices=[113, 114, 115, 116], correctAnswer='114', score=3}, QuestionModel{category='ARITHMETIC', questionText='What is 125 ÷ 25?', choices=[5, 4, 6, 7], correctAnswer='5', score=3}, QuestionModel{category='ARITHMETIC', questionText='What is 375 × 6?', choices=[2200, 2250, 2300, 2350], correctAnswer='2250', score=4}, QuestionModel{category='ARITHMETIC', questionText='What is 819 ÷ 27?', choices=[30, 31, 32, 33], correctAnswer='30', score=4}, QuestionModel{category='ARITHMETIC', questionText='What is 456 + 789?', choices=[1135, 1245, 1235, 1185], correctAnswer='1245', score=4}, QuestionModel{category='ARITHMETIC', questionText='What is 625 ÷ 25 × 12?', choices=[300, 315, 320, 325], correctAnswer='300', score=5}, QuestionModel{category='ARITHMETIC', questionText='What is 5 + 8?', choices=[13, 12, 15, 10], correctAnswer='13', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 12 - 7?', choices=[5, 6, 4, 3], correctAnswer='5', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 6 × 9?', choices=[54, 56, 60, 52], correctAnswer='54', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 36 ÷ 4?', choices=[9, 8, 7, 10], correctAnswer='9', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 15 + 9?', choices=[22, 23, 24, 21], correctAnswer='24', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 100 - 37?', choices=[67, 66, 65, 68], correctAnswer='63', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 14 × 5?', choices=[60, 70, 72, 75], correctAnswer='70', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 120 ÷ 6?', choices=[18, 19, 20, 21], correctAnswer='20', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 45 + 55?', choices=[95, 100, 105, 110], correctAnswer='100', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 50 ÷ 2?', choices=[30, 25, 20, 15], correctAnswer='25', score=1}]}
+Feb 18, 2025 10:11:57 PM Client.controller.GameController setQuestions
+INFO: 
+GameController: Loaded 40 shuffled questions for category: ARITHMETIC
+Feb 18, 2025 10:11:58 PM Client.controller.GameController checkAnswer
+INFO: 
+GameController: Correct answer for question: What is 50 ÷ 2?
+Feb 18, 2025 10:11:58 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 1
+Feb 18, 2025 10:11:59 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: What is 625 ÷ 25 × 12?
+Feb 18, 2025 10:11:59 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 10:12:00 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: Find the next term of the arithmetic sequence 177, 173, 169, 165,…
+Feb 18, 2025 10:12:00 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:26:34 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Attempting to connect to server...
+Feb 18, 2025 11:26:34 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Connected to server successfully!
+Feb 18, 2025 11:26:45 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: GET_QUESTION:ARITHMETIC
+Feb 18, 2025 11:26:45 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 11:26:45 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Question retrieved successfully.', data=[QuestionModel{category='ARITHMETIC', questionText='Find the next term of the arithmetic sequence 177, 173, 169, 165,…', choices=[160, 162, 161, 159], correctAnswer='162', score=1}, QuestionModel{category='ARITHMETIC', questionText='65 is what percent of 500', choices=[6, 8, 11, 13], correctAnswer='13', score=1}, QuestionModel{category='ARITHMETIC', questionText='9/10 - 3/10', choices=[3/4, 4/5, 4/15, 3/15], correctAnswer='3/4', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is the sum of 130 + 125 + 191?', choices=[335, 457, 446, 546], correctAnswer='446', score=1}, QuestionModel{category='ARITHMETIC', questionText='Solve 24 ÷ 8 + 2.', choices=[5, 6, 8, 12], correctAnswer='12', score=1}, QuestionModel{category='ARITHMETIC', questionText='Cube root of 1331 is:', choices=[11, 13, 14, 12], correctAnswer='11', score=1}, QuestionModel{category='ARITHMETIC', questionText='A square has all its angles equal to:', choices=[180, 90, 75, 120], correctAnswer='90', score=1}, QuestionModel{category='ARITHMETIC', questionText='The square root of 5 is:', choices=[2.23, 2.25, 3, 2.5], correctAnswer='2.23', score=1}, QuestionModel{category='ARITHMETIC', questionText='Which of the following inequalities is true?', choices=[3/4 is less than 5/7, 2/3 is greater than 5/6, 5/8 is greater than 6/10, 4/5 is less than 2/9], correctAnswer='5/8 > 6/10', score=2}, QuestionModel{category='ARITHMETIC', questionText='What is the value of the expression 8x – 10 when x = 5?', choices=[30, 4, 3, 50], correctAnswer='30', score=2}, QuestionModel{category='ARITHMETIC', questionText='46.2 × 10-2 =', choices=[0.0462, 0.462, 4.62, 0.00462], correctAnswer='0.462', score=2}, QuestionModel{category='ARITHMETIC', questionText='3 1/3 – 2 2/5 =', choices=[1 1/2, 1/15, 14/15, 1 1/1], correctAnswer='14/15', score=2}, QuestionModel{category='ARITHMETIC', questionText='15 + 19 + 23 + 27 + 31 + 35 + 39', choices=[150, 189, 174, 168], correctAnswer='189', score=2}, QuestionModel{category='ARITHMETIC', questionText='7 / 20 =', choices=[0.035, 0.855, 3.35, 0.858], correctAnswer='0.858', score=2}, QuestionModel{category='ARITHMETIC', questionText='Common ration of  4, 12, 36, 108, ...', choices=[6, 3, -3, -6], correctAnswer='3', score=2}, QuestionModel{category='ARITHMETIC', questionText='75, ?, ?, ?, 135', choices=[90, 105, 120, 120, 105, 90, 85, 95, 105, 95, 115, 125], correctAnswer='90, 105, 120', score=3}, QuestionModel{category='ARITHMETIC', questionText='What is the common ratio of the sequence: 4,12,36,108,...?', choices=[2, 3, 4, 6], correctAnswer='3', score=3}, QuestionModel{category='ARITHMETIC', questionText='A store increases the price of a phone from $500 to $625. What is the percentage increase?', choices=[20%, 22.50%, 25%, 30%], correctAnswer='25%', score=3}, QuestionModel{category='ARITHMETIC', questionText='"What is the average (mean) of these numbers?
+            8, 14, 20, 26, 32, 38"', choices=[21, 23, 24, 26], correctAnswer='24', score=3}, QuestionModel{category='ARITHMETIC', questionText='Which two consecutive whole numbers does √77 ​lie between?', choices=[7 and 8, 8 and 9, 9 and 10, 10 and 11], correctAnswer='8 and 9', score=3}, QuestionModel{category='ARITHMETIC', questionText='What is 8 + 12?', choices=[18, 20, 21, 19], correctAnswer='20', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 50 - 18?', choices=[28, 32, 30, 31], correctAnswer='32', score=2}, QuestionModel{category='ARITHMETIC', questionText='What is 15 × 4?', choices=[60, 65, 70, 75], correctAnswer='60', score=2}, QuestionModel{category='ARITHMETIC', questionText='What is 96 ÷ 8?', choices=[10, 11, 12, 13], correctAnswer='12', score=2}, QuestionModel{category='ARITHMETIC', questionText='What is 75 + 39?', choices=[113, 114, 115, 116], correctAnswer='114', score=3}, QuestionModel{category='ARITHMETIC', questionText='What is 125 ÷ 25?', choices=[5, 4, 6, 7], correctAnswer='5', score=3}, QuestionModel{category='ARITHMETIC', questionText='What is 375 × 6?', choices=[2200, 2250, 2300, 2350], correctAnswer='2250', score=4}, QuestionModel{category='ARITHMETIC', questionText='What is 819 ÷ 27?', choices=[30, 31, 32, 33], correctAnswer='30', score=4}, QuestionModel{category='ARITHMETIC', questionText='What is 456 + 789?', choices=[1135, 1245, 1235, 1185], correctAnswer='1245', score=4}, QuestionModel{category='ARITHMETIC', questionText='What is 625 ÷ 25 × 12?', choices=[300, 315, 320, 325], correctAnswer='300', score=5}, QuestionModel{category='ARITHMETIC', questionText='What is 5 + 8?', choices=[13, 12, 15, 10], correctAnswer='13', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 12 - 7?', choices=[5, 6, 4, 3], correctAnswer='5', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 6 × 9?', choices=[54, 56, 60, 52], correctAnswer='54', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 36 ÷ 4?', choices=[9, 8, 7, 10], correctAnswer='9', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 15 + 9?', choices=[22, 23, 24, 21], correctAnswer='24', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 100 - 37?', choices=[67, 66, 65, 68], correctAnswer='63', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 14 × 5?', choices=[60, 70, 72, 75], correctAnswer='70', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 120 ÷ 6?', choices=[18, 19, 20, 21], correctAnswer='20', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 45 + 55?', choices=[95, 100, 105, 110], correctAnswer='100', score=1}, QuestionModel{category='ARITHMETIC', questionText='What is 50 ÷ 2?', choices=[30, 25, 20, 15], correctAnswer='25', score=1}]}
+Feb 18, 2025 11:26:45 PM Client.controller.GameController setQuestions
+INFO: 
+GameController: Loaded 40 shuffled questions for category: ARITHMETIC
+Feb 18, 2025 11:26:46 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: What is 456 + 789?
+Feb 18, 2025 11:26:46 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:26:47 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: What is 15 × 4?
+Feb 18, 2025 11:26:47 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:26:48 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: Common ration of  4, 12, 36, 108, ...
+Feb 18, 2025 11:26:48 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:26:50 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: What is 14 × 5?
+Feb 18, 2025 11:26:50 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:26:51 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: What is 819 ÷ 27?
+Feb 18, 2025 11:26:51 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:26:52 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: Which two consecutive whole numbers does √77 ​lie between?
+Feb 18, 2025 11:26:52 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:26:53 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: Solve 24 ÷ 8 + 2.
+Feb 18, 2025 11:26:53 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:26:55 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: What is 8 + 12?
+Feb 18, 2025 11:26:55 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:26:56 PM Client.controller.GameController checkAnswer
+INFO: 
+GameController: Correct answer for question: "What is the average (mean) of these numbers?
+            8, 14, 20, 26, 32, 38"
+Feb 18, 2025 11:26:56 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 1
+Feb 18, 2025 11:26:57 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: 65 is what percent of 500
+Feb 18, 2025 11:26:57 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:26:58 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: Which of the following inequalities is true?
+Feb 18, 2025 11:26:58 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:26:59 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: Cube root of 1331 is:
+Feb 18, 2025 11:26:59 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 11:27:01 PM Client.controller.GameController checkAnswer
+INFO: 
+GameController: Correct answer for question: What is the sum of 130 + 125 + 191?
+Feb 18, 2025 11:27:01 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 1
+Feb 18, 2025 11:27:04 PM Client.controller.GameController handleForfeit
+INFO: 
+GameController: Player forfeited. Stopping game...
+Feb 18, 2025 11:27:04 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: PlayerModel{name='yuhj  ', score=0}
+Feb 18, 2025 11:27:04 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 11:27:04 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view
+Feb 18, 2025 11:27:05 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 11:27:05 PM Client.controller.GameController lambda$sendScoreToServer$4
+INFO: 
+GameController: Score successfully sent to the server.
+Feb 18, 2025 11:27:53 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Attempting to connect to server...
+Feb 18, 2025 11:27:53 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Connected to server successfully!
+Feb 18, 2025 11:28:01 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: GET_QUESTION:GEOMETRY
+Feb 18, 2025 11:28:01 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 11:28:01 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Question retrieved successfully.', data=[QuestionModel{category='GEOMETRY', questionText='What is the area of a rectangle with length 5 cm and width 3 cm?', choices=[15 cm², 10 cm², 8 cm², 5 cm²], correctAnswer='15 cm²', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the perimeter of a square with a side length of 6 cm?', choices=[24 cm, 12 cm, 36 cm, 6 cm], correctAnswer='24 cm', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the volume of a cube with side length 4 cm?', choices=[64 cm³, 16 cm³, 24 cm³, 32 cm³], correctAnswer='64 cm³', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the area of a circle with radius 7 cm?', choices=[49π cm², 14π cm², 49 cm², 14 cm²], correctAnswer='49π cm²', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the perimeter of a triangle with sides 3 cm, 4 cm, and 5 cm?', choices=[12 cm, 15 cm, 18 cm, 14 cm], correctAnswer='12 cm', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the area of a right triangle with a base of 6 cm and height of 8 cm?', choices=[24 cm², 48 cm², 36 cm², 18 cm²], correctAnswer='24 cm²', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the surface area of a sphere with radius 5 cm?', choices=[100π cm², 25π cm², 75π cm², 50π cm²], correctAnswer='100π cm²', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the area of a parallelogram with base 6 cm and height 4 cm?', choices=[24 cm², 18 cm², 20 cm², 36 cm²], correctAnswer='24 cm²', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the circumference of a circle with diameter 10 cm?', choices=[10π cm, 20π cm, 5π cm, 25π cm], correctAnswer='10π cm', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the sum of the interior angles of a hexagon?', choices=[720°, 1080°, 900°, 540°], correctAnswer='720°', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the area of a trapezoid with bases 8 cm and 12 cm, and height 5 cm?', choices=[50 cm², 40 cm², 60 cm², 30 cm²], correctAnswer='50 cm²', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the volume of a cylinder with radius 3 cm and height 7 cm?', choices=[63π cm³, 27π cm³, 21π cm³, 45π cm³], correctAnswer='63π cm³', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the area of a rhombus with diagonals of lengths 8 cm and 10 cm?', choices=[40 cm², 35 cm², 20 cm², 30 cm²], correctAnswer='40 cm²', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the volume of a cone with radius 4 cm and height 9 cm?', choices=[48π cm³, 36π cm³, 72π cm³, 54π cm³], correctAnswer='48π cm³', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the surface area of a rectangular prism with length 4 cm, width 3 cm, and height 5 cm?', choices=[94 cm², 70 cm², 56 cm², 75 cm²], correctAnswer='94 cm²', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the perimeter of a regular hexagon with a side length of 7 cm?', choices=[42 cm, 49 cm, 36 cm, 30 cm], correctAnswer='42 cm', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the volume of a pyramid with base area 16 cm² and height 9 cm?', choices=[144 cm³, 72 cm³, 128 cm³, 64 cm³], correctAnswer='48 cm³', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the area of an equilateral triangle with a side length of 6 cm?', choices=[15.59 cm², 12.99 cm², 18.47 cm², 19.39 cm²], correctAnswer='15.59 cm²', score=1}, QuestionModel{category='GEOMETRY', questionText='It is a two-dimensional surface.', choices=[plane, coordinate, line, point], correctAnswer='plane', score=1}, QuestionModel{category='GEOMETRY', questionText='The distance around a circle.', choices=[circumference, radius, perimeter, side], correctAnswer='circumference', score=1}, QuestionModel{category='GEOMETRY', questionText='What is the degree of a straight line?', choices=[360, 90, 75, 180], correctAnswer='180', score=1}, QuestionModel{category='GEOMETRY', questionText='Quadrilaterals where all the sides are the same length.', choices=[square, rectangle, rhombus, trapezoid], correctAnswer='rhombus', score=1}, QuestionModel{category='GEOMETRY', questionText='Any polygon with six sides.', choices=[pentagon, hexagon, heptagon, octagon], correctAnswer='hexagon', score=1}, QuestionModel{category='GEOMETRY', questionText='The sum of exterior angles of a polygon is equal to:', choices=[280, 150, 180, 360], correctAnswer='360', score=1}, QuestionModel{category='GEOMETRY', questionText='Identical in size and shape.', choices=[perpendicular, equilateral, congruent, parallel], correctAnswer='congruent', score=1}, QuestionModel{category='GEOMETRY', questionText='Sides that are the same length.', choices=[congruent, equilateral, perpendicular, parallel], correctAnswer='equilateral', score=1}, QuestionModel{category='GEOMETRY', questionText='Two lines in a two-dimensional space that do not meet.', choices=[perpendicular, equilateral, congruent, parallel], correctAnswer='parallel', score=2}, QuestionModel{category='GEOMETRY', questionText=' A 3D figure on which the faces are triangular and converge to a single point at the top.', choices=[prism, pyramid, sphere, triangle], correctAnswer='pyramid', score=2}, QuestionModel{category='GEOMETRY', questionText='A straight line that intersects a curve at two or more points.', choices=[side, sector, secant, segment], correctAnswer='secant', score=2}, QuestionModel{category='GEOMETRY', questionText='A particular aspect of life or activity.', choices=[side, sector, secant, segment], correctAnswer='sector', score=2}, QuestionModel{category='GEOMETRY', questionText='A round body whose surface is at all points equidistant from the center.', choices=[prism, pyramid, sphere, triangle], correctAnswer='sphere', score=2}, QuestionModel{category='GEOMETRY', questionText='The endpoint on one side and keeps going forever on the other.', choices=[ellipse, ray, chord, arc], correctAnswer='ray', score=2}, QuestionModel{category='GEOMETRY', questionText='The measure of the arc's central angle.', choices=[line segment, measure of an arc, corresponding angles, similar shape], correctAnswer='measure of an arc', score=2}, QuestionModel{category='GEOMETRY', questionText='Triangle PQR has angles in the ratio of 2:3:5. Which type of triangle is PQR?', choices=[acute, isosceles, right, obtuse], correctAnswer='obtuse', score=3}, QuestionModel{category='GEOMETRY', questionText='Which of the following could be the side lengths of a right triangle?', choices=[3, 13, and 14, 4, 5, and 6, 5, 10, and 15, 5, 12, and 13], correctAnswer='5, 12, and 13', score=3}, QuestionModel{category='GEOMETRY', questionText='The circumference of a circle is 30. What is its area?', choices=[15pi, 225pi, 250pi, 10pi], correctAnswer='225pi', score=3}, QuestionModel{category='GEOMETRY', questionText='A three-dimensional figure with identical ends', choices=[prism, pyramid, sphere, triangle], correctAnswer='prism', score=3}, QuestionModel{category='GEOMETRY', questionText='What is the sum of the measures of the interior angles of a hexagon?', choices=[720, 540, 180, 360], correctAnswer='720', score=3}]}
+Feb 18, 2025 11:28:01 PM Client.controller.GameController setQuestions
+INFO: 
+GameController: Loaded 38 shuffled questions for category: GEOMETRY
+Feb 18, 2025 11:28:02 PM Client.controller.GameController handleForfeit
+INFO: 
+GameController: Player forfeited. Stopping game...
+Feb 18, 2025 11:28:02 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: PlayerModel{name='yui', score=0}
+Feb 18, 2025 11:28:02 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 11:28:02 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 11:28:02 PM Client.controller.GameController lambda$sendScoreToServer$4
+INFO: 
+GameController: Score successfully sent to the server.
+Feb 18, 2025 11:28:02 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view

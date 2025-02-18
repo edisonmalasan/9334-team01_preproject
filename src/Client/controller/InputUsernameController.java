@@ -1,28 +1,24 @@
 package Client.controller;
 
-import Client.connection.AnsiFormatter;
+import common.AnsiFormatter;
 import Client.connection.ClientConnection;
+import Client.view.ViewManager;
+import common.LoggerSetup;
 import exception.ConnectionException;
 import exception.InvalidUsernameException;
-
 import exception.ServerNotRunningException;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InputUsernameController {
-    private static final Logger logger = Logger.getLogger(InputUsernameController.class.getName());
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -56,17 +52,16 @@ public class InputUsernameController {
         }
     }
 
-
     @FXML
     public void initialize() {
-        enterButton.setOnAction(event -> handleEnterButtonClick());
+        enterButton.setOnAction(event -> handleEnterButtonClick(event));
 
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
             errorLabel.setText("");
         });
     }
 
-    private void handleEnterButtonClick() {
+    private void handleEnterButtonClick(ActionEvent event) {
         String username = usernameField.getText().trim().toLowerCase();
 
         if (username.isEmpty()) {
@@ -75,31 +70,17 @@ public class InputUsernameController {
         }
 
         playerName = username;
-        switchToMainMenu();
+        logger.info("\nInputUsernameController: Username entered: " + playerName);
+        switchToMainMenu(event);
     }
 
     public static String getPlayerName() {
         return playerName;
     }
 
-
-    private void switchToMainMenu() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) enterButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Bomb Defusing Game");
-            stage.setResizable(false);
-            stage.show();
-
-            logger.info("Successfully switched to the Main Menu.");
-
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "Failed to load Main Menu", e);
-            errorLabel.setText("Failed to load Main Menu");
-        }
+    private void switchToMainMenu(ActionEvent event) {
+        logger.info("\nInputUsernameController: Switching to Main Menu.");
+        ViewManager.goTo(event, ViewManager.MAIN_MENU, "Main Menu");
     }
 
     private void handleException(Exception e) {
@@ -110,5 +91,4 @@ public class InputUsernameController {
             errorLabel.setText(e.getMessage());
         });
     }
-
 }

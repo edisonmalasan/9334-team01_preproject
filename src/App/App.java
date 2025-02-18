@@ -1,6 +1,6 @@
 package App;
 
-import Client.connection.AnsiFormatter;
+import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.utils.SoundUtility;
 import exception.ConnectionException;
@@ -34,7 +34,7 @@ public class App extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/input_username.fxml"));
             Parent root = fxmlLoader.load();
             //test
-            SoundUtility.playBackgroundMusic("audio/bgm.wav");
+            SoundUtility.playBackgroundMusic();
 
             try {
                 ClientConnection.getInstance().connect();

@@ -1,6 +1,7 @@
 package Client.controller;
 
-import Client.connection.AnsiFormatter;
+import common.AnsiFormatter;
+import common.LoggerSetup;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +22,7 @@ public class ScoreController {
     private Button backToMenuButton;
 
     private int finalScore;
-    private static final Logger logger = Logger.getLogger(ScoreController.class.getName());
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -50,9 +51,9 @@ public class ScoreController {
             stage.setResizable(false);
             stage.show();
 
-            logger.info("Successfully switched to the Main Menu.");
+            logger.info("ScoreController: Successfully switched to the Main Menu.");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Failed to load Main Menu", e);
+            logger.log(Level.SEVERE, "ScoreController: Failed to load Main Menu", e);
         }
     }
 }

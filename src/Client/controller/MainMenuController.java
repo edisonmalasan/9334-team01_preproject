@@ -1,9 +1,7 @@
 package Client.controller;
 
-import Client.connection.AnsiFormatter;
-import Client.view.CategoryView;
-import Client.view.MainMenuView;
-import Client.view.ModeView;
+import common.AnsiFormatter;
+import common.LoggerSetup;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainMenuController {
-    private static final Logger logger = Logger.getLogger(MainMenuController.class.getName());
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -31,24 +29,27 @@ public class MainMenuController {
     @FXML
     private Button quitButton;
 
-    private MainMenuView mainMenuView;
-
-    public void setMainMenuView(MainMenuView mainMenuView) {
-        this.mainMenuView = mainMenuView;
-    }
-
     @FXML
     public void initialize() {
-        playButton.setOnAction(actionEvent -> switchToModeMenu());
-        leaderboardButton.setOnAction(actionEvent -> switchToLeaderboard());
+        playButton.setOnAction(actionEvent -> {
+            logger.info("\nMainMenuController: Play button clicked.");
+            switchToModeMenu();
+        });
+
+        leaderboardButton.setOnAction(actionEvent -> {
+            logger.info("\nMainMenuController: Leaderboard button clicked.");
+            switchToLeaderboard();
+        });
+
         quitButton.setOnAction(actionEvent -> {
-            logger.info("Exiting application.");
+            logger.info("\nMainMenuController: Exiting application.");
             System.exit(0);
         });
     }
 
     private void switchToModeMenu() {
         try {
+            logger.info("\nMainMenuController: Switching to Mode Menu.");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/mode_menu.fxml"));
             Parent root = loader.load();
 
@@ -58,15 +59,15 @@ public class MainMenuController {
             stage.setResizable(false);
             stage.show();
 
-            logger.info("Switched to Mode Menu.");
+            logger.info("\nMainMenuController: Successfully switched to Mode Menu.");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Failed to load Mode Menu", e);
+            logger.log(Level.SEVERE, "\nMainMenuController: Failed to load Mode Menu", e);
         }
     }
 
-    
     private void switchToLeaderboard() {
         try {
+            logger.info("\nMainMenuController: Switching to Leaderboard.");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/leaderboard.fxml"));
             Parent root = loader.load();
 
@@ -76,9 +77,9 @@ public class MainMenuController {
             stage.setResizable(false);
             stage.show();
 
-            logger.info("Switched to Leaderboard.");
+            logger.info("\nMainMenuController: Successfully switched to Leaderboard.");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Failed to load Mode Menu", e);
+            logger.log(Level.SEVERE, "\nMainMenuController: Failed to load Leaderboard", e);
         }
     }
 }

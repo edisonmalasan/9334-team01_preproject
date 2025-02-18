@@ -1,12 +1,13 @@
 package Server.handler;
 
-import Client.connection.AnsiFormatter;
+import common.AnsiFormatter;
 import Client.model.PlayerModel;
 import Server.controller.LeaderboardControllerServer;
 import Server.controller.QuestionController;
 import Server.model.LeaderboardEntryModelServer;
 import Server.model.QuestionBankModel;
 import Server.controller.XMLStorageController;
+import common.LoggerSetup;
 import common.Response;
 import common.model.QuestionModel;
 
@@ -22,7 +23,7 @@ public class ClientHandler implements Runnable {
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
     private LeaderboardControllerServer leaderboardControllerServer;
-    private static final Logger logger = Logger.getLogger(ClientHandler.class.getName());
+    private static final Logger logger = LoggerSetup.setupLogger("ServerLogger", "Server/server.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -53,6 +54,11 @@ public class ClientHandler implements Runnable {
                     if (reqString.startsWith("GET_QUESTION:")) {
                         String category = reqString.split(":")[1].trim();
                         Response response = handleQuestionRequest(category);
+                        sendResponse(response);
+                    } else
+                    if (reqString.startsWith("GET_LEADERBOARD")){
+                        List<LeaderboardEntryModelServer> classicLeaderboard = LeaderboardControllerServer.getClassicLeaderboard();
+                        Response response = handleLeaderboardUpdate(classicLeaderboard);
                         sendResponse(response);
                     }
                 } else if (request instanceof PlayerModel) {
@@ -85,6 +91,22 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    private Response handleLeaderboardUpdate(List<?> list) {
+        try {
+            if (list == null) {
+                logger.severe("Received null player data.");
+                return new Response(false, "Received null player data.", null);
+            }
+
+            fileName = "data/classic_leaderboard.xml";
+            List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML(fileName);
+            return new Response(true, "Leaderboard displayed successfully.", leaderboard);
+        } catch (Exception e) {
+            logger.severe("Error updating player score: " + e.getMessage());
+            return new Response(false, "Error updating player score: " + e.getMessage(), null);
+        }
+    }
+
     private Response handlePlayerScoreUpdate(PlayerModel player) {
         try {
             if (player == null) {
@@ -104,6 +126,7 @@ public class ClientHandler implements Runnable {
                 fileName = "data/endless_leaderboard.xml";
                 leaderboard = XMLStorageController.loadLeaderboardFromXML(fileName);
             }
+
 
             boolean found = false;
             for (LeaderboardEntryModelServer entry : leaderboard) {

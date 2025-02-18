@@ -1,10 +1,9 @@
 package Server;
 
-import Client.connection.AnsiFormatter;
+import common.AnsiFormatter;
 import Server.model.QuestionBankModel;
 import Server.controller.LeaderboardControllerServer;
 
-import java.io.IOException;
 import java.util.logging.Logger;
 
 public class ServerMain {

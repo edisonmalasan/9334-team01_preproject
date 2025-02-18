@@ -1,7 +1,7 @@
 package Server;
 
-import Server.controller.AdminViewClassicController;
-import Server.view.AdminViewClassic;
+import Server.controller.AdminViewController;
+import Server.view.AdminView;
 import common.AnsiFormatter;
 import Server.model.QuestionBankModel;
 import Server.controller.LeaderboardControllerServer;
@@ -24,11 +24,11 @@ public class ServerMain {
 
         try {
             ServerHandler server = new ServerHandler(questionBank, leaderboardControllerServer);
-            AdminViewClassic classicView = new AdminViewClassic("data/classic_leaderboard.xml");
-            AdminViewClassicController classicController = new AdminViewClassicController(classicView);
+            AdminView classicView = new AdminView("data/classic_leaderboard.xml","Classic Leaderboards");
+            AdminViewController classicController = new AdminViewController(classicView);
             classicController.loadXML();
-            AdminViewClassic endlessView = new AdminViewClassic("data/endless_leaderboard.xml");
-            AdminViewClassicController endlessController = new AdminViewClassicController(endlessView);
+            AdminView endlessView = new AdminView("data/endless_leaderboard.xml","Endless Leaderboards");
+            AdminViewController endlessController = new AdminViewController(endlessView);
             endlessController.loadXML();
             server.start();
         } catch (Exception e) {

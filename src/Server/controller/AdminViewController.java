@@ -8,12 +8,12 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.*;
 import java.io.*;
 
-import Server.view.AdminViewClassic;
+import Server.view.AdminView;
 
-public class AdminViewClassicController {
-    private AdminViewClassic view;
+public class AdminViewController {
+    private AdminView view;
 
-    public AdminViewClassicController(AdminViewClassic view) {
+    public AdminViewController(AdminView view) {
         this.view = view;
 
         // Set up event listeners

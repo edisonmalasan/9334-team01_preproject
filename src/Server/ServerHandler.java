@@ -45,7 +45,18 @@ public class ServerHandler {
                 new Thread(clientHandler).start();
             }
         } catch (IOException e) {
-            logger.severe("Server Handler: ❌ Server error: " + e.getMessage());
+            logger.severe("Server error: " + e.getMessage());
+        }
+    }
+
+    public void stop() {
+        try {
+            if (serverSocket != null && !serverSocket.isClosed()) {
+                serverSocket.close();  // Close the server socket
+                logger.info("Server stopped.");
+            }
+        } catch (IOException e) {
+            logger.severe("Error stopping the server: " + e.getMessage());
         }
     }
 }

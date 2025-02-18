@@ -54,6 +54,11 @@ public class ClientHandler implements Runnable {
                         String category = reqString.split(":")[1].trim();
                         Response response = handleQuestionRequest(category);
                         sendResponse(response);
+                    } else
+                    if (reqString.startsWith("GET_LEADERBOARD")){
+                        List<LeaderboardEntryModelServer> classicLeaderboard = LeaderboardControllerServer.getClassicLeaderboard();
+                        Response response = handleLeaderboardUpdate(classicLeaderboard);
+                        sendResponse(response);
                     }
                 } else if (request instanceof PlayerModel) {
                     logger.info("Player score update request received.");
@@ -85,6 +90,22 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    private Response handleLeaderboardUpdate(List<?> list) {
+        try {
+            if (list == null) {
+                logger.severe("Received null player data.");
+                return new Response(false, "Received null player data.", null);
+            }
+
+            fileName = "data/classic_leaderboard.xml";
+            List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML(fileName);
+            return new Response(true, "Leaderboard displayed successfully.", leaderboard);
+        } catch (Exception e) {
+            logger.severe("Error updating player score: " + e.getMessage());
+            return new Response(false, "Error updating player score: " + e.getMessage(), null);
+        }
+    }
+
     private Response handlePlayerScoreUpdate(PlayerModel player) {
         try {
             if (player == null) {
@@ -104,6 +125,7 @@ public class ClientHandler implements Runnable {
                 fileName = "data/endless_leaderboard.xml";
                 leaderboard = XMLStorageController.loadLeaderboardFromXML(fileName);
             }
+
 
             boolean found = false;
             for (LeaderboardEntryModelServer entry : leaderboard) {

@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -32,9 +33,9 @@ public class LeaderboardControllerClient {
 
 
     // FXML Elements
-     public TableColumn classicRank;
-     public TableColumn endlessRank;
-     public Button returnButton;
+    public TableColumn classicRank;
+    public TableColumn endlessRank;
+    public Button returnButton;
     @FXML
     private TableView<LeaderboardEntryModelServer> classicTable;
 
@@ -74,7 +75,7 @@ public class LeaderboardControllerClient {
         this.clientConnection = ClientConnection.getInstance();
     }
 
-    public void initialize() {
+    public void initialize() throws IOException, ClassNotFoundException {
         // Initialize table columns for Classic leaderboard
         classicUsername.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPlayerName()));
         classicScore.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getScore()).asObject());
@@ -85,7 +86,7 @@ public class LeaderboardControllerClient {
 
         // Initialize leaderboard data (this data would be fetched from a server in a real-world scenario)
         classicLeaderboard = FXCollections.observableArrayList(
-                LeaderboardControllerServer.getClassicLeaderboard()
+                getLeaderboard()
         );
 
         endlessLeaderboard = FXCollections.observableArrayList(
@@ -208,8 +209,8 @@ public class LeaderboardControllerClient {
         }
     }
 
-    public String getLeaderboard() {
-        List<LeaderboardEntryModelClient> leaderboardEntryModelClientList;
+    public List<LeaderboardEntryModelServer> getLeaderboard() {
+        List<LeaderboardEntryModelServer> leaderboardEntryModelServerList = new ArrayList<>();
         try {
             // send obj req
             clientConnection.sendObject("GET_LEADERBOARD");
@@ -217,37 +218,17 @@ public class LeaderboardControllerClient {
             // receive the response obj from server
             Response response = (Response) clientConnection.receiveObject();
 
-            if (response.isSuccess()) {
+            if (response.isSuccess() && response.getData() instanceof List) {
+                leaderboardEntryModelServerList = (List<LeaderboardEntryModelServer>) response.getData();
                 System.out.println(response.getData().toString());
-                return response.getData().toString();
-            } else {
-                return "Error fetching leaderboard: " + response.getMessage();
             }
+            return leaderboardEntryModelServerList;
         } catch (IOException | ClassNotFoundException e) {
-            return "Unable to connect to the server. Please try again later.";
+            return leaderboardEntryModelServerList;
         }
     }
 
-    public String addScore(String playerName, int score) {
-        try {
-            // create a new instance of leaderboardentrymodelclient
-            LeaderboardEntryModelClient entry = new LeaderboardEntryModelClient(playerName, score);
 
-            // send the entry object to the server
-            clientConnection.sendObject(entry);
-
-            // receive response from the server
-            Response response = (Response) clientConnection.receiveObject();
-
-            if (response.isSuccess()) {
-                return "Score added successfully.";
-            } else {
-                return "Error adding score: " + response.getMessage();
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            return "Error: " + e.getMessage();
-        }
-    }
 
     public void closeConnection() {
         clientConnection.close();

@@ -56,6 +56,7 @@ public class MainMenuController {
         }
     }
 
+
     private void switchToLeaderboard() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/leaderboard.fxml"));

@@ -669,7 +669,6 @@
 
     <question category="LOGIC">
         <text>"What comes next in the pattern?
-
             A, B, C, D, ?"</text>
         <choice>E</choice>
         <choice>F</choice>
@@ -691,7 +690,6 @@
 
     <question category="LOGIC">
         <text>"What number should replace the question mark?
-
             5, 10, 15, 20, ?, 30"</text>
         <choice>22</choice>
         <choice>24</choice>
@@ -775,7 +773,6 @@
 
     <question category="LOGIC">
         <text>"What comes next?
-
             1, 4, 9, 16, 25, ?"</text>
         <choice>30</choice>
         <choice>32</choice>
@@ -1019,7 +1016,6 @@
 
     <question category="ARITHMETIC">
         <text>"What is the average (mean) of these numbers?
-
             8, 14, 20, 26, 32, 38"</text>
         <choice>21</choice>
         <choice>23</choice>
@@ -1037,6 +1033,205 @@
         <choice>10 and 11</choice>
         <answer>8 and 9</answer>
         <score>3</score>
+    </question>
+    <question category="ARITHMETIC">
+        <text>What is 8 + 12?</text>
+        <choice>18</choice>
+        <choice>20</choice>
+        <choice>21</choice>
+        <choice>19</choice>
+        <answer>20</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 50 - 18?</text>
+        <choice>28</choice>
+        <choice>32</choice>
+        <choice>30</choice>
+        <choice>31</choice>
+        <answer>32</answer>
+        <score>2</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 15 × 4?</text>
+        <choice>60</choice>
+        <choice>65</choice>
+        <choice>70</choice>
+        <choice>75</choice>
+        <answer>60</answer>
+        <score>2</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 96 ÷ 8?</text>
+        <choice>10</choice>
+        <choice>11</choice>
+        <choice>12</choice>
+        <choice>13</choice>
+        <answer>12</answer>
+        <score>2</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 75 + 39?</text>
+        <choice>113</choice>
+        <choice>114</choice>
+        <choice>115</choice>
+        <choice>116</choice>
+        <answer>114</answer>
+        <score>3</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 125 ÷ 25?</text>
+        <choice>5</choice>
+        <choice>4</choice>
+        <choice>6</choice>
+        <choice>7</choice>
+        <answer>5</answer>
+        <score>3</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 375 × 6?</text>
+        <choice>2200</choice>
+        <choice>2250</choice>
+        <choice>2300</choice>
+        <choice>2350</choice>
+        <answer>2250</answer>
+        <score>4</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 819 ÷ 27?</text>
+        <choice>30</choice>
+        <choice>31</choice>
+        <choice>32</choice>
+        <choice>33</choice>
+        <answer>30</answer>
+        <score>4</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 456 + 789?</text>
+        <choice>1135</choice>
+        <choice>1245</choice>
+        <choice>1235</choice>
+        <choice>1185</choice>
+        <answer>1245</answer>
+        <score>4</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 625 ÷ 25 × 12?</text>
+        <choice>300</choice>
+        <choice>315</choice>
+        <choice>320</choice>
+        <choice>325</choice>
+        <answer>300</answer>
+        <score>5</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 5 + 8?</text>
+        <choice>13</choice>
+        <choice>12</choice>
+        <choice>15</choice>
+        <choice>10</choice>
+        <answer>13</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 12 - 7?</text>
+        <choice>5</choice>
+        <choice>6</choice>
+        <choice>4</choice>
+        <choice>3</choice>
+        <answer>5</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 6 × 9?</text>
+        <choice>54</choice>
+        <choice>56</choice>
+        <choice>60</choice>
+        <choice>52</choice>
+        <answer>54</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 36 ÷ 4?</text>
+        <choice>9</choice>
+        <choice>8</choice>
+        <choice>7</choice>
+        <choice>10</choice>
+        <answer>9</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 15 + 9?</text>
+        <choice>22</choice>
+        <choice>23</choice>
+        <choice>24</choice>
+        <choice>21</choice>
+        <answer>24</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 100 - 37?</text>
+        <choice>67</choice>
+        <choice>66</choice>
+        <choice>65</choice>
+        <choice>68</choice>
+        <answer>63</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 14 × 5?</text>
+        <choice>60</choice>
+        <choice>70</choice>
+        <choice>72</choice>
+        <choice>75</choice>
+        <answer>70</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 120 ÷ 6?</text>
+        <choice>18</choice>
+        <choice>19</choice>
+        <choice>20</choice>
+        <choice>21</choice>
+        <answer>20</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 45 + 55?</text>
+        <choice>95</choice>
+        <choice>100</choice>
+        <choice>105</choice>
+        <choice>110</choice>
+        <answer>100</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ARITHMETIC">
+        <text>What is 50 ÷ 2?</text>
+        <choice>30</choice>
+        <choice>25</choice>
+        <choice>20</choice>
+        <choice>15</choice>
+        <answer>25</answer>
+        <score>1</score>
     </question>
 
     <question category="TRIGONOMETRY">
@@ -1237,5 +1432,205 @@
         <choice>40 cm</choice>
         <answer>20 cm</answer>
         <score>3</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>Find the value of sin(30°).</text>
+        <choice>0.5</choice>
+        <choice>1</choice>
+        <choice>0.866</choice>
+        <choice>0.707</choice>
+        <answer>0.5</answer>
+        <score>2</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of cos(45°)?</text>
+        <choice>1</choice>
+        <choice>0.5</choice>
+        <choice>0.707</choice>
+        <choice>0.866</choice>
+        <answer>0.707</answer>
+        <score>2</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>Find the value of tan(60°).</text>
+        <choice>1.732</choice>
+        <choice>1</choice>
+        <choice>0.577</choice>
+        <choice>0.707</choice>
+        <answer>1.732</answer>
+        <score>3</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>Find the value of sin(90°).</text>
+        <choice>1</choice>
+        <choice>0.5</choice>
+        <choice>0.707</choice>
+        <choice>0.866</choice>
+        <answer>1</answer>
+        <score>3</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>If tan(θ) = 1, what is the value of θ?</text>
+        <choice>45°</choice>
+        <choice>30°</choice>
+        <choice>60°</choice>
+        <choice>90°</choice>
+        <answer>45°</answer>
+        <score>3</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of cos(0°)?</text>
+        <choice>1</choice>
+        <choice>0</choice>
+        <choice>-1</choice>
+        <choice>0.5</choice>
+        <answer>1</answer>
+        <score>1</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>If sin(θ) = 0.5, what is the value of θ?</text>
+        <choice>30°</choice>
+        <choice>45°</choice>
+        <choice>60°</choice>
+        <choice>90°</choice>
+        <answer>30°</answer>
+        <score>3</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the Pythagorean identity for sine and cosine?</text>
+        <choice>sin²(θ) + cos²(θ) = 1</choice>
+        <choice>sin²(θ) + tan²(θ) = 1</choice>
+        <choice>sin²(θ) - cos²(θ) = 1</choice>
+        <choice>tan²(θ) + cos²(θ) = 1</choice>
+        <answer>sin²(θ) + cos²(θ) = 1</answer>
+        <score>3</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>Find the value of cos(60°).</text>
+        <choice>0.5</choice>
+        <choice>1</choice>
+        <choice>0.707</choice>
+        <choice>0.866</choice>
+        <answer>0.5</answer>
+        <score>3</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the cotangent of 45°?</text>
+        <choice>1</choice>
+        <choice>0.5</choice>
+        <choice>0.707</choice>
+        <choice>2</choice>
+        <answer>1</answer>
+        <score>3</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of sin(0°)?</text>
+        <choice>0</choice>
+        <choice>1</choice>
+        <choice>0.5</choice>
+        <choice>2</choice>
+        <answer>0</answer>
+        <score>1</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of cos(0°)?</text>
+        <choice>0</choice>
+        <choice>1</choice>
+        <choice>0.5</choice>
+        <choice>2</choice>
+        <answer>1</answer>
+        <score>1</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of tan(0°)?</text>
+        <choice>0</choice>
+        <choice>1</choice>
+        <choice>0.5</choice>
+        <choice>Undefined</choice>
+        <answer>0</answer>
+        <score>1</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of sin(90°)?</text>
+        <choice>0</choice>
+        <choice>1</choice>
+        <choice>0.5</choice>
+        <choice>2</choice>
+        <answer>1</answer>
+        <score>1</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of cos(90°)?</text>
+        <choice>0</choice>
+        <choice>1</choice>
+        <choice>0.5</choice>
+        <choice>2</choice>
+        <answer>0</answer>
+        <score>1</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of tan(45°)?</text>
+        <choice>0.5</choice>
+        <choice>1</choice>
+        <choice>2</choice>
+        <choice>0.707</choice>
+        <answer>1</answer>
+        <score>1</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of sin(45°)?</text>
+        <choice>0.5</choice>
+        <choice>0.707</choice>
+        <choice>1</choice>
+        <choice>0.866</choice>
+        <answer>0.707</answer>
+        <score>1</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of cos(60°)?</text>
+        <choice>0.5</choice>
+        <choice>1</choice>
+        <choice>0.707</choice>
+        <choice>0.866</choice>
+        <answer>0.5</answer>
+        <score>1</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of tan(30°)?</text>
+        <choice>0.577</choice>
+        <choice>0.5</choice>
+        <choice>1</choice>
+        <choice>0.866</choice>
+        <answer>0.577</answer>
+        <score>1</score>
+    </question>
+
+    <question category="TRIGONOMETRY">
+        <text>What is the value of sin(60°)?</text>
+        <choice>0.5</choice>
+        <choice>0.707</choice>
+        <choice>1</choice>
+        <choice>0.866</choice>
+        <answer>0.866</answer>
+        <score>1</score>
     </question>
 </questions>

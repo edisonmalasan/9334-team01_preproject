@@ -14,11 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InputUsernameController {
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -80,7 +79,7 @@ public class InputUsernameController {
 
     private void switchToMainMenu(ActionEvent event) {
         logger.info("\nInputUsernameController: Switching to Main Menu.");
-        ViewManager.goTo(event, ViewManager.MAIN_MENU, "Main Menu");
+        ViewManager.goTo(event, ViewManager.MAIN_MENU, "Bomb Defusing Game");
     }
 
     private void handleException(Exception e) {

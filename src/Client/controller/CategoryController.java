@@ -1,5 +1,6 @@
 package Client.controller;
 
+import Client.view.ViewManager;
 import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import common.LoggerSetup;
@@ -8,11 +9,7 @@ import common.model.QuestionModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,7 +37,7 @@ public class CategoryController {
     private static String selectedCategory;
     private boolean isEndlessMode = false;
 
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -62,7 +59,7 @@ public class CategoryController {
         logicButton.setOnAction(event -> requestQuestionFromServer("LOGIC", event));
         probabilityButton.setOnAction(event -> requestQuestionFromServer("PROBABILITY", event));
         trigoButton.setOnAction(event -> requestQuestionFromServer("TRIGONOMETRY", event));
-        returnButton.setOnAction(event -> returnToMainMenu());
+        returnButton.setOnAction(event -> ViewManager.goTo(event, ViewManager.MAIN_MENU, "Bomb Defusing Game"));
     }
 
     private void requestQuestionFromServer(String category, ActionEvent event) {
@@ -104,27 +101,20 @@ public class CategoryController {
     }
 
     private void switchToGameplay(String category, List<QuestionModel> questions, ActionEvent event, boolean isEndlessMode) {
-        try {
-            FXMLLoader loader;
-            if (isEndlessMode) {
-                loader = new FXMLLoader(getClass().getResource("/views/endless_game.fxml"));
-                logger.info("\nCategoryController: Switched to Endless Mode gameplay.");
-            } else {
-                loader = new FXMLLoader(getClass().getResource("/views/classic_game.fxml"));
-                logger.info("\nCategoryController: Switched to Classic Mode gameplay.");
-            }
-            Parent root = loader.load();
-
-            GameController gameController = loader.getController();
-            gameController.setQuestions(category, questions, isEndlessMode);
-
-            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Game - " + category);
-            stage.setResizable(false);
-            stage.show();
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "\nCategoryController: Failed to load gameplay screen.", e);
+        if (isEndlessMode) {
+            // use ViewManager to switch to Endless Game
+            ViewManager.goTo(event, ViewManager.ENDLESS_GAME, "Endless Mode Game", loader -> {
+                GameController gameController = loader.getController();
+                gameController.setQuestions(category, questions);
+            });
+            logger.info("\nCategoryController: Switched to Endless Mode gameplay.");
+        } else {
+            // use ViewManager to switch to Classic Game
+            ViewManager.goTo(event, ViewManager.CLASSIC_GAME, "Classic Mode Game", loader -> {
+                GameController gameController = loader.getController();
+                gameController.setQuestions(category, questions);
+            });
+            logger.info("\nCategoryController: Switched to Classic Mode gameplay.");
         }
     }
 
@@ -132,24 +122,7 @@ public class CategoryController {
         Platform.runLater(action);
     }
 
-    public void returnToMainMenu() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) returnButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Bomb Defusing Game");
-            stage.setResizable(false);
-            stage.show();
-
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "\nCategoryController: Error returning to Main Menu.", e);
-        }
-    }
-
     public void setEndlessMode(boolean isEndlessMode) {
         this.isEndlessMode = isEndlessMode;
     }
-
 }

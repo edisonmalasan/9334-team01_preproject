@@ -15,8 +15,8 @@ public class AdminView extends JFrame {
     private JTextField nameField, scoreField;
     private JButton saveButton, deleteButton, refreshButton;  // Add refresh button
 
-    public AdminView(String xmlFilePath) {
-        super("Admin View");
+    public AdminView(String xmlFilePath, String title) {
+        super(title);
         this.xmlFile = new File(xmlFilePath);
 
         // Initialize GUI components

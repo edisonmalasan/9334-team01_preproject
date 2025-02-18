@@ -1,5 +1,6 @@
 package Client.controller;
 
+import Client.view.ViewManager;
 import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.model.ComboModel;
@@ -13,16 +14,12 @@ import exception.ConnectionException;
 import exception.ThreadInterruptedException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,15 +56,13 @@ public abstract class GameController {
     protected BombUtility bombUtility;
     protected ComboModel comboModel;
     protected int finalScore = 0;
-    protected boolean checkMode;
+    protected boolean checkMode = false;
 
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
     }
-
-
 
     public GameController() {
         try {
@@ -77,13 +72,12 @@ public abstract class GameController {
         }
     }
 
-    public void setQuestions(String category, List<QuestionModel> questions, boolean isEndlessMode) {
+    public void setQuestions(String category, List<QuestionModel> questions) {
         this.questions = new ArrayList<>(questions);
-        this.checkMode = isEndlessMode;
-        Collections.shuffle(this.questions);  //shuffled questions
+        Collections.shuffle(this.questions);  // Shuffling questions
         this.comboModel = new ComboModel();
         logger.info("\nGameController: Loaded " + questions.size() + " shuffled questions for category: " + category);
-        this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons , isEndlessMode);
+        this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons, checkMode);
         this.qteUtility = new QTEUtility(questions.size(), bombUtility::applyPenalty, QTEPane);
         showNextQuestion();
     }
@@ -154,27 +148,14 @@ public abstract class GameController {
     }
 
     protected void switchToScoreView() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/score_view.fxml"));
-            Parent root = loader.load();
+        sendScoreToServer(finalScore);
 
+        ViewManager.goTo(null, ViewManager.SCORE_VIEW, "Score View", loader -> {
             ScoreController scoreController = loader.getController();
-            scoreController.setScore(finalScore);
+            scoreController.setScore(finalScore);  // passing the score to the ScoreController
+        });
 
-            // Send the player's score to the server
-            sendScoreToServer(finalScore);
-
-            Stage stage = (Stage) timerLabel.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Score");
-            stage.setResizable(false);
-            stage.show();
-
-            logger.info("\nGameController: Successfully switched to the Score view");
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "\nGameController: Failed to load Score view", e);
-            throw new RuntimeException(e);
-        }
+        logger.info("\nGameController: Successfully switched to the Score view");
     }
 
     private void sendScoreToServer(int score) {

@@ -2,7 +2,6 @@ package Client.controller;
 
 import Client.connection.ClientConnection;
 import Client.model.LeaderboardEntryModelClient;
-import Server.controller.LeaderboardControllerServer;
 import Server.model.LeaderboardEntryModelServer;
 import common.Response;
 import exception.ConnectionException;
@@ -22,7 +21,6 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.stage.Stage;
@@ -213,7 +211,7 @@ public class LeaderboardControllerClient {
         List<LeaderboardEntryModelServer> leaderboardEntryModelServerList = new ArrayList<>();
         try {
             // send obj req
-            clientConnection.sendObject("GET_LEADERBOARD");
+            clientConnection.sendObject("GET_LEADERBOARD_CLASSIC");
 
             // receive the response obj from server
             Response response = (Response) clientConnection.receiveObject();

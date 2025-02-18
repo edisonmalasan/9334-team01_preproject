@@ -11,15 +11,10 @@ public class LoggerSetup {
 
         try {
             File logFile = new File(filePath);
+
             File logDir = logFile.getParentFile();
-
-
             if (logDir != null && !logDir.exists()) {
                 logDir.mkdirs();
-            }
-
-            if (!logFile.exists()) {
-                logFile.createNewFile();
             }
 
             FileHandler fileHandler = new FileHandler(filePath, true);

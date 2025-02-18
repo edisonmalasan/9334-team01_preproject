@@ -13,12 +13,9 @@ public class EndlessGameController extends GameController {
     @Override
     protected void showNextQuestion() {
         if (currentQuestionIndex >= questions.size()) {
-            questionLabel.setText("🎉 Game Over!");
-            choicesBox.getChildren().clear();
-            bombImage.setVisible(false);
-            bombUtility.stopBombAnimation();
-            switchToScoreView();
-            return;
+            Collections.shuffle(questions);
+            //reset index to stop game from ending prematurely
+            currentQuestionIndex = 0;
         }
 
         QuestionModel question = questions.get(currentQuestionIndex);

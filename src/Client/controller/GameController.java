@@ -1,6 +1,7 @@
 package Client.controller;
 
 import Client.view.ViewManager;
+import Server.handler.ClientHandler;
 import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.model.ComboModel;
@@ -59,6 +60,7 @@ public abstract class GameController {
     protected boolean checkMode = false;
 
     private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
+//    private static final Logger logger = Logger.getLogger(GameController.class.getName());
 
     static {
         AnsiFormatter.enableColorLogging(logger);

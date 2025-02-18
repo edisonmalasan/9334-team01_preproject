@@ -1,4 +1,4 @@
-package Client.utility;
+package Client.utils;
 
 import exception.ThreadInterruptedException;
 import javafx.animation.*;
@@ -11,9 +11,6 @@ import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import java.util.List;
 
-/**
- * Represents the bomb and its animation
- */
 public class BombUtility {
     private final ImageView bombImage;
     private final ImageView flame;
@@ -25,7 +22,7 @@ public class BombUtility {
     private Timeline wickAnimation;
     private TranslateTransition flameFlicker;
     private Timeline bombTimer;
-    private final int totalTime = 90;
+    private final int totalTime = 120;
     private int remainingTime;
     private boolean hasExploded = false;
     private boolean isRunning = false;

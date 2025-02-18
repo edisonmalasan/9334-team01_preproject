@@ -2,9 +2,6 @@ package Server.model;
 
 import java.io.Serializable;
 
-/**
- * Represents an entry to the leaderboard (server side)
- */
 public class LeaderboardEntryModelServer implements Serializable {
     private String playerName;
     private int score;

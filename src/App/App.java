@@ -2,10 +2,11 @@ package App;
 
 import common.AnsiFormatter;
 import Client.connection.ClientConnection;
-import Client.utility.SoundUtility;
+import Client.utils.SoundUtility;
 import exception.ConnectionException;
 import exception.FXMLLoadingException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,9 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-/**
- * Main class for starting client
- */
+
 public class App extends Application {
     private static final Logger logger = Logger.getLogger(App.class.getName());
 
@@ -53,8 +52,10 @@ public class App extends Application {
 
             primaryStage.setOnCloseRequest(event -> {
                 System.out.println("Closing application...");
+                Platform.exit();
                 System.exit(0);
             });
+
         } catch (IOException e) {
             logger.log(Level.SEVERE, "❌ Failed to load FXML: input_username.fxml", e);
             throw new FXMLLoadingException("input_username.fxml", e);

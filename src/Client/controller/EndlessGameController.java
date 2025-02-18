@@ -7,9 +7,7 @@ import javafx.scene.control.Button;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-/**
- * Manipulates endless game logic
- */
+
 public class EndlessGameController extends GameController {
     @Override
     protected void showNextQuestion() {

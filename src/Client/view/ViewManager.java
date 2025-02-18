@@ -12,9 +12,6 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Manages connection with FXML files
- */
 public class ViewManager {
     private static final Logger logger = Logger.getLogger(ViewManager.class.getName());
 

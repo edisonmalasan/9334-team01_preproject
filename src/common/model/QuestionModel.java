@@ -2,9 +2,7 @@ package common.model;
 
 import java.io.Serializable;
 import java.util.List;
-/**
- * Represents a question
- */
+
 public class QuestionModel implements Serializable {
     private static final long serialVersionUID = 1L;
 

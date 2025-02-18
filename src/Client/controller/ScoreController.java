@@ -14,9 +14,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Manipulates score view
- */
 public class ScoreController {
 
     @FXML

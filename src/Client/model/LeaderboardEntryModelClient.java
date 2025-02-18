@@ -2,9 +2,6 @@ package Client.model;
 
 import java.io.Serializable;
 
-/**
- * Represents a leaderboard entry (client side)
- */
 public class LeaderboardEntryModelClient implements Serializable {
     private String playerName;
     private int score;

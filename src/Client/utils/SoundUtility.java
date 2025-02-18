@@ -1,4 +1,4 @@
-package Client.utility;
+package Client.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +10,6 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-/**
- * Manipulates sounds in the game
- */
 public class SoundUtility {
     // to store current position
     Long currentFrame;

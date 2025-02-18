@@ -10,9 +10,6 @@ import javafx.scene.control.Button;
 
 import java.util.logging.Logger;
 
-/**
- * Manipulates mode view
- */
 public class ModeController {
 //    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
     private static final Logger logger = Logger.getLogger(ModeController.class.getName());
@@ -52,8 +49,8 @@ public class ModeController {
 
             logger.info("\nModeController: Switching to Endless Mode.");
 
-            ViewManager.goTo(actionEvent, ViewManager.ENDLESS_GAME, "Endless Mode", loader -> {
-                CategoryController categoryController = new CategoryController();
+            ViewManager.goTo(actionEvent, ViewManager.CATEGORY_MENU, "Select a Category", loader -> {
+                CategoryController categoryController = loader.getController();
                 categoryController.setEndlessMode(true); // set endless mode flag
             });
 

@@ -1,0 +1,753 @@
+Feb 18, 2025 5:04:20 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: PlayerModel{name='ril', score=2}
+Feb 18, 2025 5:04:20 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 5:04:20 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view
+Feb 18, 2025 5:04:20 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 5:04:20 PM Client.controller.GameController lambda$sendScoreToServer$3
+INFO: 
+GameController: Score successfully sent to the server.
+Feb 18, 2025 5:04:23 PM Client.controller.ScoreController switchToMainMenu
+INFO: ScoreController: Successfully switched to the Main Menu.
+Feb 18, 2025 5:04:24 PM Client.controller.MainMenuController lambda$initialize$0
+INFO: 
+MainMenuController: Play button clicked.
+Feb 18, 2025 5:04:24 PM Client.controller.MainMenuController switchToModeMenu
+INFO: 
+MainMenuController: Switching to Mode Menu.
+Feb 18, 2025 5:04:24 PM Client.controller.MainMenuController switchToModeMenu
+INFO: 
+MainMenuController: Successfully switched to Mode Menu.
+Feb 18, 2025 5:04:25 PM Client.controller.ModeController lambda$initialize$1
+INFO: 
+ModeController: Endless button clicked.
+Feb 18, 2025 5:04:25 PM Client.controller.ModeController switchToEndlessMode
+INFO: 
+ModeController: Switching to Endless Mode.
+Feb 18, 2025 5:04:26 PM Client.controller.ModeController switchToEndlessMode
+INFO: 
+ModeController: Successfully switched to Category Selection for Endless Mode.
+Feb 18, 2025 5:04:26 PM Client.controller.CategoryController requestQuestionFromServer
+INFO: 
+CategoryController: Requesting questions for category: PROBABILITY
+Feb 18, 2025 5:04:26 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: GET_QUESTION:PROBABILITY
+Feb 18, 2025 5:04:26 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 5:04:27 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Question retrieved successfully.', data=[QuestionModel{category='PROBABILITY', questionText='A chocolate bar costs c pence and a drink costs d pence. What is the expression for the cost of 2 chocolate bars and 2 drinks?', choices=[c + d, 2c + d, 2c * 2d, 2c - 2d], correctAnswer='2c + 2d', score=1}, QuestionModel{category='PROBABILITY', questionText='If a book costs $5 and you buy 3 books, how much do you pay in total?', choices=[$10, $15, $20, $25], correctAnswer='$15', score=1}, QuestionModel{category='PROBABILITY', questionText='A rectangle has a length of 8 cm and a width of 5 cm. What is its area?', choices=[13 cm^2, 25 cm^2, 40 cm^2, 30 cm^2], correctAnswer='30 cm^2', score=1}, QuestionModel{category='PROBABILITY', questionText='What is 25% of 80?', choices=[20, 10, 25, 15], correctAnswer='30 cm^2', score=1}, QuestionModel{category='PROBABILITY', questionText='A shop sells apples for $1.50 each. If you buy 4 apples, how much do you spend?', choices=[$4.50, $6.00, $6.50, $5.00], correctAnswer='$6.00', score=1}, QuestionModel{category='PROBABILITY', questionText='If 5 pencils cost $10, how much does 1 pencil cost?', choices=[$5, $4, $3, $2], correctAnswer='$2', score=1}, QuestionModel{category='PROBABILITY', questionText='If today is Monday, what day will it be in 10 days?', choices=[Thursday, Friday, Saturday, Sunday], correctAnswer='Saturday', score=1}, QuestionModel{category='PROBABILITY', questionText='John has 12 marbles. He gives 4 marbles to his friend. How many marbles does he have left?', choices=[4, 8, 12, 16], correctAnswer='12', score=1}, QuestionModel{category='PROBABILITY', questionText='Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. What is the monthly break-even point?', choices=[100 bags, 150 bags, 225 bags, 80 bags], correctAnswer='100 bags', score=2}, QuestionModel{category='PROBABILITY', questionText='Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. To make a profit of $150, how many bags of cotton candy must be sold?', choices=[100 bags, 150 bags, 225 bags, 80 bags], correctAnswer='200 bags', score=2}, QuestionModel{category='PROBABILITY', questionText='A train travels 60 km per hour. How far does it travel in 2.5 hours?', choices=[100 km, 120 km, 150 km, 180 km], correctAnswer='150 km', score=2}, QuestionModel{category='PROBABILITY', questionText='A store sells a shirt for $25 with a 20% discount. What is the final price?', choices=[$15, $20, $22, $18], correctAnswer='$20', score=2}, QuestionModel{category='PROBABILITY', questionText='A pizza is cut into 8 equal slices. If you eat 3 slices, what fraction of the pizza is left?', choices=[3/8, 5/8, 6/8, 1/8], correctAnswer='5/8', score=2}, QuestionModel{category='PROBABILITY', questionText='A shop sells a book for $30. If sales tax is 10%, what is the total price?', choices=[$33, $35, $40, $32], correctAnswer='$33', score=2}, QuestionModel{category='PROBABILITY', questionText='A car travels 300 km in 5 hours. What is its average speed?', choices=[59 km/h, 60 km/h, 61 km/h, 62 km/h], correctAnswer='60 km/h', score=2}, QuestionModel{category='PROBABILITY', questionText='Kevin saves 2 dollars during the month of January. Each month, he plans to save twice the amount saved during the previous month. With this plan, how much will he have saved after 18 months?', choices=[$218,174, $262,144, $478,195, $524,286], correctAnswer='$524,286', score=3}, QuestionModel{category='PROBABILITY', questionText='A cardboard packing box contains footballs and baseballs. The ratio by weight of baseballs to footballs is 7 to 9. How many kilograms of footballs will there be in the box if the total weight of the box is 48 kilograms?', choices=[30, 27, 26, 15], correctAnswer='27', score=3}, QuestionModel{category='PROBABILITY', questionText='A farmer has a field in the shape of a right triangle. The two shorter sides are 9 meters and 12 meters. What is the length of the longest side?', choices=[13 meters, 14 meters, 15 meters, 16 meters], correctAnswer='13 meters', score=3}, QuestionModel{category='PROBABILITY', questionText='The price of a phone increased by 10% in the first year and 20% in the second year. If the original price was $500, what is the final price after two years?', choices=[$600, $680, $620, $660], correctAnswer='$660', score=3}, QuestionModel{category='PROBABILITY', questionText='The sum of the ages of Alex and Ben is 44. Five years ago, Alex was twice as old as Ben. How old is Ben now?', choices=[14, 15, 16, 17], correctAnswer='15', score=3}]}
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: DEBUG: Received response from server: Response{success=true, message='Question retrieved successfully.', data=[QuestionModel{category='PROBABILITY', questionText='A chocolate bar costs c pence and a drink costs d pence. What is the expression for the cost of 2 chocolate bars and 2 drinks?', choices=[c + d, 2c + d, 2c * 2d, 2c - 2d], correctAnswer='2c + 2d', score=1}, QuestionModel{category='PROBABILITY', questionText='If a book costs $5 and you buy 3 books, how much do you pay in total?', choices=[$10, $15, $20, $25], correctAnswer='$15', score=1}, QuestionModel{category='PROBABILITY', questionText='A rectangle has a length of 8 cm and a width of 5 cm. What is its area?', choices=[13 cm^2, 25 cm^2, 40 cm^2, 30 cm^2], correctAnswer='30 cm^2', score=1}, QuestionModel{category='PROBABILITY', questionText='What is 25% of 80?', choices=[20, 10, 25, 15], correctAnswer='30 cm^2', score=1}, QuestionModel{category='PROBABILITY', questionText='A shop sells apples for $1.50 each. If you buy 4 apples, how much do you spend?', choices=[$4.50, $6.00, $6.50, $5.00], correctAnswer='$6.00', score=1}, QuestionModel{category='PROBABILITY', questionText='If 5 pencils cost $10, how much does 1 pencil cost?', choices=[$5, $4, $3, $2], correctAnswer='$2', score=1}, QuestionModel{category='PROBABILITY', questionText='If today is Monday, what day will it be in 10 days?', choices=[Thursday, Friday, Saturday, Sunday], correctAnswer='Saturday', score=1}, QuestionModel{category='PROBABILITY', questionText='John has 12 marbles. He gives 4 marbles to his friend. How many marbles does he have left?', choices=[4, 8, 12, 16], correctAnswer='12', score=1}, QuestionModel{category='PROBABILITY', questionText='Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. What is the monthly break-even point?', choices=[100 bags, 150 bags, 225 bags, 80 bags], correctAnswer='100 bags', score=2}, QuestionModel{category='PROBABILITY', questionText='Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. To make a profit of $150, how many bags of cotton candy must be sold?', choices=[100 bags, 150 bags, 225 bags, 80 bags], correctAnswer='200 bags', score=2}, QuestionModel{category='PROBABILITY', questionText='A train travels 60 km per hour. How far does it travel in 2.5 hours?', choices=[100 km, 120 km, 150 km, 180 km], correctAnswer='150 km', score=2}, QuestionModel{category='PROBABILITY', questionText='A store sells a shirt for $25 with a 20% discount. What is the final price?', choices=[$15, $20, $22, $18], correctAnswer='$20', score=2}, QuestionModel{category='PROBABILITY', questionText='A pizza is cut into 8 equal slices. If you eat 3 slices, what fraction of the pizza is left?', choices=[3/8, 5/8, 6/8, 1/8], correctAnswer='5/8', score=2}, QuestionModel{category='PROBABILITY', questionText='A shop sells a book for $30. If sales tax is 10%, what is the total price?', choices=[$33, $35, $40, $32], correctAnswer='$33', score=2}, QuestionModel{category='PROBABILITY', questionText='A car travels 300 km in 5 hours. What is its average speed?', choices=[59 km/h, 60 km/h, 61 km/h, 62 km/h], correctAnswer='60 km/h', score=2}, QuestionModel{category='PROBABILITY', questionText='Kevin saves 2 dollars during the month of January. Each month, he plans to save twice the amount saved during the previous month. With this plan, how much will he have saved after 18 months?', choices=[$218,174, $262,144, $478,195, $524,286], correctAnswer='$524,286', score=3}, QuestionModel{category='PROBABILITY', questionText='A cardboard packing box contains footballs and baseballs. The ratio by weight of baseballs to footballs is 7 to 9. How many kilograms of footballs will there be in the box if the total weight of the box is 48 kilograms?', choices=[30, 27, 26, 15], correctAnswer='27', score=3}, QuestionModel{category='PROBABILITY', questionText='A farmer has a field in the shape of a right triangle. The two shorter sides are 9 meters and 12 meters. What is the length of the longest side?', choices=[13 meters, 14 meters, 15 meters, 16 meters], correctAnswer='13 meters', score=3}, QuestionModel{category='PROBABILITY', questionText='The price of a phone increased by 10% in the first year and 20% in the second year. If the original price was $500, what is the final price after two years?', choices=[$600, $680, $620, $660], correctAnswer='$660', score=3}, QuestionModel{category='PROBABILITY', questionText='The sum of the ages of Alex and Ben is 44. Five years ago, Alex was twice as old as Ben. How old is Ben now?', choices=[14, 15, 16, 17], correctAnswer='15', score=3}]}
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: CategoryController: Received 20 questions for category: PROBABILITY
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 1:
+   🏷 Category: PROBABILITY
+   ❓ Question: A chocolate bar costs c pence and a drink costs d pence. What is the expression for the cost of 2 chocolate bars and 2 drinks?
+   🔢 Choices: [c + d, 2c + d, 2c * 2d, 2c - 2d]
+   ✅ Correct Answer: 2c + 2d
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 2:
+   🏷 Category: PROBABILITY
+   ❓ Question: If a book costs $5 and you buy 3 books, how much do you pay in total?
+   🔢 Choices: [$10, $15, $20, $25]
+   ✅ Correct Answer: $15
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 3:
+   🏷 Category: PROBABILITY
+   ❓ Question: A rectangle has a length of 8 cm and a width of 5 cm. What is its area?
+   🔢 Choices: [13 cm^2, 25 cm^2, 40 cm^2, 30 cm^2]
+   ✅ Correct Answer: 30 cm^2
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 4:
+   🏷 Category: PROBABILITY
+   ❓ Question: What is 25% of 80?
+   🔢 Choices: [20, 10, 25, 15]
+   ✅ Correct Answer: 30 cm^2
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 5:
+   🏷 Category: PROBABILITY
+   ❓ Question: A shop sells apples for $1.50 each. If you buy 4 apples, how much do you spend?
+   🔢 Choices: [$4.50, $6.00, $6.50, $5.00]
+   ✅ Correct Answer: $6.00
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 6:
+   🏷 Category: PROBABILITY
+   ❓ Question: If 5 pencils cost $10, how much does 1 pencil cost?
+   🔢 Choices: [$5, $4, $3, $2]
+   ✅ Correct Answer: $2
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 7:
+   🏷 Category: PROBABILITY
+   ❓ Question: If today is Monday, what day will it be in 10 days?
+   🔢 Choices: [Thursday, Friday, Saturday, Sunday]
+   ✅ Correct Answer: Saturday
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 8:
+   🏷 Category: PROBABILITY
+   ❓ Question: John has 12 marbles. He gives 4 marbles to his friend. How many marbles does he have left?
+   🔢 Choices: [4, 8, 12, 16]
+   ✅ Correct Answer: 12
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 9:
+   🏷 Category: PROBABILITY
+   ❓ Question: Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. What is the monthly break-even point?
+   🔢 Choices: [100 bags, 150 bags, 225 bags, 80 bags]
+   ✅ Correct Answer: 100 bags
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 10:
+   🏷 Category: PROBABILITY
+   ❓ Question: Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. To make a profit of $150, how many bags of cotton candy must be sold?
+   🔢 Choices: [100 bags, 150 bags, 225 bags, 80 bags]
+   ✅ Correct Answer: 200 bags
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 11:
+   🏷 Category: PROBABILITY
+   ❓ Question: A train travels 60 km per hour. How far does it travel in 2.5 hours?
+   🔢 Choices: [100 km, 120 km, 150 km, 180 km]
+   ✅ Correct Answer: 150 km
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 12:
+   🏷 Category: PROBABILITY
+   ❓ Question: A store sells a shirt for $25 with a 20% discount. What is the final price?
+   🔢 Choices: [$15, $20, $22, $18]
+   ✅ Correct Answer: $20
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 13:
+   🏷 Category: PROBABILITY
+   ❓ Question: A pizza is cut into 8 equal slices. If you eat 3 slices, what fraction of the pizza is left?
+   🔢 Choices: [3/8, 5/8, 6/8, 1/8]
+   ✅ Correct Answer: 5/8
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 14:
+   🏷 Category: PROBABILITY
+   ❓ Question: A shop sells a book for $30. If sales tax is 10%, what is the total price?
+   🔢 Choices: [$33, $35, $40, $32]
+   ✅ Correct Answer: $33
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 15:
+   🏷 Category: PROBABILITY
+   ❓ Question: A car travels 300 km in 5 hours. What is its average speed?
+   🔢 Choices: [59 km/h, 60 km/h, 61 km/h, 62 km/h]
+   ✅ Correct Answer: 60 km/h
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 16:
+   🏷 Category: PROBABILITY
+   ❓ Question: Kevin saves 2 dollars during the month of January. Each month, he plans to save twice the amount saved during the previous month. With this plan, how much will he have saved after 18 months?
+   🔢 Choices: [$218,174, $262,144, $478,195, $524,286]
+   ✅ Correct Answer: $524,286
+   ⭐ Score: 3
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 17:
+   🏷 Category: PROBABILITY
+   ❓ Question: A cardboard packing box contains footballs and baseballs. The ratio by weight of baseballs to footballs is 7 to 9. How many kilograms of footballs will there be in the box if the total weight of the box is 48 kilograms?
+   🔢 Choices: [30, 27, 26, 15]
+   ✅ Correct Answer: 27
+   ⭐ Score: 3
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 18:
+   🏷 Category: PROBABILITY
+   ❓ Question: A farmer has a field in the shape of a right triangle. The two shorter sides are 9 meters and 12 meters. What is the length of the longest side?
+   🔢 Choices: [13 meters, 14 meters, 15 meters, 16 meters]
+   ✅ Correct Answer: 13 meters
+   ⭐ Score: 3
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 19:
+   🏷 Category: PROBABILITY
+   ❓ Question: The price of a phone increased by 10% in the first year and 20% in the second year. If the original price was $500, what is the final price after two years?
+   🔢 Choices: [$600, $680, $620, $660]
+   ✅ Correct Answer: $660
+   ⭐ Score: 3
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 20:
+   🏷 Category: PROBABILITY
+   ❓ Question: The sum of the ages of Alex and Ben is 44. Five years ago, Alex was twice as old as Ben. How old is Ben now?
+   🔢 Choices: [14, 15, 16, 17]
+   ✅ Correct Answer: 15
+   ⭐ Score: 3
+--------------------------------------
+Feb 18, 2025 5:04:27 PM Client.controller.CategoryController switchToGameplay
+INFO: 
+CategoryController: Switched to Endless Mode gameplay.
+Feb 18, 2025 5:04:27 PM Client.controller.GameController setQuestions
+INFO: 
+GameController: Loaded 20 shuffled questions for category: PROBABILITY
+Feb 18, 2025 5:04:28 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: Kevin saves 2 dollars during the month of January. Each month, he plans to save twice the amount saved during the previous month. With this plan, how much will he have saved after 18 months?
+Feb 18, 2025 5:04:28 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:04:30 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: PlayerModel{name='ril  ', score=0}
+Feb 18, 2025 5:04:30 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 5:04:30 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view
+Feb 18, 2025 5:04:30 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 5:04:30 PM Client.controller.GameController lambda$sendScoreToServer$3
+INFO: 
+GameController: Score successfully sent to the server.
+Feb 18, 2025 5:04:32 PM Client.controller.ScoreController switchToMainMenu
+INFO: ScoreController: Successfully switched to the Main Menu.
+Feb 18, 2025 5:11:22 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: PlayerModel{name='mofde  ', score=13}
+Feb 18, 2025 5:11:22 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 5:11:22 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view
+Feb 18, 2025 5:11:22 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 5:11:22 PM Client.controller.GameController lambda$sendScoreToServer$3
+INFO: 
+GameController: Score successfully sent to the server.
+Feb 18, 2025 5:12:27 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: PlayerModel{name='rt  ', score=18}
+Feb 18, 2025 5:12:27 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 5:12:27 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view
+Feb 18, 2025 5:12:27 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 5:12:27 PM Client.controller.GameController lambda$sendScoreToServer$3
+INFO: 
+GameController: Score successfully sent to the server.
+Feb 18, 2025 5:22:25 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: PlayerModel{name='ty', score=4}
+Feb 18, 2025 5:22:25 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 5:22:25 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 5:22:25 PM Client.controller.GameController lambda$sendScoreToServer$3
+INFO: 
+GameController: Score successfully sent to the server.
+Feb 18, 2025 5:22:25 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view
+Feb 18, 2025 5:22:42 PM Client.controller.ScoreController switchToMainMenu
+INFO: ScoreController: Successfully switched to the Main Menu.
+Feb 18, 2025 5:22:45 PM Client.controller.MainMenuController lambda$initialize$0
+INFO: 
+MainMenuController: Play button clicked.
+Feb 18, 2025 5:22:45 PM Client.controller.MainMenuController switchToModeMenu
+INFO: 
+MainMenuController: Switching to Mode Menu.
+Feb 18, 2025 5:22:45 PM Client.controller.MainMenuController switchToModeMenu
+INFO: 
+MainMenuController: Successfully switched to Mode Menu.
+Feb 18, 2025 5:22:46 PM Client.controller.ModeController lambda$initialize$1
+INFO: 
+ModeController: Endless button clicked.
+Feb 18, 2025 5:22:46 PM Client.controller.ModeController switchToEndlessMode
+INFO: 
+ModeController: Switching to Endless Mode.
+Feb 18, 2025 5:22:46 PM Client.controller.ModeController switchToEndlessMode
+INFO: 
+ModeController: Successfully switched to Category Selection for Endless Mode.
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController requestQuestionFromServer
+INFO: 
+CategoryController: Requesting questions for category: PROBABILITY
+Feb 18, 2025 5:22:47 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: GET_QUESTION:PROBABILITY
+Feb 18, 2025 5:22:47 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 5:22:47 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Question retrieved successfully.', data=[QuestionModel{category='PROBABILITY', questionText='A chocolate bar costs c pence and a drink costs d pence. What is the expression for the cost of 2 chocolate bars and 2 drinks?', choices=[c + d, 2c + d, 2c * 2d, 2c - 2d], correctAnswer='2c + 2d', score=1}, QuestionModel{category='PROBABILITY', questionText='If a book costs $5 and you buy 3 books, how much do you pay in total?', choices=[$10, $15, $20, $25], correctAnswer='$15', score=1}, QuestionModel{category='PROBABILITY', questionText='A rectangle has a length of 8 cm and a width of 5 cm. What is its area?', choices=[13 cm^2, 25 cm^2, 40 cm^2, 30 cm^2], correctAnswer='30 cm^2', score=1}, QuestionModel{category='PROBABILITY', questionText='What is 25% of 80?', choices=[20, 10, 25, 15], correctAnswer='30 cm^2', score=1}, QuestionModel{category='PROBABILITY', questionText='A shop sells apples for $1.50 each. If you buy 4 apples, how much do you spend?', choices=[$4.50, $6.00, $6.50, $5.00], correctAnswer='$6.00', score=1}, QuestionModel{category='PROBABILITY', questionText='If 5 pencils cost $10, how much does 1 pencil cost?', choices=[$5, $4, $3, $2], correctAnswer='$2', score=1}, QuestionModel{category='PROBABILITY', questionText='If today is Monday, what day will it be in 10 days?', choices=[Thursday, Friday, Saturday, Sunday], correctAnswer='Saturday', score=1}, QuestionModel{category='PROBABILITY', questionText='John has 12 marbles. He gives 4 marbles to his friend. How many marbles does he have left?', choices=[4, 8, 12, 16], correctAnswer='12', score=1}, QuestionModel{category='PROBABILITY', questionText='Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. What is the monthly break-even point?', choices=[100 bags, 150 bags, 225 bags, 80 bags], correctAnswer='100 bags', score=2}, QuestionModel{category='PROBABILITY', questionText='Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. To make a profit of $150, how many bags of cotton candy must be sold?', choices=[100 bags, 150 bags, 225 bags, 80 bags], correctAnswer='200 bags', score=2}, QuestionModel{category='PROBABILITY', questionText='A train travels 60 km per hour. How far does it travel in 2.5 hours?', choices=[100 km, 120 km, 150 km, 180 km], correctAnswer='150 km', score=2}, QuestionModel{category='PROBABILITY', questionText='A store sells a shirt for $25 with a 20% discount. What is the final price?', choices=[$15, $20, $22, $18], correctAnswer='$20', score=2}, QuestionModel{category='PROBABILITY', questionText='A pizza is cut into 8 equal slices. If you eat 3 slices, what fraction of the pizza is left?', choices=[3/8, 5/8, 6/8, 1/8], correctAnswer='5/8', score=2}, QuestionModel{category='PROBABILITY', questionText='A shop sells a book for $30. If sales tax is 10%, what is the total price?', choices=[$33, $35, $40, $32], correctAnswer='$33', score=2}, QuestionModel{category='PROBABILITY', questionText='A car travels 300 km in 5 hours. What is its average speed?', choices=[59 km/h, 60 km/h, 61 km/h, 62 km/h], correctAnswer='60 km/h', score=2}, QuestionModel{category='PROBABILITY', questionText='Kevin saves 2 dollars during the month of January. Each month, he plans to save twice the amount saved during the previous month. With this plan, how much will he have saved after 18 months?', choices=[$218,174, $262,144, $478,195, $524,286], correctAnswer='$524,286', score=3}, QuestionModel{category='PROBABILITY', questionText='A cardboard packing box contains footballs and baseballs. The ratio by weight of baseballs to footballs is 7 to 9. How many kilograms of footballs will there be in the box if the total weight of the box is 48 kilograms?', choices=[30, 27, 26, 15], correctAnswer='27', score=3}, QuestionModel{category='PROBABILITY', questionText='A farmer has a field in the shape of a right triangle. The two shorter sides are 9 meters and 12 meters. What is the length of the longest side?', choices=[13 meters, 14 meters, 15 meters, 16 meters], correctAnswer='13 meters', score=3}, QuestionModel{category='PROBABILITY', questionText='The price of a phone increased by 10% in the first year and 20% in the second year. If the original price was $500, what is the final price after two years?', choices=[$600, $680, $620, $660], correctAnswer='$660', score=3}, QuestionModel{category='PROBABILITY', questionText='The sum of the ages of Alex and Ben is 44. Five years ago, Alex was twice as old as Ben. How old is Ben now?', choices=[14, 15, 16, 17], correctAnswer='15', score=3}]}
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: DEBUG: Received response from server: Response{success=true, message='Question retrieved successfully.', data=[QuestionModel{category='PROBABILITY', questionText='A chocolate bar costs c pence and a drink costs d pence. What is the expression for the cost of 2 chocolate bars and 2 drinks?', choices=[c + d, 2c + d, 2c * 2d, 2c - 2d], correctAnswer='2c + 2d', score=1}, QuestionModel{category='PROBABILITY', questionText='If a book costs $5 and you buy 3 books, how much do you pay in total?', choices=[$10, $15, $20, $25], correctAnswer='$15', score=1}, QuestionModel{category='PROBABILITY', questionText='A rectangle has a length of 8 cm and a width of 5 cm. What is its area?', choices=[13 cm^2, 25 cm^2, 40 cm^2, 30 cm^2], correctAnswer='30 cm^2', score=1}, QuestionModel{category='PROBABILITY', questionText='What is 25% of 80?', choices=[20, 10, 25, 15], correctAnswer='30 cm^2', score=1}, QuestionModel{category='PROBABILITY', questionText='A shop sells apples for $1.50 each. If you buy 4 apples, how much do you spend?', choices=[$4.50, $6.00, $6.50, $5.00], correctAnswer='$6.00', score=1}, QuestionModel{category='PROBABILITY', questionText='If 5 pencils cost $10, how much does 1 pencil cost?', choices=[$5, $4, $3, $2], correctAnswer='$2', score=1}, QuestionModel{category='PROBABILITY', questionText='If today is Monday, what day will it be in 10 days?', choices=[Thursday, Friday, Saturday, Sunday], correctAnswer='Saturday', score=1}, QuestionModel{category='PROBABILITY', questionText='John has 12 marbles. He gives 4 marbles to his friend. How many marbles does he have left?', choices=[4, 8, 12, 16], correctAnswer='12', score=1}, QuestionModel{category='PROBABILITY', questionText='Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. What is the monthly break-even point?', choices=[100 bags, 150 bags, 225 bags, 80 bags], correctAnswer='100 bags', score=2}, QuestionModel{category='PROBABILITY', questionText='Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. To make a profit of $150, how many bags of cotton candy must be sold?', choices=[100 bags, 150 bags, 225 bags, 80 bags], correctAnswer='200 bags', score=2}, QuestionModel{category='PROBABILITY', questionText='A train travels 60 km per hour. How far does it travel in 2.5 hours?', choices=[100 km, 120 km, 150 km, 180 km], correctAnswer='150 km', score=2}, QuestionModel{category='PROBABILITY', questionText='A store sells a shirt for $25 with a 20% discount. What is the final price?', choices=[$15, $20, $22, $18], correctAnswer='$20', score=2}, QuestionModel{category='PROBABILITY', questionText='A pizza is cut into 8 equal slices. If you eat 3 slices, what fraction of the pizza is left?', choices=[3/8, 5/8, 6/8, 1/8], correctAnswer='5/8', score=2}, QuestionModel{category='PROBABILITY', questionText='A shop sells a book for $30. If sales tax is 10%, what is the total price?', choices=[$33, $35, $40, $32], correctAnswer='$33', score=2}, QuestionModel{category='PROBABILITY', questionText='A car travels 300 km in 5 hours. What is its average speed?', choices=[59 km/h, 60 km/h, 61 km/h, 62 km/h], correctAnswer='60 km/h', score=2}, QuestionModel{category='PROBABILITY', questionText='Kevin saves 2 dollars during the month of January. Each month, he plans to save twice the amount saved during the previous month. With this plan, how much will he have saved after 18 months?', choices=[$218,174, $262,144, $478,195, $524,286], correctAnswer='$524,286', score=3}, QuestionModel{category='PROBABILITY', questionText='A cardboard packing box contains footballs and baseballs. The ratio by weight of baseballs to footballs is 7 to 9. How many kilograms of footballs will there be in the box if the total weight of the box is 48 kilograms?', choices=[30, 27, 26, 15], correctAnswer='27', score=3}, QuestionModel{category='PROBABILITY', questionText='A farmer has a field in the shape of a right triangle. The two shorter sides are 9 meters and 12 meters. What is the length of the longest side?', choices=[13 meters, 14 meters, 15 meters, 16 meters], correctAnswer='13 meters', score=3}, QuestionModel{category='PROBABILITY', questionText='The price of a phone increased by 10% in the first year and 20% in the second year. If the original price was $500, what is the final price after two years?', choices=[$600, $680, $620, $660], correctAnswer='$660', score=3}, QuestionModel{category='PROBABILITY', questionText='The sum of the ages of Alex and Ben is 44. Five years ago, Alex was twice as old as Ben. How old is Ben now?', choices=[14, 15, 16, 17], correctAnswer='15', score=3}]}
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: CategoryController: Received 20 questions for category: PROBABILITY
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 1:
+   🏷 Category: PROBABILITY
+   ❓ Question: A chocolate bar costs c pence and a drink costs d pence. What is the expression for the cost of 2 chocolate bars and 2 drinks?
+   🔢 Choices: [c + d, 2c + d, 2c * 2d, 2c - 2d]
+   ✅ Correct Answer: 2c + 2d
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 2:
+   🏷 Category: PROBABILITY
+   ❓ Question: If a book costs $5 and you buy 3 books, how much do you pay in total?
+   🔢 Choices: [$10, $15, $20, $25]
+   ✅ Correct Answer: $15
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 3:
+   🏷 Category: PROBABILITY
+   ❓ Question: A rectangle has a length of 8 cm and a width of 5 cm. What is its area?
+   🔢 Choices: [13 cm^2, 25 cm^2, 40 cm^2, 30 cm^2]
+   ✅ Correct Answer: 30 cm^2
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 4:
+   🏷 Category: PROBABILITY
+   ❓ Question: What is 25% of 80?
+   🔢 Choices: [20, 10, 25, 15]
+   ✅ Correct Answer: 30 cm^2
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 5:
+   🏷 Category: PROBABILITY
+   ❓ Question: A shop sells apples for $1.50 each. If you buy 4 apples, how much do you spend?
+   🔢 Choices: [$4.50, $6.00, $6.50, $5.00]
+   ✅ Correct Answer: $6.00
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 6:
+   🏷 Category: PROBABILITY
+   ❓ Question: If 5 pencils cost $10, how much does 1 pencil cost?
+   🔢 Choices: [$5, $4, $3, $2]
+   ✅ Correct Answer: $2
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 7:
+   🏷 Category: PROBABILITY
+   ❓ Question: If today is Monday, what day will it be in 10 days?
+   🔢 Choices: [Thursday, Friday, Saturday, Sunday]
+   ✅ Correct Answer: Saturday
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 8:
+   🏷 Category: PROBABILITY
+   ❓ Question: John has 12 marbles. He gives 4 marbles to his friend. How many marbles does he have left?
+   🔢 Choices: [4, 8, 12, 16]
+   ✅ Correct Answer: 12
+   ⭐ Score: 1
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 9:
+   🏷 Category: PROBABILITY
+   ❓ Question: Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. What is the monthly break-even point?
+   🔢 Choices: [100 bags, 150 bags, 225 bags, 80 bags]
+   ✅ Correct Answer: 100 bags
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 10:
+   🏷 Category: PROBABILITY
+   ❓ Question: Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. To make a profit of $150, how many bags of cotton candy must be sold?
+   🔢 Choices: [100 bags, 150 bags, 225 bags, 80 bags]
+   ✅ Correct Answer: 200 bags
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 11:
+   🏷 Category: PROBABILITY
+   ❓ Question: A train travels 60 km per hour. How far does it travel in 2.5 hours?
+   🔢 Choices: [100 km, 120 km, 150 km, 180 km]
+   ✅ Correct Answer: 150 km
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 12:
+   🏷 Category: PROBABILITY
+   ❓ Question: A store sells a shirt for $25 with a 20% discount. What is the final price?
+   🔢 Choices: [$15, $20, $22, $18]
+   ✅ Correct Answer: $20
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 13:
+   🏷 Category: PROBABILITY
+   ❓ Question: A pizza is cut into 8 equal slices. If you eat 3 slices, what fraction of the pizza is left?
+   🔢 Choices: [3/8, 5/8, 6/8, 1/8]
+   ✅ Correct Answer: 5/8
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 14:
+   🏷 Category: PROBABILITY
+   ❓ Question: A shop sells a book for $30. If sales tax is 10%, what is the total price?
+   🔢 Choices: [$33, $35, $40, $32]
+   ✅ Correct Answer: $33
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 15:
+   🏷 Category: PROBABILITY
+   ❓ Question: A car travels 300 km in 5 hours. What is its average speed?
+   🔢 Choices: [59 km/h, 60 km/h, 61 km/h, 62 km/h]
+   ✅ Correct Answer: 60 km/h
+   ⭐ Score: 2
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 16:
+   🏷 Category: PROBABILITY
+   ❓ Question: Kevin saves 2 dollars during the month of January. Each month, he plans to save twice the amount saved during the previous month. With this plan, how much will he have saved after 18 months?
+   🔢 Choices: [$218,174, $262,144, $478,195, $524,286]
+   ✅ Correct Answer: $524,286
+   ⭐ Score: 3
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 17:
+   🏷 Category: PROBABILITY
+   ❓ Question: A cardboard packing box contains footballs and baseballs. The ratio by weight of baseballs to footballs is 7 to 9. How many kilograms of footballs will there be in the box if the total weight of the box is 48 kilograms?
+   🔢 Choices: [30, 27, 26, 15]
+   ✅ Correct Answer: 27
+   ⭐ Score: 3
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 18:
+   🏷 Category: PROBABILITY
+   ❓ Question: A farmer has a field in the shape of a right triangle. The two shorter sides are 9 meters and 12 meters. What is the length of the longest side?
+   🔢 Choices: [13 meters, 14 meters, 15 meters, 16 meters]
+   ✅ Correct Answer: 13 meters
+   ⭐ Score: 3
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 19:
+   🏷 Category: PROBABILITY
+   ❓ Question: The price of a phone increased by 10% in the first year and 20% in the second year. If the original price was $500, what is the final price after two years?
+   🔢 Choices: [$600, $680, $620, $660]
+   ✅ Correct Answer: $660
+   ⭐ Score: 3
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController lambda$requestQuestionFromServer$8
+INFO: 
+CategoryController: 
+📌 Question 20:
+   🏷 Category: PROBABILITY
+   ❓ Question: The sum of the ages of Alex and Ben is 44. Five years ago, Alex was twice as old as Ben. How old is Ben now?
+   🔢 Choices: [14, 15, 16, 17]
+   ✅ Correct Answer: 15
+   ⭐ Score: 3
+--------------------------------------
+Feb 18, 2025 5:22:47 PM Client.controller.CategoryController switchToGameplay
+INFO: 
+CategoryController: Switched to Endless Mode gameplay.
+Feb 18, 2025 5:22:47 PM Client.controller.GameController setQuestions
+INFO: 
+GameController: Loaded 20 shuffled questions for category: PROBABILITY
+Feb 18, 2025 5:22:49 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. To make a profit of $150, how many bags of cotton candy must be sold?
+Feb 18, 2025 5:22:49 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:22:50 PM Client.controller.GameController checkAnswer
+INFO: 
+GameController: Correct answer for question: A shop sells apples for $1.50 each. If you buy 4 apples, how much do you spend?
+Feb 18, 2025 5:22:50 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 1
+Feb 18, 2025 5:22:52 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: The sum of the ages of Alex and Ben is 44. Five years ago, Alex was twice as old as Ben. How old is Ben now?
+Feb 18, 2025 5:22:52 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:22:53 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: Kevin saves 2 dollars during the month of January. Each month, he plans to save twice the amount saved during the previous month. With this plan, how much will he have saved after 18 months?
+Feb 18, 2025 5:22:53 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:22:54 PM Client.controller.GameController checkAnswer
+INFO: 
+GameController: Correct answer for question: A cardboard packing box contains footballs and baseballs. The ratio by weight of baseballs to footballs is 7 to 9. How many kilograms of footballs will there be in the box if the total weight of the box is 48 kilograms?
+Feb 18, 2025 5:22:54 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 1
+Feb 18, 2025 5:22:55 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: What is 25% of 80?
+Feb 18, 2025 5:22:55 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:22:56 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: A chocolate bar costs c pence and a drink costs d pence. What is the expression for the cost of 2 chocolate bars and 2 drinks?
+Feb 18, 2025 5:22:56 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:22:58 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: A rectangle has a length of 8 cm and a width of 5 cm. What is its area?
+Feb 18, 2025 5:22:58 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:22:59 PM Client.controller.GameController checkAnswer
+INFO: 
+GameController: Correct answer for question: A store sells a shirt for $25 with a 20% discount. What is the final price?
+Feb 18, 2025 5:22:59 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 1
+Feb 18, 2025 5:23:00 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: If a book costs $5 and you buy 3 books, how much do you pay in total?
+Feb 18, 2025 5:23:00 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:23:01 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: A shop sells a book for $30. If sales tax is 10%, what is the total price?
+Feb 18, 2025 5:23:01 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:23:03 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: A car travels 300 km in 5 hours. What is its average speed?
+Feb 18, 2025 5:23:03 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:23:04 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: A pizza is cut into 8 equal slices. If you eat 3 slices, what fraction of the pizza is left?
+Feb 18, 2025 5:23:04 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:23:05 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: A train travels 60 km per hour. How far does it travel in 2.5 hours?
+Feb 18, 2025 5:23:05 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:23:07 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: If 5 pencils cost $10, how much does 1 pencil cost?
+Feb 18, 2025 5:23:07 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:23:09 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: If today is Monday, what day will it be in 10 days?
+Feb 18, 2025 5:23:09 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:23:10 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: John has 12 marbles. He gives 4 marbles to his friend. How many marbles does he have left?
+Feb 18, 2025 5:23:10 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:23:12 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: The price of a phone increased by 10% in the first year and 20% in the second year. If the original price was $500, what is the final price after two years?
+Feb 18, 2025 5:23:12 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:23:14 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: Cindy's Cotton Candy sells cotton candy by the bag.  Her monthly fixed costs are $150 . It costs $2.50 to make each bag and she sells them for $4.00. What is the monthly break-even point?
+Feb 18, 2025 5:23:14 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:23:16 PM Client.controller.GameController checkAnswer
+WARNING: 
+GameController: Wrong answer for question: A farmer has a field in the shape of a right triangle. The two shorter sides are 9 meters and 12 meters. What is the length of the longest side?
+Feb 18, 2025 5:23:16 PM Client.controller.GameController updateComboUI
+INFO: 
+GameController: Updating combo display: 0
+Feb 18, 2025 5:23:17 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: PlayerModel{name='ty  ', score=6}
+Feb 18, 2025 5:23:17 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 5:23:17 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view
+Feb 18, 2025 5:23:18 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 5:23:18 PM Client.controller.GameController lambda$sendScoreToServer$3
+INFO: 
+GameController: Score successfully sent to the server.
+Feb 18, 2025 5:34:46 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: PlayerModel{name='ui  ', score=11}
+Feb 18, 2025 5:34:46 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 5:34:46 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view
+Feb 18, 2025 5:34:46 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 5:34:46 PM Client.controller.GameController lambda$sendScoreToServer$3
+INFO: 
+GameController: Score successfully sent to the server.
+Feb 18, 2025 5:34:47 PM Client.controller.ScoreController switchToMainMenu
+INFO: ScoreController: Successfully switched to the Main Menu.
+Feb 18, 2025 5:37:19 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: PlayerModel{name='tru', score=7}
+Feb 18, 2025 5:37:19 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 5:37:19 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 5:37:19 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view
+Feb 18, 2025 5:37:19 PM Client.controller.GameController lambda$sendScoreToServer$3
+INFO: 
+GameController: Score successfully sent to the server.
+Feb 18, 2025 5:38:55 PM Client.connection.ClientConnection sendObject
+INFO: 
+ClientConnection: Sending object: PlayerModel{name='yuh  ', score=35}
+Feb 18, 2025 5:38:55 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 5:38:55 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view
+Feb 18, 2025 5:38:55 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 5:38:55 PM Client.controller.GameController lambda$sendScoreToServer$3
+INFO: 
+GameController: Score successfully sent to the server.
+Feb 18, 2025 5:39:00 PM Client.controller.ScoreController switchToMainMenu
+INFO: ScoreController: Successfully switched to the Main Menu.

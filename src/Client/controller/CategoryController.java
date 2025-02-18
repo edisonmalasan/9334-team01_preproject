@@ -116,7 +116,7 @@ public class CategoryController {
             Parent root = loader.load();
 
             GameController gameController = loader.getController();
-            gameController.setQuestions(category, questions);
+            gameController.setQuestions(category, questions, isEndlessMode);
 
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));

@@ -16,6 +16,7 @@ public class ViewManager {
     // fxml paths
     public static final String MAIN_MENU = "/views/main_menu.fxml";
     public static final String LEADERBOARD = "/views/leaderboard.fxml";
+    public static final String MODE = "/views/mode_menu.fxml";
     public static final String CATEGORY_MENU = "/views/category_menu.fxml";
     public static final String CLASSIC_GAME = "/views/classic_game.fxml";
     public static final String ENDLESS_GAME = "/views/endlessgame.fxml";

@@ -59,13 +59,15 @@ public abstract class GameController {
     protected BombUtility bombUtility;
     protected ComboModel comboModel;
     protected int finalScore = 0;
-    protected boolean checkMode = false;
+    protected boolean checkMode;
 
     private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
     }
+
+
 
     public GameController() {
         try {
@@ -75,12 +77,13 @@ public abstract class GameController {
         }
     }
 
-    public void setQuestions(String category, List<QuestionModel> questions) {
+    public void setQuestions(String category, List<QuestionModel> questions, boolean isEndlessMode) {
         this.questions = new ArrayList<>(questions);
+        this.checkMode = isEndlessMode;
         Collections.shuffle(this.questions);  //shuffled questions
         this.comboModel = new ComboModel();
         logger.info("\nGameController: Loaded " + questions.size() + " shuffled questions for category: " + category);
-        this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons);
+        this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons , isEndlessMode);
         this.qteUtility = new QTEUtility(questions.size(), bombUtility::applyPenalty, QTEPane);
         showNextQuestion();
     }

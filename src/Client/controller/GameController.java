@@ -1,11 +1,12 @@
 package Client.controller;
 
-import Client.connection.AnsiFormatter;
+import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.model.ComboModel;
 import Client.model.PlayerModel;
 import Client.utils.BombUtility;
 import Client.utils.QTEUtility;
+import common.LoggerSetup;
 import common.Response;
 import common.model.QuestionModel;
 import exception.ConnectionException;
@@ -60,7 +61,7 @@ public abstract class GameController {
     protected int finalScore = 0;
     protected boolean checkMode = false;
 
-    protected static final Logger logger = Logger.getLogger(GameController.class.getName());
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -70,7 +71,7 @@ public abstract class GameController {
         try {
             this.clientConnection = ClientConnection.getInstance();
         } catch (ConnectionException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "\nGameController: Error initializing ClientConnection.", e);
         }
     }
 
@@ -78,7 +79,7 @@ public abstract class GameController {
         this.questions = new ArrayList<>(questions);
         Collections.shuffle(this.questions);  //shuffled questions
         this.comboModel = new ComboModel();
-        System.out.println("DEBUG: Loaded " + questions.size() + " shuffled questions for category: " + category);
+        logger.info("\nGameController: Loaded " + questions.size() + " shuffled questions for category: " + category);
         this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons);
         this.qteUtility = new QTEUtility(questions.size(), bombUtility::applyPenalty, QTEPane);
         showNextQuestion();
@@ -103,10 +104,12 @@ public abstract class GameController {
             finalScore += totalScoreForQuestion;
 
             comboModel.incrementCombo();
+            logger.info("\nGameController: Correct answer for question: " + question.getQuestionText());
         } else {
             selectedButton.setStyle("-fx-background-image: url('/images/wrong_answer.png');");
             bombUtility.applyPenalty(3);
             comboModel.resetCombo();
+            logger.warning("\nGameController: Wrong answer for question: " + question.getQuestionText());
         }
 
         updateComboUI();
@@ -128,19 +131,20 @@ public abstract class GameController {
                 Thread.sleep(1000);
                 Platform.runLater(this::showNextQuestion);
             } catch (InterruptedException e) {
+                logger.log(Level.SEVERE, "\nGameController: Thread was interrupted while waiting to show the next question.", e);
                 throw new ThreadInterruptedException("Thread was interrupted while waiting to show the next question.", e);
             }
         }).start();
     }
 
     protected void updateComboUI() {
-        System.out.println("DEBUG: Updating combo display: " + comboModel.getComboCount());
+        logger.info("\nGameController: Updating combo display: " + comboModel.getComboCount());
         Platform.runLater(() -> comboLabel.setText("Combo: " + comboModel.getComboCount()));
     }
 
     @FXML
     protected void handleForfeit() {
-        System.out.println("Player forfeited. Stopping game...");
+        logger.info("\nGameController: Player forfeited. Stopping game...");
         bombUtility.stopBombAnimation();
         finalScore = 0;
         switchToScoreView();
@@ -163,9 +167,9 @@ public abstract class GameController {
             stage.setResizable(false);
             stage.show();
 
-            logger.info("Successfully switched to the Score view");
+            logger.info("\nGameController: Successfully switched to the Score view");
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Failed to load Score view", e);
+            logger.log(Level.SEVERE, "\nGameController: Failed to load Score view", e);
             throw new RuntimeException(e);
         }
     }
@@ -184,12 +188,12 @@ public abstract class GameController {
                 Response response = (Response) clientConnection.receiveObject();
 
                 if (response.isSuccess()) {
-                    logger.info("Score successfully sent to the server.");
+                    logger.info("\nGameController: Score successfully sent to the server.");
                 } else {
-                    logger.warning("Failed to send score to the server: " + response.getMessage());
+                    logger.warning("\nGameController: Failed to send score to the server: " + response.getMessage());
                 }
             } catch (IOException | ClassNotFoundException e) {
-                logger.log(Level.SEVERE, "Error sending score to the server", e);
+                logger.log(Level.SEVERE, "\nGameController: Error sending score to the server", e);
             }
         }).start();
     }

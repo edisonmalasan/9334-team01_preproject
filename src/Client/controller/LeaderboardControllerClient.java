@@ -227,10 +227,4 @@ public class LeaderboardControllerClient {
             return leaderboardEntryModelServerList;
         }
     }
-
-
-
-    public void closeConnection() {
-        clientConnection.close();
-    }
 }

@@ -1,12 +1,13 @@
 package Server.handler;
 
-import Client.connection.AnsiFormatter;
+import common.AnsiFormatter;
 import Client.model.PlayerModel;
 import Server.controller.LeaderboardControllerServer;
 import Server.controller.QuestionController;
 import Server.model.LeaderboardEntryModelServer;
 import Server.model.QuestionBankModel;
 import Server.controller.XMLStorageController;
+import common.LoggerSetup;
 import common.Response;
 import common.model.QuestionModel;
 
@@ -22,7 +23,7 @@ public class ClientHandler implements Runnable {
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
     private LeaderboardControllerServer leaderboardControllerServer;
-    private static final Logger logger = Logger.getLogger(ClientHandler.class.getName());
+    private static final Logger logger = LoggerSetup.setupLogger("ServerLogger", "Server/server.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);

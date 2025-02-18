@@ -1,7 +1,8 @@
 package Client.controller;
 
-import Client.connection.AnsiFormatter;
+import common.AnsiFormatter;
 import Client.connection.ClientConnection;
+import common.LoggerSetup;
 import common.Response;
 import common.model.QuestionModel;
 import javafx.application.Platform;
@@ -19,7 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CategoryController {
-    private static final Logger logger = Logger.getLogger(CategoryController.class.getName());
     @FXML
     public Button returnButton;
 
@@ -39,6 +39,8 @@ public class CategoryController {
     private ClientConnection clientConnection;
     private static String selectedCategory;
     private boolean isEndlessMode = false;
+
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -65,24 +67,24 @@ public class CategoryController {
 
     private void requestQuestionFromServer(String category, ActionEvent event) {
         selectedCategory = category;
-        logger.info("📩 Requesting questions for category: " + category);
+        logger.info("\nCategoryController: Requesting questions for category: " + category);
 
         new Thread(() -> {
             try {
                 clientConnection.sendObject("GET_QUESTION:" + category);
                 Response response = (Response) clientConnection.receiveObject();
 
-                logger.info("DEBUG: Received response from server: " + response);
+                logger.info("\nCategoryController: DEBUG: Received response from server: " + response);
 
                 if (response.isSuccess() && response.getData() instanceof List) {
                     List<QuestionModel> questions = (List<QuestionModel>) response.getData();
 
-                    logger.info("✅ Received " + questions.size() + " questions for category: " + category);
+                    logger.info("CategoryController: Received " + questions.size() + " questions for category: " + category);
 
                     // log formatted questions for debug purpose
                     for (int i = 0; i < questions.size(); i++) {
                         QuestionModel q = questions.get(i);
-                        logger.info("\n📌 Question " + (i + 1) + ":\n"
+                        logger.info("\nCategoryController: \n📌 Question " + (i + 1) + ":\n"
                                 + "   🏷 Category: " + q.getCategory() + "\n"
                                 + "   ❓ Question: " + q.getQuestionText() + "\n"
                                 + "   🔢 Choices: " + q.getChoices() + "\n"
@@ -93,10 +95,10 @@ public class CategoryController {
 
                     updateUI(() -> switchToGameplay(category, questions, event, isEndlessMode));
                 } else {
-                    logger.warning("⚠️ No questions found for category: " + category);
+                    logger.warning("CategoryController: No questions found for category: " + category);
                 }
             } catch (IOException | ClassNotFoundException e) {
-                logger.log(Level.SEVERE, "❌ Failed to fetch questions from server.", e);
+                logger.log(Level.SEVERE, "CategoryController: Failed to fetch questions from server.", e);
             }
         }).start();
     }
@@ -106,8 +108,10 @@ public class CategoryController {
             FXMLLoader loader;
             if (isEndlessMode) {
                 loader = new FXMLLoader(getClass().getResource("/views/endless_game.fxml"));
+                logger.info("\nCategoryController: Switched to Endless Mode gameplay.");
             } else {
                 loader = new FXMLLoader(getClass().getResource("/views/classic_game.fxml"));
+                logger.info("\nCategoryController: Switched to Classic Mode gameplay.");
             }
             Parent root = loader.load();
 
@@ -120,13 +124,14 @@ public class CategoryController {
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "\nCategoryController: Failed to load gameplay screen.", e);
         }
     }
 
     private void updateUI(Runnable action) {
         Platform.runLater(action);
     }
+
     public void returnToMainMenu() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
@@ -139,11 +144,8 @@ public class CategoryController {
             stage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "\nCategoryController: Error returning to Main Menu.", e);
         }
-    }
-    public static String getSelectedCategory() {
-        return selectedCategory;
     }
 
     public void setEndlessMode(boolean isEndlessMode) {

@@ -1,4 +1,6 @@
 package Client.connection;
+import common.AnsiFormatter;
+import common.LoggerSetup;
 import common.Response;
 import common.model.QuestionModel;
 import exception.ConnectionException;
@@ -16,7 +18,7 @@ public class ClientConnection {
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
 
-    private static final Logger logger = Logger.getLogger(ClientConnection.class.getName());
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -24,16 +26,16 @@ public class ClientConnection {
 
     private ClientConnection() throws ConnectionException {
         try {
-            System.out.println("DEBUG: Attempting to connect to server...");
+            logger.info("\nClientConnection: Attempting to connect to server...");
 
             socket = new Socket(IP_ADDRESS, PORT_NUMBER);
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-            System.out.println("✅ DEBUG: Connected to server successfully!");
+            logger.info("\nClientConnection: Connected to server successfully!");
 
         } catch (IOException e) {
-            System.err.println("❌ DEBUG: Connection to server failed!");
+            logger.severe("\nClientConnection: Connection to server failed!");
             throw new ConnectionException("Error connecting to the server.", e);
         }
     }
@@ -51,24 +53,11 @@ public class ClientConnection {
                 socket = new Socket(IP_ADDRESS, PORT_NUMBER);
                 objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 objectInputStream = new ObjectInputStream(socket.getInputStream());
-                logger.info("Connected to the server.");
+                logger.info("\nClientConnection: Connected to the server.");
             } catch (IOException e) {
-                logger.severe("Error connecting to the server: " + e.getMessage());
+                logger.severe("\nClientConnection: Error connecting to the server: " + e.getMessage());
                 throw new ConnectionException("Error connecting to the server.", e);
             }
-        }
-    }
-
-    public QuestionModel getQuestion(String category) throws IOException, ClassNotFoundException {
-        sendObject("GET_QUESTION:" + category);
-
-        Response response = (Response) receiveObject();
-
-        if (response.isSuccess()) {
-            return (QuestionModel) response.getData();
-        } else {
-            System.err.println("Error fetching question: " + response.getMessage());
-            return null;
         }
     }
 
@@ -76,16 +65,17 @@ public class ClientConnection {
         if (objectOutputStream == null) {
             throw new IOException("❌ ERROR: Object is NULL! Cannot send data.");
         }
+        logger.info("\nClientConnection: Sending object: " + obj);
         objectOutputStream.writeObject(obj);
         objectOutputStream.flush();
     }
 
     public Object receiveObject() throws IOException, ClassNotFoundException {
-        System.out.println("DEBUG: Waiting to receive object from server...");
+        logger.info("\nClientConnection: Waiting to receive object from server...");
 
         Object obj = objectInputStream.readObject();
 
-        System.out.println("DEBUG: Received object: " + obj);
+        logger.info("\nClientConnection: Received object: " + obj);
         return obj;
     }
 
@@ -94,8 +84,9 @@ public class ClientConnection {
             if (socket != null) socket.close();
             if (objectInputStream != null) objectInputStream.close();
             if (objectOutputStream != null) objectOutputStream.close();
+            logger.info("\nClientConnection: Connection closed.");
         } catch (IOException e) {
-            System.err.println("Error closing connection: " + e.getMessage());
+            logger.severe("\nClientConnection: Error closing connection: " + e.getMessage());
         }
     }
 }

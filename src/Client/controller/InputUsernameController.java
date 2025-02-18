@@ -1,31 +1,24 @@
 package Client.controller;
 
-import Client.connection.AnsiFormatter;
+import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.view.ViewManager;
+import common.LoggerSetup;
 import exception.ConnectionException;
 import exception.InvalidUsernameException;
-
 import exception.ServerNotRunningException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-
-import javax.swing.*;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InputUsernameController {
-    private static final Logger logger = Logger.getLogger(InputUsernameController.class.getName());
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -59,7 +52,6 @@ public class InputUsernameController {
         }
     }
 
-
     @FXML
     public void initialize() {
         enterButton.setOnAction(event -> handleEnterButtonClick(event));
@@ -78,6 +70,7 @@ public class InputUsernameController {
         }
 
         playerName = username;
+        logger.info("\nInputUsernameController: Username entered: " + playerName);
         switchToMainMenu(event);
     }
 
@@ -86,6 +79,7 @@ public class InputUsernameController {
     }
 
     private void switchToMainMenu(ActionEvent event) {
+        logger.info("\nInputUsernameController: Switching to Main Menu.");
         ViewManager.goTo(event, ViewManager.MAIN_MENU, "Main Menu");
     }
 
@@ -97,5 +91,4 @@ public class InputUsernameController {
             errorLabel.setText(e.getMessage());
         });
     }
-
 }

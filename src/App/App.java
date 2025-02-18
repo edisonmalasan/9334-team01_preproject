@@ -1,6 +1,6 @@
 package App;
 
-import Client.connection.AnsiFormatter;
+import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.utils.SoundUtility;
 import exception.ConnectionException;

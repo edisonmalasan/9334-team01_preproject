@@ -1,6 +1,6 @@
 package Server;
 
-import Client.connection.AnsiFormatter;
+import common.AnsiFormatter;
 import Server.controller.LeaderboardControllerServer;
 import Server.model.QuestionBankModel;
 import Server.handler.ClientHandler;

@@ -213,7 +213,7 @@ public class LeaderboardControllerClient {
         List<LeaderboardEntryModelServer> leaderboardEntryModelServerList = new ArrayList<>();
         try {
             // send obj req
-            clientConnection.sendObject("GET_LEADERBOARD");
+            clientConnection.sendObject("GET_LEADERBOARD_CLASSIC");
 
             // receive the response obj from server
             Response response = (Response) clientConnection.receiveObject();

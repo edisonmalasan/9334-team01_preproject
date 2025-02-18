@@ -23,7 +23,7 @@ public class ClientHandler implements Runnable {
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
     private LeaderboardControllerServer leaderboardControllerServer;
-    private static final Logger logger = LoggerSetup.setupLogger("ServerLogger", "Server/server.log");
+    private static final Logger logger = LoggerSetup.setupLogger("ServerLogger", "Server/Log/server.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);

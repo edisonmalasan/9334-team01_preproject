@@ -1,8 +1,6 @@
 package Client.connection;
 import common.AnsiFormatter;
 import common.LoggerSetup;
-import common.Response;
-import common.model.QuestionModel;
 import exception.ConnectionException;
 
 import java.io.*;
@@ -18,7 +16,7 @@ public class ClientConnection {
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
 
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/Log/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);

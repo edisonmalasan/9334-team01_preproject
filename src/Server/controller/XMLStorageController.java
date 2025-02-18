@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class XMLStorageController {
-    private static final Logger logger = LoggerSetup.setupLogger("ServerLogger", "Server/server.log");
+    private static final Logger logger = LoggerSetup.setupLogger("ServerLogger", "Server/Log/server.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);

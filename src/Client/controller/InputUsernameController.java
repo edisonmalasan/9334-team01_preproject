@@ -14,11 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class InputUsernameController {
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/client.log");
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/Log/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);

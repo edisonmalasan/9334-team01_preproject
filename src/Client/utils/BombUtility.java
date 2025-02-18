@@ -26,11 +26,11 @@ public class BombUtility {
     private int remainingTime;
     private boolean hasExploded = false;
     private boolean isRunning = false;
-    private boolean isEndlessMode = false;
+    private boolean isEndlessMode;
 
 
     public BombUtility(ImageView bombImage, ImageView flame, Line wick, Label timerLabel,
-                       Runnable explosionCallback, List<Button> choiceButtons) {
+                       Runnable explosionCallback, List<Button> choiceButtons, boolean isEndlessMode) {
         this.bombImage = bombImage;
         this.flame = flame;
         this.wick = wick;
@@ -60,11 +60,30 @@ public class BombUtility {
             remainingTime = totalTime;
             updateTimerLabel();
 
-            wickAnimation = new Timeline(new KeyFrame(Duration.seconds(1), e -> shortenWick()));
+            double wickLength = wick.getEndX() - wick.getStartX();
+            double shrinkAmountPerSecond = wickLength / totalTime;
+
+            wickAnimation = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+                if (wick.getStartX() < wick.getEndX()) {
+                    wick.setStartX(wick.getStartX() + shrinkAmountPerSecond);
+                    flame.setLayoutX(flame.getLayoutX() + shrinkAmountPerSecond);
+                }
+            }));
+
             wickAnimation.setCycleCount(totalTime);
             wickAnimation.play();
 
-            bombTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateTimer()));
+            bombTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+                if (remainingTime > 0) {
+                    remainingTime--;
+                    updateTimerLabel();
+                }
+
+                if (remainingTime <= 0) {
+                    triggerExplosion();
+                }
+            }));
+
             bombTimer.setCycleCount(totalTime);
             bombTimer.setOnFinished(e -> triggerExplosion());
             bombTimer.play();
@@ -79,10 +98,14 @@ public class BombUtility {
         double wickLength = wick.getEndX() - wick.getStartX();
 
         if (isEndlessMode) {
-            double shrinkAmount = wickLength / 10; //adjust
+            double shrinkAmount = 30; // Adjust this value as needed
             if (wickLength > 0) {
                 wick.setStartX(wick.getStartX() + shrinkAmount);
                 flame.setLayoutX(flame.getLayoutX() + shrinkAmount);
+            }
+
+            if (wick.getStartX() >= wick.getEndX()) {
+                triggerExplosion();
             }
         } else {
             double shrinkAmount = wickLength / (totalTime / penalty);
@@ -93,11 +116,12 @@ public class BombUtility {
 
             remainingTime = Math.max(0, remainingTime - penalty);
             updateTimerLabel();
+
+            if (remainingTime <= 0 || wick.getStartX() >= wick.getEndX()) {
+                triggerExplosion();
+            }
         }
 
-        if (wick.getStartX() >= wick.getEndX()) {
-            triggerExplosion();
-        }
     }
 
     private void shortenWick() {

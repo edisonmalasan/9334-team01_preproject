@@ -1,5 +1,7 @@
 package Server;
 
+import Server.controller.AdminViewController;
+import Server.view.AdminView;
 import common.AnsiFormatter;
 import Server.model.QuestionBankModel;
 import Server.controller.LeaderboardControllerServer;
@@ -22,6 +24,9 @@ public class ServerMain {
 
         try {
             ServerHandler server = new ServerHandler(questionBank, leaderboardControllerServer);
+            AdminView view = new AdminView("data/classic_leaderboard.xml");
+            AdminViewController controller = new AdminViewController(view);
+            controller.loadXML();
             server.start();
         } catch (Exception e) {
             logger.severe("Server Main: ❌ Server failed to start: " + e.getMessage());

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ClassicGameController extends GameController {
     @Override
-    protected void showNextQuestion() {
+    protected void showNextQuestion() { //problem: game ends when no more questions can be shown
         if (currentQuestionIndex >= questions.size()) {
             questionLabel.setText("🎉 Game Over!");
             choicesBox.getChildren().clear();

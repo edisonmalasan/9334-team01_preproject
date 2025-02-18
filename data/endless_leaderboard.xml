@@ -4,4 +4,12 @@
         <player>hi  </player>
         <score>0</score>
     </entry>
+    <entry>
+        <player>234563  </player>
+        <score>0</score>
+    </entry>
+    <entry>
+        <player>435  </player>
+        <score>10</score>
+    </entry>
 </leaderboard>

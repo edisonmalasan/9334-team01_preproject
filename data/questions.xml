@@ -627,7 +627,6 @@
 
     <question category="LOGIC">
         <text>"What is the next number in the pattern?
-
             3, 6, 9, 12, ?"</text>
         <choice>14</choice>
         <choice>15</choice>
@@ -721,7 +720,6 @@
 
     <question category="LOGIC">
         <text>"What number should replace the question mark?
-
             1, 4, 9, 16, 25, ?, 49"</text>
         <choice>30</choice>
         <choice>36</choice>
@@ -824,7 +822,6 @@
 
     <question category="LOGIC">
         <text>"What comes next in the pattern?
-
             1, 3, 6, 10, 15, ?"</text>
         <choice>18</choice>
         <choice>20</choice>
@@ -832,6 +829,203 @@
         <choice>24</choice>
         <answer>21</answer>
         <score>3</score>
+    </question>
+    <question category="LOGIC">
+        <text>If all dogs bark, and Rover is a dog, does Rover bark?</text>
+        <choice>Yes</choice>
+        <choice>No</choice>
+        <choice>Maybe</choice>
+        <choice>Not enough information</choice>
+        <answer>Yes</answer>
+        <score>1</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>If all humans are mammals, and some mammals are dogs, are all humans dogs?</text>
+        <choice>Yes</choice>
+        <choice>No</choice>
+        <choice>Some humans are dogs</choice>
+        <choice>None of the above</choice>
+        <answer>No</answer>
+        <score>2</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>All cars are vehicles. Is a bicycle a vehicle?</text>
+        <choice>Yes</choice>
+        <choice>No</choice>
+        <choice>Sometimes</choice>
+        <choice>Not enough information</choice>
+        <answer>Yes</answer>
+        <score>2</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>If Jane is older than Bob, and Bob is older than Tim, who is the youngest?</text>
+        <choice>Jane</choice>
+        <choice>Bob</choice>
+        <choice>Tim</choice>
+        <choice>Not enough information</choice>
+        <answer>Tim</answer>
+        <score>3</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>If the sun is shining, then it is not raining. It is raining. What can be concluded?</text>
+        <choice>The sun is shining</choice>
+        <choice>The sun is not shining</choice>
+        <choice>It is cloudy</choice>
+        <choice>Not enough information</choice>
+        <answer>The sun is not shining</answer>
+        <score>3</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>If a statement is false, then its opposite is true. If "The sky is blue" is false, what is the opposite?</text>
+        <choice>The sky is red</choice>
+        <choice>The sky is green</choice>
+        <choice>The sky is not blue</choice>
+        <choice>The sky is yellow</choice>
+        <answer>The sky is not blue</answer>
+        <score>3</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>If a number is divisible by 3, is it divisible by 6?</text>
+        <choice>Yes</choice>
+        <choice>No</choice>
+        <choice>Sometimes</choice>
+        <choice>None of the above</choice>
+        <answer>No</answer>
+        <score>4</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>Which number is the missing term in the series: 3, 9, 27, ?</text>
+        <choice>54</choice>
+        <choice>81</choice>
+        <choice>72</choice>
+        <choice>64</choice>
+        <answer>81</answer>
+        <score>4</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>If all roses are red, and the flower in the vase is red, can it be concluded that it is a rose?</text>
+        <choice>Yes</choice>
+        <choice>No</choice>
+        <choice>Maybe</choice>
+        <choice>Not enough information</choice>
+        <answer>Not enough information</answer>
+        <score>4</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>It takes 3 workers 3 hours to complete a task. How many workers are needed to complete the task in 1 hour?</text>
+        <choice>3</choice>
+        <choice>9</choice>
+        <choice>1</choice>
+        <choice>6</choice>
+        <answer>9</answer>
+        <score>5</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>All roses are flowers. Are roses plants?</text>
+        <choice>Yes</choice>
+        <choice>No</choice>
+        <answer>Yes</answer>
+        <score>1</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>All apples are fruits. Some fruits are red. Are some apples red?</text>
+        <choice>Yes</choice>
+        <choice>No</choice>
+        <choice>What</choice>
+        <choice>Correct Answer</choice>
+        <answer>Yes</answer>
+        <score>2</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>All cats are animals. Are some cats pets?</text>
+        <choice>Yes</choice>
+        <choice>No</choice>
+        <choice>Maybe</choice>
+        <choice>I don't know</choice>
+        <answer>Yes</answer>
+        <score>2</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>If today is Monday, what day is it 100 days from now?</text>
+        <choice>Wednesday</choice>
+        <choice>Friday</choice>
+        <choice>Sunday</choice>
+        <choice>Thursday</choice>
+        <answer>Friday</answer>
+        <score>3</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>A man is taller than a boy, and the boy is taller than a dog. Who is taller?</text>
+        <choice>The man</choice>
+        <choice>The boy</choice>
+        <choice>The dog</choice>
+        <choice>None of the above</choice>
+        <answer>The man</answer>
+        <score>3</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>The sky is blue. What is the opposite of this statement?</text>
+        <choice>The sky is cloudy</choice>
+        <choice>The sky is red</choice>
+        <choice>The sky is not blue</choice>
+        <choice>The sky is clear</choice>
+        <answer>The sky is not blue</answer>
+        <score>3</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>All squares are rectangles. Are squares quadrilaterals?</text>
+        <choice>Yes</choice>
+        <choice>No</choice>
+        <choice>Sometimes</choice>
+        <choice>None of the above</choice>
+        <answer>Yes</answer>
+        <score>4</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>What comes next in this sequence: 2, 4, 8, 16, ?</text>
+        <choice>20</choice>
+        <choice>24</choice>
+        <choice>32</choice>
+        <choice>28</choice>
+        <answer>32</answer>
+        <score>4</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>All birds can fly. Can penguins fly?</text>
+        <choice>Yes</choice>
+        <choice>No</choice>
+        <choice>Sometimes</choice>
+        <choice>Only in water</choice>
+        <answer>No</answer>
+        <score>4</score>
+    </question>
+
+    <question category="LOGIC">
+        <text>If 5 machines make 5 cars in 5 minutes, how many machines are needed to make 100 cars in 100 minutes?</text>
+        <choice>1</choice>
+        <choice>5</choice>
+        <choice>10</choice>
+        <choice>100</choice>
+        <answer>5</answer>
+        <score>5</score>
     </question>
 
     <question category="ARITHMETIC">

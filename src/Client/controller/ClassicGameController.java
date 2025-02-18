@@ -1,7 +1,5 @@
 package Client.controller;
 
-import Client.utils.BombUtility;
-import Client.utils.QTEUtility;
 import common.model.QuestionModel;
 import javafx.application.Platform;
 import javafx.scene.control.Button;

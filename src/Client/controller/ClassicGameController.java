@@ -1,8 +1,10 @@
 package Client.controller;
 
 import common.model.QuestionModel;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,13 +12,18 @@ import java.util.List;
 
 public class ClassicGameController extends GameController {
     @Override
-    protected void showNextQuestion() { //problem: game ends when no more questions can be shown
+    protected void showNextQuestion() {
         if (currentQuestionIndex >= questions.size()) {
             questionLabel.setText("🎉 Game Over!");
             choicesBox.getChildren().clear();
             bombImage.setVisible(false);
             bombUtility.stopBombAnimation();
-            switchToScoreView();
+
+            //added a delay before switching to score view
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(e-> switchToScoreView());
+            delay.play();
+
             return;
         }
 

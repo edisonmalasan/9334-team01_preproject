@@ -27,6 +27,15 @@
     -fx-text-fill: black;
 }
 
+#titleText {
+    -fx-font-family: "Space Nova";
+    -fx-font-size: 48px;
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-stroke: #9E4747;
+    -fx-stroke-width: 2px;
+}
+
 
 .label {
     -fx-font-family: "Space Nova";

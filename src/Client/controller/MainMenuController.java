@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import java.util.logging.Logger;
 
 public class MainMenuController {
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", "Client/Log/client.log");
+    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);

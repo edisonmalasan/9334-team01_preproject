@@ -1,4 +1,4 @@
-package Client.utils;
+package Client.utility;
 
 import java.io.File;
 import java.io.IOException;

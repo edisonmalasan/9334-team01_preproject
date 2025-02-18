@@ -1,4 +1,4 @@
-package Client.utils;
+package Client.utility;
 
 import exception.ThreadInterruptedException;
 import javafx.animation.*;

@@ -1,5 +1,244 @@
 <questions>
     <question category="ALGEBRA">
+        <text>Solve the following equation: 10 - 2(3)</text>
+        <choice>-13</choice>
+        <choice>4</choice>
+        <choice>16</choice>
+        <choice>24</choice>
+        <answer>4</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Solve the following equation: 3x + 7 = 16</text>
+        <choice>5</choice>
+        <choice>3</choice>
+        <choice>6</choice>
+        <choice>7</choice>
+        <answer>3</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Solve for y: 5y - 3 = 2</text>
+        <choice>1</choice>
+        <choice>2</choice>
+        <choice>-1</choice>
+        <choice>-2</choice>
+        <answer>1</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Simplify: 2(x + 3) - 5x</text>
+        <choice>-3x + 6</choice>
+        <choice>3x + 6</choice>
+        <choice>-3x - 6</choice>
+        <choice>3x - 6</choice>
+        <answer>-3x + 6</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>What is the value of x if 4x + 2 = 14?</text>
+        <choice>3</choice>
+        <choice>2</choice>
+        <choice>4</choice>
+        <choice>1</choice>
+        <answer>3</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>What is the solution to the inequality 2x - 5 &lt; 3?</text>
+        <choice>x &lt; 4</choice>
+        <choice>x &gt; 4</choice>
+        <choice>x &lt; 2</choice>
+        <choice>x &gt; 2</choice>
+        <answer>x &lt; 4</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Solve the following equation: x² - 16 = 0</text>
+        <choice>4</choice>
+        <choice>-4</choice>
+        <choice>±4</choice>
+        <choice>0</choice>
+        <answer>±4</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Expand the expression: (x + 3)(x - 4)</text>
+        <choice>x² - x - 12</choice>
+        <choice>x² - x + 12</choice>
+        <choice>x² - 7x - 12</choice>
+        <choice>x² + 7x - 12</choice>
+        <answer>x² - x - 12</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Solve for x: 5x - 7 = 2x + 5</text>
+        <choice>2</choice>
+        <choice>3</choice>
+        <choice>4</choice>
+        <choice>5</choice>
+        <answer>4</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>What is the value of x in the equation: 7x = 35</text>
+        <choice>5</choice>
+        <choice>7</choice>
+        <choice>35</choice>
+        <choice>1</choice>
+        <answer>5</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Simplify: (3x + 4) - (x - 5)</text>
+        <choice>2x + 9</choice>
+        <choice>2x - 1</choice>
+        <choice>3x - 1</choice>
+        <choice>4x + 9</choice>
+        <answer>2x + 9</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Solve for x: 4x + 5 = 2x + 13</text>
+        <choice>4</choice>
+        <choice>5</choice>
+        <choice>3</choice>
+        <choice>2</choice>
+        <answer>4</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>What is the value of x if 3x = 9?</text>
+        <choice>3</choice>
+        <choice>2</choice>
+        <choice>1</choice>
+        <choice>4</choice>
+        <answer>3</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Factor the expression: x² + 5x + 6</text>
+        <choice>(x + 3)(x + 2)</choice>
+        <choice>(x + 6)(x + 1)</choice>
+        <choice>(x + 2)(x + 3)</choice>
+        <choice>(x + 1)(x + 6)</choice>
+        <answer>(x + 3)(x + 2)</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Solve for x: x² - 25 = 0</text>
+        <choice>5</choice>
+        <choice>-5</choice>
+        <choice>±5</choice>
+        <choice>25</choice>
+        <answer>±5</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>What is the slope of the line passing through the points (2,3) and (4,7)?</text>
+        <choice>2</choice>
+        <choice>1</choice>
+        <choice>3</choice>
+        <choice>4</choice>
+        <answer>2</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Solve the system of equations: 2x + y = 8 and x - y = 1</text>
+        <choice>(3, 2)</choice>
+        <choice>(2, 4)</choice>
+        <choice>(1, 5)</choice>
+        <choice>(4, 3)</choice>
+        <answer>(3, 2)</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Solve for x: 2x - 4 = 3x + 5</text>
+        <choice>-9</choice>
+        <choice>9</choice>
+        <choice>-5</choice>
+        <choice>5</choice>
+        <answer>-9</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Simplify the expression: 5(x + 4) - 2(x - 3)</text>
+        <choice>3x + 26</choice>
+        <choice>3x + 23</choice>
+        <choice>3x + 17</choice>
+        <choice>3x + 20</choice>
+        <answer>3x + 26</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>What is the value of x if 6x - 5 = 19?</text>
+        <choice>4</choice>
+        <choice>5</choice>
+        <choice>3</choice>
+        <choice>6</choice>
+        <answer>4</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Simplify: 3x² + 5x - 2x² + 4x</text>
+        <choice>x² + 9x</choice>
+        <choice>5x² + 9x</choice>
+        <choice>5x² + 9x - 2</choice>
+        <choice>x² + 9x - 2</choice>
+        <answer>x² + 9x</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>What is the value of x if 3x + 10 = 25?</text>
+        <choice>5</choice>
+        <choice>6</choice>
+        <choice>8</choice>
+        <choice>4</choice>
+        <answer>5</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Solve the equation: x + 7 = 14</text>
+        <choice>7</choice>
+        <choice>6</choice>
+        <choice>8</choice>
+        <choice>5</choice>
+        <answer>7</answer>
+        <score>1</score>
+    </question>
+
+    <question category="ALGEBRA">
+        <text>Factor the expression: x² - 4x</text>
+        <choice>x(x - 4)</choice>
+        <choice>(x - 2)(x + 2)</choice>
+        <choice>x(x + 4)</choice>
+        <choice>(x - 4)(x + 4)</choice>
+        <answer>x(x - 4)</answer>
+        <score>1</score>
+    </question>
+    <question category="ALGEBRA">
         <text>What is the proper term for this definition?
             A term without a variable</text>
         <choice>Constant</choice>
@@ -226,6 +465,186 @@
     </question>
 
     <question category="GEOMETRY">
+        <text>What is the area of a rectangle with length 5 cm and width 3 cm?</text>
+        <choice>15 cm²</choice>
+        <choice>10 cm²</choice>
+        <choice>8 cm²</choice>
+        <choice>5 cm²</choice>
+        <answer>15 cm²</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the perimeter of a square with a side length of 6 cm?</text>
+        <choice>24 cm</choice>
+        <choice>12 cm</choice>
+        <choice>36 cm</choice>
+        <choice>6 cm</choice>
+        <answer>24 cm</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the volume of a cube with side length 4 cm?</text>
+        <choice>64 cm³</choice>
+        <choice>16 cm³</choice>
+        <choice>24 cm³</choice>
+        <choice>32 cm³</choice>
+        <answer>64 cm³</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the area of a circle with radius 7 cm?</text>
+        <choice>49π cm²</choice>
+        <choice>14π cm²</choice>
+        <choice>49 cm²</choice>
+        <choice>14 cm²</choice>
+        <answer>49π cm²</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the perimeter of a triangle with sides 3 cm, 4 cm, and 5 cm?</text>
+        <choice>12 cm</choice>
+        <choice>15 cm</choice>
+        <choice>18 cm</choice>
+        <choice>14 cm</choice>
+        <answer>12 cm</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the area of a right triangle with a base of 6 cm and height of 8 cm?</text>
+        <choice>24 cm²</choice>
+        <choice>48 cm²</choice>
+        <choice>36 cm²</choice>
+        <choice>18 cm²</choice>
+        <answer>24 cm²</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the surface area of a sphere with radius 5 cm?</text>
+        <choice>100π cm²</choice>
+        <choice>25π cm²</choice>
+        <choice>75π cm²</choice>
+        <choice>50π cm²</choice>
+        <answer>100π cm²</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the area of a parallelogram with base 6 cm and height 4 cm?</text>
+        <choice>24 cm²</choice>
+        <choice>18 cm²</choice>
+        <choice>20 cm²</choice>
+        <choice>36 cm²</choice>
+        <answer>24 cm²</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the circumference of a circle with diameter 10 cm?</text>
+        <choice>10π cm</choice>
+        <choice>20π cm</choice>
+        <choice>5π cm</choice>
+        <choice>25π cm</choice>
+        <answer>10π cm</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the sum of the interior angles of a hexagon?</text>
+        <choice>720°</choice>
+        <choice>1080°</choice>
+        <choice>900°</choice>
+        <choice>540°</choice>
+        <answer>720°</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the area of a trapezoid with bases 8 cm and 12 cm, and height 5 cm?</text>
+        <choice>50 cm²</choice>
+        <choice>40 cm²</choice>
+        <choice>60 cm²</choice>
+        <choice>30 cm²</choice>
+        <answer>50 cm²</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the volume of a cylinder with radius 3 cm and height 7 cm?</text>
+        <choice>63π cm³</choice>
+        <choice>27π cm³</choice>
+        <choice>21π cm³</choice>
+        <choice>45π cm³</choice>
+        <answer>63π cm³</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the area of a rhombus with diagonals of lengths 8 cm and 10 cm?</text>
+        <choice>40 cm²</choice>
+        <choice>35 cm²</choice>
+        <choice>20 cm²</choice>
+        <choice>30 cm²</choice>
+        <answer>40 cm²</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the volume of a cone with radius 4 cm and height 9 cm?</text>
+        <choice>48π cm³</choice>
+        <choice>36π cm³</choice>
+        <choice>72π cm³</choice>
+        <choice>54π cm³</choice>
+        <answer>48π cm³</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the surface area of a rectangular prism with length 4 cm, width 3 cm, and height 5 cm?</text>
+        <choice>94 cm²</choice>
+        <choice>70 cm²</choice>
+        <choice>56 cm²</choice>
+        <choice>75 cm²</choice>
+        <answer>94 cm²</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the perimeter of a regular hexagon with a side length of 7 cm?</text>
+        <choice>42 cm</choice>
+        <choice>49 cm</choice>
+        <choice>36 cm</choice>
+        <choice>30 cm</choice>
+        <answer>42 cm</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the volume of a pyramid with base area 16 cm² and height 9 cm?</text>
+        <choice>144 cm³</choice>
+        <choice>72 cm³</choice>
+        <choice>128 cm³</choice>
+        <choice>64 cm³</choice>
+        <answer>48 cm³</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
+        <text>What is the area of an equilateral triangle with a side length of 6 cm?</text>
+        <choice>15.59 cm²</choice>
+        <choice>12.99 cm²</choice>
+        <choice>18.47 cm²</choice>
+        <choice>19.39 cm²</choice>
+        <answer>15.59 cm²</answer>
+        <score>1</score>
+    </question>
+
+    <question category="GEOMETRY">
         <text>It is a two-dimensional surface.</text>
         <choice>plane</choice>
         <choice>coordinate</choice>
@@ -423,6 +842,206 @@
         <choice>360</choice>
         <answer>720</answer>
         <score>3</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of getting a head when flipping a fair coin?</text>
+        <choice>1/2</choice>
+        <choice>1/3</choice>
+        <choice>1/4</choice>
+        <choice>1</choice>
+        <answer>1/2</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of rolling a 3 on a standard six-sided die?</text>
+        <choice>1/6</choice>
+        <choice>1/2</choice>
+        <choice>1/3</choice>
+        <choice>1/4</choice>
+        <answer>1/6</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of drawing a red card from a standard deck of 52 cards?</text>
+        <choice>26/52</choice>
+        <choice>1/2</choice>
+        <choice>1/4</choice>
+        <choice>1/52</choice>
+        <answer>26/52</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>If you flip two coins, what is the probability of getting two tails?</text>
+        <choice>1/4</choice>
+        <choice>1/2</choice>
+        <choice>1/3</choice>
+        <choice>1/8</choice>
+        <answer>1/4</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of rolling a number greater than 4 on a standard six-sided die?</text>
+        <choice>1/6</choice>
+        <choice>1/3</choice>
+        <choice>1/2</choice>
+        <choice>2/3</choice>
+        <answer>1/3</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>In a bag of 5 red marbles, 3 green marbles, and 2 blue marbles, what is the probability of drawing a green marble?</text>
+        <choice>3/10</choice>
+        <choice>1/2</choice>
+        <choice>3/5</choice>
+        <choice>1/3</choice>
+        <answer>3/10</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of drawing an Ace from a standard deck of 52 cards?</text>
+        <choice>4/52</choice>
+        <choice>1/52</choice>
+        <choice>1/13</choice>
+        <choice>4/13</choice>
+        <answer>4/52</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>If a card is drawn at random from a deck of 52 cards, what is the probability of drawing a face card (Jack, Queen, King)?</text>
+        <choice>12/52</choice>
+        <choice>4/52</choice>
+        <choice>1/13</choice>
+        <choice>3/52</choice>
+        <answer>12/52</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of rolling an even number on a standard six-sided die?</text>
+        <choice>1/2</choice>
+        <choice>1/3</choice>
+        <choice>1/6</choice>
+        <choice>1/4</choice>
+        <answer>1/2</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>If two dice are rolled, what is the probability of getting a sum of 7?</text>
+        <choice>1/36</choice>
+        <choice>1/6</choice>
+        <choice>1/9</choice>
+        <choice>1/12</choice>
+        <answer>1/6</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of drawing a spade from a deck of 52 cards?</text>
+        <choice>1/4</choice>
+        <choice>1/2</choice>
+        <choice>13/52</choice>
+        <choice>4/52</choice>
+        <answer>13/52</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of getting a prime number when rolling a standard six-sided die?</text>
+        <choice>1/2</choice>
+        <choice>1/3</choice>
+        <choice>1/6</choice>
+        <choice>1/4</choice>
+        <answer>1/2</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of drawing a red card or a face card from a deck of 52 cards?</text>
+        <choice>26/52</choice>
+        <choice>18/52</choice>
+        <choice>40/52</choice>
+        <choice>12/52</choice>
+        <answer>40/52</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>If you roll two dice, what is the probability of rolling a double (both dice show the same number)?</text>
+        <choice>1/36</choice>
+        <choice>1/6</choice>
+        <choice>1/9</choice>
+        <choice>1/12</choice>
+        <answer>1/6</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of rolling a number less than 3 on a standard six-sided die?</text>
+        <choice>1/6</choice>
+        <choice>2/6</choice>
+        <choice>1/3</choice>
+        <choice>1/2</choice>
+        <answer>1/3</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of picking a marble that is not green from a bag containing 5 red marbles, 3 green marbles, and 2 blue marbles?</text>
+        <choice>7/10</choice>
+        <choice>3/10</choice>
+        <choice>1/2</choice>
+        <choice>5/10</choice>
+        <answer>7/10</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>If you draw a card from a deck of 52 cards, what is the probability that it is either a Queen or a King?</text>
+        <choice>8/52</choice>
+        <choice>4/52</choice>
+        <choice>2/52</choice>
+        <choice>12/52</choice>
+        <answer>8/52</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of flipping two coins and getting at least one head?</text>
+        <choice>1/2</choice>
+        <choice>3/4</choice>
+        <choice>1/4</choice>
+        <choice>1/3</choice>
+        <answer>3/4</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of drawing a card that is a number card (2 through 10) from a deck of 52 cards?</text>
+        <choice>36/52</choice>
+        <choice>40/52</choice>
+        <choice>28/52</choice>
+        <choice>24/52</choice>
+        <answer>36/52</answer>
+        <score>1</score>
+    </question>
+
+    <question category="PROBABILITY">
+        <text>What is the probability of drawing a black card from a deck of 52 cards?</text>
+        <choice>1/4</choice>
+        <choice>26/52</choice>
+        <choice>13/52</choice>
+        <choice>1/2</choice>
+        <answer>26/52</answer>
+        <score>1</score>
     </question>
 
     <question category="PROBABILITY">

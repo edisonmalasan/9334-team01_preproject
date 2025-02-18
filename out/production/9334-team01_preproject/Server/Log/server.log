@@ -1,2 +1,12 @@
-Feb 18, 2025 7:23:48 PM Server.ServerHandler start
+Feb 18, 2025 8:36:46 PM Server.ServerHandler start
 INFO: Server Handler: ✅ Server started on port 5000
+Feb 18, 2025 8:36:49 PM Server.ServerHandler start
+INFO: Server Handler: 🔗 New client connected: /127.0.0.1
+Feb 18, 2025 8:36:49 PM Server.ServerHandler start
+INFO: Server Handler: 🚀 Starting client thread for: /127.0.0.1
+Feb 18, 2025 8:45:02 PM Server.ServerHandler start
+INFO: Server Handler: ✅ Server started on port 5000
+Feb 18, 2025 8:45:05 PM Server.ServerHandler start
+INFO: Server Handler: 🔗 New client connected: /127.0.0.1
+Feb 18, 2025 8:45:05 PM Server.ServerHandler start
+INFO: Server Handler: 🚀 Starting client thread for: /127.0.0.1

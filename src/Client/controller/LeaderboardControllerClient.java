@@ -86,11 +86,11 @@ public class LeaderboardControllerClient {
 
         // Initialize leaderboard data (this data would be fetched from a server in a real-world scenario)
         classicLeaderboard = FXCollections.observableArrayList(
-                getLeaderboard()
+                getClassicLeaderboard()
         );
 
         endlessLeaderboard = FXCollections.observableArrayList(
-                LeaderboardControllerServer.getEndlessLeaderboard()
+                getEndlessLeaderboard()
         );
 
         // Sort the leaderboard based on score in descending order
@@ -209,11 +209,30 @@ public class LeaderboardControllerClient {
         }
     }
 
-    public List<LeaderboardEntryModelServer> getLeaderboard() {
+    public List<LeaderboardEntryModelServer> getClassicLeaderboard() {
         List<LeaderboardEntryModelServer> leaderboardEntryModelServerList = new ArrayList<>();
         try {
             // send obj req
             clientConnection.sendObject("GET_LEADERBOARD");
+
+            // receive the response obj from server
+            Response response = (Response) clientConnection.receiveObject();
+
+            if (response.isSuccess() && response.getData() instanceof List) {
+                leaderboardEntryModelServerList = (List<LeaderboardEntryModelServer>) response.getData();
+                System.out.println(response.getData().toString());
+            }
+            return leaderboardEntryModelServerList;
+        } catch (IOException | ClassNotFoundException e) {
+            return leaderboardEntryModelServerList;
+        }
+    }
+
+    public List<LeaderboardEntryModelServer> getEndlessLeaderboard() {
+        List<LeaderboardEntryModelServer> leaderboardEntryModelServerList = new ArrayList<>();
+        try {
+            // send obj req
+            clientConnection.sendObject("GET_LEADERBOARD_ENDLESS");
 
             // receive the response obj from server
             Response response = (Response) clientConnection.receiveObject();

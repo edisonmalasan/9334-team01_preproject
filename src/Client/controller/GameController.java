@@ -82,7 +82,7 @@ public abstract class GameController {
         Collections.shuffle(this.questions);  // Shuffling questions
         this.comboModel = new ComboModel();
         logger.info("\nGameController: Loaded " + questions.size() + " shuffled questions for category: " + category);
-        this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons);
+        this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons, checkMode);
         this.qteUtility = new QTEUtility(questions.size(), bombUtility::applyPenalty, QTEPane);
         showNextQuestion();
     }

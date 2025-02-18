@@ -34,29 +34,20 @@ public class ModeController {
     public void initialize() {
         classicButton.setOnAction(actionEvent -> {
             logger.info("\nModeController: Classic button clicked.");
+            CategoryController.isEndlessMode = false;
             ViewManager.goTo(actionEvent, ViewManager.CATEGORY_MENU, "Bomb Defusing Game");
         });
 
         endlessButton.setOnAction(actionEvent -> {
             logger.info("\nModeController: Endless button clicked.");
-            switchToEndlessMode(actionEvent);
+
+            CategoryController.isEndlessMode = true;
+            ViewManager.goTo(actionEvent, ViewManager.CATEGORY_MENU, "Bomb Defusing Game");
         });
 
         returnButton.setOnAction(actionEvent -> {
             logger.info("\nModeController: Return button clicked.");
             ViewManager.goTo(actionEvent, ViewManager.MAIN_MENU, "Bomb Defusing Game");
         });
-    }
-
-    private void switchToEndlessMode(ActionEvent actionEvent) {
-
-            logger.info("\nModeController: Switching to Endless Mode.");
-
-            ViewManager.goTo(actionEvent, ViewManager.ENDLESS_GAME, "Endless Mode", loader -> {
-                CategoryController categoryController = new CategoryController();
-                categoryController.setEndlessMode(true); // set endless mode flag
-            });
-
-            logger.info("\nModeController: Successfully switched to Category Selection for Endless Mode.");
     }
 }

@@ -38,7 +38,7 @@ public class CategoryController {
 
     private ClientConnection clientConnection;
     private static String selectedCategory;
-    private boolean isEndlessMode = false;
+    public static boolean isEndlessMode = false;
 
 //    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
     private static final Logger logger = Logger.getLogger(CategoryController.class.getName());
@@ -94,7 +94,7 @@ public class CategoryController {
                                 + "--------------------------------------");
                     }
 
-                    updateUI(() -> switchToGameplay(category, questions, event, isEndlessMode));
+                    updateUI(() -> switchToGameplay(category, questions, event));
                 } else {
                     logger.warning("CategoryController: No questions found for category: " + category);
                 }
@@ -104,7 +104,7 @@ public class CategoryController {
         }).start();
     }
 
-    private void switchToGameplay(String category, List<QuestionModel> questions, ActionEvent event, boolean isEndlessMode) {
+    private void switchToGameplay(String category, List<QuestionModel> questions, ActionEvent event) {
         if (isEndlessMode) {
             // use ViewManager to switch to Endless Game
             ViewManager.goTo(event, ViewManager.ENDLESS_GAME, "Endless Mode Game", loader -> {
@@ -124,9 +124,5 @@ public class CategoryController {
 
     private void updateUI(Runnable action) {
         Platform.runLater(action);
-    }
-
-    public void setEndlessMode(boolean isEndlessMode) {
-        this.isEndlessMode = isEndlessMode;
     }
 }

@@ -17,14 +17,14 @@ public class ServerMain {
         QuestionBankModel questionBank = new QuestionBankModel();
         LeaderboardControllerServer leaderboardControllerServer = new LeaderboardControllerServer();
 
-        logger.info("📖 QuestionBank loaded: " + questionBank.getQuestions().size() + " questions.");
-        logger.info("🏆 Leaderboard controller initialized.");
+        logger.info("Server Main: 📖 QuestionBank loaded: " + questionBank.getQuestions().size() + " questions.");
+        logger.info("Server Main: 🏆 Leaderboard controller initialized.");
 
         try {
             ServerHandler server = new ServerHandler(questionBank, leaderboardControllerServer);
             server.start();
         } catch (Exception e) {
-            logger.severe("❌ Server failed to start: " + e.getMessage());
+            logger.severe("Server Main: ❌ Server failed to start: " + e.getMessage());
             e.printStackTrace();
         }
     }

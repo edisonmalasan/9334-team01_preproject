@@ -1,17 +1,24 @@
 package Server.controller;
 
-import java.util.*;
+import common.AnsiFormatter;
+import common.LoggerSetup;
+import common.model.QuestionModel;
+import Server.model.LeaderboardEntryModelServer;
+import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
-
-import Server.model.LeaderboardEntryModelServer;
-import common.model.QuestionModel;
-import org.w3c.dom.*;
 import java.io.*;
+import java.util.*;
+import java.util.logging.Logger;
 
 public class XMLStorageController {
+    private static final Logger logger = LoggerSetup.setupLogger("ServerLogger", "Server/server.log");
+
+    static {
+        AnsiFormatter.enableColorLogging(logger);
+    }
 
     public static List<QuestionModel> loadQuestionsFromXML(String filename) {
         List<QuestionModel> questions = new ArrayList<>();
@@ -37,9 +44,11 @@ public class XMLStorageController {
                     choices.add(choiceNodes.item(j).getTextContent());
                 }
 
-                questions.add(new QuestionModel(category, questionText, choices, correctAnswer, score)); // 5 pass
+                questions.add(new QuestionModel(category, questionText, choices, correctAnswer, score));
             }
+            logger.info("XMLStorageModel: Questions loaded successfully from " + filename);
         } catch (Exception e) {
+            logger.severe("XMLStorageModel: Error loading questions from XML: " + e.getMessage());
             e.printStackTrace();
         }
         return questions;
@@ -49,15 +58,14 @@ public class XMLStorageController {
         List<LeaderboardEntryModelServer> leaderboard = new ArrayList<>();
         try {
             File file = new File(filename);
-
-
             File parentDir = file.getParentFile();
+
             if (parentDir != null && !parentDir.exists()) {
                 parentDir.mkdirs();
             }
 
             if (!file.exists()) {
-                System.out.println("Leaderboard file not found. Creating a new one.");
+                logger.info("XMLStorageModel: Leaderboard file not found. Creating a new one.");
                 file.createNewFile();
                 return leaderboard;
             }
@@ -73,13 +81,13 @@ public class XMLStorageController {
                 int score = Integer.parseInt(element.getElementsByTagName("score").item(0).getTextContent());
                 leaderboard.add(new LeaderboardEntryModelServer(playerName, score));
             }
+            logger.info("XMLStorageModel: Leaderboard loaded successfully from " + filename);
         } catch (Exception e) {
-            System.err.println("Error loading leaderboard from XML: " + e.getMessage());
+            logger.severe("XMLStorageModel: Error loading leaderboard from XML: " + e.getMessage());
             e.printStackTrace();
         }
         return leaderboard;
     }
-
 
     public static void saveLeaderboardToXML(String filename, List<LeaderboardEntryModelServer> leaderboard) {
         try {
@@ -108,10 +116,10 @@ public class XMLStorageController {
             StreamResult result = new StreamResult(new File(filename));
             transformer.transform(source, result);
 
-            System.out.println("Leaderboard successfully saved to XML.");
+            logger.info("XMLStorageModel: Leaderboard successfully saved to " + filename);
         } catch (Exception e) {
+            logger.severe("XMLStorageModel: Error saving leaderboard to XML: " + e.getMessage());
             e.printStackTrace();
-            System.err.println("Error saving leaderboard to XML: " + e.getMessage());
         }
     }
 }

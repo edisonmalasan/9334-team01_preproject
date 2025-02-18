@@ -55,8 +55,7 @@ public class ClientHandler implements Runnable {
                         String category = reqString.split(":")[1].trim();
                         Response response = handleQuestionRequest(category);
                         sendResponse(response);
-                    } else
-                    if (reqString.startsWith("GET_LEADERBOARD")){
+                    } else if (reqString.startsWith("GET_LEADERBOARD")) {
                         List<LeaderboardEntryModelServer> classicLeaderboard = LeaderboardControllerServer.getClassicLeaderboard();
                         Response response = handleLeaderboardUpdate(classicLeaderboard);
                         sendResponse(response);
@@ -100,10 +99,11 @@ public class ClientHandler implements Runnable {
 
             fileName = "data/classic_leaderboard.xml";
             List<LeaderboardEntryModelServer> leaderboard = XMLStorageController.loadLeaderboardFromXML(fileName);
+            logger.info("Returning leaderboard data.");
             return new Response(true, "Leaderboard displayed successfully.", leaderboard);
         } catch (Exception e) {
-            logger.severe("Error updating player score: " + e.getMessage());
-            return new Response(false, "Error updating player score: " + e.getMessage(), null);
+            logger.severe("Error retrieving leaderboard: " + e.getMessage());
+            return new Response(false, "Error retrieving leaderboard: " + e.getMessage(), null);
         }
     }
 
@@ -126,7 +126,6 @@ public class ClientHandler implements Runnable {
                 fileName = "data/endless_leaderboard.xml";
                 leaderboard = XMLStorageController.loadLeaderboardFromXML(fileName);
             }
-
 
             boolean found = false;
             for (LeaderboardEntryModelServer entry : leaderboard) {
@@ -159,7 +158,7 @@ public class ClientHandler implements Runnable {
     }
 
     private Response handleQuestionRequest(String category) {
-        System.out.println("DEBUG: Server received question request for category: " + category);
+        logger.info("Server received question request for category: " + category);
 
         QuestionController questionController = new QuestionController();
         List<QuestionModel> questions = questionController.getQuestionsByCategory(category);

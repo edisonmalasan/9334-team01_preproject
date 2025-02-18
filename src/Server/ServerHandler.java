@@ -29,20 +29,20 @@ public class ServerHandler {
     public void start() {
         try {
             serverSocket = new ServerSocket(PORT_NUMBER);
-            logger.info("✅ Server started on port " + PORT_NUMBER);
+            logger.info("Server Handler: ✅ Server started on port " + PORT_NUMBER);
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                logger.info("🔗 New client connected: " + clientSocket.getInetAddress());
+                logger.info("Server Handler: 🔗 New client connected: " + clientSocket.getInetAddress());
 
                 ClientHandler clientHandler = new ClientHandler(clientSocket, questionBank, leaderboard);
 
-                logger.info("🚀 Starting client thread for: " + clientSocket.getInetAddress());
+                logger.info("Server Handler: 🚀 Starting client thread for: " + clientSocket.getInetAddress());
 
                 new Thread(clientHandler).start();
             }
         } catch (IOException e) {
-            logger.severe("❌ Server error: " + e.getMessage());
+            logger.severe("Server Handler: ❌ Server error: " + e.getMessage());
         }
     }
 }

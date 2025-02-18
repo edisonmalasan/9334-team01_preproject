@@ -16,7 +16,7 @@ public class AdminViewClassic extends JFrame {
     private JButton saveButton, deleteButton, refreshButton;  // Add refresh button
 
     public AdminViewClassic(String xmlFilePath) {
-        super("Admin View");
+        super("Classic Leaderboard");
         this.xmlFile = new File(xmlFilePath);
 
         // Initialize GUI components

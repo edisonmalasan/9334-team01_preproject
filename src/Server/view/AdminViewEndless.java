@@ -16,7 +16,7 @@ public class AdminViewEndless extends JFrame {
     private JButton saveButton, deleteButton, refreshButton;  // Add refresh button
 
     public AdminViewEndless(String xmlFilePath) {
-        super("Admin View");
+        super("Endless Leaderboard");
         this.xmlFile = new File(xmlFilePath);
 
         // Initialize GUI components

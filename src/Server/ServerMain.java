@@ -24,9 +24,12 @@ public class ServerMain {
 
         try {
             ServerHandler server = new ServerHandler(questionBank, leaderboardControllerServer);
-            AdminViewClassic view = new AdminViewClassic("data/classic_leaderboard.xml");
-            AdminViewClassicController controller = new AdminViewClassicController(view);
-            controller.loadXML();
+            AdminViewClassic classicView = new AdminViewClassic("data/classic_leaderboard.xml");
+            AdminViewClassicController classicController = new AdminViewClassicController(classicView);
+            classicController.loadXML();
+            AdminViewClassic endlessView = new AdminViewClassic("data/endless_leaderboard.xml");
+            AdminViewClassicController endlessController = new AdminViewClassicController(endlessView);
+            endlessController.loadXML();
             server.start();
         } catch (Exception e) {
             logger.severe("Server Main: ❌ Server failed to start: " + e.getMessage());

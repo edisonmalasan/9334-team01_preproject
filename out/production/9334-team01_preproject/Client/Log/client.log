@@ -1,16 +1,46 @@
-Feb 18, 2025 8:36:49 PM Client.connection.ClientConnection <init>
+Feb 18, 2025 9:28:59 PM Client.connection.ClientConnection <init>
 INFO: 
 ClientConnection: Attempting to connect to server...
-Feb 18, 2025 8:36:49 PM Client.connection.ClientConnection <init>
+Feb 18, 2025 9:28:59 PM Client.connection.ClientConnection <init>
 INFO: 
 ClientConnection: Connected to server successfully!
-Feb 18, 2025 8:37:00 PM Client.connection.ClientConnection sendObject
+Feb 18, 2025 9:35:14 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Attempting to connect to server...
+Feb 18, 2025 9:35:14 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Connected to server successfully!
+Feb 18, 2025 9:39:10 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Attempting to connect to server...
+Feb 18, 2025 9:39:10 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Connected to server successfully!
+Feb 18, 2025 9:51:50 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Attempting to connect to server...
+Feb 18, 2025 9:51:50 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Connected to server successfully!
+Feb 18, 2025 9:59:54 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Attempting to connect to server...
+Feb 18, 2025 9:59:54 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Connected to server successfully!
+Feb 18, 2025 10:04:34 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Attempting to connect to server...
+Feb 18, 2025 10:04:34 PM Client.connection.ClientConnection <init>
+INFO: 
+ClientConnection: Connected to server successfully!
+Feb 18, 2025 10:04:42 PM Client.connection.ClientConnection sendObject
 INFO: 
 ClientConnection: Sending object: GET_QUESTION:ALGEBRA
-Feb 18, 2025 8:37:00 PM Client.connection.ClientConnection receiveObject
+Feb 18, 2025 10:04:42 PM Client.connection.ClientConnection receiveObject
 INFO: 
 ClientConnection: Waiting to receive object from server...
-Feb 18, 2025 8:37:00 PM Client.connection.ClientConnection receiveObject
+Feb 18, 2025 10:04:43 PM Client.connection.ClientConnection receiveObject
 INFO: 
 ClientConnection: Received object: Response{success=true, message='Question retrieved successfully.', data=[QuestionModel{category='ALGEBRA', questionText='Solve the following equation: 10 - 2(3)', choices=[-13, 4, 16, 24], correctAnswer='4', score=1}, QuestionModel{category='ALGEBRA', questionText='Solve the following equation: 3x + 7 = 16', choices=[5, 3, 6, 7], correctAnswer='3', score=1}, QuestionModel{category='ALGEBRA', questionText='Solve for y: 5y - 3 = 2', choices=[1, 2, -1, -2], correctAnswer='1', score=1}, QuestionModel{category='ALGEBRA', questionText='Simplify: 2(x + 3) - 5x', choices=[-3x + 6, 3x + 6, -3x - 6, 3x - 6], correctAnswer='-3x + 6', score=1}, QuestionModel{category='ALGEBRA', questionText='What is the value of x if 4x + 2 = 14?', choices=[3, 2, 4, 1], correctAnswer='3', score=1}, QuestionModel{category='ALGEBRA', questionText='What is the solution to the inequality 2x - 5 < 3?', choices=[x < 4, x > 4, x < 2, x > 2], correctAnswer='x < 4', score=1}, QuestionModel{category='ALGEBRA', questionText='Solve the following equation: x² - 16 = 0', choices=[4, -4, ±4, 0], correctAnswer='±4', score=1}, QuestionModel{category='ALGEBRA', questionText='Expand the expression: (x + 3)(x - 4)', choices=[x² - x - 12, x² - x + 12, x² - 7x - 12, x² + 7x - 12], correctAnswer='x² - x - 12', score=1}, QuestionModel{category='ALGEBRA', questionText='Solve for x: 5x - 7 = 2x + 5', choices=[2, 3, 4, 5], correctAnswer='4', score=1}, QuestionModel{category='ALGEBRA', questionText='What is the value of x in the equation: 7x = 35', choices=[5, 7, 35, 1], correctAnswer='5', score=1}, QuestionModel{category='ALGEBRA', questionText='Simplify: (3x + 4) - (x - 5)', choices=[2x + 9, 2x - 1, 3x - 1, 4x + 9], correctAnswer='2x + 9', score=1}, QuestionModel{category='ALGEBRA', questionText='Solve for x: 4x + 5 = 2x + 13', choices=[4, 5, 3, 2], correctAnswer='4', score=1}, QuestionModel{category='ALGEBRA', questionText='What is the value of x if 3x = 9?', choices=[3, 2, 1, 4], correctAnswer='3', score=1}, QuestionModel{category='ALGEBRA', questionText='Factor the expression: x² + 5x + 6', choices=[(x + 3)(x + 2), (x + 6)(x + 1), (x + 2)(x + 3), (x + 1)(x + 6)], correctAnswer='(x + 3)(x + 2)', score=1}, QuestionModel{category='ALGEBRA', questionText='Solve for x: x² - 25 = 0', choices=[5, -5, ±5, 25], correctAnswer='±5', score=1}, QuestionModel{category='ALGEBRA', questionText='What is the slope of the line passing through the points (2,3) and (4,7)?', choices=[2, 1, 3, 4], correctAnswer='2', score=1}, QuestionModel{category='ALGEBRA', questionText='Solve the system of equations: 2x + y = 8 and x - y = 1', choices=[(3, 2), (2, 4), (1, 5), (4, 3)], correctAnswer='(3, 2)', score=1}, QuestionModel{category='ALGEBRA', questionText='Solve for x: 2x - 4 = 3x + 5', choices=[-9, 9, -5, 5], correctAnswer='-9', score=1}, QuestionModel{category='ALGEBRA', questionText='Simplify the expression: 5(x + 4) - 2(x - 3)', choices=[3x + 26, 3x + 23, 3x + 17, 3x + 20], correctAnswer='3x + 26', score=1}, QuestionModel{category='ALGEBRA', questionText='What is the value of x if 6x - 5 = 19?', choices=[4, 5, 3, 6], correctAnswer='4', score=1}, QuestionModel{category='ALGEBRA', questionText='Simplify: 3x² + 5x - 2x² + 4x', choices=[x² + 9x, 5x² + 9x, 5x² + 9x - 2, x² + 9x - 2], correctAnswer='x² + 9x', score=1}, QuestionModel{category='ALGEBRA', questionText='What is the value of x if 3x + 10 = 25?', choices=[5, 6, 8, 4], correctAnswer='5', score=1}, QuestionModel{category='ALGEBRA', questionText='Solve the equation: x + 7 = 14', choices=[7, 6, 8, 5], correctAnswer='7', score=1}, QuestionModel{category='ALGEBRA', questionText='Factor the expression: x² - 4x', choices=[x(x - 4), (x - 2)(x + 2), x(x + 4), (x - 4)(x + 4)], correctAnswer='x(x - 4)', score=1}, QuestionModel{category='ALGEBRA', questionText='What is the proper term for this definition?
             A term without a variable', choices=[Constant, Exponent, Set, Terms], correctAnswer='Constant', score=1}, QuestionModel{category='ALGEBRA', questionText='How many terms are included in this expression?
@@ -39,18 +69,27 @@ ClientConnection: Received object: Response{success=true, message='Question retr
             '4 less than 3 times a number is -16'"', choices=[x = -4, x = 3, x = 4, x = -3], correctAnswer='x = -4', score=3}, QuestionModel{category='ALGEBRA', questionText='"Rearrange the equation into slope-intercept form:
             2x - 3y = 9"', choices=[y = 9 / 2x - 3, y = 2 / 3x - 3, y = 2x / 3y - 3, y = 3 / 2x - 9], correctAnswer='y = 2 / 3x - 3', score=3}, QuestionModel{category='ALGEBRA', questionText='"What is the algebraic expression for this phrase:
             ""9 taken away from the sum of x and y"""', choices=[x + y - 9, 9 - (x + y), x + y / 9, 9 / x + y], correctAnswer='x + y - 9', score=3}, QuestionModel{category='ALGEBRA', questionText='The sum of two numbers is 82 and their product is 1456, find the two numbers.', choices=[41, 2, 26 , 56, 41, -2, -26 , -56], correctAnswer='26 , 56', score=3}]}
-Feb 18, 2025 8:37:00 PM Client.controller.GameController setQuestions
+Feb 18, 2025 10:04:43 PM Client.controller.GameController setQuestions
 INFO: 
 GameController: Loaded 44 shuffled questions for category: ALGEBRA
-Feb 18, 2025 8:37:01 PM Client.controller.GameController checkAnswer
+Feb 18, 2025 10:04:45 PM Client.controller.GameController checkAnswer
 WARNING: 
-GameController: Wrong answer for question: What is the solution to the inequality 2x - 5 < 3?
-Feb 18, 2025 8:37:01 PM Client.controller.GameController updateComboUI
+GameController: Wrong answer for question: Factor the expression: x² + 5x + 6
+Feb 18, 2025 10:04:45 PM Client.controller.GameController updateComboUI
 INFO: 
 GameController: Updating combo display: 0
-Feb 18, 2025 8:45:05 PM Client.connection.ClientConnection <init>
+Feb 18, 2025 10:04:47 PM Client.connection.ClientConnection sendObject
 INFO: 
-ClientConnection: Attempting to connect to server...
-Feb 18, 2025 8:45:05 PM Client.connection.ClientConnection <init>
+ClientConnection: Sending object: PlayerModel{name='hi  ', score=0}
+Feb 18, 2025 10:04:47 PM Client.connection.ClientConnection receiveObject
 INFO: 
-ClientConnection: Connected to server successfully!
+ClientConnection: Waiting to receive object from server...
+Feb 18, 2025 10:04:47 PM Client.controller.GameController switchToScoreView
+INFO: 
+GameController: Successfully switched to the Score view
+Feb 18, 2025 10:04:47 PM Client.connection.ClientConnection receiveObject
+INFO: 
+ClientConnection: Received object: Response{success=true, message='Player score updated successfully.', data=null}
+Feb 18, 2025 10:04:47 PM Client.controller.GameController lambda$sendScoreToServer$4
+INFO: 
+GameController: Score successfully sent to the server.

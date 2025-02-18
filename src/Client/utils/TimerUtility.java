@@ -1,4 +1,4 @@
-package Client.utility;
+package Client.utils;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
@@ -6,9 +6,6 @@ import javafx.scene.control.Label;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Represents a timer
- */
 public class TimerUtility {
     private int secondsRemaining;
     private Timer timer;

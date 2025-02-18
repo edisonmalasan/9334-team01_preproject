@@ -5,11 +5,10 @@ import Server.view.AdminView;
 import common.AnsiFormatter;
 import Server.model.QuestionBankModel;
 import Server.controller.LeaderboardControllerServer;
+import common.LoggerSetup;
+
 import java.util.logging.Logger;
 
-/**
- * Runs the server and admin view, loads the questions and leaderboard
- */
 public class ServerMain {
     private static final Logger logger = Logger.getLogger(ServerMain.class.getName());
 

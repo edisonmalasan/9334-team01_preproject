@@ -5,8 +5,8 @@ import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.model.ComboModel;
 import Client.model.PlayerModel;
-import Client.utility.BombUtility;
-import Client.utility.QTEUtility;
+import Client.utils.BombUtility;
+import Client.utils.QTEUtility;
 import common.LoggerSetup;
 import common.Response;
 import common.model.QuestionModel;
@@ -27,9 +27,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-/**
- * Contains game logic
- */
+
 public abstract class GameController {
     @FXML
     protected Label timerLabel;
@@ -75,12 +73,13 @@ public abstract class GameController {
         }
     }
 
-    public void setQuestions(String category, List<QuestionModel> questions) {
+    public void setQuestions(String category, List<QuestionModel> questions, boolean isEndlessMode) {
         this.questions = new ArrayList<>(questions);
+        this.checkMode = isEndlessMode;
         Collections.shuffle(this.questions);  // Shuffling questions
         this.comboModel = new ComboModel();
         logger.info("\nGameController: Loaded " + questions.size() + " shuffled questions for category: " + category);
-        this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons, checkMode);
+        this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons, isEndlessMode);
         this.qteUtility = new QTEUtility(questions.size(), bombUtility::applyPenalty, QTEPane);
         showNextQuestion();
     }

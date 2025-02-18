@@ -5,9 +5,7 @@ import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-/**
- * Formats strings
- */
+
 public class AnsiFormatter extends Formatter {
     private static final String RESET = "\u001B[0m";
     private static final String RED = "\u001B[31m";

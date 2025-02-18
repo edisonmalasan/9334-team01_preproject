@@ -16,9 +16,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-/**
- * Manipulates category view
- */
+
 public class CategoryController {
     @FXML
     public Button returnButton;
@@ -109,15 +107,17 @@ public class CategoryController {
             // use ViewManager to switch to Endless Game
             ViewManager.goTo(event, ViewManager.ENDLESS_GAME, "Endless Mode Game", loader -> {
                 GameController gameController = loader.getController();
-                gameController.setQuestions(category, questions);
+                gameController.setQuestions(category, questions, true);
             });
             logger.info("\nCategoryController: Switched to Endless Mode gameplay.");
         } else {
             // use ViewManager to switch to Classic Game
             ViewManager.goTo(event, ViewManager.CLASSIC_GAME, "Classic Mode Game", loader -> {
                 GameController gameController = loader.getController();
-                gameController.setQuestions(category, questions);
+                gameController.setQuestions(category, questions, false);
             });
+
+
             logger.info("\nCategoryController: Switched to Classic Mode gameplay.");
         }
     }

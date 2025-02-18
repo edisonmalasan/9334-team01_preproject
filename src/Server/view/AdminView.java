@@ -7,9 +7,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.io.*;
 
-/**
- * GUI for the admin view
- */
 public class AdminView extends JFrame {
     private JTextArea textArea;
     private File xmlFile;

@@ -10,9 +10,6 @@ import java.util.logging.Logger;
 import static common.Protocol.IP_ADDRESS;
 import static common.Protocol.PORT_NUMBER;
 
-/**
- * Represents a connection from the client to the server
- */
 public class ClientConnection {
     private static ClientConnection instance;
     private Socket socket;

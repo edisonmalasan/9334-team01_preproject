@@ -1,9 +1,11 @@
 package Client.utils;
+/**
+ * Manages Quick Time Events in the game
+ */
 
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;

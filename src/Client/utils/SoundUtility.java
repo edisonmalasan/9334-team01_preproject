@@ -1,4 +1,7 @@
 package Client.utils;
+/**
+ * Manages music for the game
+ */
 
 import java.io.File;
 import java.io.IOException;
@@ -11,8 +14,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class SoundUtility {
-    // to store current position
-    Long currentFrame;
     Clip clip;
     // current status of clip
     String status;
@@ -22,7 +23,6 @@ public class SoundUtility {
     public SoundUtility() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         // create AudioInputStream object
         in1 = AudioSystem.getAudioInputStream(new File(bgmPath).getAbsoluteFile());
-        //in2 = AudioSystem.getAudioInputStream(new File(clickPath).getAbsoluteFile());
 
         // create clip reference
         clip = AudioSystem.getClip();
@@ -46,9 +46,7 @@ public class SoundUtility {
         }
     }
 
-    public static void playClickingSound() {
-    }
-        public void play() {
+    public void play() {
             //start the clip
             clip.start();
             status = "play";

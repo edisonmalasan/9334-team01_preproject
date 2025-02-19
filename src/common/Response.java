@@ -1,5 +1,7 @@
 package common;
-
+/**
+ * Represents a response for client-server communication
+ */
 import java.io.Serializable;
 
 public class Response implements Serializable {

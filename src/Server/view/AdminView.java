@@ -1,5 +1,7 @@
 package Server.view;
-
+/**
+ * GUI for admin view
+ */
 
 import javax.swing.*;
 import java.awt.*;

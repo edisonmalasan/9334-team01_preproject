@@ -1,4 +1,7 @@
 package Client.view;
+/**
+ * Manages loading of windows for the game
+ */
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

@@ -1,13 +1,14 @@
 package Server.handler;
+/**
+ * Handles requests from the client
+ */
 
 import common.AnsiFormatter;
 import Client.model.PlayerModel;
 import Server.controller.LeaderboardControllerServer;
 import Server.controller.QuestionController;
 import Server.model.LeaderboardEntryModelServer;
-import Server.model.QuestionBankModel;
 import Server.controller.XMLStorageController;
-import common.LoggerSetup;
 import common.Response;
 import common.model.QuestionModel;
 
@@ -23,14 +24,14 @@ public class ClientHandler implements Runnable {
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
     private LeaderboardControllerServer leaderboardControllerServer;
-//    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Server/Log/server.log");
-        private static final Logger logger = Logger.getLogger(ClientHandler.class.getName());
+    private static final Logger logger = Logger.getLogger(ClientHandler.class.getName());
 
     static {
         AnsiFormatter.enableColorLogging(logger);
     }
 
-    public ClientHandler(Socket clientSocket, QuestionBankModel questionBank, LeaderboardControllerServer leaderboardControllerServer) {
+    // Constructor initializes client socket and input/output streams
+    public ClientHandler(Socket clientSocket, LeaderboardControllerServer leaderboardControllerServer) {
         this.clientSocket = clientSocket;
         this.leaderboardControllerServer = leaderboardControllerServer;
 
@@ -42,11 +43,13 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    // Main run method for handling incoming client requests
     @Override
     public void run() {
         try {
             logger.info("New client connected: " + clientSocket.getInetAddress());
 
+            // Handle client requests continuously
             while (!clientSocket.isClosed()) {
                 Object request = objectInputStream.readObject();
 
@@ -83,6 +86,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    // Sends a response back to the client
     private void sendResponse(Response response) throws IOException {
         logger.info("Sending response to client: " + response);
 
@@ -95,6 +99,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    // Handles leaderboard updates based on the game mode (classic/endless)
     private Response handleLeaderboardUpdate(List<?> list, String xmlFile) {
         try {
             if (list == null) {
@@ -116,6 +121,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    // Handles player score updates and modifies the leaderboard accordingly
     private Response handlePlayerScoreUpdate(PlayerModel player) {
         try {
             if (player == null) {
@@ -166,6 +172,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    // Handles a request for a question based on the selected category
     private Response handleQuestionRequest(String category) {
         logger.info("Server received question request for category: " + category);
 
@@ -181,6 +188,7 @@ public class ClientHandler implements Runnable {
         return new Response(true, "Question retrieved successfully.", questions);
     }
 
+    // Closes the connection to the client (streams and socket)
     private void closeConnection() {
         try {
             if (objectInputStream != null) objectInputStream.close();

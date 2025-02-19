@@ -1,4 +1,7 @@
 package Server;
+/**
+ * Handles the server
+ */
 
 import common.AnsiFormatter;
 import Server.controller.LeaderboardControllerServer;
@@ -17,7 +20,6 @@ public class ServerHandler {
     private QuestionBankModel questionBank;
     private LeaderboardControllerServer leaderboard;
     private ServerSocket serverSocket;
-//    private static final Logger logger = Logger.getLogger(ServerHandler.class.getName());
     private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Server/Log/server.log");
 
     static {
@@ -38,7 +40,7 @@ public class ServerHandler {
                 Socket clientSocket = serverSocket.accept();
                 logger.info("Server Handler: 🔗 New client connected: " + clientSocket.getInetAddress());
 
-                ClientHandler clientHandler = new ClientHandler(clientSocket, questionBank, leaderboard);
+                ClientHandler clientHandler = new ClientHandler(clientSocket, leaderboard);
 
                 logger.info("Server Handler: 🚀 Starting client thread for: " + clientSocket.getInetAddress());
 

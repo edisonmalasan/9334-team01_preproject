@@ -1,5 +1,7 @@
 package common;
-
+/**
+ * Logs for the server
+ */
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.*;
@@ -8,11 +10,6 @@ public class LoggerSetup {
     public static Logger setupLogger(String loggerName, String filePath) {
         Logger logger = Logger.getLogger(loggerName);
         logger.setUseParentHandlers(false);
-
-//        // avoid duplicate
-//        if (logger.getHandlers().length > 0) {
-//            return logger;
-//        }
 
         try {
             File logFile = new File(filePath);

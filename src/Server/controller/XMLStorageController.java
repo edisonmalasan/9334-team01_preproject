@@ -1,8 +1,9 @@
 package Server.controller;
+/**
+ * Manages xml files
+ */
 
-import Server.handler.ClientHandler;
 import common.AnsiFormatter;
-import common.LoggerSetup;
 import common.model.QuestionModel;
 import Server.model.LeaderboardEntryModelServer;
 import org.w3c.dom.*;
@@ -18,7 +19,6 @@ import java.util.logging.Logger;
  * Manipulates XML files
  */
 public class XMLStorageController {
-//    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Server/Log/server.log");
 private static final Logger logger = Logger.getLogger(XMLStorageController.class.getName());
 
     static {

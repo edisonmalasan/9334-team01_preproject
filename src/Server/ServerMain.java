@@ -1,11 +1,13 @@
 package Server;
+/**
+ * Runs the server
+ */
 
 import Server.controller.AdminViewController;
 import Server.view.AdminView;
 import common.AnsiFormatter;
 import Server.model.QuestionBankModel;
 import Server.controller.LeaderboardControllerServer;
-import common.LoggerSetup;
 
 import java.util.Scanner;
 import java.util.logging.Logger;

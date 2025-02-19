@@ -1,4 +1,7 @@
 package Client.utils;
+/**
+ * Manages the bomb in the game
+ */
 
 import exception.ThreadInterruptedException;
 import javafx.animation.*;
@@ -122,27 +125,6 @@ public class BombUtility {
             }
         }
 
-    }
-
-    private void shortenWick() {
-        double wickLength = wick.getEndX() - wick.getStartX();
-        double shrinkAmount = wickLength / totalTime;
-
-        if (wick.getStartX() < wick.getEndX()) {
-            wick.setStartX(wick.getStartX() + shrinkAmount);
-            flame.setLayoutX(flame.getLayoutX() + shrinkAmount);
-        }
-    }
-
-    private void updateTimer() {
-        if (remainingTime > 0) {
-            remainingTime--;
-            updateTimerLabel();
-        }
-
-        if (remainingTime <= 0) {
-            triggerExplosion();
-        }
     }
 
     private void updateTimerLabel() {

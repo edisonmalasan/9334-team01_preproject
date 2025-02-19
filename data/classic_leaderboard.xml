@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <leaderboard>
     <entry>
-        <player>mr long bomb</player>
-        <score>1000000240</score>
-    </entry>
-    <entry>
-        <player>go</player>
-        <score>7</score>
+        <player>sample</player>
+        <score>10</score>
     </entry>
 </leaderboard>

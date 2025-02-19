@@ -4,4 +4,12 @@
         <player>sample</player>
         <score>10</score>
     </entry>
+    <entry>
+        <player>12412</player>
+        <score>15</score>
+    </entry>
+    <entry>
+        <player>eruki</player>
+        <score>27</score>
+    </entry>
 </leaderboard>

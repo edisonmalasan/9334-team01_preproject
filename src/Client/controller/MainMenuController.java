@@ -4,9 +4,16 @@ package Client.controller;
  */
 import Client.view.ViewManager;
 import common.AnsiFormatter;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainMenuController {
@@ -29,17 +36,42 @@ public class MainMenuController {
     public void initialize() {
         playButton.setOnAction(actionEvent -> {
             logger.info("\nMainMenuController: Play button clicked.");
-            ViewManager.goTo(actionEvent, ViewManager.MODE_MENU, "Bomb Defusing Game");
+            switchToModeMenu(actionEvent);
         });
 
         leaderboardButton.setOnAction(actionEvent -> {
             logger.info("\nMainMenuController: Leaderboard button clicked.");
-            ViewManager.goTo(actionEvent, ViewManager.LEADERBOARD, "Leaderboard");
+            switchToLeaderboard(actionEvent);
         });
 
         quitButton.setOnAction(actionEvent -> {
             logger.info("\nMainMenuController: Exiting application.");
             System.exit(0);
         });
+    }
+
+    private void switchToModeMenu(ActionEvent event) {
+        switchScene(event, "/views/mode_menu.fxml", "Bomb Defusing Game");
+    }
+
+    private void switchToLeaderboard(ActionEvent event) {
+        switchScene(event, "/views/leaderboard.fxml", "Leaderboard");
+    }
+
+    private void switchScene(ActionEvent event, String fxmlPath, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.setResizable(false);
+            stage.show();
+
+            logger.info("Switched to " + title);
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Failed to load " + title, e);
+        }
     }
 }

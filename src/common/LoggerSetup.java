@@ -21,7 +21,17 @@ public class LoggerSetup {
 
             FileHandler fileHandler = new FileHandler(filePath, true);
             fileHandler.setFormatter(new SimpleFormatter());
+            fileHandler.setEncoding("UTF-8");
+            fileHandler.setLevel(Level.ALL);
+
             logger.addHandler(fileHandler);
+
+            for (Handler handler : logger.getHandlers()) {
+                if (handler instanceof ConsoleHandler) {
+                    logger.removeHandler(handler);
+                }
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

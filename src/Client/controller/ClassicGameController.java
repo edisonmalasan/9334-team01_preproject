@@ -20,9 +20,8 @@ public class ClassicGameController extends GameController {
             bombImage.setVisible(false);
             bombUtility.stopBombAnimation();
 
-            //added a delay before switching to score view
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished(e-> switchToScoreView());
+            delay.setOnFinished(e -> switchToScoreView());
             delay.play();
 
             return;
@@ -33,8 +32,6 @@ public class ClassicGameController extends GameController {
         choicesBox.getChildren().clear();
         choiceButtons.clear();
 
-
-        // shuffled choices
         List<String> shuffledChoices = new ArrayList<>(question.getChoices());
         Collections.shuffle(shuffledChoices);
 
@@ -42,15 +39,13 @@ public class ClassicGameController extends GameController {
             Button choiceButton = new Button(choice);
             choiceButton.setPrefSize(146, 50);
             choiceButton.setStyle("-fx-font-family: 'Roboto Mono'; -fx-font-size: 15px;");
-
             choiceButton.setOnAction(e -> checkAnswer(choiceButton, choice, question));
-
             choicesBox.getChildren().add(choiceButton);
             choiceButtons.add(choiceButton);
         }
 
         if (!bombUtility.isRunning()) {
-            Platform.runLater(() -> bombUtility.startBombAnimation(false)); // Classic Mode
+            Platform.runLater(() -> bombUtility.startBombAnimation(false)); // classic mode
         }
 
         qteUtility.triggerQuickTimeEvent(currentQuestionIndex);

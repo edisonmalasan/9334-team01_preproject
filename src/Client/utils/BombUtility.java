@@ -31,7 +31,6 @@ public class BombUtility {
     private boolean isRunning = false;
     private boolean isEndlessMode;
 
-
     public BombUtility(ImageView bombImage, ImageView flame, Line wick, Label timerLabel,
                        Runnable explosionCallback, List<Button> choiceButtons, boolean isEndlessMode) {
         this.bombImage = bombImage;
@@ -101,7 +100,7 @@ public class BombUtility {
         double wickLength = wick.getEndX() - wick.getStartX();
 
         if (isEndlessMode) {
-            double shrinkAmount = 30; // Adjust this value as needed
+            double shrinkAmount = 30;
             if (wickLength > 0) {
                 wick.setStartX(wick.getStartX() + shrinkAmount);
                 flame.setLayoutX(flame.getLayoutX() + shrinkAmount);
@@ -124,7 +123,6 @@ public class BombUtility {
                 triggerExplosion();
             }
         }
-
     }
 
     private void updateTimerLabel() {
@@ -155,28 +153,28 @@ public class BombUtility {
         stopBombAnimation();
         bombImage.setImage(new Image("/images/explosion.png"));
         System.out.println("BOOM! The bomb explodes!");
+
         for (Button btn : choiceButtons) {
             btn.setDisable(true);
             btn.setOpacity(0.8);
         }
 
-        // transition to score view
         Platform.runLater(() -> {
-            new Thread(() -> {
-                try {
-                    // 2sec
-                    Thread.sleep(2000);
+            try {
+                Thread.sleep(1000); // wait 1 second before switching to scoreview
+            } catch (InterruptedException e) {
+                throw new ThreadInterruptedException("Thread was interrupted:", e);
+            }
 
-                    Platform.runLater(explosionCallback);
-                } catch (InterruptedException e) {
-                    throw new ThreadInterruptedException("Thread was interrupted:", e);
-                }
-            }).start();
+            explosionCallback.run();
         });
+    }
+
+    public boolean hasExploded() {
+        return hasExploded;
     }
 
     public boolean isRunning() {
         return isRunning;
     }
-
 }

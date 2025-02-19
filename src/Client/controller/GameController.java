@@ -2,7 +2,6 @@ package Client.controller;
 /**
  * Contains main game logic
  */
-import Client.view.ViewManager;
 import common.AnsiFormatter;
 import Client.connection.ClientConnection;
 import Client.model.ComboModel;
@@ -17,12 +16,16 @@ import exception.ThreadInterruptedException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,8 +63,10 @@ public abstract class GameController {
     protected ComboModel comboModel;
     protected int finalScore = 0;
     protected boolean checkMode = false;
+    private boolean hasSwitchedToScoreView = false;
+    private boolean scoreSent = false;
 
-    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
+    static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
 
     static {
         AnsiFormatter.enableColorLogging(logger);
@@ -78,7 +83,7 @@ public abstract class GameController {
     public void setQuestions(String category, List<QuestionModel> questions, boolean isEndlessMode) {
         this.questions = new ArrayList<>(questions);
         this.checkMode = isEndlessMode;
-        Collections.shuffle(this.questions);  // Shuffling questions
+        Collections.shuffle(this.questions);
         this.comboModel = new ComboModel();
         logger.info("\nGameController: Loaded " + questions.size() + " shuffled questions for category: " + category);
         this.bombUtility = new BombUtility(bombImage, flame, wick, timerLabel, this::switchToScoreView, choiceButtons, isEndlessMode);
@@ -99,7 +104,6 @@ public abstract class GameController {
         if (selectedAnswer.equals(question.getCorrectAnswer())) {
             selectedButton.setStyle("-fx-background-image: url('/images/correct_answer.png');");
 
-            // Added combo multiplier to the score
             int comboMultiplier = Math.max(1, comboModel.getComboCount()); // Ensure at least x1 multiplier
             int totalScoreForQuestion = questionScore * comboMultiplier;
             finalScore += totalScoreForQuestion;
@@ -148,39 +152,57 @@ public abstract class GameController {
         logger.info("\nGameController: Player forfeited. Stopping game...");
         bombUtility.stopBombAnimation();
         finalScore = 0;
-        switchToScoreView(event);
+        switchToScoreView();
     }
 
-    //default event
     protected void switchToScoreView() {
-        switchToScoreView(null);
-    }
+        if (hasSwitchedToScoreView) return; // prevent multiple calls
+        hasSwitchedToScoreView = true;
 
-    protected void switchToScoreView(ActionEvent event) {
         sendScoreToServer(finalScore);
 
-        if (event == null) {
-            ViewManager.goTo(null, ViewManager.SCORE_VIEW, "Score View", loader -> {
-                ScoreController scoreController = loader.getController();
-                scoreController.setScore(finalScore);
-            });
-        } else {
-            ViewManager.goTo(event, ViewManager.SCORE_VIEW, "Score View", loader -> {
-                ScoreController scoreController = loader.getController();
-                scoreController.setScore(finalScore);
-            });
-        }
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/score_view.fxml"));
+                Parent root = loader.load();
 
-        logger.info("\nGameController: Successfully switched to the Score view");
+                ScoreController scoreController = loader.getController();
+                scoreController.setScore(finalScore);
+
+                if (timerLabel.getScene() == null) {
+                    logger.severe("Error: Scene is null in switchToScoreView!");
+                    return;
+                }
+                Stage stage = (Stage) timerLabel.getScene().getWindow();
+                if (stage == null) {
+                    logger.severe("Error: Stage is null in switchToScoreView!");
+                    return;
+                }
+
+                stage.setScene(new Scene(root));
+                stage.setTitle("Score View");
+                stage.setResizable(false);
+                stage.show();
+
+                logger.info("\nGameController: Successfully switched to the Score view.");
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "Failed to load Score View.", e);
+            } catch (NullPointerException e) {
+                logger.log(Level.SEVERE, "Stage is null. Make sure switchToScoreView() is called after UI is loaded.", e);
+            }
+        });
     }
 
     private void sendScoreToServer(int score) {
+        if (scoreSent) return; // prevent score sending multiple times
+        scoreSent = true;
+
         new Thread(() -> {
             try {
                 String playerName = InputUsernameController.getPlayerName();
                 PlayerModel player = new PlayerModel(playerName, score);
 
-                if (checkMode){
+                if (checkMode) {
                     player.setName(playerName + "  ");
                 }
 

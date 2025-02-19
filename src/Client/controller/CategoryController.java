@@ -10,7 +10,11 @@ import common.model.QuestionModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
@@ -60,7 +64,7 @@ public class CategoryController {
         logicButton.setOnAction(event -> requestQuestionFromServer("LOGIC", event));
         probabilityButton.setOnAction(event -> requestQuestionFromServer("PROBABILITY", event));
         trigoButton.setOnAction(event -> requestQuestionFromServer("TRIGONOMETRY", event));
-        returnButton.setOnAction(event -> ViewManager.goTo(event, ViewManager.MAIN_MENU, "Bomb Defusing Game"));
+        returnButton.setOnAction(event -> switchToMainMenu());
     }
 
     private void requestQuestionFromServer(String category, ActionEvent event) {
@@ -102,22 +106,40 @@ public class CategoryController {
     }
 
     private void switchToGameplay(String category, List<QuestionModel> questions, ActionEvent event) {
-        if (isEndlessMode) {
-            // use ViewManager to switch to Endless Game
-            ViewManager.goTo(event, ViewManager.ENDLESS_GAME, "Endless Mode Game", loader -> {
-                GameController gameController = loader.getController();
-                gameController.setQuestions(category, questions, true);
-            });
-            logger.info("\nCategoryController: Switched to Endless Mode gameplay.");
-        } else {
-            // use ViewManager to switch to Classic Game
-            ViewManager.goTo(event, ViewManager.CLASSIC_GAME, "Classic Mode Game", loader -> {
-                GameController gameController = loader.getController();
-                gameController.setQuestions(category, questions, false);
-            });
+        String gameMode = (isEndlessMode) ? "/views/endless_game.fxml" : "/views/classic_game.fxml";
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(gameMode));
+            Parent root = loader.load();
 
+            GameController gameController = loader.getController();
+            gameController.setQuestions(category, questions, isEndlessMode);
 
-            logger.info("\nCategoryController: Switched to Classic Mode gameplay.");
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Bomb Defusing Game");
+            stage.setResizable(false);
+            stage.show();
+
+            logger.info("Switched to " + ((isEndlessMode) ? "Endless Mode" : "Classic Mode") + " gameplay.");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Failed to load game mode.", e);
+        }
+    }
+
+    private void switchToMainMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main_menu.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) returnButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Bomb Defusing Game");
+            stage.setResizable(false);
+            stage.show();
+
+            logger.info("ScoreController: Successfully switched to the Main Menu.");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "ScoreController: Failed to load Main Menu", e);
         }
     }
 

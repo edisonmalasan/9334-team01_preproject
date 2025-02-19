@@ -1,11 +1,12 @@
 package Client.controller;
-
+/**
+ * Controls classic game mode
+ */
 import common.model.QuestionModel;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.util.Duration;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

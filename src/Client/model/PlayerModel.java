@@ -1,5 +1,7 @@
 package Client.model;
-
+/**
+ * Represents a player of the game
+ */
 import java.io.Serializable;
 
 public class PlayerModel implements Serializable {

@@ -1,5 +1,7 @@
 package Client.model;
-
+/**
+ * Represents a combo (correct answer streak)
+ */
 public class ComboModel {
     private int comboCount;
     private int highestCombo;

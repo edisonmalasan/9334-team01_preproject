@@ -1,13 +1,13 @@
 package Client.controller;
-
+/**
+ * Controls endless game mode
+ */
 import common.model.QuestionModel;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 public class EndlessGameController extends GameController {
     @Override
     protected void showNextQuestion() {

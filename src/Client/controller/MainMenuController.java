@@ -1,16 +1,15 @@
 package Client.controller;
-
+/**
+ * Controls main menu view window
+ */
 import Client.view.ViewManager;
-import Server.handler.ClientHandler;
 import common.AnsiFormatter;
-import common.LoggerSetup;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import java.util.logging.Logger;
 
 public class MainMenuController {
-//    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
     private static final Logger logger = Logger.getLogger(MainMenuController.class.getName());
 
     static {

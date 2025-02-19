@@ -1,5 +1,7 @@
 package Client.model;
-
+/**
+ * Represents an entry to the leaderboard (Client side)
+ */
 import java.io.Serializable;
 
 public class LeaderboardEntryModelClient implements Serializable {

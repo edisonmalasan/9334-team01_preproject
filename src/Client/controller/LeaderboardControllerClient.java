@@ -1,5 +1,7 @@
 package Client.controller;
-
+/**
+ * Controls leaderboard view
+ */
 import Client.connection.ClientConnection;
 import Client.model.LeaderboardEntryModelClient;
 import Server.model.LeaderboardEntryModelServer;
@@ -27,9 +29,6 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class LeaderboardControllerClient {
-
-
-
     // FXML Elements
     public TableColumn classicRank;
     public TableColumn endlessRank;
@@ -100,19 +99,9 @@ public class LeaderboardControllerClient {
         endlessTable.setItems(endlessLeaderboard);
 
         // Initialize Rank columns to compute the rank dynamically
-        classicRank.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer>, ObservableValue<Integer>>() {
-            @Override
-            public ObservableValue<Integer> call(TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer> param) {
-                return new SimpleIntegerProperty(getRankForIndex(classicLeaderboard, classicLeaderboard.indexOf(param.getValue()))).asObject();
-            }
-        });
+        classicRank.setCellValueFactory((Callback<TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer>, ObservableValue<Integer>>) param -> new SimpleIntegerProperty(getRankForIndex(classicLeaderboard, classicLeaderboard.indexOf(param.getValue()))).asObject());
 
-        endlessRank.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer>, ObservableValue<Integer>>() {
-            @Override
-            public ObservableValue<Integer> call(TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer> param) {
-                return new SimpleIntegerProperty(getRankForIndex(endlessLeaderboard, endlessLeaderboard.indexOf(param.getValue()))).asObject();
-            }
-        });
+        endlessRank.setCellValueFactory((Callback<TableColumn.CellDataFeatures<LeaderboardEntryModelClient, Integer>, ObservableValue<Integer>>) param -> new SimpleIntegerProperty(getRankForIndex(endlessLeaderboard, endlessLeaderboard.indexOf(param.getValue()))).asObject());
 
         // Search box handlers for filtering Classic and Endless tables
         classicSearchBox.textProperty().addListener((observable, oldValue, newValue) -> filterLeaderboardData(newValue, "classic"));

@@ -1,10 +1,7 @@
 package Client.controller;
 
 import Client.view.ViewManager;
-import Server.handler.ClientHandler;
 import common.AnsiFormatter;
-import common.LoggerSetup;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -14,7 +11,6 @@ import java.util.logging.Logger;
  * Manipulates mode view
  */
 public class ModeController {
-//    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
     private static final Logger logger = Logger.getLogger(ModeController.class.getName());
 
     static {

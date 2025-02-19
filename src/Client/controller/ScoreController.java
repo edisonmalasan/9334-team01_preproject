@@ -1,7 +1,8 @@
 package Client.controller;
-
+/**
+ * Controls score view window
+ */
 import common.AnsiFormatter;
-import common.LoggerSetup;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,14 +23,11 @@ public class ScoreController {
     private Button backToMenuButton;
 
     private int finalScore;
-//    private static final Logger logger = LoggerSetup.setupLogger("ClientLogger", System.getProperty("user.dir") + "/src/Client/Log/client.log");
     private static final Logger logger = Logger.getLogger(ScoreController.class.getName());
 
     static {
         AnsiFormatter.enableColorLogging(logger);
     }
-
-
     public void setScore(int score) {
         this.finalScore = score;
         scoreLabel.setText(String.valueOf(finalScore));
